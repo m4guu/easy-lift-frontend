@@ -1,0 +1,62 @@
+function pxToRem(value: number) {
+  return `${value / 10}rem`;
+}
+
+function responsiveFontSizes({
+  sm,
+  md,
+  lg,
+}: {
+  sm: number;
+  md: number;
+  lg: number;
+}) {
+  return {
+    "@media (min-width:320px)": {
+      fontSize: pxToRem(sm),
+    },
+    "@media (min-width:480px)": {
+      fontSize: pxToRem(sm),
+    },
+    "@media (min-width:600px)": {
+      fontSize: pxToRem(sm),
+    },
+    "@media (min-width:900px)": {
+      fontSize: pxToRem(md),
+    },
+    "@media (min-width:1200px)": {
+      fontSize: pxToRem(lg),
+    },
+  };
+}
+
+const typography = {
+  fontFamily: "Roboto, sans-serif",
+  fontWeightRegular: 400,
+  fontWeightMedium: 600,
+  fontWeightBold: 700,
+  caption: {
+    fontWeight: 700,
+    lineHeight: "117%",
+    textTransform: "uppercase",
+    fontSize: pxToRem(17),
+    letterSpacing: 0,
+    ...responsiveFontSizes({ sm: 15, md: 15, lg: 17 }),
+  },
+  subtitle1: {
+    fontWeight: 700,
+    lineHeight: "117%",
+    fontSize: pxToRem(13),
+    letterSpacing: 0,
+    ...responsiveFontSizes({ sm: 11, md: 11, lg: 13 }),
+  },
+  subtitle2: {
+    fontWeight: 700,
+    lineHeight: "117%",
+    fontSize: pxToRem(11),
+    letterSpacing: 0,
+    ...responsiveFontSizes({ sm: 10, md: 10, lg: 11 }),
+  },
+} as const;
+
+export default typography;
