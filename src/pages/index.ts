@@ -11,6 +11,7 @@ export { default as ExerciseList } from "./NewWorkout/ExerciseList/ExerciseList"
 export { default as Exercise } from "./NewWorkout/ExerciseList/Exercise/Exercise";
 
 export { default as NewProgram } from "./NewProgram/NewProgram";
+export { default as Creator } from "./NewProgram/Creator/Creator";
 
 export { default as WorkoutList } from "./WorkoutList/WorkoutList";
 export { default as Workout } from "./WorkoutList/Workout/Workout";

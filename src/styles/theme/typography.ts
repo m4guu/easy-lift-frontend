@@ -39,9 +39,9 @@ const typography = {
     fontWeight: 700,
     lineHeight: "117%",
     textTransform: "uppercase",
-    fontSize: pxToRem(17),
+    fontSize: pxToRem(26),
     letterSpacing: 0,
-    ...responsiveFontSizes({ sm: 15, md: 15, lg: 17 }),
+    ...responsiveFontSizes({ sm: 17, md: 17, lg: 26 }),
   },
   subtitle1: {
     fontWeight: 700,

@@ -5,11 +5,7 @@ type UserState = {
   role: "trainer" | "user";
   configured: boolean;
 } | null;
-const initialUserState = {
-  id: "dsadsa",
-  role: "trainer",
-  configured: true,
-};
+const initialUserState = { id: "ssa", role: "user", configured: true };
 
 export const userSlice = createSlice({
   name: "user",
