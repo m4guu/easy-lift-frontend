@@ -1,8 +1,8 @@
-import React, { memo } from "react";
+import React from "react";
 
 const TrainerPage: React.FC = () => {
   return <div>Trainer</div>;
 };
 
-const Trainer = memo(TrainerPage);
+const Trainer = TrainerPage;
 export default Trainer;

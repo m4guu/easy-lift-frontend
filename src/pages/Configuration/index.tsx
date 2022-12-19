@@ -1,8 +1,8 @@
-import React, { memo } from "react";
+import React from "react";
 
 const ConfigurationPage: React.FC = () => {
   return <div>Configuration</div>;
 };
 
-const Configuration = memo(ConfigurationPage);
+const Configuration = ConfigurationPage;
 export default Configuration;

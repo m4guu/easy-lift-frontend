@@ -1,8 +1,8 @@
-import React, { memo } from "react";
+import React from "react";
 
 const NotFoundPage: React.FC = () => {
   return <div>NotFound</div>;
 };
 
-const NotFound = memo(NotFoundPage);
+const NotFound = NotFoundPage;
 export default NotFound;

@@ -1,8 +1,8 @@
-import React, { memo } from "react";
+import React from "react";
 
 const NewProgramPage: React.FC = () => {
   return <div>NewProgram</div>;
 };
 
-const NewProgram = memo(NewProgramPage);
+const NewProgram = NewProgramPage;
 export default NewProgram;

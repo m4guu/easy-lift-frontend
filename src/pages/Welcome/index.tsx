@@ -1,8 +1,8 @@
-import React, { memo } from "react";
+import React from "react";
 
 const WelcomePage: React.FC = () => {
   return <div>Welcome</div>;
 };
 
-const Welcome = memo(WelcomePage);
+const Welcome = WelcomePage;
 export default Welcome;

@@ -1,7 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { PATHS, NESTED_PATHS } from "./paths";
 
-import { useAppSelector } from "../hooks/useContext";
+import { useGetUserRouteState } from "../contexts/redux-store/slices/user/user.hooks";
 
 import {
   Welcome,
@@ -23,69 +24,76 @@ import {
 } from "./index";
 
 const Routing: React.FC = () => {
-  const user = useAppSelector((state) => state.user);
-  let routes; // type?
+  const { token, isConfigured, role } = useGetUserRouteState();
 
-  if (user) {
-    if (!user.configured) {
+  let routes;
+
+  if (token) {
+    if (!isConfigured) {
       routes = (
         <>
-          <Route path="/configuration" element={<Configuration />} />
-          <Route path="*" element={<Configuration />} />
+          <Route path={PATHS.CONFIGURATION} element={<Configuration />} />
+          <Route path={PATHS.notFound} element={<Configuration />} />
         </>
       );
     }
-    if (user.role === "trainer" && user.configured) {
+    if (role === "trainer" && isConfigured) {
       routes = (
         <>
-          <Route path="/" element={<Home />} />
-          <Route path="/newprogram">
+          <Route path={PATHS.default} element={<Home />} />
+          <Route path={PATHS.NEW_PROGRAM}>
             <Route index element={<NewProgram />} />
-            <Route path="/newprogram/creator" element={<Creator />} />
+            <Route
+              path={NESTED_PATHS.NEW_PROGRAM_CREATOR}
+              element={<Creator />}
+            />
           </Route>
-          <Route path="/trainers">
+          <Route path={PATHS.TRAINERS}>
             <Route index element={<TrainerList />} />
-            <Route path="/trainers/:id" element={<Trainer />} />
+            <Route path={NESTED_PATHS.TRAINER} element={<Trainer />} />
           </Route>
-          <Route path="/programs">
+          <Route path={PATHS.PROGRAMS}>
             <Route index element={<ProgramList />} />
-            <Route path="/programs/:id" element={<Program />} />
+            <Route path={NESTED_PATHS.PROGRAM} element={<Program />} />
           </Route>
-          <Route path="*" element={<NotFound />} />
+          <Route path={PATHS.notFound} element={<NotFound />} />
         </>
       );
     }
-    if (user.role === "user" && user.configured) {
+    if (role === "user" && isConfigured) {
       routes = (
         <>
-          <Route path="/" element={<Home />} />
-          <Route path="/newworkout">
+          <Route path={PATHS.default} element={<Home />} />
+          <Route path={PATHS.NEW_WORKOUT}>
             <Route index element={<NewWorkout />} />
-            <Route path="/newworkout/exercises" element={<ExerciseList />} />
-            <Route path="/newworkout/exercises/:id" element={<Exercise />} />
+            <Route
+              path={NESTED_PATHS.EXERCISE_LIST}
+              element={<ExerciseList />}
+            />
+            <Route path={NESTED_PATHS.EXERCISE} element={<Exercise />} />
           </Route>
-          <Route path="/workouts">
+          <Route path={PATHS.WORKOUTS}>
             <Route index element={<WorkoutList />} />
-            <Route path="/workouts/:id" element={<Workout />} />
+            <Route path={NESTED_PATHS.WORKOUT} element={<Workout />} />
           </Route>
-          <Route path="/trainers">
+          <Route path={PATHS.TRAINERS}>
             <Route index element={<TrainerList />} />
-            <Route path="/trainers/:id" element={<Trainer />} />
+            <Route path={NESTED_PATHS.TRAINER} element={<Trainer />} />
           </Route>
-          <Route path="/programs">
+          <Route path={PATHS.PROGRAMS}>
             <Route index element={<ProgramList />} />
-            <Route path="/programs/:id" element={<Program />} />
+            <Route path={NESTED_PATHS.PROGRAM} element={<Program />} />
           </Route>
-          <Route path="*" element={<NotFound />} />
+          <Route path={PATHS.notFound} element={<NotFound />} />
         </>
       );
     }
   } else {
     routes = (
       <>
-        <Route path="/" element={<Welcome />} />
-        <Route path="/auth" element={<Auth />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path={PATHS.default} element={<Welcome />} />
+        <Route path={PATHS.AUTH} element={<Auth />} />
+        <Route path={PATHS.notFound} element={<NotFound />} />
       </>
     );
   }

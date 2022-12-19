@@ -1,8 +1,8 @@
-import React, { memo } from "react";
+import React from "react";
 
 const WorkoutListPage: React.FC = () => {
   return <div>WorkoutList</div>;
 };
 
-const WorkoutList = memo(WorkoutListPage);
+const WorkoutList = WorkoutListPage;
 export default WorkoutList;
