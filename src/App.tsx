@@ -1,10 +1,9 @@
-import { ThemeModeSwitch, DummyCard } from "./components";
+import Routing from "./pages/Routes";
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <main>
-      <DummyCard />
-      <ThemeModeSwitch />
+      <Routing />
     </main>
   );
 };

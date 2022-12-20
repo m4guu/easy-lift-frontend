@@ -8,17 +8,17 @@ import {
   ThemeProvider,
 } from "@mui/material";
 
-import { useAppSelector } from "../../hooks/useContext";
-
 import pallette from "./palette";
 import typography from "./typography";
+
+import { useIsDarkMode } from "../../contexts/redux-store/slices/themeMode/themeMode.hooks";
 
 interface ThemeCongifProps {
   children: ReactNode;
 }
 
 export function ThemeConfig({ children }: ThemeCongifProps) {
-  const isDarkMode = useAppSelector((state) => state.themeMode.isDarkMode);
+  const isDarkMode = useIsDarkMode();
 
   const themeOptions: ThemeOptions = useMemo(
     () => ({
