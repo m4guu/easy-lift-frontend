@@ -11,7 +11,7 @@ import {
 import pallette from "./palette";
 import typography from "./typography";
 
-import { useIsDarkMode } from "../../contexts/redux-store/slices/themeMode/themeMode.hooks";
+import { useIsDarkMode } from "../../store/redux-store/slices/themeMode/themeMode.hooks";
 
 interface ThemeCongifProps {
   children: ReactNode;

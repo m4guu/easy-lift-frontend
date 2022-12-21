@@ -6,9 +6,9 @@ import { Switch } from "@mui/material";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 
-import { useIsDarkMode } from "../../contexts/redux-store/slices/themeMode/themeMode.hooks";
-import { useAppDispatch } from "../../contexts/redux-store/hooks";
-import { toggleThemeMode } from "../../contexts/redux-store/slices/themeMode/themeMode.silce";
+import { useIsDarkMode } from "../../store/redux-store/slices/themeMode/themeMode.hooks";
+import { useAppDispatch } from "../../store/redux-store/hooks";
+import { toggleThemeMode } from "../../store/redux-store/slices/themeMode/themeMode.silce";
 
 const ThemeModeSwitchComponent: React.FC = () => {
   const isDarkMode = useIsDarkMode();

@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { PATHS, NESTED_PATHS } from "./paths";
 
-import { useGetUserRouteState } from "../contexts/redux-store/slices/user/user.hooks";
+import { useGetUserRouteState } from "../store/redux-store/slices/user/user.hooks";
 
 import {
   Welcome,
