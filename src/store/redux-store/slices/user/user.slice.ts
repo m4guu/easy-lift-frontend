@@ -13,10 +13,10 @@ export interface UserState {
 }
 
 const initialState: UserState = {
-  token: "",
+  token: "DUMMY_USER_0",
   id: "",
   role: Role.user,
-  isConfigured: false,
+  isConfigured: true,
 };
 
 const userSlice = createSlice({

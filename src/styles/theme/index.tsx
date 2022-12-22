@@ -1,4 +1,5 @@
 import { ReactNode, useMemo } from "react";
+// import { CommonInterface } from "./palette";
 
 import {
   createTheme,

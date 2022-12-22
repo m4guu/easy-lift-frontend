@@ -1,7 +1,9 @@
 import React from "react";
 
+import { HomeComponent } from "../../components";
+
 const HomePage: React.FC = () => {
-  return <div>Home</div>;
+  return <HomeComponent />;
 };
 
 const Home = HomePage;

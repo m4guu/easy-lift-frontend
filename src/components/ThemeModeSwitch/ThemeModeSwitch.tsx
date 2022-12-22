@@ -1,6 +1,5 @@
 import React, { memo } from "react";
 
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { styled } from "@mui/system";
 import { Switch } from "@mui/material";
 import DarkModeIcon from "@mui/icons-material/DarkMode";

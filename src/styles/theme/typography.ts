@@ -51,11 +51,18 @@ const typography = {
     ...responsiveFontSizes({ sm: 11, md: 11, lg: 13 }),
   },
   subtitle2: {
-    fontWeight: 700,
+    fontWeight: 600,
     lineHeight: "117%",
     fontSize: pxToRem(11),
-    letterSpacing: 0,
+    letterSpacing: 1,
     ...responsiveFontSizes({ sm: 10, md: 10, lg: 11 }),
+  },
+  h3: {
+    fontWeight: 400,
+    lineHeight: "117%",
+    fontSize: pxToRem(10),
+    letterSpacing: 0.5,
+    ...responsiveFontSizes({ sm: 9, md: 9, lg: 10 }),
   },
 } as const;
 
