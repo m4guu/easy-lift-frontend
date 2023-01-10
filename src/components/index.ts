@@ -1,7 +1,6 @@
-// home components
-// eslint-disable-next-line import/no-cycle
-export { default as HomeComponent } from "./HomeComponent";
+export { default as NavigationItem } from "./NavigationItem";
+export { default as ProgramItem } from "./ProgramItem";
+export { default as WorkoutItem } from "./WorkoutItem";
 
-// else
-export { default as Logo } from "./ui-elements/Logo";
-export { default as ThemeModeSwitch } from "./ThemeModeSwitch/ThemeModeSwitch";
+export { default as Logo } from "./Logo";
+export { default as ThemeModeSwitch } from "./ThemeModeSwitch";

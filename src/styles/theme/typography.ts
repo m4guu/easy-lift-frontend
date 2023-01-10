@@ -39,19 +39,19 @@ const typography = {
     fontWeight: 700,
     lineHeight: "117%",
     textTransform: "uppercase",
-    fontSize: pxToRem(26),
+    fontSize: pxToRem(14),
     letterSpacing: 0,
-    ...responsiveFontSizes({ sm: 17, md: 17, lg: 26 }),
+    ...responsiveFontSizes({ sm: 10, md: 10, lg: 14 }),
   },
   subtitle1: {
     fontWeight: 700,
     lineHeight: "117%",
     fontSize: pxToRem(13),
     letterSpacing: 0,
-    ...responsiveFontSizes({ sm: 11, md: 11, lg: 13 }),
+    ...responsiveFontSizes({ sm: 9, md: 9, lg: 10 }),
   },
   subtitle2: {
-    fontWeight: 600,
+    fontWeight: 400,
     lineHeight: "117%",
     fontSize: pxToRem(11),
     letterSpacing: 1,
@@ -60,9 +60,9 @@ const typography = {
   h3: {
     fontWeight: 400,
     lineHeight: "117%",
-    fontSize: pxToRem(10),
+    fontSize: pxToRem(7),
     letterSpacing: 0.5,
-    ...responsiveFontSizes({ sm: 9, md: 9, lg: 10 }),
+    ...responsiveFontSizes({ sm: 8, md: 8, lg: 9 }),
   },
 } as const;
 

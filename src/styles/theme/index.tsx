@@ -1,5 +1,4 @@
 import { ReactNode, useMemo } from "react";
-// import { CommonInterface } from "./palette";
 
 import {
   createTheme,
@@ -8,7 +7,6 @@ import {
   ThemeOptions,
   ThemeProvider,
 } from "@mui/material";
-
 import pallette from "./palette";
 import typography from "./typography";
 
