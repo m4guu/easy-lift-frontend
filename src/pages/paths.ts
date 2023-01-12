@@ -8,6 +8,7 @@ export enum PATHS {
   PROGRAMS = "/programs/",
   NEW_WORKOUT = "/newworkout/",
   WORKOUTS = "/workouts/",
+  BODY_WEIGHT = "/bodyweight/",
 }
 
 // eslint-disable-next-line @typescript-eslint/naming-convention

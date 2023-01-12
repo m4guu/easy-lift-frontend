@@ -6,38 +6,23 @@ enum Role {
 }
 
 export interface UserState {
-  token: string;
   id: string;
-  role: Role.trainer | Role.user;
+  role: Role;
   isConfigured: boolean;
   image: string; // DUMMY DATA
-  weights?: { date: string; weight: number }[];
+  bodyWeights?: BodyWeight[];
   height?: number;
-  workouts?: {
-    id: string;
-    title: string;
-    date: string;
-    exercises: {
-      name: string;
-      sets: { weight: number; reps: number; RM: number }[];
-    }[];
-  }[];
-  exercisesProgress?: {
-    exerciseID: string;
-    name: string;
-    progress: { date: string; RM: number }[];
-  }[];
-
-  progrmas?: { id: string; name: string; price: number }[];
+  workouts?: Workout[];
+  exercisesProgress?: ExerciseProgress[];
+  progrmas?: Program[];
 }
 
 const initialState: UserState = {
-  token: "DUMMY_USER_0",
-  id: "",
+  id: "DUMMY_USER_0",
   role: Role.user,
   isConfigured: true,
   image: "./src/assets/images/DUMMY_PROFILE_IMG/profile-img-id.jpeg",
-  weights: [
+  bodyWeights: [
     { date: "2023-01-01", weight: 105 },
     { date: "2023-01-06", weight: 101 },
     { date: "2023-01-14", weight: 98 },
@@ -122,7 +107,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     logout(state) {
-      state.token = "";
+      state.id = "";
     },
   },
 });
@@ -131,3 +116,33 @@ export const { logout } = userSlice.actions;
 const { reducer: userReducer } = userSlice;
 
 export default userReducer;
+
+interface BodyWeight {
+  date: string;
+  weight: number;
+}
+interface Workout {
+  id: string;
+  title: string;
+  date: string;
+  exercises: Exercise;
+}
+interface Exercise {
+  name: string;
+  sets: Set[];
+}
+interface Set {
+  weight: number;
+  reps: number;
+  RM: number;
+}
+interface Program {
+  id: string;
+  name: string;
+  price: number;
+}
+interface ExerciseProgress {
+  exerciseID: string;
+  name: string;
+  progress: { date: string; RM: number }[];
+}

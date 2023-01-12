@@ -11,7 +11,7 @@ const GREY = {
 
 const COMMON = {
   common: { black: "#000", white: "#fff" },
-  grey: GREY,
+  custom_grey: GREY,
 };
 
 const pallette = {

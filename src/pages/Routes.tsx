@@ -21,14 +21,15 @@ import {
   ProgramList,
   Program,
   NotFound,
+  BodyWeight,
 } from "./index";
 
 const Routing: React.FC = () => {
-  const { token, isConfigured, role } = useGetUserRouteState();
+  const { id, isConfigured, role } = useGetUserRouteState();
 
   let routes;
 
-  if (token) {
+  if (id) {
     if (!isConfigured) {
       routes = (
         <>
@@ -84,6 +85,7 @@ const Routing: React.FC = () => {
             <Route index element={<ProgramList />} />
             <Route path={NESTED_PATHS.PROGRAM} element={<Program />} />
           </Route>
+          <Route path={PATHS.BODY_WEIGHT} element={<BodyWeight />} />
           <Route path={PATHS.notFound} element={<NotFound />} />
         </>
       );

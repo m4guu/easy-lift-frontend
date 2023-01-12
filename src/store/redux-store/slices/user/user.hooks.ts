@@ -10,8 +10,8 @@ export const useGetUserRoleAndImage = () =>
 export const useGetUserRole = () =>
   useSelector(userSelectors.getUserRoleSelector);
 
-export const useGetUserWeights = () =>
-  useSelector(userSelectors.getUserWeightsSelector);
+export const useGetUserBodyWeights = () =>
+  useSelector(userSelectors.getUserBodyWeightsSelector);
 
 export const useGetUserWorkouts = () =>
   useSelector(userSelectors.getUserWorkouts);

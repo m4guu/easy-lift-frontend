@@ -6,17 +6,17 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ScaleIcon from "@mui/icons-material/Scale";
 
-import { useGetUserWeights } from "../../../store/redux-store/slices/user/user.hooks";
+import { useGetUserBodyWeights } from "../../../store/redux-store/slices/user/user.hooks";
 
 import Chart from "../../../utils/LineChart";
 
 const WeightChart: React.FC = () => {
-  const { weights } = useGetUserWeights();
+  const { bodyWeights } = useGetUserBodyWeights();
   const labels: string[] = [];
   const data: number[] = [];
 
-  weights?.map((weight) => labels.push(weight.date));
-  weights?.map((weight) => data.push(weight.weight));
+  bodyWeights?.map((bodyWeight) => labels.push(bodyWeight.date));
+  bodyWeights?.map((bodyWeight) => data.push(bodyWeight.weight));
 
   const isLosingWeight = data[data.length - 1] < data[data.length - 2];
 
