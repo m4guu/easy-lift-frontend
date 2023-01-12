@@ -23,11 +23,13 @@ import {
   NotFound,
   BodyWeight,
 } from "./index";
+import Layout from "../Layout";
 
 const Routing: React.FC = () => {
   const { id, isConfigured, role } = useGetUserRouteState();
 
   let routes;
+  const isRouteWithLayout = !!id;
 
   if (id) {
     if (!isConfigured) {
@@ -99,7 +101,18 @@ const Routing: React.FC = () => {
       </>
     );
   }
-  return <Routes>{routes}</Routes>;
+  return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    <>
+      {isRouteWithLayout ? (
+        <Layout>
+          <Routes>{routes}</Routes>
+        </Layout>
+      ) : (
+        <Routes>{routes}</Routes>
+      )}
+    </>
+  );
 };
 
 export default Routing;

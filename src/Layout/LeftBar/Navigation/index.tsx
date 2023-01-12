@@ -20,7 +20,7 @@ const Navigation: React.FC = () => {
     {
       id: uuidv4(),
       title: "Home",
-      link: PATHS.default,
+      link: PATHS.HOME,
       icon: <HomeIcon color="primary" fontSize="large" />,
     },
     {
