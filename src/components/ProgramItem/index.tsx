@@ -14,16 +14,22 @@ const ProgramItem: React.FC<Props> = ({ program }) => {
   return (
     <ProgramItemCard variant="outlined">
       <Typography variant="caption">{program.name}</Typography>
-      <Typography>{program.description}</Typography>
-      <Button variant="contained">Check it out!</Button>
+      <CardContainer>
+        <Typography>{program.description}</Typography>
+        <Button variant="contained">Check it out!</Button>
+      </CardContainer>
     </ProgramItemCard>
   );
 };
 
 const ProgramItemCard = styled(Card)(({ theme }) => ({
-  padding: "1rem",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  alignItems: "center",
   borderRadius: "1rem",
-  height: "87%",
+  boxShadow: "none",
+  height: "99%",
   [theme.breakpoints.down("lg")]: {
     height: "15rem",
   },
@@ -32,6 +38,11 @@ const ProgramItemCard = styled(Card)(({ theme }) => ({
     marginRight: "auto",
     marginLeft: "auto",
   },
+}));
+
+const CardContainer = styled("div")(({ theme }) => ({
+  padding: theme.spacing(1),
+  textAlign: "center",
 }));
 
 export default ProgramItem;

@@ -39,14 +39,14 @@ const SectionContainer = styled("section")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "right",
   gap: "1rem",
-  paddingRight: "1rem",
+  paddingRight: theme.spacing(2),
   height: "100%",
   borderBottom: `solid thin ${theme.palette.others.border_color}`,
   [theme.breakpoints.down("lg")]: {
     height: "inherit",
     borderTop: `solid thin ${theme.palette.others.border_color}`,
     justifyContent: "space-around",
-    padding: "0.6rem 0rem",
+    padding: theme.spacing(1.5),
   },
 }));
 

@@ -8,9 +8,9 @@ import WorkoutList from "./WorkoutList";
 const YoursWorkoutsSection: React.FC = () => {
   return (
     <SectionContainer>
-      <header>
+      <SectionHeader>
         <Typography variant="caption">yours workouts</Typography>
-      </header>
+      </SectionHeader>
       <WorkoutList />
     </SectionContainer>
   );
@@ -21,5 +21,7 @@ const SectionContainer = styled("section")(({ theme }) => ({
     width: "100%",
   },
 }));
-
+const SectionHeader = styled("header")(({ theme }) => ({
+  paddingBottom: theme.spacing(1),
+}));
 export default YoursWorkoutsSection;

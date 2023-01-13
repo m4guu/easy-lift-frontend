@@ -13,6 +13,7 @@ const TreningProgramsSection: React.FC = () => {
 };
 
 const SectionContainer = styled("section")(({ theme }) => ({
+  padding: theme.spacing(2),
   [theme.breakpoints.up("lg")]: {
     height: "40%",
   },

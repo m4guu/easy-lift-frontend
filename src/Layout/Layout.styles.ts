@@ -18,7 +18,7 @@ export const FirstGridItem = styled(Grid)(({ theme }) => ({
 
 export const SecondGridItem = styled(Grid)(({ theme }) => ({
   backgroundColor: theme.palette.background.layout,
-  [theme.breakpoints.up("lg")]: { height: "10%" },
+  [theme.breakpoints.up("lg")]: { height: "8%" },
   [theme.breakpoints.down("lg")]: {
     zIndex: "1000",
     position: "fixed",
@@ -29,7 +29,6 @@ export const SecondGridItem = styled(Grid)(({ theme }) => ({
 }));
 
 export const ThirdGridItem = styled(Grid)(({ theme }) => ({
-  padding: theme.spacing(2),
-  marginBottom: "4rem",
-  [theme.breakpoints.up("lg")]: { height: "90%" },
+  marginBottom: theme.spacing(4),
+  [theme.breakpoints.up("lg")]: { height: "92%" },
 }));

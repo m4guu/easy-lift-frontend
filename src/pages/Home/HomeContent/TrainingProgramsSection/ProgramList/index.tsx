@@ -40,15 +40,14 @@ const ProgramsSwiper = styled(Swiper)({
   display: "flex",
   flexDirection: "column-reverse",
   height: "100%",
-  position: "relative",
 });
 
-const ProgramSwiperHeader = styled("header")({
+const ProgramSwiperHeader = styled("header")(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  paddingBottom: "1rem",
-});
+  paddingBottom: theme.spacing(1),
+}));
 
 const SlideContainer = styled("div")(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {

@@ -9,6 +9,7 @@ import ScaleIcon from "@mui/icons-material/Scale";
 import { useGetUserBodyWeights } from "../../../store/redux-store/slices/user/user.hooks";
 
 import Chart from "../../../utils/LineChart";
+import themeModeReducer from "../../../store/redux-store/slices/themeMode/themeMode.silce";
 
 const WeightChart: React.FC = () => {
   const { bodyWeights } = useGetUserBodyWeights();
@@ -60,7 +61,7 @@ const chartOptions = {
 };
 
 const WeightChartContainer = styled("div")(({ theme }) => ({
-  padding: theme.spacing(2),
+  padding: `${theme.spacing(2)} 0`,
   marginTop: theme.spacing(1),
   marginBottom: theme.spacing(1),
   borderRadius: "0.5rem",
@@ -69,11 +70,11 @@ const WeightChartContainer = styled("div")(({ theme }) => ({
   },
 }));
 
-const Header = styled("header")({
+const Header = styled("header")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  gap: "0.5rem",
-});
+  gap: theme.spacing(1),
+}));
 
 const CurrentWeightContainer = styled("div")({
   textAlign: "left",

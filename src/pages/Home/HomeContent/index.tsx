@@ -23,7 +23,7 @@ const HomeContainer = styled("div")({
 });
 
 const Wrapper = styled("div")(({ theme }) => ({
-  paddingTop: "1rem",
+  padding: theme.spacing(2),
   [theme.breakpoints.up("lg")]: {
     height: "60%",
     display: "flex",

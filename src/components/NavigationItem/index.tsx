@@ -38,15 +38,15 @@ const MenuListItem = styled(MenuItem)(({ theme }) => ({
   },
 }));
 
-const NavigationLink = styled(NavLink)({
+const NavigationLink = styled(NavLink)(({ theme }) => ({
   width: "100%",
   display: "flex",
-  padding: "0.7rem",
+  padding: theme.spacing(1),
   alignItems: "center",
   borderRadius: " 0.7rem",
   textDecoration: "none",
   color: "inherit",
-});
+}));
 
 const NavItemTypography = styled(Typography)({
   paddingLeft: "1rem",

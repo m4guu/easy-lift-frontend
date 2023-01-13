@@ -16,7 +16,8 @@ const ExercisesProgressSection: React.FC = () => {
   );
 };
 
-const SectionHeader = styled("header")({
-  paddingBottom: "1rem",
-});
+const SectionHeader = styled("header")(({ theme }) => ({
+  paddingBottom: theme.spacing(1),
+}));
+
 export default ExercisesProgressSection;

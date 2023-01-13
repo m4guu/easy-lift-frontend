@@ -125,7 +125,7 @@ interface Workout {
   id: string;
   title: string;
   date: string;
-  exercises: Exercise;
+  exercises: Exercise[];
 }
 interface Exercise {
   name: string;

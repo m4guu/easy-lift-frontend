@@ -132,19 +132,16 @@ const ChartMenu: React.FC<Props> = ({ sendData }) => {
 };
 
 const ChartMenuForm = styled("form")(({ theme }) => ({
-  margin: "0 2rem 0 0",
-  [theme.breakpoints.down("sm")]: {
-    margin: "1rem 0 2rem 0",
-  },
+  margin: `0 ${theme.spacing(2)} ${theme.spacing(2)} ${theme.spacing(2)}`,
 }));
 
 const ChartMenuFormControl = styled(FormControl)(({ theme }) => ({
   m: 1,
   minWidth: 150,
-  paddingBottom: "1rem",
+  paddingBottom: theme.spacing(2),
   [theme.breakpoints.down("sm")]: {
     minWidth: 100,
-    padding: "0.2rem",
+    margin: theme.spacing(1),
   },
 }));
 
