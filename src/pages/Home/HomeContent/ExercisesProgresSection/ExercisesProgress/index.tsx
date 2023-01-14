@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { styled, useTheme } from "@mui/system";
 
-import useWindowWidth from "../../../../../hooks/useWindowWidth";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 import Chart from "../../../../../utils/LineChart";
 import ChartMenu from "./ChartMenu";
@@ -13,11 +13,9 @@ const ExercisesProgress: React.FC = () => {
   const [dateRange, setDateRange] = useState("");
 
   const theme = useTheme();
-  const windowWidth = useWindowWidth();
-
-  const isBetweenSmLgBreakpoints =
-    theme.breakpoints.values.sm < windowWidth &&
-    windowWidth < theme.breakpoints.values.lg;
+  const isBetweenSmLgBreakpoints = useMediaQuery(
+    theme.breakpoints.between("sm", "lg")
+  );
 
   const aspectRatio = isBetweenSmLgBreakpoints ? 2 / 1 : 1 / 1;
 

@@ -13,7 +13,7 @@ import {
   getLastYearDate,
 } from "../../../../../../utils/Date";
 
-type Props = {
+type ChartMenuProps = {
   sendData: (childData: {
     labels: string[];
     data: number[];
@@ -21,7 +21,7 @@ type Props = {
   }) => void;
 };
 
-const ChartMenu: React.FC<Props> = ({ sendData }) => {
+const ChartMenu: React.FC<ChartMenuProps> = ({ sendData }) => {
   const [formInputs, setFormInputs] = useState({
     exerciseID: {
       name: "exerciseID",

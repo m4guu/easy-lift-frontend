@@ -8,7 +8,7 @@ export default function TemporaryDrawer() {
   const [isShowDrawer, setIsShowDrawer] = useState(false);
 
   const toggleDrawer =
-    (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+    () => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
         event.type === "keydown" &&
         ((event as React.KeyboardEvent).key === "Tab" ||
@@ -16,13 +16,13 @@ export default function TemporaryDrawer() {
       ) {
         return;
       }
-      setIsShowDrawer(open);
+      setIsShowDrawer((prevState) => !prevState);
     };
 
   return (
     <>
-      <Button onClick={toggleDrawer(true)}>menu</Button>
-      <Drawer open={isShowDrawer} onClose={toggleDrawer(false)}>
+      <Button onClick={toggleDrawer()}>menu</Button>
+      <Drawer open={isShowDrawer} onClose={toggleDrawer()}>
         <Navigation />
       </Drawer>
     </>

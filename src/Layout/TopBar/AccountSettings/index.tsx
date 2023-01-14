@@ -17,11 +17,11 @@ import { useAppDispatch } from "../../../store/redux-store/hooks";
 
 import { ThemeModeSwitch } from "../../../components";
 
-type Props = {
+type AccountSettingsProps = {
   image: string;
 };
 
-const AccountSettings: React.FC<Props> = ({ image }) => {
+const AccountSettings: React.FC<AccountSettingsProps> = ({ image }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 

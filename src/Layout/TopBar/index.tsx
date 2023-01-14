@@ -9,14 +9,17 @@ import { PATHS } from "../../pages/paths";
 
 import { useGetUserRoleAndImage } from "../../store/redux-store/slices/user/user.hooks";
 
+import { Role } from "../../shared/enums";
+
 import AccountSettings from "./AccountSettings";
 
 const TopBar: React.FC = () => {
   const { role, image } = useGetUserRoleAndImage();
   const navigate = useNavigate();
 
-  const buttonText = role === "user" ? "start training" : "create new program";
-  const buttonLink = role === "user" ? PATHS.NEW_WORKOUT : PATHS.NEW_PROGRAM;
+  const buttonText =
+    role === Role.user ? "start training" : "create new program";
+  const buttonLink = role === Role.user ? PATHS.NEW_WORKOUT : PATHS.NEW_PROGRAM;
 
   return (
     <SectionContainer>

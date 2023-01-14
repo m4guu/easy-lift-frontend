@@ -5,9 +5,13 @@ import { styled, useTheme } from "@mui/system";
 
 import { NavLink } from "react-router-dom";
 
-type Props = { navItem: { title: string; link: string; icon: JSX.Element } };
+import { NavigationItem as NavigationItemInterface } from "../../shared/interfaces";
 
-const NavigationItem: React.FC<Props> = ({ navItem }) => {
+type NavigationItemProps = {
+  navItem: NavigationItemInterface;
+};
+
+const NavigationItem: React.FC<NavigationItemProps> = ({ navItem }) => {
   const theme = useTheme();
 
   const activeStyle = {

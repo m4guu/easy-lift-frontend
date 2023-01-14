@@ -11,6 +11,8 @@ import ProgramsNav from "./ProgramsNav";
 import "swiper/css";
 import "swiper/css/pagination";
 
+import { DUMMY_PROGRAMS } from "./constatns";
+
 const ProgramList: React.FC = () => {
   const areTherePrograms = DUMMY_PROGRAMS.length;
   return (
@@ -69,48 +71,5 @@ const swiperBreakPoints = {
     spaceBetween: 30,
   },
 };
-
-const DUMMY_PROGRAMS: { id: string; name: string; description: string }[] = [
-  {
-    id: "DUMMY-ID-1",
-    name: "Random Name #1",
-    description: "Probably the most random thing you have ever seen!",
-  },
-  {
-    id: "DUMMY-ID-2",
-    name: "Random Name #2",
-    description: "Hello World!",
-  },
-  {
-    id: "DUMMY-ID-3",
-    name: "Random Name #3",
-    description: "Probably the most random thing you have ever seen!",
-  },
-  {
-    id: "DUMMY-ID-4",
-    name: "Random Name #4",
-    description: "Hello World!",
-  },
-  {
-    id: "DUMMY-ID-5",
-    name: "Random Name #5",
-    description: "Probably the most random thing you have ever seen!",
-  },
-  {
-    id: "DUMMY-ID-6",
-    name: "Random Name #6",
-    description: "Hello World!",
-  },
-  {
-    id: "DUMMY-ID-7",
-    name: "Random Name #7",
-    description: "Probably the most random thing you have ever seen!",
-  },
-  {
-    id: "DUMMY-ID-8",
-    name: "Random Name #8",
-    description: "Hello World!",
-  },
-];
 
 export default ProgramList;

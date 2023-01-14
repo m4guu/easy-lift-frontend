@@ -35,13 +35,13 @@ const defaultOptions: ChartOptions = {
   },
 };
 
-type Props = {
+type ChartProps = {
   labels: string[];
   data: number[];
   options: ChartOptions;
 };
 
-const Chart: React.FC<Props> = ({ labels, data, options }) => {
+const Chart: React.FC<ChartProps> = ({ labels, data, options }) => {
   const theme = useTheme();
 
   const chartData = {

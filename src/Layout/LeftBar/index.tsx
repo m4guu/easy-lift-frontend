@@ -8,6 +8,8 @@ import WeightChart from "./WeightChart";
 import AccountSettings from "../TopBar/AccountSettings";
 import TemporaryDrawer from "./MenuDrawer";
 
+import { Role } from "../../shared/enums";
+
 import {
   SectionContainer,
   LeftBarContainer,
@@ -30,7 +32,7 @@ const LeftBar: React.FC = () => {
         <AccountSettingsBox>
           <AccountSettings image={image} />
         </AccountSettingsBox>
-        {role === "user" ? <WeightChart /> : null}
+        {role === Role.user ? <WeightChart /> : null}
         <NavigationContainer>
           <Navigation />
         </NavigationContainer>

@@ -3,14 +3,13 @@ import React from "react";
 import { Card, Typography, Button } from "@mui/material";
 import styled from "@mui/system/styled";
 
-type Props = {
-  program: {
-    name: string;
-    description: string;
-  };
+import { Program } from "../../shared/interfaces";
+
+type ProgramItemProps = {
+  program: Program;
 };
 
-const ProgramItem: React.FC<Props> = ({ program }) => {
+const ProgramItem: React.FC<ProgramItemProps> = ({ program }) => {
   return (
     <ProgramItemCard variant="outlined">
       <Typography variant="caption">{program.name}</Typography>

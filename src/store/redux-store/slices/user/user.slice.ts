@@ -1,9 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-enum Role {
-  user = "user",
-  trainer = "trainer",
-}
+import {
+  Workout,
+  BodyWeight,
+  ExerciseProgress,
+  Program,
+} from "../../../../shared/interfaces";
+import { Role } from "../../../../shared/enums";
 
 export interface UserState {
   id: string;
@@ -116,33 +119,3 @@ export const { logout } = userSlice.actions;
 const { reducer: userReducer } = userSlice;
 
 export default userReducer;
-
-interface BodyWeight {
-  date: string;
-  weight: number;
-}
-interface Workout {
-  id: string;
-  title: string;
-  date: string;
-  exercises: Exercise[];
-}
-interface Exercise {
-  name: string;
-  sets: Set[];
-}
-interface Set {
-  weight: number;
-  reps: number;
-  RM: number;
-}
-interface Program {
-  id: string;
-  name: string;
-  price: number;
-}
-interface ExerciseProgress {
-  exerciseID: string;
-  name: string;
-  progress: { date: string; RM: number }[];
-}

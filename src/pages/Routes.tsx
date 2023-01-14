@@ -4,6 +4,8 @@ import { PATHS, NESTED_PATHS } from "./paths";
 
 import { useGetUserRouteState } from "../store/redux-store/slices/user/user.hooks";
 
+import { Role } from "../shared/enums";
+
 import {
   Welcome,
   Auth,
@@ -40,7 +42,7 @@ const Routing: React.FC = () => {
         </>
       );
     }
-    if (role === "trainer" && isConfigured) {
+    if (role === Role.trainer && isConfigured) {
       routes = (
         <>
           <Route path={PATHS.default} element={<Home />} />
@@ -63,7 +65,7 @@ const Routing: React.FC = () => {
         </>
       );
     }
-    if (role === "user" && isConfigured) {
+    if (role === Role.user && isConfigured) {
       routes = (
         <>
           <Route path={PATHS.default} element={<Home />} />

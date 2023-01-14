@@ -3,19 +3,13 @@ import React from "react";
 import { ListItem, Typography, Link } from "@mui/material";
 import styled from "@mui/system/styled";
 
-type Props = {
-  workout: {
-    id: string;
-    title: string;
-    date: string;
-    exercises: {
-      name: string;
-      sets: { weight: number; reps: number; RM: number }[];
-    }[];
-  };
+import { Workout } from "../../shared/interfaces";
+
+type WorkoutItemProps = {
+  workout: Workout;
 };
 
-const WorkoutItem: React.FC<Props> = ({ workout }) => {
+const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
   return (
     <WorkoutListItem disablePadding>
       <div>
