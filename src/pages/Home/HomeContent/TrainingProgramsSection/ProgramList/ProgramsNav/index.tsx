@@ -1,5 +1,6 @@
 import React from "react";
 
+import { Box } from "@mui/material";
 import styled from "@mui/system/styled";
 
 import PrevSlideButton from "./PrevSlideButton";
@@ -13,7 +14,7 @@ const ProgramsNav: React.FC = () => {
     </NavigationContainer>
   );
 };
-const NavigationContainer = styled("div")({
+const NavigationContainer = styled(Box)({
   display: "flex",
   gap: "0.5rem ",
   zIndex: "100",

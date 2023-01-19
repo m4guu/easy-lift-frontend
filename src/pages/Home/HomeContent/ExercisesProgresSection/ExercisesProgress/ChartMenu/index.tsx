@@ -4,58 +4,29 @@ import { InputLabel, MenuItem, FormControl } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import styled from "@mui/system/styled";
 
-import { v4 as uuidv4 } from "uuid";
-
 import { useGetUserExercisesProgress } from "../../../../../../store/redux-store/slices/user/user.hooks";
-import {
-  getLastWeekDate,
-  getLastMonthDate,
-  getLastYearDate,
-} from "../../../../../../utils/Date";
+
+import { ChartData, ChartMenuData } from "../../../../../../shared/interfaces";
+
+import { initialFormInputs } from "./constans";
 
 type ChartMenuProps = {
-  sendData: (childData: {
-    labels: string[];
-    data: number[];
-    dateRange: string;
-  }) => void;
+  sendData: (childData: ChartMenuData) => void;
 };
 
 const ChartMenu: React.FC<ChartMenuProps> = ({ sendData }) => {
-  const [formInputs, setFormInputs] = useState({
-    exerciseID: {
-      name: "exerciseID",
-      label: "Exercise",
-      value: "DUMMY-EXERCISE-PROGRESS-ID-1",
-    },
-    dateRange: {
-      name: "dateRange",
-      label: "Date Range",
-      value: "default",
-      options: [
-        { id: uuidv4(), name: "All Time", value: "default" },
-        { id: uuidv4(), name: "Year", value: getLastYearDate() },
-        { id: uuidv4(), name: "Month", value: getLastMonthDate() },
-        { id: uuidv4(), name: "Week", value: getLastWeekDate() },
-      ],
-    },
-  });
-
+  const [formInputs, setFormInputs] = useState(initialFormInputs);
   const { exercisesProgress } = useGetUserExercisesProgress();
 
   const exerciseProgress = exercisesProgress?.find(
     (item) => item.exerciseID === formInputs.exerciseID.value
   );
 
-  const labels: string[] = useMemo(() => {
-    const returnData: string[] = [];
-    exerciseProgress?.progress.map((item) => returnData.push(item.date));
-    return returnData;
+  const labels: ChartData["labels"] = useMemo(() => {
+    return exerciseProgress?.progress.map((item) => item.date);
   }, [exerciseProgress]);
-  const data: number[] = useMemo(() => {
-    const returnData: number[] = [];
-    exerciseProgress?.progress.map((item) => returnData.push(item.RM));
-    return returnData;
+  const data: ChartData["data"] = useMemo(() => {
+    return exerciseProgress?.progress.map((item) => item.RM);
   }, [exerciseProgress]);
 
   const handleChange = (event: SelectChangeEvent): void => {
@@ -113,7 +84,7 @@ const ChartMenu: React.FC<ChartMenuProps> = ({ sendData }) => {
           label={formInputs.exerciseID.label}
           onChange={handleChange}
         >
-          {exercisesProgress?.length ? null : (
+          {exercisesProgress?.length === 0 && (
             <MenuItem value="">
               <em>No exercises yet</em>
             </MenuItem>

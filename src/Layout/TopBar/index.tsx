@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -53,7 +53,7 @@ const SectionContainer = styled("section")(({ theme }) => ({
   },
 }));
 
-const AccountSettingsBox = styled("div")(({ theme }) => ({
+const AccountSettingsBox = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down("lg")]: {
     display: "none",
   },

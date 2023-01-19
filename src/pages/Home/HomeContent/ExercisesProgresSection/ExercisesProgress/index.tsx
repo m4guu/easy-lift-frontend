@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 
+import { useMediaQuery, Box } from "@mui/material";
 import { styled, useTheme } from "@mui/system";
-
-import useMediaQuery from "@mui/material/useMediaQuery";
 
 import Chart from "../../../../../utils/LineChart";
 import ChartMenu from "./ChartMenu";
 
+import { ChartMenuData, ChartData } from "../../../../../shared/interfaces";
+
 const ExercisesProgress: React.FC = () => {
-  const [labels, setLabels] = useState([""]);
-  const [data, setData] = useState([0]);
+  const [labels, setLabels] = useState<ChartData["labels"]>([]);
+  const [data, setData] = useState<ChartData["data"]>([]);
   const [dateRange, setDateRange] = useState("");
 
   const theme = useTheme();
@@ -32,11 +33,7 @@ const ExercisesProgress: React.FC = () => {
     },
   };
 
-  const getChildData = (childData: {
-    labels: string[];
-    data: number[];
-    dateRange: string;
-  }) => {
+  const getChildData = (childData: ChartMenuData) => {
     setLabels(childData.labels);
     setData(childData.data);
     setDateRange(childData.dateRange);
@@ -50,7 +47,7 @@ const ExercisesProgress: React.FC = () => {
   );
 };
 
-const ExercisesProgressContainer = styled("div")(({ theme }) => ({
+const ExercisesProgressContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   width: "80%",
   [theme.breakpoints.up("lg")]: {

@@ -3,6 +3,7 @@ import React from "react";
 import { styled } from "@mui/system";
 import {
   Tooltip,
+  Box,
   IconButton,
   Menu,
   MenuItem,
@@ -35,7 +36,7 @@ const AccountSettings: React.FC<AccountSettingsProps> = ({ image }) => {
   };
 
   return (
-    <div>
+    <Box>
       <Tooltip title="Account settings">
         <AccImgIconButton
           onClick={handleClick}
@@ -68,7 +69,7 @@ const AccountSettings: React.FC<AccountSettingsProps> = ({ image }) => {
           <ThemeModeSwitch />
         </ThemeModeSwitchBox>
       </Menu>
-    </div>
+    </Box>
   );
 };
 
@@ -93,7 +94,7 @@ const LogoutButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const ThemeModeSwitchBox = styled("div")(({ theme }) => ({
+const ThemeModeSwitchBox = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up("lg")]: {
     display: "none",
   },

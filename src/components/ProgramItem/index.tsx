@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Card, Typography, Button } from "@mui/material";
+import { Card, Typography, Button, Box } from "@mui/material";
 import styled from "@mui/system/styled";
 
 import { Program } from "../../shared/interfaces";
@@ -39,7 +39,7 @@ const ProgramItemCard = styled(Card)(({ theme }) => ({
   },
 }));
 
-const CardContainer = styled("div")(({ theme }) => ({
+const CardContainer = styled(Box)(({ theme }) => ({
   padding: theme.spacing(1),
   textAlign: "center",
 }));

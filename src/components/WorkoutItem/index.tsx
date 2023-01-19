@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ListItem, Typography, Link } from "@mui/material";
+import { ListItem, Typography, Link, Box } from "@mui/material";
 import styled from "@mui/system/styled";
 
 import { Workout } from "../../shared/interfaces";
@@ -12,12 +12,12 @@ type WorkoutItemProps = {
 const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
   return (
     <WorkoutListItem disablePadding>
-      <div>
+      <Box>
         <Typography variant="subtitle1" color="primary">
           {workout.title}
         </Typography>
         <Typography variant="h3">{workout.date}</Typography>
-      </div>
+      </Box>
       <Link href="/" underline="hover">
         show details
       </Link>

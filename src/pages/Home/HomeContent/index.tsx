@@ -1,5 +1,6 @@
 import React from "react";
 
+import { Box } from "@mui/material";
 import { styled } from "@mui/system";
 
 import ExercisesProgresSection from "./ExercisesProgresSection";
@@ -18,11 +19,11 @@ const HomeContent: React.FC = () => {
   );
 };
 
-const HomeContainer = styled("div")({
+const HomeContainer = styled(Box)({
   height: "100%",
 });
 
-const Wrapper = styled("div")(({ theme }) => ({
+const Wrapper = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
   [theme.breakpoints.up("lg")]: {
     height: "60%",

@@ -1,10 +1,11 @@
 import React from "react";
 
-import { Button } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import styled from "@mui/system/styled";
 
 import { useSwiper } from "swiper/react";
+
+import { ButtonBase } from "../../../../../../../components";
 
 const PrevSlideButton: React.FC = () => {
   const swiper = useSwiper();
@@ -16,12 +17,12 @@ const PrevSlideButton: React.FC = () => {
       size="small"
       variant="outlined"
     >
-      <ButtonText>prev</ButtonText>
+      prev
     </PrevButton>
   );
 };
 
-const PrevButton = styled(Button)(({ theme }) => ({
+const PrevButton = styled(ButtonBase)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     position: "absolute",
     paddingRight: 0,
@@ -29,9 +30,5 @@ const PrevButton = styled(Button)(({ theme }) => ({
     bottom: "7.5rem",
   },
 }));
-const ButtonText = styled("div")(({ theme }) => ({
-  [theme.breakpoints.down("sm")]: {
-    display: "none",
-  },
-}));
+
 export default PrevSlideButton;

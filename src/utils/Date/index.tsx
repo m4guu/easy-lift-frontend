@@ -1,4 +1,4 @@
-import moment from "moment";
+import { format } from "date-fns";
 
 export const getLastWeekDate = () => {
   const now = new Date();
@@ -7,7 +7,7 @@ export const getLastWeekDate = () => {
     now.getMonth(),
     now.getDate() - 7
   );
-  return moment(lastWeek).format("YYYY-MM-DD");
+  return format(lastWeek, "yyyy-MM-dd");
 };
 
 export const getLastMonthDate = () => {
@@ -17,7 +17,7 @@ export const getLastMonthDate = () => {
     now.getMonth() - 1,
     now.getDate()
   );
-  return moment(lastMonth).format("YYYY-MM-DD");
+  return format(lastMonth, "yyyy-MM-dd");
 };
 
 export const getLastYearDate = () => {
@@ -27,5 +27,5 @@ export const getLastYearDate = () => {
     now.getMonth(),
     now.getDate()
   );
-  return moment(lastYear).format("YYYY-MM-DD");
+  return format(lastYear, "yyyy-MM-dd");
 };

@@ -14,7 +14,7 @@ const TrainingList: React.FC = () => {
       {workouts?.map((workout) => {
         return <WorkoutItem key={workout.id} workout={workout} />;
       })}
-      {workouts?.length ? null : (
+      {workouts?.length === 0 && (
         <Alert variant="outlined" severity="info">
           There are no training workouts yet.
         </Alert>

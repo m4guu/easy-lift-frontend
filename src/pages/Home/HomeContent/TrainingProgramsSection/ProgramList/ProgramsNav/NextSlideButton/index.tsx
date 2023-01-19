@@ -1,10 +1,11 @@
 import React from "react";
 
-import { Button } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import styled from "@mui/system/styled";
 
 import { useSwiper } from "swiper/react";
+
+import { ButtonBase } from "../../../../../../../components";
 
 const NextSlideButton: React.FC = () => {
   const swiper = useSwiper();
@@ -16,23 +17,17 @@ const NextSlideButton: React.FC = () => {
       size="small"
       variant="outlined"
     >
-      <ButtonText>next</ButtonText>
+      next
     </NextButton>
   );
 };
 
-const NextButton = styled(Button)(({ theme }) => ({
+const NextButton = styled(ButtonBase)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     position: "absolute",
     paddingLeft: 0,
     right: 0,
     bottom: "7.5rem",
-  },
-}));
-
-const ButtonText = styled("div")(({ theme }) => ({
-  [theme.breakpoints.down("sm")]: {
-    display: "none",
   },
 }));
 

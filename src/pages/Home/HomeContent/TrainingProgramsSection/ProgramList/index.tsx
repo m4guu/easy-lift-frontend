@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Typography, Alert } from "@mui/material";
+import { Typography, Alert, Box } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,13 +11,12 @@ import ProgramsNav from "./ProgramsNav";
 import "swiper/css";
 import "swiper/css/pagination";
 
-import { DUMMY_PROGRAMS } from "./constatns";
+import { DUMMY_PROGRAMS, swiperBreakPoints } from "./constatns";
 
 const ProgramList: React.FC = () => {
-  const areTherePrograms = DUMMY_PROGRAMS.length;
   return (
     <ProgramsSwiper breakpoints={swiperBreakPoints} className="mySwiper">
-      {areTherePrograms ? (
+      {DUMMY_PROGRAMS.length !== 0 ? (
         <SlideContainer>
           {DUMMY_PROGRAMS.map((program) => (
             <SwiperSlide key={program.id}>
@@ -32,7 +31,7 @@ const ProgramList: React.FC = () => {
       )}
       <ProgramSwiperHeader>
         <Typography variant="caption">training programs</Typography>
-        {areTherePrograms ? <ProgramsNav /> : null}
+        {DUMMY_PROGRAMS.length ? <ProgramsNav /> : null}
       </ProgramSwiperHeader>
     </ProgramsSwiper>
   );
@@ -51,25 +50,10 @@ const ProgramSwiperHeader = styled("header")(({ theme }) => ({
   paddingBottom: theme.spacing(1),
 }));
 
-const SlideContainer = styled("div")(({ theme }) => ({
+const SlideContainer = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     display: "flex",
   },
 }));
-
-const swiperBreakPoints = {
-  600: {
-    slidesPerView: 3,
-    spaceBetween: 20,
-  },
-  1200: {
-    slidesPerView: 4,
-    spaceBetween: 20,
-  },
-  1536: {
-    slidesPerView: 5,
-    spaceBetween: 30,
-  },
-};
 
 export default ProgramList;

@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 
-import { Switch } from "@mui/material";
+import { Box, Switch } from "@mui/material";
 import { styled } from "@mui/system";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
@@ -32,7 +32,7 @@ const ThemeModeSwitchComponent: React.FC = () => {
   );
 };
 
-const Content = styled("div")({
+const Content = styled(Box)({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
