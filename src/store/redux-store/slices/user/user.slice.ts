@@ -21,7 +21,8 @@ export interface UserState {
 }
 
 const initialState: UserState = {
-  id: "DUMMY_USER_0",
+  // id: "DUMMY_USER_0",
+  id: "",
   role: Role.user,
   isConfigured: true,
   image: "./src/assets/images/DUMMY_PROFILE_IMG/profile-img-id.jpeg",
