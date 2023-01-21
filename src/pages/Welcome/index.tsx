@@ -1,11 +1,22 @@
 import React from "react";
 
 import { Box, Typography, Button } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import { styled } from "@mui/system";
 
+import { useAppDispatch } from "../../store/redux-store/hooks";
+import { login } from "../../store/redux-store/slices/user/user.slice";
+
 import logo from "../../assets/images/logo/mini_logo_yellow.svg";
+import { DUMMY_LOGIN_STATE } from "./constans";
 
 const WelcomePage: React.FC = () => {
+  const dispatch = useAppDispatch();
+
+  const loginHandle = () => {
+    dispatch(login(DUMMY_LOGIN_STATE));
+  };
+
   return (
     <WelcomePageContainer>
       <LogoImage src={logo} alt="Logo EasyLift" />
@@ -14,9 +25,13 @@ const WelcomePage: React.FC = () => {
         Log in with your EasyLift account to continue
       </Typography>
       <ButtonBox>
-        <Button variant="outlined" size="small">
+        <LoadingButton
+          onClick={() => loginHandle()}
+          variant="outlined"
+          size="small"
+        >
           Log in
-        </Button>
+        </LoadingButton>
         <Button variant="contained" size="small">
           Sign up
         </Button>
