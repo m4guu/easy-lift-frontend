@@ -84,4 +84,5 @@ export const DUMMY_LOGIN_STATE: UserState = {
     },
   ],
   height: 180,
+  expirationDate: "",
 };

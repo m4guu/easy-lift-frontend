@@ -7,9 +7,10 @@ const selectUserRole = (state: RootState) => state.userState.role;
 const selectUserImage = (state: RootState) => state.userState.image;
 const selectUserBodyWeights = (state: RootState) => state.userState.bodyWeights;
 const selectUserWorkouts = (state: RootState) => state.userState.workouts;
-
 const selectUserExercisesProgress = (state: RootState) =>
   state.userState.exercisesProgress;
+const selectUserExpirationDate = (state: RootState) =>
+  state.userState.expirationDate;
 
 const getUserRouteStateSelector = createSelector(
   [selectUserId, selectUserConfigured, selectUserRole],
@@ -47,6 +48,13 @@ const getUserExercisesProgress = createSelector(
   }
 );
 
+const getUserIdAndExpirationDate = createSelector(
+  [selectUserId, selectUserExpirationDate],
+  (id, expirationDate) => {
+    return { id, expirationDate };
+  }
+);
+
 export const userSelectors = {
   getUserRouteStateSelector,
   getUserRoleAndImageSelector,
@@ -54,4 +62,5 @@ export const userSelectors = {
   getUserBodyWeightsSelector,
   getUserWorkouts,
   getUserExercisesProgress,
+  getUserIdAndExpirationDate,
 };

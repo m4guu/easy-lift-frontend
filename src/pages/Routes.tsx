@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { PATHS } from "./paths";
 
 import { useGetUserRouteState } from "../store/redux-store/slices/user/user.hooks";
+
+import { useAuth } from "../hooks";
 
 import { getRoutes } from "../utils/Routes";
 
@@ -13,9 +15,18 @@ import Layout from "../Layout";
 
 const Routing: React.FC = () => {
   const { id, isConfigured, role } = useGetUserRouteState();
+  const { autoLogin, autoLogout } = useAuth();
 
   let routes;
   const isRouteWithLayout = !!id;
+
+  useEffect(() => {
+    autoLogin();
+  }, [autoLogin]);
+
+  useEffect(() => {
+    autoLogout();
+  }, [autoLogout, id]);
 
   if (id) {
     if (!isConfigured) {

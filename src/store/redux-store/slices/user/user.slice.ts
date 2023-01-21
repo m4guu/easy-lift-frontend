@@ -18,6 +18,7 @@ export interface UserState {
   workouts: Workout[];
   exercisesProgress: ExerciseProgress[];
   progrmas?: Program[];
+  expirationDate: string;
 }
 
 const initialState: UserState = {
@@ -29,16 +30,22 @@ const initialState: UserState = {
   workouts: [],
   exercisesProgress: [],
   height: 0,
+  expirationDate: "",
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    logout(state) {
-      state.id = "";
+    logout() {
+      localStorage.removeItem("userData");
+      return initialState;
     },
     login(state, action: { payload: UserState }) {
+      const loginExpirationDate =
+        action.payload.expirationDate ||
+        new Date(new Date().getTime() + 1000 * 60 * 60 * 24).toISOString();
+
       state.id = action.payload.id;
       state.role = action.payload.role;
       state.isConfigured = action.payload.isConfigured;
@@ -47,6 +54,15 @@ const userSlice = createSlice({
       state.workouts = action.payload.workouts;
       state.exercisesProgress = action.payload.exercisesProgress;
       state.height = action.payload.height;
+      state.expirationDate = loginExpirationDate;
+
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({
+          ...action.payload,
+          expirationDate: loginExpirationDate,
+        })
+      );
     },
   },
 });
