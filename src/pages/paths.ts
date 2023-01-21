@@ -8,14 +8,15 @@ export enum PATHS {
   PROGRAMS = "/programs/",
   NEW_WORKOUT = "/newworkout/",
   WORKOUTS = "/workouts/",
+  BODY_WEIGHT = "/bodyweight/",
 }
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export enum NESTED_PATHS {
-  NEW_PROGRAM_CREATOR = "creator",
-  TRAINER = ":trainerId",
-  PROGRAM = ":programId",
-  EXERCISE_LIST = "exercises",
-  EXERCISE = "/exercises/:exerciseId",
-  WORKOUT = "/:workoutId",
+  NEW_PROGRAM_CREATOR = "/newprogram/creator",
+  TRAINER = "/trainers/:trainerId",
+  PROGRAM = "/programs/:programId",
+  EXERCISE_LIST = "/newworkout/exercises",
+  EXERCISE = "/newworkout/exercises/:exerciseId",
+  WORKOUT = "/workouts/:workoutId",
 }

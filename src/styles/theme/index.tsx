@@ -1,4 +1,4 @@
-import { ReactNode, useMemo } from "react";
+import { useMemo } from "react";
 
 import {
   createTheme,
@@ -7,17 +7,12 @@ import {
   ThemeOptions,
   ThemeProvider,
 } from "@mui/material";
-
 import pallette from "./palette";
 import typography from "./typography";
 
 import { useIsDarkMode } from "../../store/redux-store/slices/themeMode/themeMode.hooks";
 
-interface ThemeCongifProps {
-  children: ReactNode;
-}
-
-export function ThemeConfig({ children }: ThemeCongifProps) {
+export const ThemeConfig: React.FCWithChildren = ({ children }) => {
   const isDarkMode = useIsDarkMode();
 
   const themeOptions: ThemeOptions = useMemo(
@@ -40,4 +35,4 @@ export function ThemeConfig({ children }: ThemeCongifProps) {
       </ThemeProvider>
     </StyledEngineProvider>
   );
-}
+};

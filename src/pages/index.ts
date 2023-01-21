@@ -22,4 +22,6 @@ export { default as Trainer } from "./TrainerList/Trainer";
 export { default as ProgramList } from "./ProgramList";
 export { default as Program } from "./ProgramList/Program";
 
+export { default as BodyWeight } from "./BodyWeight";
+
 export { default as NotFound } from "./NotFound";

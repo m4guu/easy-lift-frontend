@@ -1,8 +1,7 @@
 import React, { memo } from "react";
 
-// eslint-disable-next-line import/no-extraneous-dependencies
+import { Box, Switch } from "@mui/material";
 import { styled } from "@mui/system";
-import { Switch } from "@mui/material";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 
@@ -33,11 +32,11 @@ const ThemeModeSwitchComponent: React.FC = () => {
   );
 };
 
-const Content = styled("div")({
+const Content = styled(Box)({
   display: "flex",
   alignItems: "center",
+  justifyContent: "center",
 });
 
 const ThemeModeSwitch = memo(ThemeModeSwitchComponent);
-
 export default ThemeModeSwitch;
