@@ -13,10 +13,10 @@ export interface UserState {
   role: Role;
   isConfigured: boolean;
   image: string; // DUMMY DATA
-  bodyWeights?: BodyWeight[];
-  height?: number;
-  workouts?: Workout[];
-  exercisesProgress?: ExerciseProgress[];
+  bodyWeights: BodyWeight[];
+  height: number;
+  workouts: Workout[];
+  exercisesProgress: ExerciseProgress[];
   progrmas?: Program[];
 }
 

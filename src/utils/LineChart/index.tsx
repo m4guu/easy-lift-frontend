@@ -16,8 +16,6 @@ import {
 import "chartjs-adapter-date-fns";
 import { Line } from "react-chartjs-2";
 
-import { ChartData } from "../../shared/interfaces";
-
 ChartJS.register(
   LineElement,
   TimeScale,
@@ -38,8 +36,8 @@ const defaultOptions: ChartOptions = {
 };
 
 type ChartProps = {
-  labels: ChartData["labels"];
-  data: ChartData["data"];
+  labels: string[];
+  data: number[];
   options: ChartOptions;
 };
 

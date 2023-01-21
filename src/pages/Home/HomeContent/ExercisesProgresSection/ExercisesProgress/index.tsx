@@ -6,12 +6,12 @@ import { styled, useTheme } from "@mui/system";
 import Chart from "../../../../../utils/LineChart";
 import ChartMenu from "./ChartMenu";
 
-import { ChartMenuData, ChartData } from "../../../../../shared/interfaces";
+import { ChartMenuData } from "../../../../../shared/interfaces";
 
 const ExercisesProgress: React.FC = () => {
-  const [labels, setLabels] = useState<ChartData["labels"]>([]);
-  const [data, setData] = useState<ChartData["data"]>([]);
-  const [dateRange, setDateRange] = useState("");
+  const [labels, setLabels] = useState<string[]>([]);
+  const [data, setData] = useState<number[]>([]);
+  const [dateRange, setDateRange] = useState<string>("");
 
   const theme = useTheme();
   const isBetweenSmLgBreakpoints = useMediaQuery(

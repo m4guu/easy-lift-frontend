@@ -6,7 +6,7 @@ import styled from "@mui/system/styled";
 
 import { useGetUserExercisesProgress } from "../../../../../../store/redux-store/slices/user/user.hooks";
 
-import { ChartData, ChartMenuData } from "../../../../../../shared/interfaces";
+import { ChartMenuData } from "../../../../../../shared/interfaces";
 
 import { initialFormInputs } from "./constans";
 
@@ -18,15 +18,24 @@ const ChartMenu: React.FC<ChartMenuProps> = ({ sendData }) => {
   const [formInputs, setFormInputs] = useState(initialFormInputs);
   const { exercisesProgress } = useGetUserExercisesProgress();
 
-  const exerciseProgress = exercisesProgress?.find(
+  const exerciseProgress = exercisesProgress.find(
     (item) => item.exerciseID === formInputs.exerciseID.value
   );
 
-  const labels: ChartData["labels"] = useMemo(() => {
-    return exerciseProgress?.progress.map((item) => item.date);
+  const labels: string[] = useMemo(() => {
+    if (exerciseProgress) {
+      return exerciseProgress.progress.map((item) => item.date);
+    }
+    // securing the undefined type that the find method can return
+    return [];
   }, [exerciseProgress]);
-  const data: ChartData["data"] = useMemo(() => {
-    return exerciseProgress?.progress.map((item) => item.RM);
+
+  const data: number[] = useMemo(() => {
+    if (exerciseProgress) {
+      return exerciseProgress?.progress.map((item) => item.RM);
+    }
+    // securing the undefined type that the find method can return
+    return [];
   }, [exerciseProgress]);
 
   const handleChange = (event: SelectChangeEvent): void => {

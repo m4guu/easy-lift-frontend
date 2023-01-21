@@ -1,8 +1,6 @@
-import ChartData from "../ChartData";
-
 interface ChartMenuData {
-  labels: ChartData["labels"];
-  data: ChartData["data"];
+  labels: string[];
+  data: number[];
   dateRange: string;
 }
 export default ChartMenuData;

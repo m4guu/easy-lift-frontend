@@ -1,19 +1,18 @@
-import { BodyWeight, ChartData } from "../../shared/interfaces";
+import { BodyWeight } from "../../shared/interfaces";
 import { ChartType } from "../../shared/enums";
 
 export const generateChartData = (
   chartType: ChartType,
-  chartData: BodyWeight[] | undefined
+  chartData: BodyWeight[]
 ) => {
-  const labels: ChartData["labels"] = [];
-  const data: ChartData["data"] = [];
+  let labels: string[] = [];
+  let data: number[] = [];
 
   switch (chartType) {
     case ChartType.weight:
-      chartData?.map((bodyWeight) => labels.push(bodyWeight.date));
-      chartData?.map((bodyWeight) => data.push(bodyWeight.weight));
+      labels = chartData?.map((bodyWeight) => bodyWeight.date);
+      data = chartData?.map((bodyWeight) => bodyWeight.weight);
       break;
-
     default:
       break;
   }
