@@ -18,3 +18,6 @@ export const useGetUserWorkouts = () =>
 
 export const useGetUserExercisesProgress = () =>
   useSelector(userSelectors.getUserExercisesProgress);
+
+export const useGetUserIdAndExpirationDate = () =>
+  useSelector(userSelectors.getUserIdAndExpirationDate);
