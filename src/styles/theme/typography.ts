@@ -46,7 +46,7 @@ const typography = {
   subtitle1: {
     fontWeight: 700,
     lineHeight: "117%",
-    fontSize: pxToRem(13),
+    fontSize: pxToRem(10),
     letterSpacing: 0,
     ...responsiveFontSizes({ sm: 9, md: 9, lg: 10 }),
   },
@@ -60,9 +60,9 @@ const typography = {
   h3: {
     fontWeight: 400,
     lineHeight: "117%",
-    fontSize: pxToRem(7),
+    fontSize: pxToRem(10),
     letterSpacing: 0.5,
-    ...responsiveFontSizes({ sm: 8, md: 8, lg: 9 }),
+    ...responsiveFontSizes({ sm: 8, md: 8, lg: 10 }),
   },
 } as const;
 
