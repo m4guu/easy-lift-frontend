@@ -15,7 +15,7 @@ import { ChartType } from "../../../shared/enums";
 
 const WeightChart: React.FC = () => {
   const { bodyWeights } = useGetUserBodyWeights();
-  const { labels, data } = generateChartData(ChartType.weight, bodyWeights);
+  const { labels, data } = generateChartData(ChartType.weight, bodyWeights!);
 
   const isLosingWeight = data[data.length - 1] < data[data.length - 2];
 

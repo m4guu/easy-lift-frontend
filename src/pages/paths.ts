@@ -1,14 +1,14 @@
 export enum PATHS {
   default = "/",
   notFound = "*",
-  AUTH = "/auth/",
-  CONFIGURATION = "/configuration/",
-  NEW_PROGRAM = "/newprogram/",
-  TRAINERS = "/trainers/",
-  PROGRAMS = "/programs/",
-  NEW_WORKOUT = "/newworkout/",
-  WORKOUTS = "/workouts/",
-  BODY_WEIGHT = "/bodyweight/",
+  AUTH = "/auth",
+  CONFIGURATION = "/configuration",
+  NEW_PROGRAM = "/newprogram",
+  TRAINERS = "/trainers",
+  PROGRAMS = "/programs",
+  NEW_WORKOUT = "/newworkout",
+  WORKOUTS = "/workouts",
+  BODY_WEIGHT = "/bodyweight",
 }
 
 // eslint-disable-next-line @typescript-eslint/naming-convention

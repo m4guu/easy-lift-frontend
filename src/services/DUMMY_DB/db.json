@@ -1,0 +1,173 @@
+{
+  "programs": [
+    {
+      "id": "DUMMY-ID-1",
+      "creator": "DUMMY-TRAINER-1",
+      "title": "Random Name #1",
+      "description": "Probably the most random thing you have ever seen!",
+      "price": 199
+    },
+    {
+      "id": "DUMMY-ID-2",
+      "creator": "DUMMY-TRAINER-2",
+      "title": "Random Name #2",
+      "description": "Probably the most random thing you have ever seen!",
+      "price": 199
+    },
+    {
+      "id": "DUMMY-ID-3",
+      "creator": "DUMMY-TRAINER-3",
+      "title": "Random Name #3",
+      "description": "Probably the most random thing you have ever seen!",
+      "price": 199
+    },
+    {
+      "id": "DUMMY-ID-4",
+      "creator": "DUMMY-TRAINER-4",
+      "title": "Random Name #4",
+      "description": "Probably the most random thing you have ever seen!",
+      "price": 199
+    },
+    {
+      "id": "DUMMY-ID-5",
+      "creator": "DUMMY-TRAINER-5",
+      "title": "Random Name #5",
+      "description": "Probably the most random thing you have ever seen!",
+      "price": 199
+    },
+    {
+      "id": "DUMMY-ID-6",
+      "creator": "DUMMY-TRAINER-6",
+      "title": "Random Name #6",
+      "description": "Probably the most random thing you have ever seen!",
+      "price": 199
+    },
+    {
+      "id": "DUMMY-ID-7",
+      "creator": "DUMMY-TRAINER-7",
+      "title": "Random Name #7",
+      "description": "Probably the most random thing you have ever seen!",
+      "price": 199
+    },
+    {
+      "id": "DUMMY-ID-8",
+      "creator": "DUMMY-TRAINER-8",
+      "title": "Random Name #8",
+      "description": "Probably the most random thing you have ever seen!",
+      "price": 199
+    },
+    {
+      "id": "DUMMY-ID-9",
+      "creator": "DUMMY-TRAINER-9",
+      "title": "Random Name #9",
+      "description": "Probably the most random thing you have ever seen!",
+      "price": 199
+    },
+    {
+      "id": "DUMMY-ID-10",
+      "creator": "DUMMY-TRAINER-10",
+      "title": "Random Name #10",
+      "description": "Probably the most random thing you have ever seen!",
+      "price": 199
+    },
+    {
+      "id": "DUMMY-ID-11",
+      "creator": "DUMMY-TRAINER-11",
+      "title": "Random Name #11",
+      "description": "Probably the most random thing you have ever seen!",
+      "price": 199
+    }
+  ],
+  "trainers": [
+    {
+      "creator": "DUMMY-TRAINER-1",
+      "name": "Random trainer 1"
+    },
+    {
+      "creator": "DUMMY-TRAINER-2",
+      "name": "Random trainer 2"
+    },
+    {
+      "creator": "DUMMY-TRAINER-3",
+      "name": "Random trainer 3"
+    }
+  ],
+  "workouts": [
+    {
+      "id": "DUMMY-workout-id-1",
+      "creator": "DUMMY-USER-1",
+      "title": "Monday chest",
+      "date": "2023-01-01",
+      "exercises": [
+        {
+          "name": "Bench Press",
+          "sets": [
+            {
+              "weight": 120,
+              "reps": 5,
+              "RM": 150
+            }
+          ]
+        },
+        {
+          "name": "Squat",
+          "sets": [
+            {
+              "weight": 120,
+              "reps": 4,
+              "RM": 245
+            }
+          ]
+        },
+        {
+          "name": "Deadlift",
+          "sets": [
+            {
+              "weight": 120,
+              "reps": 3,
+              "RM": 345
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "DUMMY-workout-id-2",
+      "creator": "DUMMY-USER-1",
+      "title": "Squat day",
+      "date": "2023-01-11",
+      "exercises": [
+        {
+          "name": "Bench Press",
+          "sets": [
+            {
+              "weight": 150,
+              "reps": 5,
+              "RM": 170
+            }
+          ]
+        },
+        {
+          "name": "Squat",
+          "sets": [
+            {
+              "weight": 150,
+              "reps": 6,
+              "RM": 270
+            }
+          ]
+        },
+        {
+          "name": "Deadlift",
+          "sets": [
+            {
+              "weight": 150,
+              "reps": 7,
+              "RM": 370
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

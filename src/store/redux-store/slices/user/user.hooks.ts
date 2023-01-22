@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
 import { userSelectors } from "./user.selectors";
 
+export const useGetUserId = () => useSelector(userSelectors.getUserId);
+
 export const useGetUserRouteState = () =>
   useSelector(userSelectors.getUserRouteStateSelector);
 
@@ -12,9 +14,6 @@ export const useGetUserRole = () =>
 
 export const useGetUserBodyWeights = () =>
   useSelector(userSelectors.getUserBodyWeightsSelector);
-
-export const useGetUserWorkouts = () =>
-  useSelector(userSelectors.getUserWorkouts);
 
 export const useGetUserExercisesProgress = () =>
   useSelector(userSelectors.getUserExercisesProgress);

@@ -18,7 +18,7 @@ const ChartMenu: React.FC<ChartMenuProps> = ({ sendData }) => {
   const [formInputs, setFormInputs] = useState(initialFormInputs);
   const { exercisesProgress } = useGetUserExercisesProgress();
 
-  const exerciseProgress = exercisesProgress.find(
+  const exerciseProgress = exercisesProgress?.find(
     (item) => item.exerciseID === formInputs.exerciseID.value
   );
 

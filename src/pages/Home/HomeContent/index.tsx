@@ -3,17 +3,23 @@ import React from "react";
 import { Box } from "@mui/material";
 import { styled } from "@mui/system";
 
+import { useGetUserRole } from "../../../store/redux-store/slices/user/user.hooks";
+
+import { Role } from "../../../shared/enums";
+
 import ExercisesProgresSection from "./ExercisesProgresSection";
 import TrainingProgramsSection from "./TrainingProgramsSection";
-import YoursWorkoutsSection from "./YoursWorkoutsSection";
+import YoursSection from "./YoursSection";
 
 const HomeContent: React.FC = () => {
+  const { role } = useGetUserRole();
+
   return (
     <HomeContainer>
       <TrainingProgramsSection />
       <Wrapper>
-        <ExercisesProgresSection />
-        <YoursWorkoutsSection />
+        {role === Role.user && <ExercisesProgresSection />}
+        <YoursSection />
       </Wrapper>
     </HomeContainer>
   );

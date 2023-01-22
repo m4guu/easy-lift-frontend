@@ -1,36 +1,72 @@
 import React from "react";
 
-import { ListItem, Typography, Link, Box } from "@mui/material";
-import styled from "@mui/system/styled";
+import { Link } from "react-router-dom";
+
+import { ListItem, Typography, Box, Button } from "@mui/material";
+import { styled, useTheme } from "@mui/system";
+
+import { useMutation, useQueryClient } from "react-query";
+
+import WorkoutsService from "../../services/WorkoutsService";
 
 import { Workout } from "../../shared/interfaces";
+import { PATHS } from "../../pages/paths";
 
 type WorkoutItemProps = {
   workout: Workout;
 };
 
 const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
+  const queryClient = useQueryClient();
+  const theme = useTheme();
+
+  const deleteWorkoutMutation = useMutation(WorkoutsService.delete, {
+    onSuccess: () => {
+      // invalidates cache and refetch
+      queryClient.invalidateQueries("workouts");
+    },
+  });
+
+  const deleteWorkout = () => {
+    deleteWorkoutMutation.mutate(workout.id);
+  };
+
   return (
     <WorkoutListItem disablePadding>
-      <Box>
-        <Typography variant="subtitle1" color="primary">
-          {workout.title}
-        </Typography>
-        <Typography variant="h3">{workout.date}</Typography>
-      </Box>
-      <Link href="/" underline="hover">
-        show details
-      </Link>
+      <ListItemLink to={`${PATHS.WORKOUTS}/${workout.id}`}>
+        <Box>
+          <Typography variant="subtitle1" color="primary">
+            {workout.title}
+          </Typography>
+          <Typography variant="h3" color={theme.palette.text.primary}>
+            {workout.date}
+          </Typography>
+        </Box>
+      </ListItemLink>
+      <Button
+        onClick={deleteWorkout}
+        sx={{ position: "absolute", right: 15 }}
+        variant="outlined"
+        size="small"
+        color="error"
+      >
+        delete
+      </Button>
     </WorkoutListItem>
   );
 };
 
 const WorkoutListItem = styled(ListItem)(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
   marginBottom: theme.spacing(1),
-  borderBottom: `solid thin ${theme.palette.others.border_color}`,
 }));
 
+const ListItemLink = styled(Link)(({ theme }) => ({
+  width: "100%",
+  padding: theme.spacing(1),
+  textDecoration: "none",
+  borderRadius: theme.spacing(1),
+  "&:hover": {
+    backgroundColor: theme.palette.action.hover,
+  },
+}));
 export default WorkoutItem;

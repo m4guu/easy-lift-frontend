@@ -1,11 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import {
-  Workout,
-  BodyWeight,
-  ExerciseProgress,
-  Program,
-} from "../../../../shared/interfaces";
+import { BodyWeight, ExerciseProgress } from "../../../../shared/interfaces";
 import { Role } from "../../../../shared/enums";
 
 export interface UserState {
@@ -13,11 +8,9 @@ export interface UserState {
   role: Role;
   isConfigured: boolean;
   image: string; // DUMMY DATA
-  bodyWeights: BodyWeight[];
-  height: number;
-  workouts: Workout[];
-  exercisesProgress: ExerciseProgress[];
-  progrmas?: Program[];
+  bodyWeights?: BodyWeight[];
+  height?: number;
+  exercisesProgress?: ExerciseProgress[];
   expirationDate: string;
 }
 
@@ -27,7 +20,6 @@ const initialState: UserState = {
   isConfigured: false,
   image: "",
   bodyWeights: [],
-  workouts: [],
   exercisesProgress: [],
   height: 0,
   expirationDate: "",
@@ -51,7 +43,6 @@ const userSlice = createSlice({
       state.isConfigured = action.payload.isConfigured;
       state.image = action.payload.image;
       state.bodyWeights = action.payload.bodyWeights;
-      state.workouts = action.payload.workouts;
       state.exercisesProgress = action.payload.exercisesProgress;
       state.height = action.payload.height;
       state.expirationDate = loginExpirationDate;
