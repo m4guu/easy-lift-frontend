@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { useQueryClient, useMutation } from "react-query";
@@ -8,6 +8,8 @@ import { useQueryClient, useMutation } from "react-query";
 import { ProgramsService } from "../../services";
 
 import { DUMMY_PROGRAM } from "./constans";
+
+import { SectionHeader, SectionContainer } from "../../components";
 
 const NewProgramPage: React.FC = () => {
   const queryClient = useQueryClient();
@@ -22,22 +24,14 @@ const NewProgramPage: React.FC = () => {
     addWorkoutMutation.mutate(DUMMY_PROGRAM);
   };
   return (
-    <NewProgramContainer>
-      <NewProgramHeader>
-        <Typography variant="caption">New Program</Typography>
-      </NewProgramHeader>
+    <SectionContainer>
+      <SectionHeader>New Program</SectionHeader>
       <Button onClick={addNewProgram} variant="contained">
         add new workout
       </Button>
-    </NewProgramContainer>
+    </SectionContainer>
   );
 };
-
-const NewProgramContainer = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(2),
-}));
-
-const NewProgramHeader = styled("header")({});
 
 const NewProgram = NewProgramPage;
 export default NewProgram;

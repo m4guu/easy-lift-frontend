@@ -14,7 +14,7 @@ type ChartMenuProps = {
   sendData: (childData: ChartMenuData) => void;
 };
 
-const ChartMenu: React.FC<ChartMenuProps> = ({ sendData }) => {
+export const ChartMenu: React.FC<ChartMenuProps> = ({ sendData }) => {
   const [formInputs, setFormInputs] = useState(initialFormInputs);
   const { exercisesProgress } = useGetUserExercisesProgress();
 
@@ -124,5 +124,3 @@ const ChartMenuFormControl = styled(FormControl)(({ theme }) => ({
     margin: theme.spacing(1),
   },
 }));
-
-export default ChartMenu;

@@ -2,12 +2,14 @@ import React from "react";
 
 import { useParams } from "react-router-dom";
 
-import { Box, Typography, Alert } from "@mui/material";
+import { Box, Alert } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { useQuery } from "react-query";
 
 import { ProgramsService } from "../../../services";
+
+import { SectionHeader, SectionContainer } from "../../../components";
 
 const ProgramPage: React.FC = () => {
   const { programId } = useParams();
@@ -19,10 +21,9 @@ const ProgramPage: React.FC = () => {
   } = useQuery(["program"], () => ProgramsService.getProgramById(programId));
 
   return (
-    <ProgramPageContainer>
-      <ProgramPageHeader>
-        <Typography variant="caption">Program</Typography>
-      </ProgramPageHeader>
+    <SectionContainer>
+      <SectionHeader>Program</SectionHeader>
+
       {status === "loading" && null}
       {status === "error" && null}
       {status === "success" && program.length !== 0 && (
@@ -37,15 +38,9 @@ const ProgramPage: React.FC = () => {
           There is no program with provided ID.
         </Alert>
       )}
-    </ProgramPageContainer>
+    </SectionContainer>
   );
 };
-
-const ProgramPageContainer = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(2),
-}));
-
-const ProgramPageHeader = styled("header")({});
 
 const Program = ProgramPage;
 export default Program;

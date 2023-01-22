@@ -6,12 +6,12 @@ import { List, Alert } from "@mui/material";
 
 import { useGetUserId } from "../../../../../store/redux-store/slices/user/user.hooks";
 
-import WorkoutsService from "../../../../../services/WorkoutsService";
+import { WorkoutsService } from "../../../../../services";
 
 import { WorkoutItem } from "../../../../../components";
 import { Workout } from "../../../../../shared/interfaces";
 
-const YourWorkoutList: React.FC = () => {
+export const YourWorkoutList: React.FC = () => {
   const { id: userId } = useGetUserId();
   const {
     status,
@@ -35,5 +35,3 @@ const YourWorkoutList: React.FC = () => {
     </List>
   );
 };
-
-export default YourWorkoutList;

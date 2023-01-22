@@ -13,6 +13,8 @@ import { Role } from "../../shared/enums";
 
 import AccountSettings from "./AccountSettings";
 
+import { SectionContainer } from "../../components";
+
 const TopBar: React.FC = () => {
   const { role, image } = useGetUserRoleAndImage();
   const navigate = useNavigate();
@@ -23,26 +25,27 @@ const TopBar: React.FC = () => {
 
   return (
     <SectionContainer>
-      <Button
-        onClick={() => navigate(buttonLink)}
-        variant="contained"
-        startIcon={<AddIcon />}
-      >
-        {buttonText}
-      </Button>
-      <AccountSettingsBox>
-        <AccountSettings image={image} />
-      </AccountSettingsBox>
+      <Content>
+        <Button
+          onClick={() => navigate(buttonLink)}
+          variant="contained"
+          startIcon={<AddIcon />}
+        >
+          {buttonText}
+        </Button>
+        <AccountSettingsBox>
+          <AccountSettings image={image} />
+        </AccountSettingsBox>
+      </Content>
     </SectionContainer>
   );
 };
 
-const SectionContainer = styled("section")(({ theme }) => ({
+const Content = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "right",
   gap: "1rem",
-  paddingRight: theme.spacing(2),
   height: "100%",
   borderBottom: `solid thin ${theme.palette.others.border_color}`,
   [theme.breakpoints.down("lg")]: {

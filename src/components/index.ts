@@ -1,5 +1,7 @@
 export { default as NavigationItem } from "./NavigationItem";
 export { default as ProgramItem } from "./ProgramItem";
+export { default as SectionContainer } from "./SectionContainer";
+export { default as SectionHeader } from "./SectionHeader";
 export { default as WorkoutItem } from "./WorkoutItem";
 export { default as TrainerItem } from "./TrainerItem";
 export { default as ButtonBase } from "./ButtonBase";

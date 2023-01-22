@@ -11,7 +11,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { ProgramsService } from "../../../../../services";
 
 import { ProgramItem } from "../../../../../components";
-import ProgramsNav from "./ProgramsNav";
+import { ProgramsNav } from "./ProgramsNav";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -21,7 +21,7 @@ import { Program } from "../../../../../shared/interfaces";
 
 import { PATHS } from "../../../../paths";
 
-const ProgramList: React.FC = () => {
+export const ProgramList: React.FC = () => {
   const {
     status,
     error,
@@ -95,5 +95,3 @@ const LinkButton = styled(Link)(({ theme }) => ({
   padding: theme.spacing(2),
   color: "inherit",
 }));
-
-export default ProgramList;

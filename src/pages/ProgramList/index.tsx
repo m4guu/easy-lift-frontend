@@ -2,12 +2,13 @@ import React from "react";
 
 import { useQuery } from "react-query";
 
-import { Box, Typography, Alert } from "@mui/material";
+import { Alert } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { Program } from "../../shared/interfaces";
 import { ProgramsService } from "../../services";
-import { ProgramItem } from "../../components";
+
+import { ProgramItem, SectionHeader, SectionContainer } from "../../components";
 
 const ProgramListPage: React.FC = () => {
   const {
@@ -17,10 +18,8 @@ const ProgramListPage: React.FC = () => {
   } = useQuery(["programs"], ProgramsService.getAllPrograms);
 
   return (
-    <ProgramListContainer>
-      <ProgramListHeader>
-        <Typography variant="caption">Programs</Typography>
-      </ProgramListHeader>
+    <SectionContainer>
+      <SectionHeader>Programs</SectionHeader>
 
       {status === "loading" && <div>Loading...</div>}
       {status === "error" && <div>error</div>}
@@ -36,17 +35,9 @@ const ProgramListPage: React.FC = () => {
           There are no training programs yet.
         </Alert>
       )}
-    </ProgramListContainer>
+    </SectionContainer>
   );
 };
-
-const ProgramListContainer = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(2),
-}));
-
-const ProgramListHeader = styled("header")(({ theme }) => ({
-  padding: theme.spacing(2),
-}));
 
 const ProgramsList = styled("ul")({});
 

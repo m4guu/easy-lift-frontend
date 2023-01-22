@@ -10,7 +10,7 @@ import { ProgramsService } from "../../../../../services";
 import { Program } from "../../../../../shared/interfaces";
 import { ProgramItem } from "../../../../../components";
 
-const YoursProgramsList: React.FC = () => {
+export const YoursProgramsList: React.FC = () => {
   const { id: userId } = useGetUserId();
   const {
     status,
@@ -35,5 +35,3 @@ const YoursProgramsList: React.FC = () => {
     </List>
   );
 };
-
-export default YoursProgramsList;

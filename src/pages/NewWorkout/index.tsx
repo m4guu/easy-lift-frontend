@@ -1,13 +1,14 @@
 import React from "react";
 
-import { Box, Button } from "@mui/material";
-import { styled } from "@mui/system";
+import { Button } from "@mui/material";
 
 import { useQueryClient, useMutation } from "react-query";
 
-import WorkoutsService from "../../services/WorkoutsService";
+import { WorkoutsService } from "../../services";
 
 import { DUMMY_WORKOUT } from "./constans";
+
+import { SectionHeader, SectionContainer } from "../../components";
 
 const NewWorkoutPage: React.FC = () => {
   const queryClient = useQueryClient();
@@ -24,15 +25,14 @@ const NewWorkoutPage: React.FC = () => {
   };
 
   return (
-    <NewWorkoutContainer>
+    <SectionContainer>
+      <SectionHeader>New Program</SectionHeader>
       <Button onClick={addNewWorkout} variant="contained">
         add new workout
       </Button>
-    </NewWorkoutContainer>
+    </SectionContainer>
   );
 };
-
-const NewWorkoutContainer = styled(Box)({});
 
 const NewWorkout = NewWorkoutPage;
 export default NewWorkout;

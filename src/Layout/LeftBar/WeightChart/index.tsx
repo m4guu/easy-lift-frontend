@@ -9,7 +9,7 @@ import ScaleIcon from "@mui/icons-material/Scale";
 import { useGetUserBodyWeights } from "../../../store/redux-store/slices/user/user.hooks";
 
 import { generateChartData } from "../../../utils/ChartData";
-import Chart from "../../../utils/LineChart";
+import { Chart } from "../../../utils/LineChart";
 
 import { ChartType } from "../../../shared/enums";
 

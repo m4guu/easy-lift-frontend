@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import { useMediaQuery, Box } from "@mui/material";
 import { styled, useTheme } from "@mui/system";
 
-import Chart from "../../../../../utils/LineChart";
-import ChartMenu from "./ChartMenu";
+import { Chart } from "../../../../../utils/LineChart";
+import { ChartMenu } from "./ChartMenu";
 
 import { ChartMenuData } from "../../../../../shared/interfaces";
 
-const ExercisesProgress: React.FC = () => {
+export const ExercisesProgress: React.FC = () => {
   const [labels, setLabels] = useState<string[]>([]);
   const [data, setData] = useState<number[]>([]);
   const [dateRange, setDateRange] = useState<string>("");
@@ -59,5 +59,3 @@ const ExercisesProgressContainer = styled(Box)(({ theme }) => ({
     width: "100%",
   },
 }));
-
-export default ExercisesProgress;

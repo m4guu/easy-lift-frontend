@@ -1,16 +1,16 @@
 import React from "react";
 
-import { Box, Typography, Skeleton } from "@mui/material";
+import { Box, Skeleton } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { useQuery } from "react-query";
-import WorkoutsService from "../../services/WorkoutsService";
+import { WorkoutsService } from "../../services";
 
 import { useGetUserId } from "../../store/redux-store/slices/user/user.hooks";
 
-import { WorkoutItem } from "../../components";
-
 import { Workout } from "../../shared/interfaces";
+
+import { WorkoutItem, SectionHeader, SectionContainer } from "../../components";
 
 const WorkoutListPage: React.FC = () => {
   const { id: userId } = useGetUserId();
@@ -21,10 +21,8 @@ const WorkoutListPage: React.FC = () => {
   } = useQuery(["workouts"], () => WorkoutsService.getUserWorkouts(userId));
 
   return (
-    <WorkoutListContainer>
-      <WorkoutListHeader>
-        <Typography variant="caption">Your Workouts</Typography>
-      </WorkoutListHeader>
+    <SectionContainer>
+      <SectionHeader>Your Workouts</SectionHeader>
       {status === "loading" ? (
         <>
           <LoadingSkeleton variant="rectangular" height={55} />
@@ -38,15 +36,9 @@ const WorkoutListPage: React.FC = () => {
           })}
         </WorkoutsList>
       )}
-    </WorkoutListContainer>
+    </SectionContainer>
   );
 };
-
-const WorkoutListContainer = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(2),
-}));
-
-const WorkoutListHeader = styled("header")({});
 
 const WorkoutsList = styled("ul")({
   padding: 0,

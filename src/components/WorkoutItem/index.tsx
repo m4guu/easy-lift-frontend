@@ -7,7 +7,7 @@ import { styled, useTheme } from "@mui/system";
 
 import { useMutation, useQueryClient } from "react-query";
 
-import WorkoutsService from "../../services/WorkoutsService";
+import { WorkoutsService } from "../../services";
 
 import { Workout } from "../../shared/interfaces";
 import { PATHS } from "../../pages/paths";

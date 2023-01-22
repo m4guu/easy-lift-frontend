@@ -5,11 +5,11 @@ import { styled } from "@mui/system";
 
 import { useQuery } from "react-query";
 
-import TrainersService from "../../services/TrainersService";
+import { TrainersService } from "../../services";
 
 import { Trainer } from "../../shared/interfaces";
 
-import { TrainerItem } from "../../components";
+import { TrainerItem, SectionHeader, SectionContainer } from "../../components";
 
 const TrainerListPage: React.FC = () => {
   const {
@@ -19,10 +19,9 @@ const TrainerListPage: React.FC = () => {
   } = useQuery(["trainers"], TrainersService.get);
 
   return (
-    <TrainerListContainer>
-      <TrainerListHeader>
-        <Typography variant="caption">Our Trainers</Typography>
-      </TrainerListHeader>
+    <SectionContainer>
+      <SectionHeader>Our Trainers</SectionHeader>
+
       {status === "loading" && <div>Loading...</div>}
       {status === "error" && <div>error</div>}
       <TrainersList>
@@ -30,14 +29,10 @@ const TrainerListPage: React.FC = () => {
           return <TrainerItem key={trainer.id} trainer={trainer} />;
         })}
       </TrainersList>
-    </TrainerListContainer>
+    </SectionContainer>
   );
 };
 
-const TrainerListContainer = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(2),
-}));
-const TrainerListHeader = styled("header")({});
 const TrainersList = styled("ul")({
   padding: 0,
 });

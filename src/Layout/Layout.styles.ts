@@ -37,7 +37,7 @@ export const SecondGridItem = styled(Grid)(({ theme }) => ({
 
 export const ThirdGridItem = styled(Grid)(({ theme }) => ({
   marginBottom: theme.spacing(4),
-  overflowY: "scroll",
+  // overflowY: "scroll",
   [theme.breakpoints.up("lg")]: {
     height: "92%",
   },

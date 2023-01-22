@@ -1,14 +1,16 @@
 import React from "react";
 
-import { Box, Typography, Alert } from "@mui/material";
+import { Box, Alert } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { useParams } from "react-router-dom";
 
 import { useQuery } from "react-query";
 
-import WorkoutsService from "../../../services/WorkoutsService";
+import { WorkoutsService } from "../../../services";
 import { Workout as WorkoutType } from "../../../shared/interfaces";
+
+import { SectionHeader, SectionContainer } from "../../../components";
 
 const WorkoutPage: React.FC = () => {
   const { workoutId } = useParams();
@@ -19,10 +21,9 @@ const WorkoutPage: React.FC = () => {
   } = useQuery(["workout"], () => WorkoutsService.getWorkoutById(workoutId));
 
   return (
-    <WorkoutContainer>
-      <WorkoutHeader>
-        <Typography variant="caption">Workout</Typography>
-      </WorkoutHeader>
+    <SectionContainer>
+      <SectionHeader>Workout</SectionHeader>
+
       {status === "loading" && null}
       {status === "error" && null}
       {status === "success" && workout.length !== 0 && (
@@ -36,15 +37,13 @@ const WorkoutPage: React.FC = () => {
           There is no workout with provided ID.
         </Alert>
       )}
-    </WorkoutContainer>
+    </SectionContainer>
   );
 };
 
 const WorkoutContainer = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
 }));
-
-const WorkoutHeader = styled("header")({});
 
 const Workout = WorkoutPage;
 export default Workout;

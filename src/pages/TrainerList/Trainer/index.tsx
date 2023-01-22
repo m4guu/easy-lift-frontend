@@ -3,10 +3,12 @@ import { useParams } from "react-router-dom";
 
 import { useQuery } from "react-query";
 
-import { Box, Typography, Alert } from "@mui/material";
+import { Box, Alert } from "@mui/material";
 import { styled } from "@mui/system";
 
-import TrainersService from "../../../services/TrainersService";
+import { TrainersService } from "../../../services";
+
+import { SectionHeader, SectionContainer } from "../../../components";
 
 const Trainer: React.FC = () => {
   const { trainerId } = useParams();
@@ -18,10 +20,9 @@ const Trainer: React.FC = () => {
   } = useQuery(["trainer"], () => TrainersService.getTrainerById(trainerId));
 
   return (
-    <TrainerContainer>
-      <TrainerHeader>
-        <Typography variant="caption">Trainer</Typography>
-      </TrainerHeader>
+    <SectionContainer>
+      <SectionHeader>Trainer</SectionHeader>
+
       {status === "loading" && <div>loading...</div>}
       {status === "error" && <div>error</div>}
       {status === "success" && trainer.length !== 0 && (
@@ -35,12 +36,8 @@ const Trainer: React.FC = () => {
           There is no trainer with provided ID.
         </Alert>
       )}
-    </TrainerContainer>
+    </SectionContainer>
   );
 };
 
-const TrainerContainer = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(2),
-}));
-const TrainerHeader = styled("header")({});
 export default Trainer;

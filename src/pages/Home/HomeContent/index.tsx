@@ -7,18 +7,18 @@ import { useGetUserRole } from "../../../store/redux-store/slices/user/user.hook
 
 import { Role } from "../../../shared/enums";
 
-import ExercisesProgresSection from "./ExercisesProgresSection";
-import TrainingProgramsSection from "./TrainingProgramsSection";
-import YoursSection from "./YoursSection";
+import { ExercisesProgressSection } from "./ExercisesProgresSection";
+import { TrainingProgramsSection } from "./TrainingProgramsSection";
+import { YoursSection } from "./YoursSection";
 
-const HomeContent: React.FC = () => {
+export const HomeContent: React.FC = () => {
   const { role } = useGetUserRole();
 
   return (
     <HomeContainer>
       <TrainingProgramsSection />
       <Wrapper>
-        {role === Role.user && <ExercisesProgresSection />}
+        {role === Role.user && <ExercisesProgressSection />}
         <YoursSection />
       </Wrapper>
     </HomeContainer>
@@ -30,11 +30,8 @@ const HomeContainer = styled(Box)({
 });
 
 const Wrapper = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(2),
   [theme.breakpoints.up("lg")]: {
     height: "60%",
     display: "flex",
   },
 }));
-
-export default HomeContent;
