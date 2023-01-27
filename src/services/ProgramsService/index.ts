@@ -2,7 +2,7 @@ import { ENDPOINTS, HttpService } from "../api";
 
 import { Program } from "../../shared/interfaces";
 
-enum ProgramsMethods {
+export enum ProgramsMethods {
   GET_ALL_PROGRAMS = "getAllPrograms",
   GET_10_PROGRAMS = "get10Programs",
   GET_TRAINER_PROGRAMS = "getTrainerPrograms",
@@ -12,21 +12,22 @@ enum ProgramsMethods {
 }
 
 const ProgramsService = {
-  [ProgramsMethods.GET_ALL_PROGRAMS]: () => HttpService.get(ENDPOINTS.PROGRAMS),
+  [ProgramsMethods.GET_ALL_PROGRAMS]: () =>
+    HttpService.get<Program[]>(ENDPOINTS.PROGRAMS),
 
   [ProgramsMethods.GET_10_PROGRAMS]: () =>
-    HttpService.get(`${ENDPOINTS.PROGRAMS}?limit=10`),
+    HttpService.get<Program[]>(`${ENDPOINTS.PROGRAMS}?_limit=10`),
 
   [ProgramsMethods.GET_TRAINER_PROGRAMS]: (trainerId: string) =>
-    HttpService.get(`${ENDPOINTS.PROGRAMS}?creator=${trainerId}`),
+    HttpService.get<Program[]>(`${ENDPOINTS.PROGRAMS}?creator=${trainerId}`),
 
   [ProgramsMethods.GET_PROGRAM_BY_ID]: (programId: string) =>
-    HttpService.get(`${ENDPOINTS.PROGRAMS}?id=${programId}`),
+    HttpService.get<Program[]>(`${ENDPOINTS.PROGRAMS}?id=${programId}`),
 
-  [ProgramsMethods.CREATE]: (newProgram: Program) =>
+  [ProgramsMethods.CREATE]: (newProgram: Program): Promise<void> =>
     HttpService.post(ENDPOINTS.PROGRAMS, newProgram),
 
-  [ProgramsMethods.DELETE]: (programId: string) =>
+  [ProgramsMethods.DELETE]: (programId: string): Promise<void> =>
     HttpService.delete(`${ENDPOINTS.PROGRAMS}/${programId}`),
 };
 

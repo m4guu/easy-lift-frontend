@@ -1,14 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { useQuery } from "react-query";
-
 import { Typography, Alert, Box, Button } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-
-import { ProgramsService } from "../../../../../services";
 
 import { ProgramItem } from "../../../../../components";
 import { ProgramsNav } from "./ProgramsNav";
@@ -16,28 +12,23 @@ import { ProgramsNav } from "./ProgramsNav";
 import "swiper/css";
 import "swiper/css/pagination";
 
-import { swiperBreakPoints } from "./constatns";
-import { Program } from "../../../../../shared/interfaces";
+import { use10Programs } from "../../../../../hooks/queryHooks/programsHooks/use10Programs";
 
 import { PATHS } from "../../../../paths";
+import { swiperBreakPoints } from "./constatns";
+import { Status } from "../../../../../shared/enums";
+import { Program } from "../../../../../shared/interfaces";
 
 export const ProgramList: React.FC = () => {
-  const {
-    status,
-    error,
-    data: programs,
-  } = useQuery(["10-programs"], ProgramsService.get10Programs);
-
-  // hardcoded filter 10 programs, because json-server doesnt support limit query params
-  const tenPrograms = programs?.slice(0, 10);
+  const { status, error, data: programs } = use10Programs();
 
   return (
     <ProgramsSwiper breakpoints={swiperBreakPoints} className="mySwiper">
-      {status === "loading" && <div>loading...</div>}
-      {status === "error" && <div>error</div>}
+      {status === Status.LOADING && <div>loading...</div>}
+      {status === Status.ERROR && <div>error</div>}
 
       <SlideContainer>
-        {tenPrograms?.map((program: Program) => (
+        {programs?.map((program: Program) => (
           <SwiperSlide key={program.id}>
             <ProgramItem program={program} />
           </SwiperSlide>

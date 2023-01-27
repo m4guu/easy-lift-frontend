@@ -1,5 +1,9 @@
 import { format } from "date-fns";
 
+export const getTodayDate = () => {
+  return format(new Date(), "yyyy-MM-dd");
+};
+
 export const getLastWeekDate = () => {
   const now = new Date();
   const lastWeek = new Date(

@@ -2,25 +2,32 @@ import { ENDPOINTS, HttpService } from "../api";
 
 import { Workout } from "../../shared/interfaces";
 
-enum WorkoutsMethods {
+export enum WorkoutsMethods {
   GET_USER_WORKOUTS = "getUserWorkouts",
   GET_WORKOUT_BY_ID = "getWorkoutById",
   CREATE = "create",
   DELETE = "delete",
+  UPDATE = "update",
 }
 
 const WorkoutsService = {
   [WorkoutsMethods.GET_USER_WORKOUTS]: (userId: string) =>
-    HttpService.get(`${ENDPOINTS.WORKOUTS}?creator=${userId}`),
+    HttpService.get<Workout[]>(`${ENDPOINTS.WORKOUTS}?creator=${userId}`),
 
   [WorkoutsMethods.GET_WORKOUT_BY_ID]: (workoutuId: string) =>
-    HttpService.get(`${ENDPOINTS.WORKOUTS}?id=${workoutuId}`),
+    HttpService.get<Workout[]>(`${ENDPOINTS.WORKOUTS}?id=${workoutuId}`),
 
   [WorkoutsMethods.CREATE]: (newWorkout: Workout) =>
-    HttpService.post(ENDPOINTS.WORKOUTS, newWorkout),
+    HttpService.post<void>(ENDPOINTS.WORKOUTS, newWorkout),
 
   [WorkoutsMethods.DELETE]: (workoutId: string) =>
-    HttpService.delete(`${ENDPOINTS.WORKOUTS}/${workoutId}`),
+    HttpService.delete<void>(`${ENDPOINTS.WORKOUTS}/${workoutId}`),
+
+  [WorkoutsMethods.UPDATE]: (updatedWorkout: Workout) =>
+    HttpService.patch<void>(
+      `${ENDPOINTS.WORKOUTS}/${updatedWorkout.id}`,
+      updatedWorkout
+    ),
 };
 
 export default WorkoutsService;

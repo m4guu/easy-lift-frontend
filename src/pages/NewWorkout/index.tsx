@@ -1,35 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Button } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 
-import { useQueryClient, useMutation } from "react-query";
-
-import { WorkoutsService } from "../../services";
+import { useAddWorkoutMutation } from "../../hooks/queryHooks/workoutsHooks/useAddWorkoutMutation";
+import { useAddUserProgresMutation } from "../../hooks/queryHooks/userProgressHooks/useAddUserProgresMutation";
 
 import { DUMMY_WORKOUT } from "./constans";
-
 import { SectionHeader, SectionContainer } from "../../components";
+import { generateUserProgress } from "../../utils/UserProgress";
+import { Status } from "../../shared/enums";
 
 const NewWorkoutPage: React.FC = () => {
-  const queryClient = useQueryClient();
+  const [asyncError, setAsyncError] = useState(false);
 
-  const addWorkoutMutation = useMutation(WorkoutsService.create, {
-    onSuccess: () => {
-      // invalidates cache and refetch
-      queryClient.invalidateQueries("workouts");
-    },
-  });
+  const { status: addWorkotStatus, mutateAsync: addQueryWorkout } =
+    useAddWorkoutMutation();
+  const { status: addUserProgresStatus, mutate: addQueryUserProgres } =
+    useAddUserProgresMutation();
 
   const addNewWorkout = () => {
-    addWorkoutMutation.mutate(DUMMY_WORKOUT);
+    addQueryWorkout(DUMMY_WORKOUT)
+      .then(() => {
+        // new user's progress depends on workout
+        const newUserProgress = generateUserProgress(DUMMY_WORKOUT);
+
+        return newUserProgress.map((userProgres) =>
+          addQueryUserProgres(userProgres)
+        );
+      })
+      .catch(() => setAsyncError(true));
   };
+
+  const isLoading =
+    addWorkotStatus === Status.LOADING ||
+    addUserProgresStatus === Status.LOADING;
+
+  const isError =
+    asyncError ||
+    addWorkotStatus === Status.ERROR ||
+    addUserProgresStatus === Status.ERROR;
+
+  const isSucces =
+    addWorkotStatus === Status.SUCCESS &&
+    addUserProgresStatus === Status.SUCCESS;
 
   return (
     <SectionContainer>
       <SectionHeader>New Program</SectionHeader>
-      <Button onClick={addNewWorkout} variant="contained">
+      <LoadingButton
+        loading={isLoading}
+        onClick={addNewWorkout}
+        variant="contained"
+      >
         add new workout
-      </Button>
+      </LoadingButton>
+      {isSucces && <div>ADDED SUCCESFULLY</div>}
+      {isError && <div>SERVER ERROR! TRY AGAIN LATER</div>}
     </SectionContainer>
   );
 };

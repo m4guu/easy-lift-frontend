@@ -5,30 +5,35 @@ import { Link } from "react-router-dom";
 import { ListItem, Typography, Box, Button } from "@mui/material";
 import { styled, useTheme } from "@mui/system";
 
-import { useMutation, useQueryClient } from "react-query";
-
-import { WorkoutsService } from "../../services";
+import { useDeleteWorkoutMutation } from "../../hooks/queryHooks/workoutsHooks/useDeleteWorkoutMutation";
+import { useUpdateWorkoutMutation } from "../../hooks/queryHooks/workoutsHooks/useUpdateWorkouteMutation";
 
 import { Workout } from "../../shared/interfaces";
 import { PATHS } from "../../pages/paths";
+import { useDeleteUserProgresMutation } from "../../hooks/queryHooks/userProgressHooks/useDeleteUserProgressMutation";
 
 type WorkoutItemProps = {
   workout: Workout;
 };
 
 const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
-  const queryClient = useQueryClient();
   const theme = useTheme();
-
-  const deleteWorkoutMutation = useMutation(WorkoutsService.delete, {
-    onSuccess: () => {
-      // invalidates cache and refetch
-      queryClient.invalidateQueries("workouts");
-    },
-  });
+  const { mutate: deleteQueryWorkout } = useDeleteWorkoutMutation(workout.id);
+  const { mutate: deleteQueryUserProgress } = useDeleteUserProgresMutation();
+  const { mutate: updateQueryWorkout } = useUpdateWorkoutMutation(workout.id);
 
   const deleteWorkout = () => {
-    deleteWorkoutMutation.mutate(workout.id);
+    deleteQueryWorkout(workout.id);
+    deleteQueryUserProgress(workout.id);
+  };
+
+  const updateWorkout = () => {
+    const updateData = {
+      ...workout,
+      title: "Updated Title Workout",
+    };
+
+    updateQueryWorkout(updateData);
   };
 
   return (
@@ -44,8 +49,16 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
         </Box>
       </ListItemLink>
       <Button
+        onClick={updateWorkout}
+        sx={{ marginRight: "1rem" }}
+        variant="outlined"
+        size="small"
+        color="info"
+      >
+        update
+      </Button>
+      <Button
         onClick={deleteWorkout}
-        sx={{ position: "absolute", right: 15 }}
         variant="outlined"
         size="small"
         color="error"

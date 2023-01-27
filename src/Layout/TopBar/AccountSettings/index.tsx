@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import { styled } from "@mui/system";
 import {
@@ -16,6 +17,7 @@ import Logout from "@mui/icons-material/Logout";
 import { logout } from "../../../store/redux-store/slices/user/user.slice";
 import { useAppDispatch } from "../../../store/redux-store/hooks";
 
+import { PATHS } from "../../../pages/paths";
 import { ThemeModeSwitch } from "../../../components";
 
 type AccountSettingsProps = {
@@ -23,6 +25,8 @@ type AccountSettingsProps = {
 };
 
 const AccountSettings: React.FC<AccountSettingsProps> = ({ image }) => {
+  const navigate = useNavigate();
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -58,7 +62,12 @@ const AccountSettings: React.FC<AccountSettingsProps> = ({ image }) => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <SettingsMenuItem>
-          <LogoutButton onClick={() => dispatch(logout())}>
+          <LogoutButton
+            onClick={() => {
+              navigate(PATHS.default);
+              dispatch(logout());
+            }}
+          >
             <ListItemIcon>
               <Logout fontSize="small" />
             </ListItemIcon>

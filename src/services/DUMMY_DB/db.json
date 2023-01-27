@@ -1,13 +1,6 @@
 {
   "programs": [
     {
-      "id": "DUMMY-ID-1",
-      "creator": "DUMMY-TRAINER-1",
-      "title": "Random Name #1",
-      "description": "Probably the most random thing you have ever seen!",
-      "price": 199
-    },
-    {
       "id": "DUMMY-ID-2",
       "creator": "DUMMY-TRAINER-2",
       "title": "Random Name #2",
@@ -76,98 +69,252 @@
       "title": "Random Name #11",
       "description": "Probably the most random thing you have ever seen!",
       "price": 199
+    },
+    {
+      "id": "a9463446-ed97-4295-8dd2-fb2a78c82427",
+      "creator": "DUMMY-TRAINER-1",
+      "title": "NEW PROGRAM!",
+      "description": "Probably the most random thing you have ever seen!",
+      "price": 1999
+    },
+    {
+      "id": "15513e49-cebf-479c-a7a2-7daf17d54bfb",
+      "creator": "DUMMY-TRAINER-1",
+      "title": "NEW PROGRAM!",
+      "description": "Probably the most random thing you have ever seen!",
+      "price": 1999
+    },
+    {
+      "id": "392fa1f8-8be7-4661-9d4c-d0e2009943ba",
+      "creator": "DUMMY-TRAINER-1",
+      "title": "NEW PROGRAM!",
+      "description": "Probably the most random thing you have ever seen!",
+      "price": 1999
+    },
+    {
+      "id": "4359f09f-8be7-4698-9ab0-5b6777f8ca60",
+      "creator": "DUMMY-TRAINER-1",
+      "title": "NEW PROGRAM!",
+      "description": "Probably the most random thing you have ever seen!",
+      "price": 1999
+    },
+    {
+      "id": "69b106b3-abb3-4e15-a035-bb6c31fd65e6",
+      "creator": "DUMMY-TRAINER-1",
+      "title": "NEW PROGRAM!",
+      "description": "Probably the most random thing you have ever seen!",
+      "price": 1999
+    },
+    {
+      "id": "bea5f663-af0d-476b-9152-663aaa427d76",
+      "creator": "DUMMY-TRAINER-1",
+      "title": "NEW PROGRAM!",
+      "description": "Probably the most random thing you have ever seen!",
+      "price": 1999
+    },
+    {
+      "id": "4a652147-21ba-41b2-aad2-a0971ef00d63",
+      "creator": "DUMMY-TRAINER-1",
+      "title": "NEW PROGRAM!",
+      "description": "Probably the most random thing you have ever seen!",
+      "price": 1999
     }
   ],
   "trainers": [
     {
+      "id": "DUMMY-ID-1",
       "creator": "DUMMY-TRAINER-1",
       "name": "Random trainer 1"
     },
     {
+      "id": "DUMMY-ID-2",
       "creator": "DUMMY-TRAINER-2",
       "name": "Random trainer 2"
     },
     {
+      "id": "DUMMY-ID-3",
       "creator": "DUMMY-TRAINER-3",
       "name": "Random trainer 3"
     }
   ],
   "workouts": [
     {
-      "id": "DUMMY-workout-id-1",
+      "id": "8a8b4416-5498-472b-a08d-672039773d8d",
+      "title": "Updated Title Workout",
       "creator": "DUMMY-USER-1",
-      "title": "Monday chest",
       "date": "2023-01-01",
       "exercises": [
         {
-          "name": "Bench Press",
+          "id": "DUMMY-EXERCISE-ID-1",
+          "name": "bench press",
           "sets": [
             {
               "weight": 120,
               "reps": 5,
-              "RM": 150
+              "repMax": 150
+            },
+            {
+              "weight": 130,
+              "reps": 5,
+              "repMax": 155
+            },
+            {
+              "weight": 150,
+              "reps": 5,
+              "repMax": 170
             }
           ]
         },
         {
-          "name": "Squat",
+          "id": "DUMMY-EXERCISE-ID-2",
+          "name": "squat",
           "sets": [
             {
-              "weight": 120,
+              "weight": 220,
               "reps": 4,
-              "RM": 245
+              "repMax": 245
+            },
+            {
+              "weight": 220,
+              "reps": 4,
+              "repMax": 255
             }
           ]
         },
         {
-          "name": "Deadlift",
+          "id": "DUMMY-EXERCISE-ID-3",
+          "name": "deadlift",
           "sets": [
             {
               "weight": 120,
               "reps": 3,
-              "RM": 345
+              "repMax": 345
+            },
+            {
+              "weight": 120,
+              "reps": 3,
+              "repMax": 365
             }
           ]
         }
       ]
     },
     {
-      "id": "DUMMY-workout-id-2",
+      "id": "270de88b-c1d1-4dd6-9a1c-39e943eef5df",
+      "title": "Updated Title Workout",
       "creator": "DUMMY-USER-1",
-      "title": "Squat day",
-      "date": "2023-01-11",
+      "date": "2023-01-01",
       "exercises": [
         {
-          "name": "Bench Press",
+          "id": "DUMMY-EXERCISE-ID-1",
+          "name": "bench press",
           "sets": [
+            {
+              "weight": 120,
+              "reps": 5,
+              "repMax": 150
+            },
+            {
+              "weight": 130,
+              "reps": 5,
+              "repMax": 155
+            },
             {
               "weight": 150,
               "reps": 5,
-              "RM": 170
+              "repMax": 170
             }
           ]
         },
         {
-          "name": "Squat",
+          "id": "DUMMY-EXERCISE-ID-2",
+          "name": "squat",
           "sets": [
             {
-              "weight": 150,
-              "reps": 6,
-              "RM": 270
+              "weight": 220,
+              "reps": 4,
+              "repMax": 245
+            },
+            {
+              "weight": 220,
+              "reps": 4,
+              "repMax": 255
             }
           ]
         },
         {
-          "name": "Deadlift",
+          "id": "DUMMY-EXERCISE-ID-3",
+          "name": "deadlift",
           "sets": [
             {
-              "weight": 150,
-              "reps": 7,
-              "RM": 370
+              "weight": 120,
+              "reps": 3,
+              "repMax": 345
+            },
+            {
+              "weight": 120,
+              "reps": 3,
+              "repMax": 365
             }
           ]
         }
       ]
+    }
+  ],
+  "usersProgress": [
+    {
+      "id": "28070f37-7db9-4dd6-a3b9-cf99c3efbffe",
+      "workoutId": "8a8b4416-5498-472b-a08d-672039773d8d",
+      "userId": "DUMMY-USER-1",
+      "exerciseId": "DUMMY-EXERCISE-ID-1",
+      "exerciseName": "bench press",
+      "date": "2023-01-27",
+      "repMax": 170
+    },
+    {
+      "id": "270d6d88-9225-4f56-93da-5a2802f30b0b",
+      "workoutId": "8a8b4416-5498-472b-a08d-672039773d8d",
+      "userId": "DUMMY-USER-1",
+      "exerciseId": "DUMMY-EXERCISE-ID-2",
+      "exerciseName": "squat",
+      "date": "2023-01-27",
+      "repMax": 255
+    },
+    {
+      "id": "cab46c67-b363-4ee1-9076-dc20812b22ea",
+      "workoutId": "8a8b4416-5498-472b-a08d-672039773d8d",
+      "userId": "DUMMY-USER-1",
+      "exerciseId": "DUMMY-EXERCISE-ID-3",
+      "exerciseName": "deadlift",
+      "date": "2023-01-27",
+      "repMax": 365
+    },
+    {
+      "id": "6d7caa01-dcfc-46b6-9c3e-2b26d43fb264",
+      "workoutId": "270de88b-c1d1-4dd6-9a1c-39e943eef5df",
+      "userId": "DUMMY-USER-1",
+      "exerciseId": "DUMMY-EXERCISE-ID-1",
+      "exerciseName": "bench press",
+      "date": "2023-01-27",
+      "repMax": 170
+    },
+    {
+      "id": "6e0b2cbc-9875-497f-a198-c3a213177aa4",
+      "workoutId": "270de88b-c1d1-4dd6-9a1c-39e943eef5df",
+      "userId": "DUMMY-USER-1",
+      "exerciseId": "DUMMY-EXERCISE-ID-2",
+      "exerciseName": "squat",
+      "date": "2023-01-27",
+      "repMax": 255
+    },
+    {
+      "id": "13a1c588-3954-4627-b2b3-c0d55c5bf8f2",
+      "workoutId": "270de88b-c1d1-4dd6-9a1c-39e943eef5df",
+      "userId": "DUMMY-USER-1",
+      "exerciseId": "DUMMY-EXERCISE-ID-3",
+      "exerciseName": "deadlift",
+      "date": "2023-01-27",
+      "repMax": 365
     }
   ]
 }

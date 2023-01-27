@@ -1,28 +1,24 @@
 import React from "react";
 
-import { useQuery } from "react-query";
-
 import { Alert } from "@mui/material";
 import { styled } from "@mui/system";
 
-import { Program } from "../../shared/interfaces";
-import { ProgramsService } from "../../services";
+import { usePrograms } from "../../hooks/queryHooks/programsHooks/usePrograms";
 
+import { Program } from "../../shared/interfaces";
+
+import { Status } from "../../shared/enums";
 import { ProgramItem, SectionHeader, SectionContainer } from "../../components";
 
 const ProgramListPage: React.FC = () => {
-  const {
-    status,
-    error,
-    data: programs,
-  } = useQuery(["programs"], ProgramsService.getAllPrograms);
+  const { status, error, data: programs } = usePrograms();
 
   return (
     <SectionContainer>
       <SectionHeader>Programs</SectionHeader>
 
-      {status === "loading" && <div>Loading...</div>}
-      {status === "error" && <div>error</div>}
+      {status === Status.LOADING && <div>loading...</div>}
+      {status === Status.ERROR && <div>error!</div>}
 
       <ProgramsList>
         {programs?.map((program: Program) => {

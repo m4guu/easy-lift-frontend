@@ -1,6 +1,6 @@
 interface Set {
   weight: number;
   reps: number;
-  RM: number;
+  repMax: number;
 }
 export default Set;

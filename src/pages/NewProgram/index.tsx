@@ -1,34 +1,37 @@
 import React from "react";
 
-import { Box, Button } from "@mui/material";
-import { styled } from "@mui/system";
+import { LoadingButton } from "@mui/lab";
 
-import { useQueryClient, useMutation } from "react-query";
-
-import { ProgramsService } from "../../services";
+import { useAddProgramMutation } from "../../hooks/queryHooks/programsHooks/useAddProgramMutation";
 
 import { DUMMY_PROGRAM } from "./constans";
 
 import { SectionHeader, SectionContainer } from "../../components";
+import { Status } from "../../shared/enums";
 
 const NewProgramPage: React.FC = () => {
-  const queryClient = useQueryClient();
+  const {
+    isLoading,
+    status,
+    mutate: addQueryProgram,
+  } = useAddProgramMutation();
 
-  const addWorkoutMutation = useMutation(ProgramsService.create, {
-    onSuccess: () => {
-      // invalidates cache and refetch
-      queryClient.invalidateQueries(["programs", "10programs"]);
-    },
-  });
   const addNewProgram = () => {
-    addWorkoutMutation.mutate(DUMMY_PROGRAM);
+    addQueryProgram(DUMMY_PROGRAM);
   };
+
   return (
     <SectionContainer>
       <SectionHeader>New Program</SectionHeader>
-      <Button onClick={addNewProgram} variant="contained">
-        add new workout
-      </Button>
+      <LoadingButton
+        loading={isLoading}
+        onClick={addNewProgram}
+        variant="contained"
+      >
+        add new program
+      </LoadingButton>
+      {status === Status.SUCCESS && <div>program added!</div>}
+      {status === Status.ERROR && <div>ERROR</div>}
     </SectionContainer>
   );
 };

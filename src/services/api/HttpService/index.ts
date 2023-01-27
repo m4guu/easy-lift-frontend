@@ -9,17 +9,17 @@ const throwError = (e: Error) => {
 const axiosInstance = axios.create({ baseURL: ENDPOINTS.API });
 
 const HttpService = {
-  get: (path: string) =>
-    axiosInstance.get(path).then(pluckData).catch(throwError),
+  get: <T = unknown>(path: string) =>
+    axiosInstance.get<T>(path).then(pluckData).catch(throwError),
 
-  post: (path: string, data?: any) =>
-    axiosInstance.post(path, data).then(pluckData).catch(throwError),
+  post: <T = void>(path: string, data?: any) =>
+    axiosInstance.post<T>(path, data).then(pluckData).catch(throwError),
 
-  patch: (path: string, data?: any) =>
-    axiosInstance.patch(path, data).then(pluckData).catch(throwError),
+  patch: <T = void>(path: string, data?: any) =>
+    axiosInstance.patch<T>(path, data).then(pluckData).catch(throwError),
 
-  delete: (path: string, data?: any) =>
-    axiosInstance.delete(path, data).then(pluckData).catch(throwError),
+  delete: <T = void>(path: string, data?: any) =>
+    axiosInstance.delete<T>(path, data).then(pluckData).catch(throwError),
 };
 
 export default HttpService;

@@ -1,31 +1,24 @@
 import React from "react";
 
-import { Box, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
-import { useQuery } from "react-query";
+import { useTrainers } from "../../hooks/queryHooks/trainersHooks/useTrainers";
 
-import { TrainersService } from "../../services";
-
-import { Trainer } from "../../shared/interfaces";
-
+import { Status } from "../../shared/enums";
 import { TrainerItem, SectionHeader, SectionContainer } from "../../components";
 
 const TrainerListPage: React.FC = () => {
-  const {
-    status,
-    error,
-    data: trainers,
-  } = useQuery(["trainers"], TrainersService.get);
+  const { status, error, data: trainers } = useTrainers();
 
   return (
     <SectionContainer>
       <SectionHeader>Our Trainers</SectionHeader>
 
-      {status === "loading" && <div>Loading...</div>}
-      {status === "error" && <div>error</div>}
+      {status === Status.LOADING && <div>Loading...</div>}
+      {status === Status.ERROR && <div>error</div>}
+
       <TrainersList>
-        {trainers?.map((trainer: Trainer) => {
+        {trainers?.map((trainer) => {
           return <TrainerItem key={trainer.id} trainer={trainer} />;
         })}
       </TrainersList>
