@@ -18,6 +18,7 @@ export const generateUserProgress = (workout: Workout): UserProgres[] => {
       exerciseName: name,
       date: getTodayDate(),
       repMax,
+      sets,
     };
   });
 };

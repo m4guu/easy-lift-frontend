@@ -1,8 +1,10 @@
-import Set from "../Set";
-
 interface Exercise {
+  bodyPart: string;
+  equipment: string;
+  gifUrl: string;
   id: string;
   name: string;
-  sets: Set[];
+  target: string;
 }
+
 export default Exercise;

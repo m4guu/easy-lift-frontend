@@ -1,4 +1,5 @@
 enum QueryKey {
+  // internal API
   WORKOUT = "workout",
   USER_WORKOUTS = "userWorkouts",
 
@@ -11,6 +12,10 @@ enum QueryKey {
   TRAINER_PROGRAMS = "trainerPrograms",
 
   USER_PROGRESS = "userProgress",
+
+  // exerciseDB API
+  EXERCISES = "exercises",
+  EXERCISE = "exercise",
 }
 
 export default QueryKey;

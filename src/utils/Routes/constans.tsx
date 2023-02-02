@@ -5,15 +5,16 @@ import {
   Home,
   NewProgram,
   Creator,
-  TrainerList,
+  Trainers,
   Trainer,
-  ProgramList,
+  Programs,
   Program,
   NotFound,
   NewWorkout,
-  ExerciseList,
+  Exercises,
   Exercise,
-  WorkoutList,
+  ExerciseProgress,
+  Workouts,
   Workout,
   BodyWeight,
 } from "../../pages";
@@ -25,12 +26,19 @@ export const trainerRoutes = (
       <Route index element={<NewProgram />} />
       <Route path={NESTED_PATHS.NEW_PROGRAM_CREATOR} element={<Creator />} />
     </Route>
+
+    <Route path={PATHS.NEW_WORKOUT} element={<NewWorkout />} />
+    <Route path={PATHS.EXERCISES}>
+      <Route index element={<Exercises />} />
+      <Route path={NESTED_PATHS.EXERCISE} element={<Exercise />} />
+    </Route>
+
     <Route path={PATHS.TRAINERS}>
-      <Route index element={<TrainerList />} />
+      <Route index element={<Trainers />} />
       <Route path={NESTED_PATHS.TRAINER} element={<Trainer />} />
     </Route>
     <Route path={PATHS.PROGRAMS}>
-      <Route index element={<ProgramList />} />
+      <Route index element={<Programs />} />
       <Route path={NESTED_PATHS.PROGRAM} element={<Program />} />
     </Route>
     <Route path={PATHS.notFound} element={<NotFound />} />
@@ -40,21 +48,25 @@ export const trainerRoutes = (
 export const userRoutes = (
   <>
     <Route path={PATHS.default} element={<Home />} />
-    <Route path={PATHS.NEW_WORKOUT}>
-      <Route index element={<NewWorkout />} />
-      <Route path={NESTED_PATHS.EXERCISE_LIST} element={<ExerciseList />} />
+    <Route path={PATHS.NEW_WORKOUT} element={<NewWorkout />} />
+    <Route path={PATHS.EXERCISES}>
+      <Route index element={<Exercises />} />
       <Route path={NESTED_PATHS.EXERCISE} element={<Exercise />} />
+      <Route
+        path={NESTED_PATHS.EXERCISE_PROGRESS}
+        element={<ExerciseProgress />}
+      />
     </Route>
     <Route path={PATHS.WORKOUTS}>
-      <Route index element={<WorkoutList />} />
+      <Route index element={<Workouts />} />
       <Route path={NESTED_PATHS.WORKOUT} element={<Workout />} />
     </Route>
     <Route path={PATHS.TRAINERS}>
-      <Route index element={<TrainerList />} />
+      <Route index element={<Trainers />} />
       <Route path={NESTED_PATHS.TRAINER} element={<Trainer />} />
     </Route>
     <Route path={PATHS.PROGRAMS}>
-      <Route index element={<ProgramList />} />
+      <Route index element={<Programs />} />
       <Route path={NESTED_PATHS.PROGRAM} element={<Program />} />
     </Route>
     <Route path={PATHS.BODY_WEIGHT} element={<BodyWeight />} />

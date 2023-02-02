@@ -1,6 +1,7 @@
 export type { default as BodyWeight } from "./BodyWeight";
-export type { default as ChartMenuData } from "./ChartMenuData";
 export type { default as Exercise } from "./Exercise";
+export type { default as ChartMenuData } from "./ChartMenuData";
+export type { default as WorkoutExercise } from "./WorkoutExercise";
 export type { default as UserProgres } from "./UserProgres";
 export type { default as NavigationItem } from "./NavigationItem";
 export type { default as Program } from "./Program";

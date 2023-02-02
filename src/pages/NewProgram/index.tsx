@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { LoadingButton } from "@mui/lab";
 
@@ -8,6 +9,7 @@ import { DUMMY_PROGRAM } from "./constans";
 
 import { SectionHeader, SectionContainer } from "../../components";
 import { Status } from "../../shared/enums";
+import { PATHS } from "../paths";
 
 const NewProgramPage: React.FC = () => {
   const {
@@ -23,6 +25,9 @@ const NewProgramPage: React.FC = () => {
   return (
     <SectionContainer>
       <SectionHeader>New Program</SectionHeader>
+
+      <Link to={PATHS.NEW_WORKOUT}>add new workout</Link>
+
       <LoadingButton
         loading={isLoading}
         onClick={addNewProgram}

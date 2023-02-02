@@ -1,11 +1,11 @@
-import Exercise from "../Exercise";
+import WorkoutExercise from "../WorkoutExercise";
 
 interface Workout {
   id: string;
   creator: string;
   title: string;
   date: string;
-  exercises: Exercise[];
+  exercises: WorkoutExercise[];
 }
 
 export default Workout;

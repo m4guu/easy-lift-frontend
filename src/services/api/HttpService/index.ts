@@ -1,12 +1,17 @@
 import axios from "axios";
 
-import ENDPOINTS from "../endpoints";
+import { config } from "./constans";
 
 const pluckData = <T>(wrapper: { data: T }) => wrapper.data;
 const throwError = (e: Error) => {
   throw e;
 };
-const axiosInstance = axios.create({ baseURL: ENDPOINTS.API });
+const axiosInstance = axios.create({
+  baseURL: import.meta.env.VITE_INTERNAL_API_URL,
+});
+const axiosInstanceExerciseApi = axios.create({
+  baseURL: import.meta.env.VITE_EXERCISE_DB_API_URL,
+});
 
 const HttpService = {
   get: <T = unknown>(path: string) =>
@@ -22,4 +27,12 @@ const HttpService = {
     axiosInstance.delete<T>(path, data).then(pluckData).catch(throwError),
 };
 
-export default HttpService;
+const ExerciseDBHttpService = {
+  get: <T = unknown>(path: string) =>
+    axiosInstanceExerciseApi
+      .get<T>(path, config)
+      .then(pluckData)
+      .catch(throwError),
+};
+
+export { HttpService, ExerciseDBHttpService };

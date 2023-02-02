@@ -33,3 +33,23 @@ export const getLastYearDate = () => {
   );
   return format(lastYear, "yyyy-MM-dd");
 };
+
+export const getLongFormByDate = (stringDate: string) => {
+  const date = new Date(stringDate);
+
+  return date.toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  });
+};
+
+export const getHowMuchDaysUntill = (stringDate: string) => {
+  const today = new Date();
+  const date = new Date(stringDate);
+
+  const timeDiff = Math.abs(today.getTime() - date.getTime());
+  const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+  return diffDays;
+};

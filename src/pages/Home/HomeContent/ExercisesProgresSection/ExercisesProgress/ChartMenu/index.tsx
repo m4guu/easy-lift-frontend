@@ -4,11 +4,12 @@ import { InputLabel, MenuItem, FormControl } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import styled from "@mui/system/styled";
 
-import { useUserProgress } from "../../../../../../hooks/queryHooks/userProgressHooks/useUserExercisesProgress";
+import { getUniqueArrayByKey } from "../../../../../../utils/assets/getUniqueArrayByKey";
+
+import { useUserProgress } from "../../../../../../hooks/queryHooks/userProgressHooks/useUserProgress";
 import { useGetUserId } from "../../../../../../store/redux-store/slices/user/user.hooks";
 
 import { ChartMenuData } from "../../../../../../shared/interfaces";
-
 import { initialFormInputs } from "./constans";
 
 type ChartMenuProps = {
@@ -20,11 +21,7 @@ export const ChartMenu: React.FC<ChartMenuProps> = ({ sendData }) => {
   const { id: userId } = useGetUserId();
   const { status, error, data: userProgress } = useUserProgress(userId);
 
-  const menuItemProgressData = [
-    ...new Map(
-      userProgress?.map((progres) => [progres["exerciseId"], progres])
-    ).values(),
-  ];
+  const menuItemProgressData = getUniqueArrayByKey(userProgress, "exerciseId");
 
   const exerciseProgress = useMemo(() => {
     return userProgress?.filter(
@@ -103,18 +100,19 @@ export const ChartMenu: React.FC<ChartMenuProps> = ({ sendData }) => {
           label={formInputs.exerciseID.label}
           onChange={handleChange}
         >
-          {menuItemProgressData?.length === 0 && (
+          {menuItemProgressData?.length === 0 ? (
             <MenuItem value="">
               <em>No exercises yet</em>
             </MenuItem>
+          ) : (
+            menuItemProgressData.map((item) => {
+              return (
+                <MenuItem key={item.exerciseId} value={item.exerciseId}>
+                  {item.exerciseName}
+                </MenuItem>
+              );
+            })
           )}
-          {menuItemProgressData?.map((item) => {
-            return (
-              <MenuItem key={item.exerciseId} value={item.exerciseId}>
-                {item.exerciseName}
-              </MenuItem>
-            );
-          })}
         </Select>
       </ChartMenuFormControl>
     </ChartMenuForm>

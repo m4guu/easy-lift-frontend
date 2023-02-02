@@ -8,7 +8,6 @@ export const useAddProgramMutation = () => {
 
   return useMutation(ProgramsService[ProgramsMethods.CREATE], {
     onSuccess: () => {
-      // invalidates cache and refetch
       queryClient.invalidateQueries([QueryKey.TRAINER_PROGRAMS]);
     },
   });

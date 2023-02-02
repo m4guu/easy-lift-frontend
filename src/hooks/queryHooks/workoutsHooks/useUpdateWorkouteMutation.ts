@@ -1,17 +1,21 @@
-import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 import { WorkoutsService, WorkoutsMethods } from "../../../services";
+
+import { useInvalidateQueries } from "../useInvalidateQuries";
 
 import { QueryKey } from "../../../shared/enums";
 
 export const useUpdateWorkoutMutation = (workoutId: string) => {
-  const queryClient = useQueryClient();
+  const { invalidateQueries } = useInvalidateQueries([
+    [QueryKey.USER_WORKOUTS],
+    [QueryKey.WORKOUT, workoutId],
+    [QueryKey.USER_PROGRESS],
+  ]);
 
   return useMutation(WorkoutsService[WorkoutsMethods.UPDATE], {
     onSuccess: () => {
-      queryClient.invalidateQueries([QueryKey.USER_WORKOUTS]);
-      queryClient.invalidateQueries([QueryKey.WORKOUT, workoutId]);
-      queryClient.invalidateQueries([QueryKey.USER_PROGRESS]);
+      invalidateQueries();
     },
   });
 };

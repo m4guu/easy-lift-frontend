@@ -17,6 +17,7 @@ export const HomeContent: React.FC = () => {
   return (
     <HomeContainer>
       <TrainingProgramsSection />
+
       <Wrapper>
         {role === Role.user && <ExercisesProgressSection />}
         <YoursSection />

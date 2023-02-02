@@ -7,7 +7,7 @@ import { useTrainers } from "../../hooks/queryHooks/trainersHooks/useTrainers";
 import { Status } from "../../shared/enums";
 import { TrainerItem, SectionHeader, SectionContainer } from "../../components";
 
-const TrainerListPage: React.FC = () => {
+const TrainersPage: React.FC = () => {
   const { status, error, data: trainers } = useTrainers();
 
   return (
@@ -30,5 +30,5 @@ const TrainersList = styled("ul")({
   padding: 0,
 });
 
-const TrainerList = TrainerListPage;
-export default TrainerList;
+const Trainers = TrainersPage;
+export default Trainers;

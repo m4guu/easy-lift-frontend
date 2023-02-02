@@ -5,12 +5,10 @@ import { styled } from "@mui/system";
 
 import { usePrograms } from "../../hooks/queryHooks/programsHooks/usePrograms";
 
-import { Program } from "../../shared/interfaces";
-
 import { Status } from "../../shared/enums";
 import { ProgramItem, SectionHeader, SectionContainer } from "../../components";
 
-const ProgramListPage: React.FC = () => {
+const ProgramsPage: React.FC = () => {
   const { status, error, data: programs } = usePrograms();
 
   return (
@@ -21,7 +19,7 @@ const ProgramListPage: React.FC = () => {
       {status === Status.ERROR && <div>error!</div>}
 
       <ProgramsList>
-        {programs?.map((program: Program) => {
+        {programs?.map((program) => {
           return <ProgramItem key={program.id} program={program} />;
         })}
       </ProgramsList>
@@ -37,5 +35,5 @@ const ProgramListPage: React.FC = () => {
 
 const ProgramsList = styled("ul")({});
 
-const ProgramList = ProgramListPage;
-export default ProgramList;
+const Programs = ProgramsPage;
+export default Programs;

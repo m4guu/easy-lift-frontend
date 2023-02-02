@@ -12,7 +12,7 @@ import { SectionHeader, SectionContainer } from "../../../components";
 const WorkoutPage: React.FC = () => {
   const { workoutId } = useParams();
 
-  const { status, error, data: workout } = useWorkout(workoutId || "");
+  const { status, error, data: workout } = useWorkout(workoutId!);
 
   return (
     <SectionContainer>

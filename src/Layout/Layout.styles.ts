@@ -26,12 +26,12 @@ export const GridWrapper = styled(Grid)({
 });
 
 export const SecondGridItem = styled(Grid)(({ theme }) => ({
+  zIndex: 1000,
   backgroundColor: theme.palette.background.layout,
   [theme.breakpoints.up("lg")]: {
     height: "8%",
   },
   [theme.breakpoints.down("lg")]: {
-    zIndex: 1000,
     position: "fixed",
     bottom: 0,
     right: 0,

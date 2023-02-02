@@ -11,6 +11,7 @@ import { useUpdateWorkoutMutation } from "../../hooks/queryHooks/workoutsHooks/u
 import { Workout } from "../../shared/interfaces";
 import { PATHS } from "../../pages/paths";
 import { useDeleteUserProgresMutation } from "../../hooks/queryHooks/userProgressHooks/useDeleteUserProgressMutation";
+import { scales } from "chart.js";
 
 type WorkoutItemProps = {
   workout: Workout;
@@ -28,12 +29,12 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
   };
 
   const updateWorkout = () => {
-    const updateData = {
+    const updatedWorkout = {
       ...workout,
       title: "Updated Title Workout",
     };
 
-    updateQueryWorkout(updateData);
+    updateQueryWorkout(updatedWorkout);
   };
 
   return (
@@ -79,7 +80,7 @@ const ListItemLink = styled(Link)(({ theme }) => ({
   textDecoration: "none",
   borderRadius: theme.spacing(1),
   "&:hover": {
-    backgroundColor: theme.palette.action.hover,
+    transform: "scale(0.99)",
   },
 }));
 export default WorkoutItem;

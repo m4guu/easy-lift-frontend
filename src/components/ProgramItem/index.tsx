@@ -5,6 +5,7 @@ import { LoadingButton } from "@mui/lab";
 import { Card, Typography, Button, Box } from "@mui/material";
 import styled from "@mui/system/styled";
 
+import { useUpdateProgramMutation } from "../../hooks/queryHooks/programsHooks/useUpdateProgramMutation";
 import { useDeleteProgramMutation } from "../../hooks/queryHooks/programsHooks/useDeleteProgramMutation";
 import { useGetUserId } from "../../store/redux-store/slices/user/user.hooks";
 
@@ -19,19 +20,33 @@ type ProgramItemProps = {
 const ProgramItem: React.FC<ProgramItemProps> = ({ program }) => {
   const { id: userId } = useGetUserId();
   const {
-    isLoading,
-    status,
-    error,
+    isLoading: isDeleting,
+    status: deleteStatus,
+    error: deleteError,
     mutate: deleteQueryProgram,
-  } = useDeleteProgramMutation();
+  } = useDeleteProgramMutation(program.id);
+  const {
+    isLoading: isUpdating,
+    status: updateStatus,
+    error: updateError,
+    mutate: updateQueryProgram,
+  } = useUpdateProgramMutation(program.id);
 
   const deleteProgram = () => {
     deleteQueryProgram(program.id);
+  };
+  const updateProgram = () => {
+    const updatedProgram = {
+      ...program,
+      title: "Updated Title Workout",
+    };
+    updateQueryProgram(updatedProgram);
   };
 
   return (
     <ProgramItemCard variant="outlined">
       <Typography variant="caption">{program.title}</Typography>
+
       <CardContainer>
         <Typography>{program.description}</Typography>
         <ButtonsContainer>
@@ -40,18 +55,32 @@ const ProgramItem: React.FC<ProgramItemProps> = ({ program }) => {
           </ProgramItemLink>
 
           {userId === program.creator && (
-            <LoadingButton
-              loading={isLoading}
-              onClick={deleteProgram}
-              variant="outlined"
-              color="error"
-            >
-              delete
-            </LoadingButton>
+            <>
+              <LoadingButton
+                sx={{ marginRight: "1rem" }}
+                loading={isDeleting}
+                onClick={deleteProgram}
+                variant="outlined"
+                color="error"
+              >
+                delete
+              </LoadingButton>
+              <LoadingButton
+                loading={isUpdating}
+                onClick={updateProgram}
+                variant="outlined"
+                color="info"
+              >
+                update
+              </LoadingButton>
+            </>
           )}
         </ButtonsContainer>
-        {status === Status.SUCCESS && <div>Program deleted succesfully!</div>}
-        {status === Status.ERROR && <div>error!</div>}
+
+        {deleteStatus === Status.SUCCESS && (
+          <div>Program deleted succesfully!</div>
+        )}
+        {deleteStatus === Status.ERROR && <div>error!</div>}
       </CardContainer>
     </ProgramItemCard>
   );

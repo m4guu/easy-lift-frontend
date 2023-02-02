@@ -1,15 +1,19 @@
-import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 import { WorkoutsService, WorkoutsMethods } from "../../../services";
+
+import { useInvalidateQueries } from "../useInvalidateQuries";
+
 import { QueryKey } from "../../../shared/enums";
 
 export const useAddWorkoutMutation = () => {
-  const queryClient = useQueryClient();
+  const { invalidateQueries } = useInvalidateQueries([
+    [QueryKey.USER_WORKOUTS],
+  ]);
 
   return useMutation(WorkoutsService[WorkoutsMethods.CREATE], {
     onSuccess: () => {
-      // invalidates cache and refetch
-      queryClient.invalidateQueries([QueryKey.USER_WORKOUTS]);
+      invalidateQueries();
     },
   });
 };

@@ -9,6 +9,7 @@ export enum ProgramsMethods {
   GET_PROGRAM_BY_ID = "getProgramById",
   CREATE = "create",
   DELETE = "delete",
+  UPDATE = "update",
 }
 
 const ProgramsService = {
@@ -25,10 +26,16 @@ const ProgramsService = {
     HttpService.get<Program[]>(`${ENDPOINTS.PROGRAMS}?id=${programId}`),
 
   [ProgramsMethods.CREATE]: (newProgram: Program): Promise<void> =>
-    HttpService.post(ENDPOINTS.PROGRAMS, newProgram),
+    HttpService.post<void>(ENDPOINTS.PROGRAMS, newProgram),
 
   [ProgramsMethods.DELETE]: (programId: string): Promise<void> =>
-    HttpService.delete(`${ENDPOINTS.PROGRAMS}/${programId}`),
+    HttpService.delete<void>(`${ENDPOINTS.PROGRAMS}/${programId}`),
+
+  [ProgramsMethods.UPDATE]: (updatedProgram: Program): Promise<void> =>
+    HttpService.patch<void>(
+      `${ENDPOINTS.PROGRAMS}/${updatedProgram.id}`,
+      updatedProgram
+    ),
 };
 
 export default ProgramsService;
