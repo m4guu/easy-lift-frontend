@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useGetUserRoleAndImage } from "../../store/redux-store/slices/user/user.hooks";
+import { useUserContext } from "../../contexts/userContext";
 
 import { Logo, ThemeModeSwitch } from "../../components";
 import Navigation from "./Navigation";
@@ -20,7 +20,7 @@ import {
 } from "./LeftBar.styles";
 
 const LeftBar: React.FC = () => {
-  const { role, image } = useGetUserRoleAndImage();
+  const { user } = useUserContext();
 
   return (
     <SectionContainer>
@@ -30,9 +30,9 @@ const LeftBar: React.FC = () => {
         </MenuDrawerBox>
         <Logo />
         <AccountSettingsBox>
-          <AccountSettings image={image} />
+          <AccountSettings image={user?.image!} />
         </AccountSettingsBox>
-        {role === Role.user ? <WeightChart /> : null}
+        {user?.role === Role.user ? <WeightChart /> : null}
         <NavigationContainer>
           <Navigation />
         </NavigationContainer>

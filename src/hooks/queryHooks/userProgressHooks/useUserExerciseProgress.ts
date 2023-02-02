@@ -5,10 +5,10 @@ import { QueryKey, Status } from "../../../shared/enums";
 import { UserProgressService, UserProgressMethods } from "../../../services";
 
 export const useUserExerciseProgress = (
-  userId: string,
+  userId?: string,
   exerciseId?: string
 ) => {
-  if (!exerciseId) {
+  if (!exerciseId || !userId) {
     return {
       status: Status.ERROR,
       data: [],

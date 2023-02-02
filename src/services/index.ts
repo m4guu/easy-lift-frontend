@@ -1,3 +1,5 @@
+export { default as AuthService, AuthMethods } from "./auth";
+
 export {
   default as ExerciseDBService,
   ExerciseDBMethods,

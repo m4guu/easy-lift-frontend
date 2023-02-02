@@ -12,7 +12,6 @@ const ExercisePage: React.FC = () => {
   const { exerciseId } = useParams();
 
   const { status, error, data: exercise } = useExercise(exerciseId);
-  console.log(exercise);
 
   return (
     <SectionContainer>

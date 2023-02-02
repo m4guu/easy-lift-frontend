@@ -1,25 +1,25 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Box, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import AddIcon from "@mui/icons-material/Add";
 
-import { useNavigate } from "react-router-dom";
+import { useUserContext } from "../../contexts/userContext";
+
 import { PATHS } from "../../pages/paths";
-
-import { useGetUserRoleAndImage } from "../../store/redux-store/slices/user/user.hooks";
-
 import { Role } from "../../shared/enums";
 
 import AccountSettings from "./AccountSettings";
 
 const TopBar: React.FC = () => {
-  const { role, image } = useGetUserRoleAndImage();
+  const { user } = useUserContext();
   const navigate = useNavigate();
 
   const buttonText =
-    role === Role.user ? "start training" : "create new program";
-  const buttonLink = role === Role.user ? PATHS.NEW_WORKOUT : PATHS.NEW_PROGRAM;
+    user?.role === Role.user ? "start training" : "create new program";
+  const buttonLink =
+    user?.role === Role.user ? PATHS.NEW_WORKOUT : PATHS.NEW_PROGRAM;
 
   return (
     <TopBarSectionContainer>
@@ -32,7 +32,7 @@ const TopBar: React.FC = () => {
           {buttonText}
         </Button>
         <AccountSettingsBox>
-          <AccountSettings image={image} />
+          <AccountSettings image={user?.image!} />
         </AccountSettingsBox>
       </Content>
     </TopBarSectionContainer>

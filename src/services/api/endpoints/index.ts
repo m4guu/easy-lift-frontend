@@ -4,6 +4,10 @@ enum ENDPOINTS {
   WORKOUTS = "workouts",
   TRAINERS = "trainers",
   USERS_PROGRESS = "usersProgress",
+  // auth
+  LOGIN = "login",
+  LOGOUT = "logout",
+  RESET_PASSWORD = "resetPassword",
 
   // exerciseDB API
   EXERCISES = "exercises",

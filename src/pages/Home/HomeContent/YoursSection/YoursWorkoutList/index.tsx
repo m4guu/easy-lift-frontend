@@ -2,15 +2,15 @@ import React from "react";
 
 import { List, Alert } from "@mui/material";
 
+import { useUserContext } from "../../../../../contexts/userContext";
 import { useUserWorkouts } from "../../../../../hooks/queryHooks/workoutsHooks/useUserWorkouts";
-import { useGetUserId } from "../../../../../store/redux-store/slices/user/user.hooks";
 
 import { Status } from "../../../../../shared/enums";
 import { WorkoutItem } from "../../../../../components";
 
 export const YourWorkoutList: React.FC = () => {
-  const { id: userId } = useGetUserId();
-  const { status, error, data: userWorkouts } = useUserWorkouts(userId);
+  const { user } = useUserContext();
+  const { status, error, data: userWorkouts } = useUserWorkouts(user?.id);
 
   return (
     <List>

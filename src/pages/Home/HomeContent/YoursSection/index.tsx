@@ -2,7 +2,7 @@ import React from "react";
 
 import styled from "@mui/system/styled";
 
-import { useGetUserRole } from "../../../../store/redux-store/slices/user/user.hooks";
+import { useUserContext } from "../../../../contexts/userContext";
 
 import { Role } from "../../../../shared/enums";
 
@@ -11,14 +11,14 @@ import { YourWorkoutList } from "./YoursWorkoutList";
 import { SectionHeader } from "../../../../components";
 
 export const YoursSection: React.FC = () => {
-  const { role } = useGetUserRole();
+  const { user } = useUserContext();
 
   return (
     <SectionContainer>
       <SectionHeader>
-        yours {role === Role.user ? "workouts" : "programs"}
+        yours {user?.role === Role.user ? "workouts" : "programs"}
       </SectionHeader>
-      {role === Role.user ? <YourWorkoutList /> : <YoursProgramsList />}
+      {user?.role === Role.user ? <YourWorkoutList /> : <YoursProgramsList />}
     </SectionContainer>
   );
 };
