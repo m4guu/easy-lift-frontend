@@ -7,6 +7,9 @@ const THEME_BACKGROUND = {
 
 const GREY = {
   main: "#c4D4D4D",
+
+  tint_1: "#767676",
+  tint_2: "#595959",
 };
 
 const COMMON = {

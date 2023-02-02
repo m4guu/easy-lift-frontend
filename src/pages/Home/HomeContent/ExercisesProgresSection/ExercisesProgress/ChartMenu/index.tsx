@@ -4,38 +4,45 @@ import { InputLabel, MenuItem, FormControl } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import styled from "@mui/system/styled";
 
-import { useGetUserExercisesProgress } from "../../../../../../store/redux-store/slices/user/user.hooks";
+import { getUniqueArrayByKey } from "../../../../../../utils/assets/getUniqueArrayByKey";
+
+import { useUserProgress } from "../../../../../../hooks/queryHooks/userProgressHooks/useUserProgress";
+import { useGetUserId } from "../../../../../../store/redux-store/slices/user/user.hooks";
 
 import { ChartMenuData } from "../../../../../../shared/interfaces";
-
 import { initialFormInputs } from "./constans";
 
 type ChartMenuProps = {
   sendData: (childData: ChartMenuData) => void;
 };
 
-const ChartMenu: React.FC<ChartMenuProps> = ({ sendData }) => {
+export const ChartMenu: React.FC<ChartMenuProps> = ({ sendData }) => {
   const [formInputs, setFormInputs] = useState(initialFormInputs);
-  const { exercisesProgress } = useGetUserExercisesProgress();
+  const { id: userId } = useGetUserId();
+  const { status, error, data: userProgress } = useUserProgress(userId);
 
-  const exerciseProgress = exercisesProgress.find(
-    (item) => item.exerciseID === formInputs.exerciseID.value
-  );
+  const menuItemProgressData = getUniqueArrayByKey(userProgress, "exerciseId");
+
+  const exerciseProgress = useMemo(() => {
+    return userProgress?.filter(
+      (progres) => progres.exerciseId === formInputs.exerciseID.value
+    );
+  }, [formInputs.exerciseID.value, userProgress]);
 
   const labels: string[] = useMemo(() => {
-    if (exerciseProgress) {
-      return exerciseProgress.progress.map((item) => item.date);
+    if (!exerciseProgress) {
+      // securing the undefined type that the find method can return
+      return [];
     }
-    // securing the undefined type that the find method can return
-    return [];
+    return exerciseProgress.map((item) => item.date);
   }, [exerciseProgress]);
 
   const data: number[] = useMemo(() => {
-    if (exerciseProgress) {
-      return exerciseProgress?.progress.map((item) => item.RM);
+    if (!exerciseProgress) {
+      // securing the undefined type that the find method can return
+      return [];
     }
-    // securing the undefined type that the find method can return
-    return [];
+    return exerciseProgress?.map((item) => item.repMax);
   }, [exerciseProgress]);
 
   const handleChange = (event: SelectChangeEvent): void => {
@@ -93,18 +100,19 @@ const ChartMenu: React.FC<ChartMenuProps> = ({ sendData }) => {
           label={formInputs.exerciseID.label}
           onChange={handleChange}
         >
-          {exercisesProgress?.length === 0 && (
+          {menuItemProgressData?.length === 0 ? (
             <MenuItem value="">
               <em>No exercises yet</em>
             </MenuItem>
+          ) : (
+            menuItemProgressData.map((item) => {
+              return (
+                <MenuItem key={item.exerciseId} value={item.exerciseId}>
+                  {item.exerciseName}
+                </MenuItem>
+              );
+            })
           )}
-          {exercisesProgress?.map((item) => {
-            return (
-              <MenuItem key={item.exerciseID} value={item.exerciseID}>
-                {item.name}
-              </MenuItem>
-            );
-          })}
         </Select>
       </ChartMenuFormControl>
     </ChartMenuForm>
@@ -124,5 +132,3 @@ const ChartMenuFormControl = styled(FormControl)(({ theme }) => ({
     margin: theme.spacing(1),
   },
 }));
-
-export default ChartMenu;

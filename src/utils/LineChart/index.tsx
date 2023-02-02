@@ -41,7 +41,7 @@ type ChartProps = {
   options: ChartOptions;
 };
 
-const Chart: React.FC<ChartProps> = ({ labels, data, options }) => {
+export const Chart: React.FC<ChartProps> = ({ labels, data, options }) => {
   const theme = useTheme();
 
   const chartData = {
@@ -57,5 +57,3 @@ const Chart: React.FC<ChartProps> = ({ labels, data, options }) => {
 
   return <Line options={{ ...defaultOptions, ...options }} data={chartData} />;
 };
-
-export default Chart;

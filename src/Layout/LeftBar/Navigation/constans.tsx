@@ -14,32 +14,55 @@ import { Role } from "../../../shared/enums";
 export const Constans = () => {
   const { role } = useGetUserRole();
 
-  const navList: NavigationItem[] = [
-    {
-      id: uuidv4(),
-      title: "Home",
-      link: PATHS.default,
-      icon: <HomeIcon color="primary" fontSize="large" />,
-    },
-    {
-      id: uuidv4(),
-      title: role === Role.user ? "Workouts" : "Programs",
-      link: role === Role.user ? PATHS.NEW_WORKOUT : PATHS.NEW_PROGRAM,
-      icon: <FitnessCenterIcon color="primary" fontSize="large" />,
-    },
-    {
-      id: uuidv4(),
-      title: "Body Weight",
-      link: PATHS.BODY_WEIGHT,
-      icon: <ScaleIcon color="primary" fontSize="large" />,
-    },
-    {
-      id: uuidv4(),
-      title: "Trainers",
-      link: PATHS.TRAINERS,
-      icon: <EngineeringIcon color="primary" fontSize="large" />,
-    },
-  ];
+  const navList: NavigationItem[] =
+    role === Role.trainer
+      ? [
+          {
+            id: uuidv4(),
+            title: "Home",
+            link: PATHS.default,
+            icon: <HomeIcon color="primary" fontSize="large" />,
+          },
+          {
+            id: uuidv4(),
+            title: "Programs",
+            link: PATHS.PROGRAMS,
+            icon: <FitnessCenterIcon color="primary" fontSize="large" />,
+          },
+
+          {
+            id: uuidv4(),
+            title: "Trainers",
+            link: PATHS.TRAINERS,
+            icon: <EngineeringIcon color="primary" fontSize="large" />,
+          },
+        ]
+      : [
+          {
+            id: uuidv4(),
+            title: "Home",
+            link: PATHS.default,
+            icon: <HomeIcon color="primary" fontSize="large" />,
+          },
+          {
+            id: uuidv4(),
+            title: "Workouts",
+            link: PATHS.WORKOUTS,
+            icon: <FitnessCenterIcon color="primary" fontSize="large" />,
+          },
+          {
+            id: uuidv4(),
+            title: "Body Weight",
+            link: PATHS.BODY_WEIGHT,
+            icon: <ScaleIcon color="primary" fontSize="large" />,
+          },
+          {
+            id: uuidv4(),
+            title: "Trainers",
+            link: PATHS.TRAINERS,
+            icon: <EngineeringIcon color="primary" fontSize="large" />,
+          },
+        ];
 
   return navList;
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Box, Typography, Button } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
@@ -11,10 +11,21 @@ import logo from "../../assets/images/logo/mini_logo_yellow.svg";
 import { DUMMY_LOGIN_STATE } from "./constans";
 
 const WelcomePage: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const dispatch = useAppDispatch();
 
+  const wait = (duration: number) => {
+    // eslint-disable-next-line no-promise-executor-return
+    return new Promise((resolve) => setTimeout(resolve, duration));
+  };
+
   const loginHandle = () => {
-    dispatch(login(DUMMY_LOGIN_STATE));
+    setIsLoading(true);
+    wait(1000).then(() => {
+      setIsLoading(false);
+      dispatch(login(DUMMY_LOGIN_STATE));
+    });
   };
 
   return (
@@ -27,6 +38,7 @@ const WelcomePage: React.FC = () => {
       <ButtonBox>
         <LoadingButton
           onClick={() => loginHandle()}
+          loading={isLoading}
           variant="outlined"
           size="small"
         >

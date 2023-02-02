@@ -7,7 +7,7 @@ import { useSwiper } from "swiper/react";
 
 import { ButtonBase } from "../../../../../../../components";
 
-const PrevSlideButton: React.FC = () => {
+export const PrevSlideButton: React.FC = () => {
   const swiper = useSwiper();
 
   return (
@@ -30,5 +30,3 @@ const PrevButton = styled(ButtonBase)(({ theme }) => ({
     bottom: "7.5rem",
   },
 }));
-
-export default PrevSlideButton;

@@ -10,7 +10,7 @@ export const initialFormInputs = {
   exerciseID: {
     name: "exerciseID",
     label: "Exercise",
-    value: "DUMMY-EXERCISE-PROGRESS-ID-1",
+    value: "0289",
   },
   dateRange: {
     name: "dateRange",

@@ -22,27 +22,31 @@ const TopBar: React.FC = () => {
   const buttonLink = role === Role.user ? PATHS.NEW_WORKOUT : PATHS.NEW_PROGRAM;
 
   return (
-    <SectionContainer>
-      <Button
-        onClick={() => navigate(buttonLink)}
-        variant="contained"
-        startIcon={<AddIcon />}
-      >
-        {buttonText}
-      </Button>
-      <AccountSettingsBox>
-        <AccountSettings image={image} />
-      </AccountSettingsBox>
-    </SectionContainer>
+    <TopBarSectionContainer>
+      <Content>
+        <Button
+          onClick={() => navigate(buttonLink)}
+          variant="contained"
+          startIcon={<AddIcon />}
+        >
+          {buttonText}
+        </Button>
+        <AccountSettingsBox>
+          <AccountSettings image={image} />
+        </AccountSettingsBox>
+      </Content>
+    </TopBarSectionContainer>
   );
 };
 
-const SectionContainer = styled("section")(({ theme }) => ({
+const TopBarSectionContainer = styled("section")({});
+
+const Content = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(2),
   display: "flex",
   alignItems: "center",
   justifyContent: "right",
   gap: "1rem",
-  paddingRight: theme.spacing(2),
   height: "100%",
   borderBottom: `solid thin ${theme.palette.others.border_color}`,
   [theme.breakpoints.down("lg")]: {

@@ -1,6 +1,7 @@
 interface Program {
   id: string;
-  name: string;
+  creator: string;
+  title: string;
   description: string;
   price: number;
 }

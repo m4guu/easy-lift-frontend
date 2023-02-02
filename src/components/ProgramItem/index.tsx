@@ -1,21 +1,86 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
+import { LoadingButton } from "@mui/lab";
 import { Card, Typography, Button, Box } from "@mui/material";
 import styled from "@mui/system/styled";
 
+import { useUpdateProgramMutation } from "../../hooks/queryHooks/programsHooks/useUpdateProgramMutation";
+import { useDeleteProgramMutation } from "../../hooks/queryHooks/programsHooks/useDeleteProgramMutation";
+import { useGetUserId } from "../../store/redux-store/slices/user/user.hooks";
+
 import { Program } from "../../shared/interfaces";
+import { PATHS } from "../../pages/paths";
+import { Status } from "../../shared/enums";
 
 type ProgramItemProps = {
   program: Program;
 };
 
 const ProgramItem: React.FC<ProgramItemProps> = ({ program }) => {
+  const { id: userId } = useGetUserId();
+  const {
+    isLoading: isDeleting,
+    status: deleteStatus,
+    error: deleteError,
+    mutate: deleteQueryProgram,
+  } = useDeleteProgramMutation(program.id);
+  const {
+    isLoading: isUpdating,
+    status: updateStatus,
+    error: updateError,
+    mutate: updateQueryProgram,
+  } = useUpdateProgramMutation(program.id);
+
+  const deleteProgram = () => {
+    deleteQueryProgram(program.id);
+  };
+  const updateProgram = () => {
+    const updatedProgram = {
+      ...program,
+      title: "Updated Title Workout",
+    };
+    updateQueryProgram(updatedProgram);
+  };
+
   return (
     <ProgramItemCard variant="outlined">
-      <Typography variant="caption">{program.name}</Typography>
+      <Typography variant="caption">{program.title}</Typography>
+
       <CardContainer>
         <Typography>{program.description}</Typography>
-        <Button variant="contained">Check it out!</Button>
+        <ButtonsContainer>
+          <ProgramItemLink to={`${PATHS.PROGRAMS}/${program.id}`}>
+            <Button variant="contained">Check it out!</Button>
+          </ProgramItemLink>
+
+          {userId === program.creator && (
+            <>
+              <LoadingButton
+                sx={{ marginRight: "1rem" }}
+                loading={isDeleting}
+                onClick={deleteProgram}
+                variant="outlined"
+                color="error"
+              >
+                delete
+              </LoadingButton>
+              <LoadingButton
+                loading={isUpdating}
+                onClick={updateProgram}
+                variant="outlined"
+                color="info"
+              >
+                update
+              </LoadingButton>
+            </>
+          )}
+        </ButtonsContainer>
+
+        {deleteStatus === Status.SUCCESS && (
+          <div>Program deleted succesfully!</div>
+        )}
+        {deleteStatus === Status.ERROR && <div>error!</div>}
       </CardContainer>
     </ProgramItemCard>
   );
@@ -43,5 +108,15 @@ const CardContainer = styled(Box)(({ theme }) => ({
   padding: theme.spacing(1),
   textAlign: "center",
 }));
+
+const ButtonsContainer = styled(Box)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "center",
+  gap: theme.spacing(2),
+}));
+
+const ProgramItemLink = styled(Link)({
+  textDecoration: "none",
+});
 
 export default ProgramItem;

@@ -2,9 +2,9 @@ import React from "react";
 
 import styled from "@mui/system/styled";
 
-import ProgramList from "./ProgramList";
+import { ProgramList } from "./ProgramList";
 
-const TreningProgramsSection: React.FC = () => {
+export const TrainingProgramsSection: React.FC = () => {
   return (
     <SectionContainer>
       <ProgramList />
@@ -18,5 +18,3 @@ const SectionContainer = styled("section")(({ theme }) => ({
     height: "40%",
   },
 }));
-
-export default TreningProgramsSection;
