@@ -32,7 +32,7 @@ const TopBar: React.FC = () => {
           {buttonText}
         </Button>
         <AccountSettingsBox>
-          <AccountSettings image={user?.image!} />
+          <AccountSettings image={user?.image} />
         </AccountSettingsBox>
       </Content>
     </TopBarSectionContainer>

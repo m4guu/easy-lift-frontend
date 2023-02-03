@@ -18,7 +18,7 @@ import { useUserContext } from "../../../contexts/userContext";
 import { ThemeModeSwitch } from "../../../components";
 
 type AccountSettingsProps = {
-  image: string;
+  image?: string;
 };
 
 const AccountSettings: React.FC<AccountSettingsProps> = ({ image }) => {
@@ -57,11 +57,7 @@ const AccountSettings: React.FC<AccountSettingsProps> = ({ image }) => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <SettingsMenuItem>
-          <LogoutButton
-            onClick={() => {
-              logout();
-            }}
-          >
+          <LogoutButton onClick={logout}>
             <ListItemIcon>
               <Logout fontSize="small" />
             </ListItemIcon>

@@ -25,7 +25,7 @@ const useAuth = (): UseAuthReturnType => {
     mutateAsync: loginMutation,
   } = useLogin();
 
-  let logOutTimer: any;
+  let logOutTimer: number | NodeJS.Timeout | undefined;
 
   const login = (credentials: LoginCredentials) => {
     loginMutation(credentials).then((response) => {
@@ -69,7 +69,6 @@ const useAuth = (): UseAuthReturnType => {
       const remainingTime =
         new Date(user.expirationDate).getTime() - new Date().getTime();
       logOutTimer = setTimeout(logout, remainingTime);
-      console.log(logOutTimer);
     } else {
       clearTimeout(logOutTimer);
     }

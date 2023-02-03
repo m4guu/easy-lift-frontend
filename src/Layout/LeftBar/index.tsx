@@ -32,7 +32,7 @@ const LeftBar: React.FC = () => {
         <AccountSettingsBox>
           <AccountSettings image={user?.image!} />
         </AccountSettingsBox>
-        {user?.role === Role.user ? <WeightChart /> : null}
+        {user?.role === Role.user && <WeightChart />}
         <NavigationContainer>
           <Navigation />
         </NavigationContainer>
