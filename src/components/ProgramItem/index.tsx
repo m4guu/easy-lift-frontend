@@ -5,9 +5,9 @@ import { LoadingButton } from "@mui/lab";
 import { Card, Typography, Button, Box } from "@mui/material";
 import styled from "@mui/system/styled";
 
+import { useUserContext } from "../../contexts/userContext";
 import { useUpdateProgramMutation } from "../../hooks/queryHooks/programsHooks/useUpdateProgramMutation";
 import { useDeleteProgramMutation } from "../../hooks/queryHooks/programsHooks/useDeleteProgramMutation";
-import { useGetUserId } from "../../store/redux-store/slices/user/user.hooks";
 
 import { Program } from "../../shared/interfaces";
 import { PATHS } from "../../pages/paths";
@@ -18,7 +18,7 @@ type ProgramItemProps = {
 };
 
 const ProgramItem: React.FC<ProgramItemProps> = ({ program }) => {
-  const { id: userId } = useGetUserId();
+  const { user } = useUserContext();
   const {
     isLoading: isDeleting,
     status: deleteStatus,
@@ -54,7 +54,7 @@ const ProgramItem: React.FC<ProgramItemProps> = ({ program }) => {
             <Button variant="contained">Check it out!</Button>
           </ProgramItemLink>
 
-          {userId === program.creator && (
+          {user?.id === program.creator && (
             <>
               <LoadingButton
                 sx={{ marginRight: "1rem" }}

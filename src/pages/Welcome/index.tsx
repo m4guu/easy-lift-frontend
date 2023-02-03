@@ -1,31 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Box, Typography, Button } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { styled } from "@mui/system";
 
-import { useAppDispatch } from "../../store/redux-store/hooks";
-import { login } from "../../store/redux-store/slices/user/user.slice";
+import { useUserContext } from "../../contexts/userContext";
 
 import logo from "../../assets/images/logo/mini_logo_yellow.svg";
-import { DUMMY_LOGIN_STATE } from "./constans";
 
 const WelcomePage: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const dispatch = useAppDispatch();
-
-  const wait = (duration: number) => {
-    // eslint-disable-next-line no-promise-executor-return
-    return new Promise((resolve) => setTimeout(resolve, duration));
-  };
+  const { login, isLoading } = useUserContext();
 
   const loginHandle = () => {
-    setIsLoading(true);
-    wait(1000).then(() => {
-      setIsLoading(false);
-      dispatch(login(DUMMY_LOGIN_STATE));
-    });
+    const DUMMY_CREDENTIALS = {
+      login: "dummy_login",
+      password: "dummy_password",
+    };
+
+    login(DUMMY_CREDENTIALS);
   };
 
   return (

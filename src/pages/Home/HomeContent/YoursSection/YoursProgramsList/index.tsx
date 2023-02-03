@@ -2,20 +2,16 @@ import React from "react";
 
 import { List, Alert } from "@mui/material";
 
+import { useUserContext } from "../../../../../contexts/userContext";
 import { useTrainerPrograms } from "../../../../../hooks/queryHooks/programsHooks/useTrainerPrograms";
-import { useGetUserId } from "../../../../../store/redux-store/slices/user/user.hooks";
 
 import { Status } from "../../../../../shared/enums";
 import { Program } from "../../../../../shared/interfaces";
 import { ProgramItem } from "../../../../../components";
 
 export const YoursProgramsList: React.FC = () => {
-  const { id: userId } = useGetUserId();
-  const {
-    status,
-    error,
-    data: userPrograms,
-  } = useTrainerPrograms(userId || "");
+  const { user } = useUserContext();
+  const { status, error, data: userPrograms } = useTrainerPrograms(user?.id);
 
   return (
     <List>

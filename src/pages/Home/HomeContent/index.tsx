@@ -3,7 +3,7 @@ import React from "react";
 import { Box } from "@mui/material";
 import { styled } from "@mui/system";
 
-import { useGetUserRole } from "../../../store/redux-store/slices/user/user.hooks";
+import { useUserContext } from "../../../contexts/userContext";
 
 import { Role } from "../../../shared/enums";
 
@@ -12,14 +12,14 @@ import { TrainingProgramsSection } from "./TrainingProgramsSection";
 import { YoursSection } from "./YoursSection";
 
 export const HomeContent: React.FC = () => {
-  const { role } = useGetUserRole();
+  const { user } = useUserContext();
 
   return (
     <HomeContainer>
       <TrainingProgramsSection />
 
       <Wrapper>
-        {role === Role.user && <ExercisesProgressSection />}
+        {user?.role === Role.user && <ExercisesProgressSection />}
         <YoursSection />
       </Wrapper>
     </HomeContainer>

@@ -1,7 +1,6 @@
 import React from "react";
 
 import { List } from "@mui/material";
-import { styled } from "@mui/system";
 
 import { Exercise } from "../../../shared/interfaces";
 import { ExerciseItem } from "../../../components";

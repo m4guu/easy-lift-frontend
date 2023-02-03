@@ -5,7 +5,7 @@ import { LoadingButton } from "@mui/lab";
 import { Typography, Box } from "@mui/material";
 import { styled } from "@mui/system";
 
-import { useGetUserRole } from "../../store/redux-store/slices/user/user.hooks";
+import { useUserContext } from "../../contexts/userContext";
 import { useAddWorkoutMutation } from "../../hooks/queryHooks/workoutsHooks/useAddWorkoutMutation";
 import { useAddUserProgresMutation } from "../../hooks/queryHooks/userProgressHooks/useAddUserProgresMutation";
 
@@ -17,7 +17,7 @@ import { Status, Role } from "../../shared/enums";
 import { SectionHeader, SectionContainer } from "../../components";
 
 const NewWorkoutPage: React.FC = () => {
-  const { role } = useGetUserRole();
+  const { user } = useUserContext();
   const { status: addWorkotStatus, mutateAsync: addQueryWorkout } =
     useAddWorkoutMutation();
   const { status: addUserProgresStatus, mutate: addQueryUserProgres } =
@@ -54,14 +54,13 @@ const NewWorkoutPage: React.FC = () => {
           onClick={addNewWorkout}
           variant="contained"
         >
-          {role === Role.user ? "finish" : "add"} workout
+          {user?.role === Role.user ? "finish" : "add"} workout
         </LoadingButton>
       </SectionFooter>
     </SectionContainer>
   );
 };
 
-const SectionContent = styled(Box)({});
 const SectionFooter = styled(Box)({
   display: "flex",
   justifyContent: "space-between",

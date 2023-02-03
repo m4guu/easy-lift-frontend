@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 
 import { Alert, Divider } from "@mui/material";
 
+import { useUserContext } from "../../../../contexts/userContext";
 import { useUserExerciseProgress } from "../../../../hooks/queryHooks/userProgressHooks/useUserExerciseProgress";
-import { useGetUserId } from "../../../../store/redux-store/slices/user/user.hooks";
 
 import { Chart } from "../../../../utils/LineChart";
 
@@ -15,16 +15,14 @@ import { ExerciseProgresList } from "./ExerciseProgressContent/ExerciseProgresLi
 import { SectionContainer, SectionHeader } from "../../../../components";
 
 const ExerciseProgressPage: React.FC = () => {
-  const { id: userId } = useGetUserId();
+  const { user } = useUserContext();
   const { exerciseId } = useParams();
 
   const {
     status,
     error,
     data: userExerciseProgress,
-  } = useUserExerciseProgress(userId, exerciseId);
-
-  console.log(userExerciseProgress);
+  } = useUserExerciseProgress(user?.id, exerciseId);
 
   const labels: string[] = userExerciseProgress
     ? userExerciseProgress.map((exerciseProgress) => exerciseProgress.date)

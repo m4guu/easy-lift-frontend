@@ -11,7 +11,6 @@ import { useUpdateWorkoutMutation } from "../../hooks/queryHooks/workoutsHooks/u
 import { Workout } from "../../shared/interfaces";
 import { PATHS } from "../../pages/paths";
 import { useDeleteUserProgresMutation } from "../../hooks/queryHooks/userProgressHooks/useDeleteUserProgressMutation";
-import { scales } from "chart.js";
 
 type WorkoutItemProps = {
   workout: Workout;

@@ -20,13 +20,13 @@ export const ExerciseListItem = styled(ListItem)({
   },
 });
 
-export const ExerciseButtton = styled(Button)(({ theme }) => ({
+export const ExerciseButtton = styled(Button)({
   padding: 0,
   width: "100%",
   "&:hover": {
     backgroundColor: "transparent",
   },
-}));
+});
 
 export const CustomAccordion = styled(Accordion)({
   background: "none",

@@ -6,8 +6,8 @@ import styled from "@mui/system/styled";
 
 import { getUniqueArrayByKey } from "../../../../../../utils/assets/getUniqueArrayByKey";
 
+import { useUserContext } from "../../../../../../contexts/userContext";
 import { useUserProgress } from "../../../../../../hooks/queryHooks/userProgressHooks/useUserProgress";
-import { useGetUserId } from "../../../../../../store/redux-store/slices/user/user.hooks";
 
 import { ChartMenuData } from "../../../../../../shared/interfaces";
 import { initialFormInputs } from "./constans";
@@ -18,8 +18,8 @@ type ChartMenuProps = {
 
 export const ChartMenu: React.FC<ChartMenuProps> = ({ sendData }) => {
   const [formInputs, setFormInputs] = useState(initialFormInputs);
-  const { id: userId } = useGetUserId();
-  const { status, error, data: userProgress } = useUserProgress(userId);
+  const { user } = useUserContext();
+  const { status, error, data: userProgress } = useUserProgress(user?.id);
 
   const menuItemProgressData = getUniqueArrayByKey(userProgress, "exerciseId");
 

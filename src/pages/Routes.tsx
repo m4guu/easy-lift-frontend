@@ -1,35 +1,24 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { PATHS } from "./paths";
 
-import { useGetUserRouteState } from "../store/redux-store/slices/user/user.hooks";
-
-import { useAuth } from "../hooks";
+import { useUserContext } from "../contexts/userContext";
 
 import { getRoutes } from "../utils/Routes";
 
+import { PATHS } from "./paths";
 import { Role } from "../shared/enums";
 
 import { Welcome, Auth, Configuration, NotFound } from "./index";
 import Layout from "../Layout";
 
 const Routing: React.FC = () => {
-  const { id, isConfigured, role } = useGetUserRouteState();
-  const { autoLogin, autoLogout } = useAuth();
+  const { user } = useUserContext();
 
   let routes;
-  const isRouteWithLayout = !!id;
+  const isRouteWithLayout = !!user?.id;
 
-  useEffect(() => {
-    autoLogin();
-  }, [autoLogin]);
-
-  useEffect(() => {
-    autoLogout();
-  }, [autoLogout, id]);
-
-  if (id) {
-    if (!isConfigured) {
+  if (user?.id) {
+    if (!user?.isConfigured) {
       routes = (
         <>
           <Route path={PATHS.CONFIGURATION} element={<Configuration />} />
@@ -37,10 +26,10 @@ const Routing: React.FC = () => {
         </>
       );
     }
-    if (role === Role.trainer && isConfigured) {
+    if (user?.role === Role.trainer && user?.isConfigured) {
       routes = getRoutes(Role.trainer);
     }
-    if (role === Role.user && isConfigured) {
+    if (user?.role === Role.user && user?.isConfigured) {
       routes = getRoutes(Role.user);
     }
   } else {

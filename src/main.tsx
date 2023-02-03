@@ -9,6 +9,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Provider } from "react-redux";
 import store from "./store/redux-store/store-config";
 
+import UserProvider from "./contexts/userContext";
+
 import { ThemeConfig } from "./styles/theme";
 
 import App from "./App";
@@ -18,12 +20,14 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <Provider store={store}>
-          <ThemeConfig>
-            <App />
-            <ReactQueryDevtools />
-          </ThemeConfig>
-        </Provider>
+        <UserProvider>
+          <Provider store={store}>
+            <ThemeConfig>
+              <App />
+              <ReactQueryDevtools />
+            </ThemeConfig>
+          </Provider>
+        </UserProvider>
       </BrowserRouter>
     </QueryClientProvider>
   </React.StrictMode>

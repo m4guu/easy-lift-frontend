@@ -1,14 +1,57 @@
-import { useGetUserIdAndExpirationDate } from "../../store/redux-store/slices/user/user.hooks";
-import { useAppDispatch } from "../../store/redux-store/hooks";
-import { login, logout } from "../../store/redux-store/slices/user/user.slice";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-type UseAuthReturnType = { autoLogin: () => void; autoLogout: () => void };
+import { useLogin } from "../queryHooks/auth/useLogin";
+
+import { PATHS } from "../../pages/paths";
+import { User, LoginCredentials } from "../../shared/interfaces";
+
+type UseAuthReturnType = {
+  isLoading: boolean;
+  user: User | undefined;
+  login: (credentials: LoginCredentials) => void;
+  logout: () => void;
+  autoLogin: () => void;
+  autoLogout: () => void;
+  resetPassword: (password: string) => void;
+};
 
 const useAuth = (): UseAuthReturnType => {
-  const { id, expirationDate } = useGetUserIdAndExpirationDate();
-  const dispatch = useAppDispatch();
+  const [user, setUser] = useState<User | undefined>(undefined);
+  const navigate = useNavigate();
+  const {
+    isLoading: isLogging,
+    error: loginError,
+    mutateAsync: loginMutation,
+  } = useLogin();
 
-  let logOutTimer: number;
+  let logOutTimer: number | NodeJS.Timeout | undefined;
+
+  const login = (credentials: LoginCredentials) => {
+    loginMutation(credentials).then((response) => {
+      const loginExpirationDate =
+        response.expirationDate ||
+        new Date(new Date().getTime() + 1000 * 60 * 60 * 24).toISOString();
+      setUser({ ...response, expirationDate: loginExpirationDate });
+
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({
+          ...response,
+          expirationDate: loginExpirationDate,
+        })
+      );
+    });
+  };
+
+  const logout = () => {
+    setUser(undefined);
+    localStorage.removeItem("userData");
+    navigate(PATHS.default);
+  };
+
+  // todo: add funcionality
+  const resetPassword = (password: string) => {};
 
   const autoLogin = () => {
     const storedData = JSON.parse(localStorage.getItem("userData")!);
@@ -17,20 +60,29 @@ const useAuth = (): UseAuthReturnType => {
       storedData.id &&
       new Date(storedData.expirationDate) > new Date()
     ) {
-      dispatch(login({ ...storedData }));
+      login(storedData);
     }
   };
+
   const autoLogout = () => {
-    if (id && expirationDate) {
+    if (user?.id && user.expirationDate) {
       const remainingTime =
-        new Date(expirationDate).getTime() - new Date().getTime();
-      logOutTimer = setTimeout(dispatch(logout), remainingTime);
+        new Date(user.expirationDate).getTime() - new Date().getTime();
+      logOutTimer = setTimeout(logout, remainingTime);
     } else {
       clearTimeout(logOutTimer);
     }
   };
 
-  return { autoLogin, autoLogout };
+  return {
+    user,
+    isLoading: isLogging,
+    login,
+    logout,
+    resetPassword,
+    autoLogin,
+    autoLogout,
+  };
 };
 
 export default useAuth;

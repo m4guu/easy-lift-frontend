@@ -18,7 +18,7 @@ import {
   DetailItem,
 } from "./ExerciseItem.styles";
 
-import { useGetUserRole } from "../../store/redux-store/slices/user/user.hooks";
+import { useUserContext } from "../../contexts/userContext";
 
 import { PATHS } from "../../pages/paths";
 import { Exercise } from "../../shared/interfaces";
@@ -29,7 +29,7 @@ type ExerciseItemProps = {
 };
 
 const ExerciseItem: React.FC<ExerciseItemProps> = ({ exercise }) => {
-  const { role } = useGetUserRole();
+  const { user } = useUserContext();
   const [expand, setExpand] = useState(false);
 
   const toggleAcordion = () => {
@@ -93,7 +93,7 @@ const ExerciseItem: React.FC<ExerciseItemProps> = ({ exercise }) => {
             >
               add
             </Button>
-            {role === Role.user && (
+            {user?.role === Role.user && (
               <Button variant="contained">
                 <ButtonLink to={`${PATHS.EXERCISES_PROGRESS}/${exercise.id}`}>
                   yours progress{" "}
