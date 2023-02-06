@@ -1,23 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { LoadingButton } from "@mui/lab";
-import { Typography, Box } from "@mui/material";
+import { Box } from "@mui/material";
 import { styled } from "@mui/system";
 
-import { useUserContext } from "../../contexts/userContext";
 import { useAddWorkoutMutation } from "../../hooks/queryHooks/workoutsHooks/useAddWorkoutMutation";
 import { useAddUserProgresMutation } from "../../hooks/queryHooks/userProgressHooks/useAddUserProgresMutation";
 
-import { PATHS } from "../paths";
 import { DUMMY_WORKOUT } from "./constans";
 
 import { generateUserProgress } from "../../utils/UserProgress";
-import { Status, Role } from "../../shared/enums";
+import { Status } from "../../shared/enums";
+
+import { AddWorkout } from "./views/AddWorkout/AddWorkout";
 import { SectionHeader, SectionContainer } from "../../components";
 
 const NewWorkoutPage: React.FC = () => {
-  const { user } = useUserContext();
   const { status: addWorkotStatus, mutateAsync: addQueryWorkout } =
     useAddWorkoutMutation();
   const { status: addUserProgresStatus, mutate: addQueryUserProgres } =
@@ -25,6 +23,7 @@ const NewWorkoutPage: React.FC = () => {
 
   // ! refactory when the backend will be written addQueryWorkout won't be async
   // ! addNewWorkout is different and depend on user ROLE
+  // todo: migrate funcionality to useNewWorkoutForm => onSubmit
   const addNewWorkout = () => {
     addQueryWorkout(DUMMY_WORKOUT).then(() => {
       // new user's progress depends on workout
@@ -44,7 +43,9 @@ const NewWorkoutPage: React.FC = () => {
     <SectionContainer>
       <SectionHeader>New Workout</SectionHeader>
 
-      <SectionFooter>
+      <AddWorkout />
+
+      {/* <SectionFooter>
         <ExercisesLink to={PATHS.EXERCISES}>
           <Typography color="primary">+ exercise</Typography>
         </ExercisesLink>
@@ -56,7 +57,7 @@ const NewWorkoutPage: React.FC = () => {
         >
           {user?.role === Role.user ? "finish" : "add"} workout
         </LoadingButton>
-      </SectionFooter>
+      </SectionFooter> */}
     </SectionContainer>
   );
 };
