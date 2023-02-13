@@ -1,6 +1,4 @@
-import React from "react";
-
-import { Box, useTheme, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { labels } from "./constans";
@@ -10,19 +8,7 @@ export const SetLabels = () => {
 
   return (
     <Container>
-      {labels.map((label, i, arr) => {
-        if (i + 1 === arr.length) {
-          return (
-            <LabelTitle
-              key={label.name}
-              variant="h3"
-              sx={{ marginLeft: "15rem" }}
-              color={theme.palette.custom_grey.tint_2}
-            >
-              {label.name}
-            </LabelTitle>
-          );
-        }
+      {labels.map((label, i) => {
         return (
           <LabelTitle
             key={label.name}

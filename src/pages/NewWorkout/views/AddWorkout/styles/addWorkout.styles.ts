@@ -8,6 +8,12 @@ export const FormWrapper = styled("form")(({ theme }) => ({
   margin: `${theme.spacing(2)} 0`,
 }));
 
+export const HeaderInputsWrapper = styled(Box)({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+});
+
 export const FormActionsWrapper = styled(Box)({
   display: "flex",
   alignItems: "center",

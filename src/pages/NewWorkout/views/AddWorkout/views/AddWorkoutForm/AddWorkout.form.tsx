@@ -1,38 +1,38 @@
-import { styled, useTheme, Divider } from "@mui/material";
+import { useFormContext } from "react-hook-form";
 
-import { AddWorkoutFormFields } from "../../../../../hooks/formHooks/workout/useNewWorkoutForm";
+import { Divider, styled, TextField } from "@mui/material";
 
-import { ControlledTextField } from "../../../../../features";
+import { ControlledTextField } from "../../../../../../features";
+import { AddWorkoutFormFields } from "../../../../../../hooks/formHooks/workout/useNewWorkoutForm";
 
-import { SetLabels } from "./SetLabels";
+import { SetLabels } from "./views/SetLabels/SetLabels";
+import { Sets } from "./views/Sets/Sets";
 
-import {
-  FieldWrapper,
-  ExerciseTitle,
-  SetsContainer,
-} from "./styles/addWorkoutForm.styles";
+import { FieldWrapper, SetsContainer } from "./styles/addWorkoutForm.styles";
 
 // Workout title //
 export const WorkoutTitle = styled(() => (
   <ControlledTextField
-    variant="outlined"
+    variant="standard"
     size="small"
     label="Workout Title"
     fieldName={AddWorkoutFormFields.WORKOUT_TITLE}
     placeholder="Add workout title..."
   />
 ))``;
+//
 
 // Start time //
 export const StartTime = styled(() => (
   <ControlledTextField
-    variant="outlined"
+    variant="standard"
     size="small"
     label="Start Time"
-    type="date"
+    type="datetime-local"
     fieldName={AddWorkoutFormFields.START_TIME}
   />
 ))``;
+//
 
 // Exercise //
 type ExerciseProps = {
@@ -40,20 +40,38 @@ type ExerciseProps = {
     id: string;
     name: string;
   };
+  exerciseIndex: number;
 };
 
-export const Exercise: React.FC<ExerciseProps> = ({ exercise }) => {
-  const theme = useTheme();
+export const Exercise: React.FC<ExerciseProps> = ({
+  exercise,
+  exerciseIndex,
+}) => {
+  const { register } = useFormContext();
   return (
     <FieldWrapper>
-      <ExerciseTitle variant="subtitle1" color="primary">
-        {exercise.name}
-      </ExerciseTitle>
+      <TextField
+        size="small"
+        {...register(
+          `${AddWorkoutFormFields.EXERCISES}[${exerciseIndex}].name`
+        )}
+        InputProps={{ readOnly: true, disableUnderline: true }}
+        variant="standard"
+        defaultValue={exercise.name}
+      />
 
+      <TextField
+        // question: i need in form: data like exercise name or id, its ok to manage uncontrolled input like this ?
+        sx={{ display: "none" }}
+        {...register(`${AddWorkoutFormFields.EXERCISES}[${exerciseIndex}].id`)}
+        defaultValue={exercise.id}
+      />
       <SetsContainer>
         <SetLabels />
         <Divider />
+        <Sets exerciseId={exercise.id} exerciseIndex={exerciseIndex} />
       </SetsContainer>
     </FieldWrapper>
   );
 };
+//

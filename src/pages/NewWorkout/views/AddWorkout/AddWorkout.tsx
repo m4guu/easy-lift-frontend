@@ -1,39 +1,53 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 import { FormProvider } from "react-hook-form";
 
 import { Typography } from "@mui/material";
 
 import { useUserContext } from "../../../../contexts/userContext";
-import { Role } from "../../
-import { PATHS } from "../../../pathsths";
+import { useNewWorkoutForm } from "../../../../hooks/formHooks/workout/useNewWorkoutForm";
+import { Role } from "../../../../shared/enums";
+import { PATHS } from "../../../paths";
 import { defaultExercises } from "./constans";
 import {
   ChooseExercise,
   ExercisesWrapper,
   FormActionsWrapper,
   FormWrapper,
+  HeaderInputsWrapper,
   Reset,
   Submit,
 } from "./styles/addWorkout.styles";
-import { Exercise, StartTime, WorkoutTitle } from "./views/AddWorkout.form";
-import {useNewWorkoutForm} from "../../../../hooks/formHooks/workout/useNewWorkoutForm";
+import {
+  Exercise,
+  StartTime,
+  WorkoutTitle,
+} from "./views/AddWorkoutForm/AddWorkout.form";
 
 export const AddWorkout: React.FC = () => {
   const [exercises, setExercises] = useState(defaultExercises);
   const { user } = useUserContext();
-  const {pending, methods, onSubmit, canSubmit} = useNewWorkoutForm();
+  const { pending, methods, onSubmit, canSubmit } = useNewWorkoutForm();
 
   const { handleSubmit } = methods;
 
   return (
     <FormProvider {...methods}>
       <FormWrapper>
-        <WorkoutTitle />
-        <StartTime />
+        <HeaderInputsWrapper>
+          <WorkoutTitle />
+          <StartTime />
+        </HeaderInputsWrapper>
+
         {exercises.length !== 0 && (
           <ExercisesWrapper>
-            {exercises.map((exercise) => {
-              return <Exercise key={exercise.id} exercise={exercise} />;
+            {exercises.map((exercise, index) => {
+              return (
+                <Exercise
+                  key={exercise.id}
+                  exercise={exercise}
+                  exerciseIndex={index}
+                />
+              );
             })}
           </ExercisesWrapper>
         )}

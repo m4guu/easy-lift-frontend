@@ -1,1 +1,1 @@
-export const defaultExercises = [{ id: "1", name: "bench" }];
+export const defaultExercises = [{ id: "0289", name: "bench" }];

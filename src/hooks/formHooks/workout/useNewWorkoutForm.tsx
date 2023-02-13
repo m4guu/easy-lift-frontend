@@ -1,9 +1,8 @@
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { WorkoutExercise } from "../../../shared/interfaces";
+import * as yup from "yup";
 
 export enum AddWorkoutFormFields {
   WORKOUT_TITLE = "workoutTitle",
@@ -12,7 +11,8 @@ export enum AddWorkoutFormFields {
 }
 
 export interface AddWorkoutForm {
-  exercises: WorkoutExercise[];
+  // todo: add custom type
+  exercises: any[];
   workoutTitle: string;
   startTime: Date;
 }
@@ -26,7 +26,7 @@ const defaultValues: AddWorkoutForm = {
 const schema = yup.object().shape({
   workoutTitle: yup.string().required().min(5),
   startTime: yup.date().required(),
-  exercises: yup.array().required().min(2),
+  exercises: yup.array().required().min(1),
 });
 
 export const useNewWorkoutForm = () => {
