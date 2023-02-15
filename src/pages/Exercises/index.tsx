@@ -9,7 +9,15 @@ import { Status } from "../../shared/enums";
 import { ExerciseList } from "./ExercisesContent/ExerciseList";
 import { SectionContainer, SectionHeader } from "../../components";
 
-const ExercisesPage: React.FC = () => {
+type ExercisesProps = {
+  appendExercise: any;
+  closeModal: () => void;
+};
+
+const ExercisesPage: React.FC<ExercisesProps> = ({
+  appendExercise,
+  closeModal,
+}) => {
   const { status, error, data: exercises } = useExercises();
 
   return (
@@ -28,7 +36,11 @@ const ExercisesPage: React.FC = () => {
           An Error has occurred. Please try again later.
         </Alert>
       ) : (
-        <ExerciseList exercises={exercises!} />
+        <ExerciseList
+          exercises={exercises!}
+          appendExercise={appendExercise}
+          closeModal={closeModal}
+        />
       )}
     </SectionContainer>
   );

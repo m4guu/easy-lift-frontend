@@ -1,72 +1,133 @@
-import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import React, { useEffect, useCallback, useRef } from "react";
+import { useFieldArray, UseFieldArrayReturn } from "react-hook-form";
 
-import { Box, Divider, List, ListItem, Typography } from "@mui/material";
+import {
+  Box,
+  Divider,
+  List,
+  ListItem,
+  Typography,
+  Button,
+} from "@mui/material";
 import { styled } from "@mui/system";
 
-import { defaultSet } from "./constans";
-import { Add, Comment, Details } from "./views/SetActions";
+import { useNewWorkoutForm } from "../../../../../../../../hooks/formHooks/workout/useNewWorkoutForm";
+
+import { Add, DeleteExercise, Details, SetDone } from "./views/SetActions";
 import { SetArchived, SetGoal, SetTempo } from "./views/Sets.form";
 
 type SetsProps = {
   exerciseId: string;
   exerciseIndex: number;
+  removeExercise: UseFieldArrayReturn["remove"];
 };
-export const Sets: React.FC<SetsProps> = ({ exerciseId, exerciseIndex }) => {
-  const [sets, setSets] = useState([defaultSet]);
+export const Sets: React.FC<SetsProps> = ({
+  exerciseId,
+  exerciseIndex,
+  removeExercise,
+}) => {
+  const {
+    methods: { control },
+  } = useNewWorkoutForm();
 
-  // todo: refactory dummy function
-  const addNewSet = () => {
-    setSets((prev) => {
-      const { id, ...defaultSetWithoutId } = defaultSet;
+  const {
+    fields: setFields,
+    append: appendSet,
+    remove: removeSet,
+  } = useFieldArray({
+    control,
+    name: `exercises.${exerciseIndex}.sets`,
+  });
 
-      const newSet = {
-        id: uuidv4(),
-        ...defaultSetWithoutId,
-      };
-      return [...prev, newSet];
-    });
-  };
+  const addNewSet = useCallback(() => {
+    appendSet({ goal: "", tempo: "", archived: "" });
+  }, [appendSet]);
+
+  const isMounted = useRef(false);
+  useEffect(() => {
+    if (!isMounted.current) {
+      addNewSet();
+      isMounted.current = true;
+    }
+  }, [addNewSet]);
+
   return (
     <SetsContainer>
       <SetList>
-        {sets.map((set, i) => {
+        {setFields.map((set, i) => {
           return (
             <SetItem key={set.id}>
-              <SetNumber variant="h3" color="primary">
-                {i + 1}
-              </SetNumber>
-              <SetGoal exerciseIndex={exerciseIndex} setIndex={i} />
-              <SetTempo exerciseIndex={exerciseIndex} setIndex={i} />
-              <SetArchived exerciseIndex={exerciseIndex} setIndex={i} />
+              <SetContainer>
+                <SetNumber variant="h3" color="primary">
+                  {i + 1}
+                </SetNumber>
+                <SetGoal exerciseIndex={exerciseIndex} setIndex={i} />
+                <SetTempo exerciseIndex={exerciseIndex} setIndex={i} />
+                <SetArchived exerciseIndex={exerciseIndex} setIndex={i} />
+              </SetContainer>
+
+              <SetActionsWrapper>
+                <SetDone
+                  control={control}
+                  exerciseIndex={exerciseIndex}
+                  setIndex={i}
+                />
+                <DeleteSet
+                  onClick={() => removeSet(i)}
+                  color="error"
+                  size="small"
+                >
+                  delete set
+                </DeleteSet>
+              </SetActionsWrapper>
             </SetItem>
           );
         })}
       </SetList>
+
       <Divider />
-      <SetActionsWrapper>
+
+      <SetsActionsWrapper>
         <Add addNewSet={addNewSet} />
         <Box>
-          <Comment />
+          <DeleteExercise
+            exerciseIndex={exerciseIndex}
+            removeExercise={removeExercise}
+          />
           <Details exerciseId={exerciseId} />
         </Box>
-      </SetActionsWrapper>
+      </SetsActionsWrapper>
     </SetsContainer>
   );
 };
 
 const SetsContainer = styled(Box)({});
-const SetList = styled(List)({
-  width: "50%",
-});
+const SetList = styled(List)({});
 const SetItem = styled(ListItem)({
+  position: "relative",
+  padding: 0,
+});
+const SetContainer = styled(Box)({
+  width: "50%",
+  display: "flex",
+  alignItems: "center",
   padding: 0,
 });
 const SetNumber = styled(Typography)({
   width: "25%",
 });
 
+const SetsActionsWrapper = styled(Box)({
+  display: "flex",
+  justifyContent: "space-between",
+});
+
 const SetActionsWrapper = styled(Box)({
   display: "flex",
   justifyContent: "space-between",
+});
+
+const DeleteSet = styled(Button)({
+  positon: "absolute",
+  right: 0,
 });

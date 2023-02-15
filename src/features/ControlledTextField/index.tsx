@@ -14,6 +14,7 @@ interface ControlledTextFieldProps<T extends FieldValues> {
   multiline?: boolean;
   rows?: number;
   mask?: string;
+  textColor?: string;
   disabledUnderline?: boolean;
 }
 
@@ -28,6 +29,7 @@ const ControlledTextField = <T extends FieldValues>({
   multiline = false,
   rows,
   mask,
+  textColor,
   disabledUnderline,
 }: ControlledTextFieldProps<T>) => {
   const { control } = useFormContext<T>();
@@ -36,6 +38,7 @@ const ControlledTextField = <T extends FieldValues>({
     disableUnderline: disabledUnderline,
     inputComponent: mask && (TextFieldMask as any),
     inputProps: { mask },
+    style: { color: textColor },
   };
 
   return (
@@ -57,6 +60,7 @@ const ControlledTextField = <T extends FieldValues>({
           error={!!fieldState.error}
           label={label}
           helperText={fieldState.error?.message}
+          autoComplete="off"
           color="primary"
         />
       )}

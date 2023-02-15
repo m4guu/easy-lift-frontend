@@ -118,8 +118,59 @@
       "name": "Random trainer 3"
     }
   ],
-  "workouts": [],
-  "usersProgress": [],
+  "workouts": [
+    {
+      "id": "95567f83-aef2-449c-8b52-2a648513a0b0",
+      "creator": "DUMMY-USER-1",
+      "title": "abs trening",
+      "date": "2023-02-15",
+      "exercises": [
+        {
+          "name": "3/4 sit-up",
+          "id": "0001",
+          "sets": [
+            {
+              "weight": 90,
+              "reps": 5,
+              "tempo": "3-2-1-3",
+              "repMax": 105
+            },
+            {
+              "weight": 90,
+              "reps": 6,
+              "tempo": "3-2-1-2",
+              "repMax": 108
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "usersProgress": [
+    {
+      "id": "dbca3be0-ddb5-4523-aea1-924e87e2692b",
+      "workoutId": "95567f83-aef2-449c-8b52-2a648513a0b0",
+      "userId": "DUMMY-USER-1",
+      "exerciseId": "0001",
+      "exerciseName": "3/4 sit-up",
+      "date": "2023-02-15",
+      "repMax": 108,
+      "sets": [
+        {
+          "weight": 90,
+          "reps": 5,
+          "tempo": "3-2-1-3",
+          "repMax": 105
+        },
+        {
+          "weight": 90,
+          "reps": 6,
+          "tempo": "3-2-1-2",
+          "repMax": 108
+        }
+      ]
+    }
+  ],
   "exercises": [
     {
       "bodyPart": "waist",

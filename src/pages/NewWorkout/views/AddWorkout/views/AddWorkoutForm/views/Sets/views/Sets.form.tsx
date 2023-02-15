@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { ControlledTextField } from "../../../../../../../../../features";
@@ -14,7 +14,7 @@ export const SetGoal: React.FC<{ exerciseIndex: number; setIndex: number }> = ({
     <FieldContainer>
       <ControlledTextField
         fieldName={`${AddWorkoutFormFields.EXERCISES}[${exerciseIndex}].sets[${setIndex}].goal`}
-        mask="0[00] x 0[00]"
+        mask="0[00] `x 0[00]"
         placeholder="kg x reps"
         variant="standard"
         disabledUnderline
@@ -44,6 +44,7 @@ export const SetArchived: React.FC<{
   exerciseIndex: number;
   setIndex: number;
 }> = ({ exerciseIndex, setIndex }) => {
+  const theme = useTheme();
   return (
     <FieldContainer>
       <ControlledTextField
@@ -51,6 +52,7 @@ export const SetArchived: React.FC<{
         mask="0[00] x 0[00]"
         placeholder="kg x reps"
         variant="standard"
+        textColor={theme.palette.primary.main}
         disabledUnderline
       />
     </FieldContainer>

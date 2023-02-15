@@ -1,14 +1,13 @@
-import { useFormContext } from "react-hook-form";
+import { UseFieldArrayReturn, useFormContext } from "react-hook-form";
 
-import { Divider, styled, TextField } from "@mui/material";
+import { Divider, styled, TextField, useTheme } from "@mui/material";
 
 import { ControlledTextField } from "../../../../../../features";
 import { AddWorkoutFormFields } from "../../../../../../hooks/formHooks/workout/useNewWorkoutForm";
 
+import { FieldWrapper, SetsContainer } from "./styles/addWorkoutForm.styles";
 import { SetLabels } from "./views/SetLabels/SetLabels";
 import { Sets } from "./views/Sets/Sets";
-
-import { FieldWrapper, SetsContainer } from "./styles/addWorkoutForm.styles";
 
 // Workout title //
 export const WorkoutTitle = styled(() => (
@@ -38,38 +37,52 @@ export const StartTime = styled(() => (
 type ExerciseProps = {
   exercise: {
     id: string;
+    _id: string;
     name: string;
   };
   exerciseIndex: number;
+  removeExercise: UseFieldArrayReturn["remove"];
 };
 
 export const Exercise: React.FC<ExerciseProps> = ({
   exercise,
   exerciseIndex,
+  removeExercise,
 }) => {
+  const theme = useTheme();
   const { register } = useFormContext();
+
   return (
     <FieldWrapper>
       <TextField
         size="small"
         {...register(
-          `${AddWorkoutFormFields.EXERCISES}[${exerciseIndex}].name`
+          `${AddWorkoutFormFields.EXERCISES}.[${exerciseIndex}].name`
         )}
-        InputProps={{ readOnly: true, disableUnderline: true }}
+        InputProps={{
+          readOnly: true,
+          disableUnderline: true,
+          style: { color: theme.palette.primary.main },
+        }}
         variant="standard"
         defaultValue={exercise.name}
       />
 
       <TextField
-        // question: i need in form: data like exercise name or id, its ok to manage uncontrolled input like this ?
+        // question: i need in form data like exercise name or id, its ok to manage uncontrolled input like this ?
         sx={{ display: "none" }}
-        {...register(`${AddWorkoutFormFields.EXERCISES}[${exerciseIndex}].id`)}
-        defaultValue={exercise.id}
+        {...register(`${AddWorkoutFormFields.EXERCISES}.[${exerciseIndex}].id`)}
+        defaultValue={exercise._id}
       />
+
       <SetsContainer>
         <SetLabels />
         <Divider />
-        <Sets exerciseId={exercise.id} exerciseIndex={exerciseIndex} />
+        <Sets
+          exerciseId={exercise._id}
+          exerciseIndex={exerciseIndex}
+          removeExercise={removeExercise}
+        />
       </SetsContainer>
     </FieldWrapper>
   );

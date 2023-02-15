@@ -1,13 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { UseFieldArrayReturn, useWatch } from "react-hook-form";
 
-import AddIcon from "@mui/icons-material/Add";
-import EditIcon from "@mui/icons-material/Edit";
-import InfoIcon from "@mui/icons-material/Info";
-import { IconButton } from "@mui/material";
-
+import { IconButton, Typography } from "@mui/material";
 import { styled } from "@mui/system";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
+import InfoIcon from "@mui/icons-material/Info";
+import DoneIcon from "@mui/icons-material/Done";
+
 import { PATHS } from "../../../../../../../../paths";
+import { AddWorkoutFormFields } from "../../../../../../../../../hooks/formHooks/workout/useNewWorkoutForm";
 
 export const Add: React.FC<{ addNewSet: () => void }> = ({ addNewSet }) => {
   return (
@@ -17,10 +20,18 @@ export const Add: React.FC<{ addNewSet: () => void }> = ({ addNewSet }) => {
   );
 };
 
-export const Comment: React.FC = () => {
+type DeleteExerciseProps = {
+  exerciseIndex: number;
+  removeExercise: UseFieldArrayReturn["remove"];
+};
+
+export const DeleteExercise: React.FC<DeleteExerciseProps> = ({
+  exerciseIndex,
+  removeExercise,
+}) => {
   return (
-    <IconBtn size="small">
-      <EditIcon color="primary" />
+    <IconBtn onClick={() => removeExercise(exerciseIndex)} size="small">
+      <DeleteIcon color="error" />
     </IconBtn>
   );
 };
@@ -32,6 +43,31 @@ export const Details: React.FC<{ exerciseId: string }> = ({ exerciseId }) => {
         <InfoIcon />
       </IconBtn>
     </Link>
+  );
+};
+
+type SetDoneProps = {
+  exerciseIndex: number;
+  setIndex: number;
+  control: any;
+};
+export const SetDone: React.FC<SetDoneProps> = ({
+  exerciseIndex,
+  setIndex,
+  control,
+}) => {
+  // question [meeting]: why useWatch doesnt work in this example ?
+  const setArchived = useWatch({
+    control,
+    name: `${AddWorkoutFormFields.EXERCISES}[${exerciseIndex}].sets[${setIndex}].archived`,
+  });
+  if (setArchived) {
+    return <Typography>Set Done!</Typography>;
+  }
+  return (
+    <IconButton size="small">
+      <DoneIcon color="primary" />
+    </IconButton>
   );
 };
 

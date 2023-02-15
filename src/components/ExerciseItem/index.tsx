@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Divider, Typography, Button } from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
@@ -26,9 +27,15 @@ import { Role } from "../../shared/enums";
 
 type ExerciseItemProps = {
   exercise: Exercise;
+  appendExercise: any;
+  closeModal: () => void;
 };
 
-const ExerciseItem: React.FC<ExerciseItemProps> = ({ exercise }) => {
+const ExerciseItem: React.FC<ExerciseItemProps> = ({
+  exercise,
+  appendExercise,
+  closeModal,
+}) => {
   const { user } = useUserContext();
   const [expand, setExpand] = useState(false);
 
@@ -36,8 +43,14 @@ const ExerciseItem: React.FC<ExerciseItemProps> = ({ exercise }) => {
     setExpand((prevState) => !prevState);
   };
 
-  // todo: add workout slice and slice hooks to handle addExerciseToWorkout
-  const addExerciseToWorkout = (choosenExercise: Exercise) => {};
+  const addExerciseToWorkout = (choosenExercise: Exercise) => {
+    appendExercise({
+      name: choosenExercise.name,
+      _id: choosenExercise.id,
+      sets: [{ goal: "", tempo: "", archived: "", isDone: true }],
+    });
+    closeModal();
+  };
 
   return (
     <>

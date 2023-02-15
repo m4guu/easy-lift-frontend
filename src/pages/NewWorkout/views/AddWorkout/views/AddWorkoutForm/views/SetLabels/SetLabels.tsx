@@ -7,8 +7,9 @@ export const SetLabels = () => {
   const theme = useTheme();
 
   return (
+    // question [meeting]: why does ts not see my custom Palette type ? (custom_grey: styles -> theme-> types)
     <Container>
-      {labels.map((label, i) => {
+      {labels.map((label) => {
         return (
           <LabelTitle
             key={label.name}
