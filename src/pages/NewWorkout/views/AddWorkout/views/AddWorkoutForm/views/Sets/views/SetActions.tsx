@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { UseFieldArrayReturn, useWatch } from "react-hook-form";
 
 import { IconButton, Typography } from "@mui/material";
@@ -9,7 +8,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import InfoIcon from "@mui/icons-material/Info";
 import DoneIcon from "@mui/icons-material/Done";
 
-import { PATHS } from "../../../../../../../../paths";
 import { AddWorkoutFormFields } from "../../../../../../../../../hooks/formHooks/workout/useNewWorkoutForm";
 
 export const Add: React.FC<{ addNewSet: () => void }> = ({ addNewSet }) => {
@@ -36,13 +34,11 @@ export const DeleteExercise: React.FC<DeleteExerciseProps> = ({
   );
 };
 
-export const Details: React.FC<{ exerciseId: string }> = ({ exerciseId }) => {
+export const Details: React.FC<{ openModal: () => void }> = ({ openModal }) => {
   return (
-    <Link to={`${PATHS.EXERCISES_PROGRESS}/${exerciseId}`}>
-      <IconBtn size="small">
-        <InfoIcon />
-      </IconBtn>
-    </Link>
+    <IconBtn onClick={openModal} size="small">
+      <InfoIcon />
+    </IconBtn>
   );
 };
 

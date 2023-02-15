@@ -10,7 +10,7 @@ export enum AuthMethods {
 
 const AuthService = {
   [AuthMethods.LOGIN]: (credentials: LoginCredentials) =>
-    // ! dummy login with json server [change when the backend will be ready] get->post
+    // ! dummy login with json server [change when the backend will be ready] get -> post
     HttpService.get<User>(ENDPOINTS.LOGIN),
 
   [AuthMethods.LOGOUT]: () => HttpService.post<void>(ENDPOINTS.LOGOUT),

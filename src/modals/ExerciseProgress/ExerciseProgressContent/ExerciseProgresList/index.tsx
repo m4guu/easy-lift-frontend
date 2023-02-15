@@ -1,10 +1,10 @@
 import React from "react";
 
-import { Divider, List } from "@mui/material";
+import { Box, Divider, List } from "@mui/material";
 
-import { UserProgres } from "../../../../../../shared/interfaces";
+import { UserProgres } from "../../../../shared/interfaces";
 
-import { ExerciseProgresItem } from "../../../../../../components";
+import { ExerciseProgresItem } from "../../../../components";
 
 type ExerciseProgresListProps = {
   exerciseProgress: UserProgres[];
@@ -17,13 +17,10 @@ export const ExerciseProgresList: React.FC<ExerciseProgresListProps> = ({
     <List>
       {exerciseProgress.map((exerciseProgres) => {
         return (
-          <>
-            <ExerciseProgresItem
-              key={exerciseProgres.id}
-              exerciseProgres={exerciseProgres}
-            />
+          <Box key={exerciseProgres.id}>
+            <ExerciseProgresItem exerciseProgres={exerciseProgres} />
             <Divider />
-          </>
+          </Box>
         );
       })}
     </List>

@@ -11,9 +11,6 @@ import {
   Program,
   NotFound,
   NewWorkout,
-  Exercises,
-  Exercise,
-  ExerciseProgress,
   Workouts,
   Workout,
   BodyWeight,
@@ -28,10 +25,6 @@ export const trainerRoutes = (
     </Route>
 
     <Route path={PATHS.NEW_WORKOUT} element={<NewWorkout />} />
-    <Route path={PATHS.EXERCISES}>
-      <Route index element={<Exercises />} />
-      <Route path={NESTED_PATHS.EXERCISE} element={<Exercise />} />
-    </Route>
 
     <Route path={PATHS.TRAINERS}>
       <Route index element={<Trainers />} />
@@ -49,14 +42,6 @@ export const userRoutes = (
   <>
     <Route path={PATHS.default} element={<Home />} />
     <Route path={PATHS.NEW_WORKOUT} element={<NewWorkout />} />
-    <Route path={PATHS.EXERCISES}>
-      <Route index element={<Exercises />} />
-      <Route path={NESTED_PATHS.EXERCISE} element={<Exercise />} />
-      <Route
-        path={NESTED_PATHS.EXERCISE_PROGRESS}
-        element={<ExerciseProgress />}
-      />
-    </Route>
     <Route path={PATHS.WORKOUTS}>
       <Route index element={<Workouts />} />
       <Route path={NESTED_PATHS.WORKOUT} element={<Workout />} />

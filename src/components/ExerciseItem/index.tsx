@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 import { Divider, Typography, Button } from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+
+import { useUserContext } from "../../contexts/userContext";
+
 import {
   ExerciseListItem,
   ExerciseButtton,
@@ -14,16 +16,12 @@ import {
   ExerciseDetailImage,
   ExtandButton,
   ButtonsContainer,
-  ButtonLink,
   DetailsList,
   DetailItem,
 } from "./ExerciseItem.styles";
-
-import { useUserContext } from "../../contexts/userContext";
-
-import { PATHS } from "../../pages/paths";
 import { Exercise } from "../../shared/interfaces";
 import { Role } from "../../shared/enums";
+import { useExerciseProgressModal } from "../../hooks/modalHooks/ExerciseProgress/useExerciseProgressModal";
 
 type ExerciseItemProps = {
   exercise: Exercise;
@@ -36,8 +34,10 @@ const ExerciseItem: React.FC<ExerciseItemProps> = ({
   appendExercise,
   closeModal,
 }) => {
-  const { user } = useUserContext();
   const [expand, setExpand] = useState(false);
+  const { user } = useUserContext();
+  const { open: openExerciseProgressModal, Modal: ExerciseProgressModal } =
+    useExerciseProgressModal(exercise.id);
 
   const toggleAcordion = () => {
     setExpand((prevState) => !prevState);
@@ -107,10 +107,8 @@ const ExerciseItem: React.FC<ExerciseItemProps> = ({
               add
             </Button>
             {user?.role === Role.user && (
-              <Button variant="contained">
-                <ButtonLink to={`${PATHS.EXERCISES_PROGRESS}/${exercise.id}`}>
-                  yours progress{" "}
-                </ButtonLink>
+              <Button onClick={openExerciseProgressModal} variant="contained">
+                yours progress
               </Button>
             )}
           </ButtonsContainer>
@@ -118,6 +116,8 @@ const ExerciseItem: React.FC<ExerciseItemProps> = ({
       </ExerciseListItem>
 
       <Divider />
+
+      <ExerciseProgressModal />
     </>
   );
 };

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { FormProvider } from "react-hook-form";
 
-import { Typography, Box } from "@mui/material";
+import { Box } from "@mui/material";
 
 import { useUserContext } from "../../../../contexts/userContext";
 import { useNewWorkoutForm } from "../../../../hooks/formHooks/workout/useNewWorkoutForm";
@@ -15,22 +15,16 @@ import {
   HeaderInputsWrapper,
   Reset,
   Submit,
-  ExercisesModal,
 } from "./styles/addWorkout.styles";
 import {
   Exercise,
   StartTime,
   WorkoutTitle,
 } from "./views/AddWorkoutForm/AddWorkout.form";
-import Exercises from "../../../Exercises";
+import { useExerciseModal } from "../../../../hooks/modalHooks/Exercises/useExerciseModal";
 
 export const AddWorkout: React.FC = () => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
   const { user } = useUserContext();
-
   const {
     pending,
     methods,
@@ -41,6 +35,9 @@ export const AddWorkout: React.FC = () => {
     removeExercise,
     appendExercise,
   } = useNewWorkoutForm();
+
+  const { open: openExerciseModal, Modal: ExerciseModal } =
+    useExerciseModal(appendExercise);
 
   const {
     handleSubmit,
@@ -70,21 +67,20 @@ export const AddWorkout: React.FC = () => {
           </ExercisesWrapper>
         )}
       </FormWrapper>
-
       {/* // todo: add error handling component */}
       <Box>{errors.exercises?.message}</Box>
-
       <FormActionsWrapper>
-        <ChooseExercise onClick={handleOpen}>
-          <Typography color="primary">+ exercise</Typography>
+        <ChooseExercise onClick={openExerciseModal} size="small">
+          add exercise
         </ChooseExercise>
 
-        <Reset onClick={resetForm} color="error">
+        <Reset onClick={resetForm} size="small" color="error">
           reset workout
         </Reset>
 
         <Submit
           onClick={handleSubmit((data) => onSubmit(data))}
+          size="small"
           loading={pending}
           disabled={!canSubmit}
           variant="contained"
@@ -93,15 +89,7 @@ export const AddWorkout: React.FC = () => {
         </Submit>
       </FormActionsWrapper>
 
-      <ExercisesModal
-        open={open}
-        onClose={handleClose}
-        BackdropProps={{ style: { backgroundColor: "inherit" } }}
-      >
-        <Box>
-          <Exercises appendExercise={appendExercise} closeModal={handleClose} />
-        </Box>
-      </ExercisesModal>
+      <ExerciseModal />
     </FormProvider>
   );
 };

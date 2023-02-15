@@ -7,14 +7,17 @@ import {
   List,
   ListItem,
   Typography,
-  Button,
+  IconButton,
 } from "@mui/material";
+import RemoveIcon from "@mui/icons-material/Remove";
+
 import { styled } from "@mui/system";
 
 import { useNewWorkoutForm } from "../../../../../../../../hooks/formHooks/workout/useNewWorkoutForm";
 
 import { Add, DeleteExercise, Details, SetDone } from "./views/SetActions";
 import { SetArchived, SetGoal, SetTempo } from "./views/Sets.form";
+import { useExerciseProgressModal } from "../../../../../../../../hooks/modalHooks/ExerciseProgress/useExerciseProgressModal";
 
 type SetsProps = {
   exerciseId: string;
@@ -29,6 +32,9 @@ export const Sets: React.FC<SetsProps> = ({
   const {
     methods: { control },
   } = useNewWorkoutForm();
+
+  const { open: openExerciseProgressModal, Modal: ExerciseProgressModal } =
+    useExerciseProgressModal(exerciseId);
 
   const {
     fields: setFields,
@@ -77,7 +83,7 @@ export const Sets: React.FC<SetsProps> = ({
                   color="error"
                   size="small"
                 >
-                  delete set
+                  <RemoveIcon color="error" />
                 </DeleteSet>
               </SetActionsWrapper>
             </SetItem>
@@ -94,9 +100,11 @@ export const Sets: React.FC<SetsProps> = ({
             exerciseIndex={exerciseIndex}
             removeExercise={removeExercise}
           />
-          <Details exerciseId={exerciseId} />
+          <Details openModal={openExerciseProgressModal} />
         </Box>
       </SetsActionsWrapper>
+
+      <ExerciseProgressModal />
     </SetsContainer>
   );
 };
@@ -107,15 +115,21 @@ const SetItem = styled(ListItem)({
   position: "relative",
   padding: 0,
 });
-const SetContainer = styled(Box)({
+const SetContainer = styled(Box)(({ theme }) => ({
   width: "50%",
   display: "flex",
   alignItems: "center",
   padding: 0,
-});
-const SetNumber = styled(Typography)({
+  [theme.breakpoints.down("sm")]: {
+    width: "100%",
+  },
+}));
+const SetNumber = styled(Typography)(({ theme }) => ({
   width: "25%",
-});
+  [theme.breakpoints.down("sm")]: {
+    width: "10%",
+  },
+}));
 
 const SetsActionsWrapper = styled(Box)({
   display: "flex",
@@ -123,11 +137,13 @@ const SetsActionsWrapper = styled(Box)({
 });
 
 const SetActionsWrapper = styled(Box)({
+  position: "absolute",
+  right: 0,
   display: "flex",
   justifyContent: "space-between",
 });
 
-const DeleteSet = styled(Button)({
+const DeleteSet = styled(IconButton)({
   positon: "absolute",
   right: 0,
 });

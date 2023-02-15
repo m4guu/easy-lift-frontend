@@ -1,5 +1,5 @@
 import { LoadingButton } from "@mui/lab";
-import { Box, Button, Modal } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { styled } from "@mui/system";
 
 export const FormWrapper = styled("form")(({ theme }) => ({
@@ -28,9 +28,4 @@ export const Reset = styled(Button)({});
 
 export const ExercisesWrapper = styled(Box)(({ theme }) => ({
   marginTop: theme.spacing(4),
-}));
-
-export const ExercisesModal = styled(Modal)(({ theme }) => ({
-  backgroundColor: theme.palette.background.default,
-  overflowY: "scroll",
 }));

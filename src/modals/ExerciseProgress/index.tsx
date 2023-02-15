@@ -1,22 +1,23 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 
 import { Alert, Divider } from "@mui/material";
 
-import { useUserContext } from "../../../../contexts/userContext";
-import { useUserExerciseProgress } from "../../../../hooks/queryHooks/userProgressHooks/useUserExerciseProgress";
+import { useUserContext } from "../../contexts/userContext";
+import { useUserExerciseProgress } from "../../hooks/queryHooks/userProgressHooks/useUserExerciseProgress";
 
-import { Chart } from "../../../../utils/LineChart";
+import { Chart } from "../../utils/LineChart";
 
-import { Status } from "../../../../shared/enums";
+import { Status } from "../../shared/enums";
 import { chartOptions } from "./constans";
 
 import { ExerciseProgresList } from "./ExerciseProgressContent/ExerciseProgresList";
-import { SectionContainer, SectionHeader } from "../../../../components";
+import { SectionContainer, SectionHeader } from "../../components";
 
-const ExerciseProgressPage: React.FC = () => {
+const ExerciseProgress: React.FC<{
+  exerciseId: string;
+  closeModal: () => void;
+}> = ({ exerciseId, closeModal }) => {
   const { user } = useUserContext();
-  const { exerciseId } = useParams();
 
   const {
     status,
@@ -31,9 +32,15 @@ const ExerciseProgressPage: React.FC = () => {
     ? userExerciseProgress.map((exerciseProgress) => exerciseProgress.repMax)
     : [];
 
+  const name =
+    userExerciseProgress?.length === 1
+      ? userExerciseProgress[0].exerciseName
+      : "";
+
   return (
     <SectionContainer>
-      <SectionHeader>your bench press progress</SectionHeader>
+      <SectionHeader>your {name} progress</SectionHeader>
+
       {status === Status.LOADING && <div>loading...</div>}
 
       {!!userExerciseProgress && userExerciseProgress?.length !== 0 ? (
@@ -44,12 +51,15 @@ const ExerciseProgressPage: React.FC = () => {
         </>
       ) : (
         <Alert variant="outlined" severity="info">
-          There are no progress yet.
+          There are no progress in this exercise yet.
         </Alert>
       )}
+
+      <button type="button" onClick={closeModal}>
+        close modal
+      </button>
     </SectionContainer>
   );
 };
 
-const ExerciseProgress = ExerciseProgressPage;
 export default ExerciseProgress;

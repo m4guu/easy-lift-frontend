@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box, Alert } from "@mui/material";
+import { Box, Alert, Button } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { useExercises } from "../../hooks/queryHooks/exerciseDB/useExercises";
@@ -14,7 +14,7 @@ type ExercisesProps = {
   closeModal: () => void;
 };
 
-const ExercisesPage: React.FC<ExercisesProps> = ({
+const Exercises: React.FC<ExercisesProps> = ({
   appendExercise,
   closeModal,
 }) => {
@@ -42,6 +42,10 @@ const ExercisesPage: React.FC<ExercisesProps> = ({
           closeModal={closeModal}
         />
       )}
+
+      <CloseModalButton onClick={closeModal} color="error" variant="contained">
+        close modal
+      </CloseModalButton>
     </SectionContainer>
   );
 };
@@ -50,5 +54,10 @@ const ExerciseFilterContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   gap: theme.spacing(2),
 }));
-const Exercises = ExercisesPage;
+
+const CloseModalButton = styled(Button)({
+  position: "fixed",
+  right: 5,
+  top: 5,
+});
 export default Exercises;
