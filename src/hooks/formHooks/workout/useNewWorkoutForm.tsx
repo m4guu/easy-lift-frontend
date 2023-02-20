@@ -13,6 +13,8 @@ import { useUserContext } from "../../../contexts/userContext";
 
 import { generateWorkoutExercises } from "../../../utils/FormExercises";
 import { generateUserProgress } from "../../../utils/UserProgress";
+
+import { FormExercise } from "../../../shared/interfaces";
 import { ErrorMessages } from "../../../shared/enums";
 import { WEIGHT_REPS_REGEX, TEMPO_REGEX } from "../../../shared/regex/regex";
 
@@ -22,28 +24,16 @@ export enum AddWorkoutFormFields {
   EXERCISES = "exercises",
 }
 
-export interface FormExercise {
-  name: string;
-  id: string;
-  _id: string;
-  sets: FormSet[];
-}
-interface FormSet {
-  goal: string;
-  tempo: string;
-  archived: string;
-}
-
 export interface AddWorkoutForm {
-  workoutTitle: string;
-  startTime: Date;
-  exercises: FormExercise[];
+  [AddWorkoutFormFields.WORKOUT_TITLE]: string;
+  [AddWorkoutFormFields.START_TIME]: Date;
+  [AddWorkoutFormFields.EXERCISES]: FormExercise[];
 }
 
-const defaultValues: AddWorkoutForm = {
-  workoutTitle: "",
-  startTime: new Date(),
-  exercises: [],
+const defaultValues = {
+  [AddWorkoutFormFields.WORKOUT_TITLE]: "",
+  [AddWorkoutFormFields.START_TIME]: new Date(),
+  [AddWorkoutFormFields.EXERCISES]: [],
 };
 
 const schema = yup.object().shape({

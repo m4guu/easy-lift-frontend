@@ -10,3 +10,6 @@ export type { default as Set } from "./Set";
 export type { default as Workout } from "./Workout";
 export type { default as Trainer } from "./Trainer";
 export type { default as User } from "./User";
+
+export type { default as FormExercise } from "./WorkoutForm/FormExercise";
+export type { default as FormSet } from "./WorkoutForm/FormSet";

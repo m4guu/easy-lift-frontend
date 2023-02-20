@@ -1,5 +1,5 @@
 import React from "react";
-import { UseFieldArrayReturn, useWatch } from "react-hook-form";
+import { UseFieldArrayReturn, useWatch, Control } from "react-hook-form";
 
 import { IconButton, Typography } from "@mui/material";
 import { styled } from "@mui/system";
@@ -8,7 +8,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import InfoIcon from "@mui/icons-material/Info";
 import DoneIcon from "@mui/icons-material/Done";
 
-import { AddWorkoutFormFields } from "../../../../../../../../../hooks/formHooks/workout/useNewWorkoutForm";
+import {
+  AddWorkoutFormFields,
+  AddWorkoutForm,
+} from "../../../../../../../../../hooks/formHooks/workout/useNewWorkoutForm";
 
 export const Add: React.FC<{ addNewSet: () => void }> = ({ addNewSet }) => {
   return (
@@ -45,21 +48,21 @@ export const Details: React.FC<{ openModal: () => void }> = ({ openModal }) => {
 type SetDoneProps = {
   exerciseIndex: number;
   setIndex: number;
-  control: any;
+  control: Control<AddWorkoutForm, any>;
 };
 export const SetDone: React.FC<SetDoneProps> = ({
   exerciseIndex,
   setIndex,
   control,
 }) => {
-  // question [meeting]: why useWatch doesnt work in this example ?
-  const setArchived = useWatch({
-    control,
-    name: `${AddWorkoutFormFields.EXERCISES}[${exerciseIndex}].sets[${setIndex}].archived`,
-  });
-  if (setArchived) {
-    return <Typography>Set Done!</Typography>;
-  }
+  // ? question [meeting]: why useWatch doesnt work in this example ?
+  // const setArchived = useWatch({
+  //   control,
+  //   name: `${AddWorkoutFormFields.EXERCISES}[${exerciseIndex}].sets[${setIndex}].archived`,
+  // });
+  // if (setArchived) {
+  //   return <Typography>Set Done!</Typography>;
+  // }
   return (
     <IconButton size="small">
       <DoneIcon color="primary" />

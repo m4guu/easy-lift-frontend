@@ -1,18 +1,11 @@
 import { Controller, FieldValues, Path, useFormContext } from "react-hook-form";
 
-import { TextField } from "@mui/material";
+import { TextField, TextFieldProps } from "@mui/material";
 import TextFieldMask from "../TextFieldMask";
 
-interface ControlledTextFieldProps<T extends FieldValues> {
+interface ControlledTextFieldProps<T extends FieldValues>
+  extends Omit<TextFieldProps, "name" | "value" | "onChange" | "onBlur"> {
   fieldName: Path<T>;
-  label?: string;
-  placeholder?: string;
-  type?: string;
-  variant?: "standard" | "filled" | "outlined";
-  size?: "medium" | "small";
-  disabled?: boolean;
-  multiline?: boolean;
-  rows?: number;
   mask?: string;
   textColor?: string;
   disabledUnderline?: boolean;

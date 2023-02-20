@@ -1,52 +1,68 @@
 import React from "react";
+import { UseFieldArrayAppend } from "react-hook-form";
 
-import { Box, Alert, Button } from "@mui/material";
+import { Box, Alert, Button, Modal } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { useExercises } from "../../hooks/queryHooks/exerciseDB/useExercises";
+import { AddWorkoutForm } from "../../hooks/formHooks/workout/useNewWorkoutForm";
 
 import { Status } from "../../shared/enums";
 import { ExerciseList } from "./ExercisesContent/ExerciseList";
 import { SectionContainer, SectionHeader } from "../../components";
 
 type ExercisesProps = {
-  appendExercise: any;
+  appendExercise: UseFieldArrayAppend<AddWorkoutForm, "exercises">;
+  isOpen: boolean;
   closeModal: () => void;
 };
 
-const Exercises: React.FC<ExercisesProps> = ({
+const ExercisesModal: React.FC<ExercisesProps> = ({
   appendExercise,
   closeModal,
+  isOpen,
 }) => {
   const { status, error, data: exercises } = useExercises();
 
   return (
-    <SectionContainer>
-      <SectionHeader>Exercise list</SectionHeader>
+    <ExercisesMuiModal
+      open={isOpen}
+      onClose={closeModal}
+      slotProps={{ backdrop: { style: { backgroundColor: "inherit" } } }}
+    >
+      <Box>
+        <SectionContainer>
+          <SectionHeader>Exercise list</SectionHeader>
 
-      <ExerciseFilterContainer>
-        <Box>search ...</Box>
-        <Box>target -categories</Box>
-      </ExerciseFilterContainer>
+          <ExerciseFilterContainer>
+            <Box>search ...</Box>
+            <Box>target -categories</Box>
+          </ExerciseFilterContainer>
 
-      {status === Status.LOADING && <div>loading...</div>}
+          {status === Status.LOADING && <div>loading...</div>}
 
-      {exercises && exercises.length === 0 ? (
-        <Alert variant="outlined" severity="error">
-          An Error has occurred. Please try again later.
-        </Alert>
-      ) : (
-        <ExerciseList
-          exercises={exercises!}
-          appendExercise={appendExercise}
-          closeModal={closeModal}
-        />
-      )}
+          {exercises && exercises.length === 0 ? (
+            <Alert variant="outlined" severity="error">
+              An Error has occurred. Please try again later.
+            </Alert>
+          ) : (
+            <ExerciseList
+              exercises={exercises!}
+              appendExercise={appendExercise}
+              closeModal={closeModal}
+            />
+          )}
 
-      <CloseModalButton onClick={closeModal} color="error" variant="contained">
-        close modal
-      </CloseModalButton>
-    </SectionContainer>
+          <CloseModalButton
+            onClick={closeModal}
+            color="error"
+            variant="contained"
+          >
+            close modal
+          </CloseModalButton>
+        </SectionContainer>
+      </Box>
+    </ExercisesMuiModal>
   );
 };
 
@@ -60,4 +76,10 @@ const CloseModalButton = styled(Button)({
   right: 5,
   top: 5,
 });
-export default Exercises;
+
+const ExercisesMuiModal = styled(Modal)(({ theme }) => ({
+  backgroundColor: theme.palette.background.default,
+  overflowY: "scroll",
+}));
+
+export default ExercisesModal;

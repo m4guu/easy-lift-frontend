@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { UseFieldArrayAppend } from "react-hook-form";
+import { v4 as uuidv4 } from "uuid";
 
 import { Divider, Typography, Button } from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
+import { useExerciseProgressModal } from "../../hooks/modalHooks/ExerciseProgress/useExerciseProgressModal";
 import { useUserContext } from "../../contexts/userContext";
 
 import {
@@ -20,12 +23,15 @@ import {
   DetailItem,
 } from "./ExerciseItem.styles";
 import { Exercise } from "../../shared/interfaces";
+import { AddWorkoutForm } from "../../hooks/formHooks/workout/useNewWorkoutForm";
+import { defaultSets } from "../../hooks/formHooks/workout/constans";
 import { Role } from "../../shared/enums";
-import { useExerciseProgressModal } from "../../hooks/modalHooks/ExerciseProgress/useExerciseProgressModal";
+
+import { ExerciseProgressModal } from "../../modals";
 
 type ExerciseItemProps = {
   exercise: Exercise;
-  appendExercise: any;
+  appendExercise: UseFieldArrayAppend<AddWorkoutForm, "exercises">;
   closeModal: () => void;
 };
 
@@ -36,8 +42,11 @@ const ExerciseItem: React.FC<ExerciseItemProps> = ({
 }) => {
   const [expand, setExpand] = useState(false);
   const { user } = useUserContext();
-  const { open: openExerciseProgressModal, Modal: ExerciseProgressModal } =
-    useExerciseProgressModal(exercise.id);
+  const {
+    open: openExerciseProgressModal,
+    close: closeExerciseProgressModal,
+    isOpen: isExerciseProgressModalOpen,
+  } = useExerciseProgressModal();
 
   const toggleAcordion = () => {
     setExpand((prevState) => !prevState);
@@ -45,9 +54,10 @@ const ExerciseItem: React.FC<ExerciseItemProps> = ({
 
   const addExerciseToWorkout = (choosenExercise: Exercise) => {
     appendExercise({
-      name: choosenExercise.name,
+      id: uuidv4(),
       _id: choosenExercise.id,
-      sets: [{ goal: "", tempo: "", archived: "", isDone: true }],
+      name: choosenExercise.name,
+      sets: defaultSets,
     });
     closeModal();
   };
@@ -114,10 +124,14 @@ const ExerciseItem: React.FC<ExerciseItemProps> = ({
           </ButtonsContainer>
         )}
       </ExerciseListItem>
-
       <Divider />
-
-      <ExerciseProgressModal />
+      {isExerciseProgressModalOpen && (
+        <ExerciseProgressModal
+          exerciseId={exercise.id}
+          isOpen={isExerciseProgressModalOpen}
+          closeModal={closeExerciseProgressModal}
+        />
+      )}
     </>
   );
 };

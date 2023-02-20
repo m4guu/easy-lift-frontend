@@ -1,11 +1,6 @@
 import { useState } from "react";
 
-import { Modal, Box } from "@mui/material";
-import { styled } from "@mui/system";
-
-import { Exercises } from "../../../modals";
-
-export const useExerciseModal = (appendExercise: any) => {
+export const useExerciseModal = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const open = () => {
@@ -18,21 +13,6 @@ export const useExerciseModal = (appendExercise: any) => {
   return {
     open,
     close,
-    Modal: () => (
-      <ExercisesModal
-        open={isOpen}
-        onClose={close}
-        slotProps={{ backdrop: { style: { backgroundColor: "inherit" } } }}
-      >
-        <Box>
-          <Exercises appendExercise={appendExercise} closeModal={close} />
-        </Box>
-      </ExercisesModal>
-    ),
+    isOpen,
   };
 };
-
-const ExercisesModal = styled(Modal)(({ theme }) => ({
-  backgroundColor: theme.palette.background.default,
-  overflowY: "scroll",
-}));

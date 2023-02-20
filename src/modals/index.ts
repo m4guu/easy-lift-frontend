@@ -1,2 +1,2 @@
-export { default as Exercises } from "./Exercises";
-export { default as ExerciseProgress } from "./ExerciseProgress";
+export { default as ExercisesModal } from "./Exercises";
+export { default as ExerciseProgressModal } from "./ExerciseProgress";

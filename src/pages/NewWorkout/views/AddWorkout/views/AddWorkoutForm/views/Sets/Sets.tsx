@@ -13,11 +13,15 @@ import RemoveIcon from "@mui/icons-material/Remove";
 
 import { styled } from "@mui/system";
 
+import { useExerciseProgressModal } from "../../../../../../../../hooks/modalHooks/ExerciseProgress/useExerciseProgressModal";
 import { useNewWorkoutForm } from "../../../../../../../../hooks/formHooks/workout/useNewWorkoutForm";
 
 import { Add, DeleteExercise, Details, SetDone } from "./views/SetActions";
 import { SetArchived, SetGoal, SetTempo } from "./views/Sets.form";
-import { useExerciseProgressModal } from "../../../../../../../../hooks/modalHooks/ExerciseProgress/useExerciseProgressModal";
+
+import { defaultSet } from "../../../../../../../../hooks/formHooks/workout/constans";
+
+import { ExerciseProgressModal } from "../../../../../../../../modals";
 
 type SetsProps = {
   exerciseId: string;
@@ -33,8 +37,11 @@ export const Sets: React.FC<SetsProps> = ({
     methods: { control },
   } = useNewWorkoutForm();
 
-  const { open: openExerciseProgressModal, Modal: ExerciseProgressModal } =
-    useExerciseProgressModal(exerciseId);
+  const {
+    open: openExerciseProgressModal,
+    close: closeExerciseProgressModal,
+    isOpen: isExerciseProgressModalOpen,
+  } = useExerciseProgressModal();
 
   const {
     fields: setFields,
@@ -46,7 +53,7 @@ export const Sets: React.FC<SetsProps> = ({
   });
 
   const addNewSet = useCallback(() => {
-    appendSet({ goal: "", tempo: "", archived: "" });
+    appendSet(defaultSet);
   }, [appendSet]);
 
   const isMounted = useRef(false);
@@ -104,7 +111,13 @@ export const Sets: React.FC<SetsProps> = ({
         </Box>
       </SetsActionsWrapper>
 
-      <ExerciseProgressModal />
+      {isExerciseProgressModalOpen && (
+        <ExerciseProgressModal
+          exerciseId={exerciseId}
+          isOpen={isExerciseProgressModalOpen}
+          closeModal={closeExerciseProgressModal}
+        />
+      )}
     </SetsContainer>
   );
 };

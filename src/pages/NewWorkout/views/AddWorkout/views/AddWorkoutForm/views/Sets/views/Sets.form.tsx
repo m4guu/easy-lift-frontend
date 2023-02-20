@@ -3,6 +3,8 @@ import React from "react";
 import { Box, useTheme } from "@mui/material";
 import { styled } from "@mui/system";
 
+import { weightRepsMask, tempoMask } from "./constans";
+
 import { ControlledTextField } from "../../../../../../../../../features";
 import { AddWorkoutFormFields } from "../../../../../../../../../hooks/formHooks/workout/useNewWorkoutForm";
 
@@ -14,7 +16,7 @@ export const SetGoal: React.FC<{ exerciseIndex: number; setIndex: number }> = ({
     <FieldContainer>
       <ControlledTextField
         fieldName={`${AddWorkoutFormFields.EXERCISES}[${exerciseIndex}].sets[${setIndex}].goal`}
-        mask="0[00] `x 0[00]"
+        mask={weightRepsMask}
         placeholder="kg x reps"
         variant="standard"
         disabledUnderline
@@ -31,7 +33,7 @@ export const SetTempo: React.FC<{
     <FieldContainer>
       <ControlledTextField
         fieldName={`${AddWorkoutFormFields.EXERCISES}[${exerciseIndex}].sets[${setIndex}].tempo`}
-        mask="0-0-0-0"
+        mask={tempoMask}
         placeholder="3-4-1-4"
         variant="standard"
         disabledUnderline
@@ -49,7 +51,7 @@ export const SetArchived: React.FC<{
     <FieldContainer>
       <ControlledTextField
         fieldName={`${AddWorkoutFormFields.EXERCISES}[${exerciseIndex}].sets[${setIndex}].archived`}
-        mask="0[00] x 0[00]"
+        mask={weightRepsMask}
         placeholder="kg x reps"
         variant="standard"
         textColor={theme.palette.primary.main}

@@ -22,6 +22,7 @@ import {
   WorkoutTitle,
 } from "./views/AddWorkoutForm/AddWorkout.form";
 import { useExerciseModal } from "../../../../hooks/modalHooks/Exercises/useExerciseModal";
+import { ExercisesModal } from "../../../../modals";
 
 export const AddWorkout: React.FC = () => {
   const { user } = useUserContext();
@@ -36,8 +37,11 @@ export const AddWorkout: React.FC = () => {
     appendExercise,
   } = useNewWorkoutForm();
 
-  const { open: openExerciseModal, Modal: ExerciseModal } =
-    useExerciseModal(appendExercise);
+  const {
+    open: openExerciseModal,
+    isOpen: isExerciseModalOpen,
+    close: closeExerciseModal,
+  } = useExerciseModal();
 
   const {
     handleSubmit,
@@ -89,7 +93,13 @@ export const AddWorkout: React.FC = () => {
         </Submit>
       </FormActionsWrapper>
 
-      <ExerciseModal />
+      {isExerciseModalOpen && (
+        <ExercisesModal
+          appendExercise={appendExercise}
+          isOpen={isExerciseModalOpen}
+          closeModal={closeExerciseModal}
+        />
+      )}
     </FormProvider>
   );
 };

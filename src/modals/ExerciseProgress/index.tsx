@@ -1,6 +1,7 @@
 import React from "react";
 
-import { Alert, Divider } from "@mui/material";
+import { Alert, Divider, Button, Modal, Box } from "@mui/material";
+import { styled } from "@mui/system";
 
 import { useUserContext } from "../../contexts/userContext";
 import { useUserExerciseProgress } from "../../hooks/queryHooks/userProgressHooks/useUserExerciseProgress";
@@ -13,10 +14,11 @@ import { chartOptions } from "./constans";
 import { ExerciseProgresList } from "./ExerciseProgressContent/ExerciseProgresList";
 import { SectionContainer, SectionHeader } from "../../components";
 
-const ExerciseProgress: React.FC<{
+const ExerciseProgressModal: React.FC<{
   exerciseId: string;
+  isOpen: boolean;
   closeModal: () => void;
-}> = ({ exerciseId, closeModal }) => {
+}> = ({ exerciseId, closeModal, isOpen }) => {
   const { user } = useUserContext();
 
   const {
@@ -38,28 +40,44 @@ const ExerciseProgress: React.FC<{
       : "";
 
   return (
-    <SectionContainer>
-      <SectionHeader>your {name} progress</SectionHeader>
+    <Modal open={isOpen} onClose={closeModal}>
+      <ModalBox>
+        <SectionContainer>
+          <SectionHeader>your {name} progress</SectionHeader>
 
-      {status === Status.LOADING && <div>loading...</div>}
+          {status === Status.LOADING && <div>loading...</div>}
 
-      {!!userExerciseProgress && userExerciseProgress?.length !== 0 ? (
-        <>
-          <Chart labels={labels} data={data} options={chartOptions} />
-          <Divider />
-          <ExerciseProgresList exerciseProgress={userExerciseProgress!} />
-        </>
-      ) : (
-        <Alert variant="outlined" severity="info">
-          There are no progress in this exercise yet.
-        </Alert>
-      )}
+          {!!userExerciseProgress && userExerciseProgress?.length !== 0 ? (
+            <>
+              <Chart labels={labels} data={data} options={chartOptions} />
+              <Divider />
+              <ExerciseProgresList exerciseProgress={userExerciseProgress!} />
+            </>
+          ) : (
+            <Alert variant="outlined" severity="info">
+              There are no progress in this exercise yet.
+            </Alert>
+          )}
 
-      <button type="button" onClick={closeModal}>
-        close modal
-      </button>
-    </SectionContainer>
+          <Button onClick={closeModal}>close modal</Button>
+        </SectionContainer>
+      </ModalBox>
+    </Modal>
   );
 };
 
-export default ExerciseProgress;
+const ModalBox = styled(Box)(({ theme }) => ({
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "60%",
+  border: "0.2rem solid #000",
+  borderRadius: "2rem",
+  backgroundColor: theme.palette.background.layout,
+  [theme.breakpoints.down("md")]: {
+    width: "100%",
+  },
+}));
+
+export default ExerciseProgressModal;

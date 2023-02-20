@@ -1,4 +1,4 @@
-import { FormExercise } from "../../hooks/formHooks/workout/useNewWorkoutForm";
+import { FormExercise } from "../../shared/interfaces/WorkoutForm/WorkoutForm";
 import { WorkoutExercise } from "../../shared/interfaces";
 
 export const generateWorkoutExercises = (
