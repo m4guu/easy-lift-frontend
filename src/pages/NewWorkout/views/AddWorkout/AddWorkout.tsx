@@ -1,5 +1,9 @@
 import React from "react";
-import { FormProvider } from "react-hook-form";
+import {
+  FormProvider,
+  FieldValues,
+  UseFieldArrayUpdate,
+} from "react-hook-form";
 
 import { Box } from "@mui/material";
 
@@ -24,7 +28,18 @@ import {
 import { useExerciseModal } from "../../../../hooks/modalHooks/Exercises/useExerciseModal";
 import { ExercisesModal } from "../../../../modals";
 
-export const AddWorkout: React.FC = () => {
+type AddWorkoutProps = {
+  workoutIndex?: number;
+  updateWorkoutField?: UseFieldArrayUpdate<
+    FieldValues,
+    `program.${number}.weekWorkouts`
+  >;
+};
+
+export const AddWorkout: React.FC<AddWorkoutProps> = ({
+  workoutIndex,
+  updateWorkoutField,
+}) => {
   const { user } = useUserContext();
   const {
     pending,
@@ -35,7 +50,7 @@ export const AddWorkout: React.FC = () => {
     exerciseFields,
     removeExercise,
     appendExercise,
-  } = useNewWorkoutForm();
+  } = useNewWorkoutForm({ workoutIndex, updateWorkoutField });
 
   const {
     open: openExerciseModal,
@@ -53,7 +68,7 @@ export const AddWorkout: React.FC = () => {
       <FormWrapper>
         <HeaderInputsWrapper>
           <WorkoutTitle />
-          <StartTime />
+          {user?.role === Role.user && <StartTime />}
         </HeaderInputsWrapper>
 
         {exerciseFields.length !== 0 && (

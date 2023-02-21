@@ -1,5 +1,10 @@
 import React from "react";
-import { UseFieldArrayReturn, useWatch, Control } from "react-hook-form";
+import {
+  UseFieldArrayReturn,
+  useWatch,
+  Control,
+  FieldValues,
+} from "react-hook-form";
 
 import { IconButton, Typography } from "@mui/material";
 import { styled } from "@mui/system";
@@ -48,7 +53,7 @@ export const Details: React.FC<{ openModal: () => void }> = ({ openModal }) => {
 type SetDoneProps = {
   exerciseIndex: number;
   setIndex: number;
-  control: Control<AddWorkoutForm, any>;
+  control: Control<FieldValues, any>;
 };
 export const SetDone: React.FC<SetDoneProps> = ({
   exerciseIndex,
@@ -56,13 +61,13 @@ export const SetDone: React.FC<SetDoneProps> = ({
   control,
 }) => {
   // ? question [meeting]: why useWatch doesnt work in this example ?
-  // const setArchived = useWatch({
-  //   control,
-  //   name: `${AddWorkoutFormFields.EXERCISES}[${exerciseIndex}].sets[${setIndex}].archived`,
-  // });
-  // if (setArchived) {
-  //   return <Typography>Set Done!</Typography>;
-  // }
+  const setArchived = useWatch({
+    control,
+    name: `${AddWorkoutFormFields.EXERCISES}[${exerciseIndex}].sets[${setIndex}].archived`,
+  });
+  if (setArchived) {
+    return <Typography>Set Done!</Typography>;
+  }
   return (
     <IconButton size="small">
       <DoneIcon color="primary" />

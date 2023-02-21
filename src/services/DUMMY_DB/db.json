@@ -268,6 +268,26 @@
           ]
         }
       ]
+    },
+    {
+      "id": "aa7d602a-e08e-4902-96f0-a706caa519fb",
+      "creator": "DUMMY-USER-1",
+      "title": "weqwdsa",
+      "date": "2023-02-21",
+      "exercises": [
+        {
+          "name": "45° side bend",
+          "id": "b17222bc-0d28-46b1-aa9d-49577dbb789b",
+          "sets": [
+            {
+              "weight": 231,
+              "reps": 23,
+              "tempo": "2-3-1-3",
+              "repMax": 408
+            }
+          ]
+        }
+      ]
     }
   ],
   "usersProgress": [
@@ -369,42 +389,19 @@
       ]
     },
     {
-      "id": "a84e92dd-2b97-471c-a6dd-54314b4dab9e",
-      "workoutId": "61c501a5-2e7b-42c9-8803-18afc8f4a23a",
+      "id": "53f37825-735e-4a8f-bacd-99b9ba64eb3a",
+      "workoutId": "aa7d602a-e08e-4902-96f0-a706caa519fb",
       "userId": "DUMMY-USER-1",
-      "exerciseId": "b92d19b5-5039-4217-bc04-de887e0883b8",
-      "exerciseName": "3/4 sit-up",
-      "date": "2023-02-20",
-      "repMax": 3752,
+      "exerciseId": "b17222bc-0d28-46b1-aa9d-49577dbb789b",
+      "exerciseName": "45° side bend",
+      "date": "2023-02-21",
+      "repMax": 408,
       "sets": [
         {
           "weight": 231,
-          "reps": 321,
-          "tempo": "2-3-1-2",
-          "repMax": 2700
-        },
-        {
-          "weight": 321,
-          "reps": 321,
-          "tempo": "1-3-2-1",
-          "repMax": 3752
-        }
-      ]
-    },
-    {
-      "id": "fbc3355a-0290-4804-b9bf-4b37dbf764b9",
-      "workoutId": "61c501a5-2e7b-42c9-8803-18afc8f4a23a",
-      "userId": "DUMMY-USER-1",
-      "exerciseId": "4dc4ab64-ba3b-4b63-b0f6-8bf46850c383",
-      "exerciseName": "archer pull up",
-      "date": "2023-02-20",
-      "repMax": 2008,
-      "sets": [
-        {
-          "weight": 231,
-          "reps": 231,
-          "tempo": "3-2-1-3",
-          "repMax": 2008
+          "reps": 23,
+          "tempo": "2-3-1-3",
+          "repMax": 408
         }
       ]
     }

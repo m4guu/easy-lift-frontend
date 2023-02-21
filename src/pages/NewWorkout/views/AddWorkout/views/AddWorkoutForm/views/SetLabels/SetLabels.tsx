@@ -1,10 +1,15 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { styled } from "@mui/system";
+import { useUserContext } from "../../../../../../../../contexts/userContext";
+import { Role } from "../../../../../../../../shared/enums";
 
-import { labels } from "./constans";
+import { userLabels, trainerLabels } from "./constans";
 
 export const SetLabels = () => {
+  const { user } = useUserContext();
   const theme = useTheme();
+
+  const labels = user?.role === Role.trainer ? trainerLabels : userLabels;
 
   return (
     // question [meeting]: why does ts not see my custom Palette type ? (custom_grey: styles -> theme-> types)

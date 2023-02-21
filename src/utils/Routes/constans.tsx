@@ -4,7 +4,6 @@ import { PATHS, NESTED_PATHS } from "../../pages/paths";
 import {
   Home,
   NewProgram,
-  Creator,
   Trainers,
   Trainer,
   Programs,
@@ -21,7 +20,6 @@ export const trainerRoutes = (
     <Route path={PATHS.default} element={<Home />} />
     <Route path={PATHS.NEW_PROGRAM}>
       <Route index element={<NewProgram />} />
-      <Route path={NESTED_PATHS.NEW_PROGRAM_CREATOR} element={<Creator />} />
     </Route>
 
     <Route path={PATHS.NEW_WORKOUT} element={<NewWorkout />} />

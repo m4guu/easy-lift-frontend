@@ -1,42 +1,113 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { FormProvider, useFieldArray } from "react-hook-form";
 
-import { LoadingButton } from "@mui/lab";
+import { Button, Stepper, Step, StepLabel } from "@mui/material";
 
-import { useAddProgramMutation } from "../../hooks/queryHooks/programsHooks/useAddProgramMutation";
+import { useNewProgramForm } from "../../hooks/formHooks/program/useNewProgramForm";
+import { useFormSteps } from "../../hooks/formHooks/formStepHook/useFormSteps";
 
-import { DUMMY_PROGRAM } from "./constans";
-
+import {
+  FormWrapper,
+  FirstFormStepWrapper,
+  SecondFormStepWrapper,
+  ThirdFormStepWrapper,
+  FormActions,
+  FormStepper,
+} from "./styles/NewProgram.styles";
 import { SectionHeader, SectionContainer } from "../../components";
-import { Status } from "../../shared/enums";
-import { PATHS } from "../paths";
+import {
+  ProgramTitle,
+  ProgramLevel,
+  ProgramFrequency,
+  ProgramLength,
+  Program,
+  ProgramPrice,
+  ProgramDescription,
+} from "./views/AddProgramForm/AddProgram.form";
+import { steps } from "./constans";
 
 const NewProgramPage: React.FC = () => {
   const {
-    isLoading,
-    status,
-    mutate: addQueryProgram,
-  } = useAddProgramMutation();
+    methods,
+    appendProgramField,
+    removeProgramField,
+    programFields,
+    canSubmit,
+    onSubmit,
+  } = useNewProgramForm();
+  const { currentStep, nextStep, prevStep } = useFormSteps();
 
-  const addNewProgram = () => {
-    addQueryProgram(DUMMY_PROGRAM);
-  };
+  const {
+    watch,
+    trigger,
+    handleSubmit,
+    formState: { errors },
+  } = methods;
+
+  const programLength = watch("programLength");
+  const programFrequency = watch("frequency");
+  console.log(errors);
 
   return (
     <SectionContainer>
-      <SectionHeader>New Program</SectionHeader>
+      <SectionHeader>New Training Program</SectionHeader>
 
-      <Link to={PATHS.NEW_WORKOUT}>add new workout</Link>
+      <FormStepper activeStep={currentStep - 1}>
+        {steps.map((step) => {
+          return (
+            <Step key={step}>
+              <StepLabel>{step}</StepLabel>
+            </Step>
+          );
+        })}
+      </FormStepper>
 
-      <LoadingButton
-        loading={isLoading}
-        onClick={addNewProgram}
-        variant="contained"
-      >
-        add new program
-      </LoadingButton>
-      {status === Status.SUCCESS && <div>program added!</div>}
-      {status === Status.ERROR && <div>ERROR</div>}
+      <FormProvider {...methods}>
+        <FormWrapper>
+          {currentStep === 1 && (
+            <FirstFormStepWrapper>
+              <ProgramTitle />
+              <ProgramLevel />
+              <ProgramFrequency />
+              <ProgramLength />
+            </FirstFormStepWrapper>
+          )}
+
+          {currentStep === 2 && (
+            <SecondFormStepWrapper>
+              <Program
+                programLength={programLength}
+                programFrequency={programFrequency}
+                programFields={programFields}
+                appendProgram={appendProgramField}
+                removeProgram={removeProgramField}
+              />
+            </SecondFormStepWrapper>
+          )}
+
+          {currentStep === 3 && (
+            <ThirdFormStepWrapper>
+              <ProgramPrice />
+              <ProgramDescription />
+            </ThirdFormStepWrapper>
+          )}
+
+          <FormActions>
+            {currentStep !== 1 && <Button onClick={prevStep}>prev step</Button>}
+            {currentStep !== 3 && (
+              <Button onClick={() => nextStep(trigger)}>next step</Button>
+            )}
+            {currentStep === 3 && (
+              <Button
+                onClick={handleSubmit((data) => onSubmit(data))}
+                disabled={!canSubmit}
+              >
+                create program
+              </Button>
+            )}
+          </FormActions>
+        </FormWrapper>
+      </FormProvider>
     </SectionContainer>
   );
 };

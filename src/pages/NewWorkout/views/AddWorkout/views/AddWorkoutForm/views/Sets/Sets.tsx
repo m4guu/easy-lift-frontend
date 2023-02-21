@@ -1,5 +1,9 @@
-import React, { useEffect, useCallback, useRef } from "react";
-import { useFieldArray, UseFieldArrayReturn } from "react-hook-form";
+import React, { useCallback } from "react";
+import {
+  useFieldArray,
+  UseFieldArrayReturn,
+  useFormContext,
+} from "react-hook-form";
 
 import {
   Box,
@@ -14,14 +18,15 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { styled } from "@mui/system";
 
 import { useExerciseProgressModal } from "../../../../../../../../hooks/modalHooks/ExerciseProgress/useExerciseProgressModal";
-import { useNewWorkoutForm } from "../../../../../../../../hooks/formHooks/workout/useNewWorkoutForm";
 
 import { Add, DeleteExercise, Details, SetDone } from "./views/SetActions";
 import { SetArchived, SetGoal, SetTempo } from "./views/Sets.form";
 
 import { defaultSet } from "../../../../../../../../hooks/formHooks/workout/constans";
 
+import { Role } from "../../../../../../../../shared/enums";
 import { ExerciseProgressModal } from "../../../../../../../../modals";
+import { useUserContext } from "../../../../../../../../contexts/userContext";
 
 type SetsProps = {
   exerciseId: string;
@@ -33,9 +38,11 @@ export const Sets: React.FC<SetsProps> = ({
   exerciseIndex,
   removeExercise,
 }) => {
+  const { user } = useUserContext();
   const {
-    methods: { control },
-  } = useNewWorkoutForm();
+    control,
+    formState: { errors },
+  } = useFormContext();
 
   const {
     open: openExerciseProgressModal,
@@ -56,14 +63,6 @@ export const Sets: React.FC<SetsProps> = ({
     appendSet(defaultSet);
   }, [appendSet]);
 
-  const isMounted = useRef(false);
-  useEffect(() => {
-    if (!isMounted.current) {
-      addNewSet();
-      isMounted.current = true;
-    }
-  }, [addNewSet]);
-
   return (
     <SetsContainer>
       <SetList>
@@ -76,15 +75,19 @@ export const Sets: React.FC<SetsProps> = ({
                 </SetNumber>
                 <SetGoal exerciseIndex={exerciseIndex} setIndex={i} />
                 <SetTempo exerciseIndex={exerciseIndex} setIndex={i} />
-                <SetArchived exerciseIndex={exerciseIndex} setIndex={i} />
+                {user?.role === Role.user && (
+                  <SetArchived exerciseIndex={exerciseIndex} setIndex={i} />
+                )}
               </SetContainer>
 
               <SetActionsWrapper>
-                <SetDone
-                  control={control}
-                  exerciseIndex={exerciseIndex}
-                  setIndex={i}
-                />
+                {user?.role === Role.user && (
+                  <SetDone
+                    control={control}
+                    exerciseIndex={exerciseIndex}
+                    setIndex={i}
+                  />
+                )}
                 <DeleteSet
                   onClick={() => removeSet(i)}
                   color="error"

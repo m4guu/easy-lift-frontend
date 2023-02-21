@@ -69,7 +69,6 @@ export const Exercise: React.FC<ExerciseProps> = ({
       />
 
       <TextField
-        // question: i need in form data like exercise name or id, its ok to manage uncontrolled input like this ?
         sx={{ display: "none" }}
         {...register(`${AddWorkoutFormFields.EXERCISES}.[${exerciseIndex}].id`)}
         defaultValue={exercise._id}

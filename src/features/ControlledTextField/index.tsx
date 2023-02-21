@@ -9,6 +9,7 @@ interface ControlledTextFieldProps<T extends FieldValues>
   mask?: string;
   textColor?: string;
   disabledUnderline?: boolean;
+  children?: React.ReactNode;
 }
 
 const ControlledTextField = <T extends FieldValues>({
@@ -22,8 +23,10 @@ const ControlledTextField = <T extends FieldValues>({
   multiline = false,
   rows,
   mask,
+  select,
   textColor,
   disabledUnderline,
+  children,
 }: ControlledTextFieldProps<T>) => {
   const { control } = useFormContext<T>();
 
@@ -52,10 +55,13 @@ const ControlledTextField = <T extends FieldValues>({
           placeholder={placeholder}
           error={!!fieldState.error}
           label={label}
+          select={select}
           helperText={fieldState.error?.message}
           autoComplete="off"
           color="primary"
-        />
+        >
+          {children}
+        </TextField>
       )}
     />
   );

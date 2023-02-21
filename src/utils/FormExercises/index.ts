@@ -1,16 +1,19 @@
-import { FormExercise } from "../../shared/interfaces/WorkoutForm/WorkoutForm";
-import { WorkoutExercise } from "../../shared/interfaces";
+import { Role } from "../../shared/enums";
+import { WorkoutExercise, FormExercise } from "../../shared/interfaces";
 
 export const generateWorkoutExercises = (
-  formExercises: FormExercise[]
+  formExercises: FormExercise[],
+  userRole?: Role
 ): WorkoutExercise[] => {
   const workoutExercises = formExercises.map((exercise) => {
     const { name, id, sets: formSets } = exercise;
 
     const sets = formSets.map((set) => {
-      const { archived, tempo } = set;
+      const { archived, tempo, goal } = set;
 
-      const [weight, reps] = archived.split("x").map((s) => Number(s.trim()));
+      const splitValue = userRole === Role.trainer ? goal : archived;
+
+      const [weight, reps] = splitValue.split("x").map((s) => Number(s.trim()));
       // calculate 1 rep max with epley formula
       const repMax = Math.round(weight * (1 + 0.0333 * reps));
       return {

@@ -9,7 +9,6 @@ export { default as Home } from "./Home";
 export { default as NewWorkout } from "./NewWorkout";
 
 export { default as NewProgram } from "./NewProgram";
-export { default as Creator } from "./NewProgram/Creator/Creator";
 
 export { default as Workouts } from "./Workouts";
 export { default as Workout } from "./Workouts/Workout";
