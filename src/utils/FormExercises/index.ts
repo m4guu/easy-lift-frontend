@@ -6,7 +6,8 @@ export const generateWorkoutExercises = (
   userRole?: Role
 ): WorkoutExercise[] => {
   const workoutExercises = formExercises.map((exercise) => {
-    const { name, id, sets: formSets } = exercise;
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const { name, _id, sets: formSets } = exercise;
 
     const sets = formSets.map((set) => {
       const { archived, tempo, goal } = set;
@@ -25,7 +26,7 @@ export const generateWorkoutExercises = (
     });
     return {
       name,
-      id,
+      id: _id,
       sets,
     };
   });

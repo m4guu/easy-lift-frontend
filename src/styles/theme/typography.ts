@@ -35,14 +35,6 @@ const typography = {
   fontWeightRegular: 400,
   fontWeightMedium: 600,
   fontWeightBold: 700,
-  caption: {
-    fontWeight: 700,
-    lineHeight: "117%",
-    textTransform: "uppercase",
-    fontSize: pxToRem(14),
-    letterSpacing: 0,
-    ...responsiveFontSizes({ sm: 10, md: 10, lg: 14 }),
-  },
   subtitle1: {
     fontWeight: 700,
     lineHeight: "117%",

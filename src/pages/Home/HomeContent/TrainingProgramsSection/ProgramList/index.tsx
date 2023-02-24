@@ -6,7 +6,7 @@ import { styled } from "@mui/system";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { ProgramItem } from "../../../../../components";
+import { ProgramItem, SectionHeader } from "../../../../../components";
 import { ProgramsNav } from "./ProgramsNav";
 
 import "swiper/css";
@@ -48,7 +48,7 @@ export const ProgramList: React.FC = () => {
       )}
 
       <ProgramSwiperHeader>
-        <Typography variant="caption">training programs</Typography>
+        <SectionHeader>training programs</SectionHeader>
         {programs?.length ? <ProgramsNav /> : null}
       </ProgramSwiperHeader>
     </ProgramsSwiper>

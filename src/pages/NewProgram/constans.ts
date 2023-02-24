@@ -8,8 +8,4 @@ export const DUMMY_PROGRAM = {
   price: 1999,
 };
 
-export const steps = [
-  "Basic Information",
-  "Add Workouts",
-  "Describe New Program",
-];
+export const steps = ["Basic Information", "Add Workouts", "Describe Program"];

@@ -1,22 +1,16 @@
 import * as yup from "yup";
 
 import { FormSet } from "../../../shared/interfaces";
-import { ErrorMessages, Role } from "../../../shared/enums";
+import { ErrorMessages } from "../../../shared/enums";
 import { WEIGHT_REPS_REGEX, TEMPO_REGEX } from "../../../shared/regex/regex";
-
-export const defaultSets: FormSet[] = [
-  {
-    goal: "",
-    tempo: "",
-    archived: "",
-  },
-];
 
 export const defaultSet: FormSet = {
   goal: "",
   tempo: "",
   archived: "",
 };
+
+export const defaultSets: FormSet[] = [defaultSet];
 
 export const workoutTraienrSchema = yup.object().shape({
   workoutTitle: yup.string().required().min(5),

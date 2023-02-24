@@ -104,6 +104,7 @@ const programSchema = yup.object().shape({
 
 export const useNewProgramForm = () => {
   const [pending, setPending] = useState(false);
+  const [isProgramAdded, setIsProgramAdded] = useState(false);
   const { mutateAsync: addQueryProgram } = useAddProgramMutation();
   const { user } = useUserContext();
 
@@ -141,7 +142,7 @@ export const useNewProgramForm = () => {
     remove: removeProgramField,
   } = useFieldArray({
     control,
-    name: "program",
+    name: AddProgramFormFields.PROGRAM,
   });
 
   const onSubmit = useCallback(
@@ -160,7 +161,10 @@ export const useNewProgramForm = () => {
       };
       addQueryProgram(newProgram)
         .then(resetForm)
-        .finally(() => setPending(false));
+        .finally(() => {
+          setPending(false);
+          setIsProgramAdded(true);
+        });
     },
     [user, addQueryProgram, resetForm]
   );
@@ -173,6 +177,7 @@ export const useNewProgramForm = () => {
     programFields,
     appendProgramField,
     removeProgramField,
+    isProgramAdded,
     resetForm,
   };
 };

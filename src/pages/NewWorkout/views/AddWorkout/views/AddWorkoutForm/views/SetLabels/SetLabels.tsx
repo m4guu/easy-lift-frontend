@@ -12,7 +12,6 @@ export const SetLabels = () => {
   const labels = user?.role === Role.trainer ? trainerLabels : userLabels;
 
   return (
-    // question [meeting]: why does ts not see my custom Palette type ? (custom_grey: styles -> theme-> types)
     <Container>
       {labels.map((label, i) => {
         if (i === 0) {

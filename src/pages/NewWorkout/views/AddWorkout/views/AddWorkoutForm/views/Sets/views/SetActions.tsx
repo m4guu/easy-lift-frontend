@@ -4,19 +4,18 @@ import {
   useWatch,
   Control,
   FieldValues,
+  UseFieldArrayUpdate,
 } from "react-hook-form";
 
-import { IconButton, Typography } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { styled } from "@mui/system";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import InfoIcon from "@mui/icons-material/Info";
 import DoneIcon from "@mui/icons-material/Done";
 
-import {
-  AddWorkoutFormFields,
-  AddWorkoutForm,
-} from "../../../../../../../../../hooks/formHooks/workout/useNewWorkoutForm";
+import { ExerciseFormActions } from "../../../../../../../../../shared/enums";
+import { AddWorkoutFormFields } from "../../../../../../../../../hooks/formHooks/workout/useNewWorkoutForm";
 
 export const Add: React.FC<{ addNewSet: () => void }> = ({ addNewSet }) => {
   return (
@@ -28,7 +27,7 @@ export const Add: React.FC<{ addNewSet: () => void }> = ({ addNewSet }) => {
 
 type DeleteExerciseProps = {
   exerciseIndex: number;
-  removeExercise: UseFieldArrayReturn["remove"];
+  removeExercise: UseFieldArrayReturn[ExerciseFormActions.REMOVE];
 };
 
 export const DeleteExercise: React.FC<DeleteExerciseProps> = ({
@@ -54,23 +53,33 @@ type SetDoneProps = {
   exerciseIndex: number;
   setIndex: number;
   control: Control<FieldValues, any>;
+  updateSet: UseFieldArrayUpdate<FieldValues, `exercises.${number}.sets`>;
 };
 export const SetDone: React.FC<SetDoneProps> = ({
   exerciseIndex,
   setIndex,
   control,
+  updateSet,
 }) => {
-  // ? question [meeting]: why useWatch doesnt work in this example ?
-  const setArchived = useWatch({
+  const set = useWatch({
     control,
-    name: `${AddWorkoutFormFields.EXERCISES}[${exerciseIndex}].sets[${setIndex}].archived`,
+    name: `${AddWorkoutFormFields.EXERCISES}[${exerciseIndex}].sets[${setIndex}]`,
   });
-  if (setArchived) {
-    return <Typography>Set Done!</Typography>;
+
+  // ? question: how to check validation of this value? [archived and goal]
+  if (set.archived || !set.goal) {
+    return null;
   }
+
+  const update = () => {
+    updateSet(setIndex, {
+      ...set,
+      archived: set.goal,
+    });
+  };
   return (
-    <IconButton size="small">
-      <DoneIcon color="primary" />
+    <IconButton onClick={update}>
+      <DoneIcon fontSize="small" color="primary" />
     </IconButton>
   );
 };

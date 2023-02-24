@@ -24,14 +24,17 @@ import { SetArchived, SetGoal, SetTempo } from "./views/Sets.form";
 
 import { defaultSet } from "../../../../../../../../hooks/formHooks/workout/constans";
 
-import { Role } from "../../../../../../../../shared/enums";
+import {
+  Role,
+  ExerciseFormActions,
+} from "../../../../../../../../shared/enums";
 import { ExerciseProgressModal } from "../../../../../../../../modals";
 import { useUserContext } from "../../../../../../../../contexts/userContext";
 
 type SetsProps = {
   exerciseId: string;
   exerciseIndex: number;
-  removeExercise: UseFieldArrayReturn["remove"];
+  removeExercise: UseFieldArrayReturn[ExerciseFormActions.REMOVE];
 };
 export const Sets: React.FC<SetsProps> = ({
   exerciseId,
@@ -39,10 +42,7 @@ export const Sets: React.FC<SetsProps> = ({
   removeExercise,
 }) => {
   const { user } = useUserContext();
-  const {
-    control,
-    formState: { errors },
-  } = useFormContext();
+  const { control, clearErrors } = useFormContext();
 
   const {
     open: openExerciseProgressModal,
@@ -54,6 +54,7 @@ export const Sets: React.FC<SetsProps> = ({
     fields: setFields,
     append: appendSet,
     remove: removeSet,
+    update: updateSet,
   } = useFieldArray({
     control,
     name: `exercises.${exerciseIndex}.sets`,
@@ -61,7 +62,8 @@ export const Sets: React.FC<SetsProps> = ({
 
   const addNewSet = useCallback(() => {
     appendSet(defaultSet);
-  }, [appendSet]);
+    clearErrors();
+  }, [appendSet, clearErrors]);
 
   return (
     <SetsContainer>
@@ -86,6 +88,7 @@ export const Sets: React.FC<SetsProps> = ({
                     control={control}
                     exerciseIndex={exerciseIndex}
                     setIndex={i}
+                    updateSet={updateSet}
                   />
                 )}
                 <DeleteSet
@@ -110,7 +113,9 @@ export const Sets: React.FC<SetsProps> = ({
             exerciseIndex={exerciseIndex}
             removeExercise={removeExercise}
           />
-          <Details openModal={openExerciseProgressModal} />
+          {user?.role === Role.user && (
+            <Details openModal={openExerciseProgressModal} />
+          )}
         </Box>
       </SetsActionsWrapper>
 

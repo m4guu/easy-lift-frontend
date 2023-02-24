@@ -5,14 +5,20 @@ import { Box, Alert, Button, Modal } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { useExercises } from "../../hooks/queryHooks/exerciseDB/useExercises";
-import { AddWorkoutForm } from "../../hooks/formHooks/workout/useNewWorkoutForm";
+import {
+  AddWorkoutForm,
+  AddWorkoutFormFields,
+} from "../../hooks/formHooks/workout/useNewWorkoutForm";
 
 import { Status } from "../../shared/enums";
 import { ExerciseList } from "./ExercisesContent/ExerciseList";
 import { SectionContainer, SectionHeader } from "../../components";
 
 type ExercisesProps = {
-  appendExercise: UseFieldArrayAppend<AddWorkoutForm, "exercises">;
+  appendExercise: UseFieldArrayAppend<
+    AddWorkoutForm,
+    AddWorkoutFormFields.EXERCISES
+  >;
   isOpen: boolean;
   closeModal: () => void;
 };

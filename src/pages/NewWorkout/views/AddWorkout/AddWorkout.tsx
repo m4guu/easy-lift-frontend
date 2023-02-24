@@ -5,7 +5,7 @@ import {
   UseFieldArrayUpdate,
 } from "react-hook-form";
 
-import { Box } from "@mui/material";
+import { Box, FormControl } from "@mui/material";
 
 import { useUserContext } from "../../../../contexts/userContext";
 import { useNewWorkoutForm } from "../../../../hooks/formHooks/workout/useNewWorkoutForm";
@@ -27,6 +27,7 @@ import {
 } from "./views/AddWorkoutForm/AddWorkout.form";
 import { useExerciseModal } from "../../../../hooks/modalHooks/Exercises/useExerciseModal";
 import { ExercisesModal } from "../../../../modals";
+import { ErrorMessage } from "../../../../components";
 
 type AddWorkoutProps = {
   workoutIndex?: number;
@@ -63,9 +64,11 @@ export const AddWorkout: React.FC<AddWorkoutProps> = ({
     formState: { errors },
   } = methods;
 
+  const component = user?.role === Role.user ? "form" : Box;
+
   return (
     <FormProvider {...methods}>
-      <FormWrapper>
+      <FormWrapper component={component}>
         <HeaderInputsWrapper>
           <WorkoutTitle />
           {user?.role === Role.user && <StartTime />}
@@ -86,15 +89,16 @@ export const AddWorkout: React.FC<AddWorkoutProps> = ({
           </ExercisesWrapper>
         )}
       </FormWrapper>
-      {/* // todo: add error handling component */}
-      <Box>{errors.exercises?.message}</Box>
+      {errors.exercises?.message && (
+        <ErrorMessage>{errors.exercises?.message}</ErrorMessage>
+      )}
       <FormActionsWrapper>
         <ChooseExercise onClick={openExerciseModal} size="small">
-          add exercise
+          + exercise
         </ChooseExercise>
 
         <Reset onClick={resetForm} size="small" color="error">
-          reset workout
+          reset
         </Reset>
 
         <Submit

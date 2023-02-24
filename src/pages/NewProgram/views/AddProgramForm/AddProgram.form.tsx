@@ -98,7 +98,10 @@ type ProgramProps = {
   programLength: number;
   programFrequency: number;
   programFields: ProgramItem[];
-  appendProgram: UseFieldArrayAppend<AddProgramForm, "program">;
+  appendProgram: UseFieldArrayAppend<
+    AddProgramForm,
+    AddProgramFormFields.PROGRAM
+  >;
   removeProgram: UseFieldArrayRemove;
 };
 export const Program: React.FC<ProgramProps> = ({
@@ -140,6 +143,7 @@ export const ProgramPrice = styled(() => (
     size="small"
     label="Price"
     type="number"
+    placeholder="999 $"
     fieldName={AddProgramFormFields.PROGRAM_PRICE}
   />
 ))``;

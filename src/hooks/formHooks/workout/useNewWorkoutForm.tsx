@@ -79,7 +79,7 @@ export const useNewWorkoutForm = ({
     remove: removeExercise,
   } = useFieldArray({
     control,
-    name: "exercises",
+    name: AddWorkoutFormFields.EXERCISES,
   });
 
   const onSubmit = useCallback(

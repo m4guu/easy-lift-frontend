@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { UseFieldArrayAppend } from "react-hook-form";
+import { UseFieldArrayAppend, useFormContext } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 
 import { Divider, Typography, Button } from "@mui/material";
@@ -23,7 +23,10 @@ import {
   DetailItem,
 } from "./ExerciseItem.styles";
 import { Exercise } from "../../shared/interfaces";
-import { AddWorkoutForm } from "../../hooks/formHooks/workout/useNewWorkoutForm";
+import {
+  AddWorkoutForm,
+  AddWorkoutFormFields,
+} from "../../hooks/formHooks/workout/useNewWorkoutForm";
 import { defaultSets } from "../../hooks/formHooks/workout/constans";
 import { Role } from "../../shared/enums";
 
@@ -31,7 +34,10 @@ import { ExerciseProgressModal } from "../../modals";
 
 type ExerciseItemProps = {
   exercise: Exercise;
-  appendExercise: UseFieldArrayAppend<AddWorkoutForm, "exercises">;
+  appendExercise: UseFieldArrayAppend<
+    AddWorkoutForm,
+    AddWorkoutFormFields.EXERCISES
+  >;
   closeModal: () => void;
 };
 
@@ -42,6 +48,7 @@ const ExerciseItem: React.FC<ExerciseItemProps> = ({
 }) => {
   const [expand, setExpand] = useState(false);
   const { user } = useUserContext();
+  const { clearErrors } = useFormContext();
   const {
     open: openExerciseProgressModal,
     close: closeExerciseProgressModal,
@@ -59,6 +66,7 @@ const ExerciseItem: React.FC<ExerciseItemProps> = ({
       name: choosenExercise.name,
       sets: defaultSets,
     });
+    clearErrors();
     closeModal();
   };
 

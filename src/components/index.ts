@@ -1,4 +1,5 @@
 export { default as ButtonBase } from "./ButtonBase";
+export { default as ErrorMessage } from "./ErrorMessage";
 export { default as ExerciseItem } from "./ExerciseItem";
 export { default as ExerciseProgresItem } from "./ExerciseProgresItem";
 export { default as NavigationItem } from "./NavigationItem";

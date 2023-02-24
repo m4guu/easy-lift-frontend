@@ -1,7 +1,7 @@
 import "@mui/material";
 
 declare module "@mui/material/styles" {
-  interface Pallette {
+  interface Palette {
     custom_grey: { main: string; tint_1: string; tint_2: string };
     others: {
       border_color: string;
@@ -11,5 +11,11 @@ declare module "@mui/material/styles" {
       hover: string;
       hoverOpacity: number;
     };
+  }
+}
+
+declare module "@mui/material/styles" {
+  interface PaletteOptions {
+    custom_grey?: { main: string; tint_1: string; tint_2: string };
   }
 }

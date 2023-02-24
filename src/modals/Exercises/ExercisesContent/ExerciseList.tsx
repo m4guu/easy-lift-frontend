@@ -3,13 +3,19 @@ import { UseFieldArrayAppend } from "react-hook-form";
 
 import { List } from "@mui/material";
 
-import { AddWorkoutForm } from "../../../hooks/formHooks/workout/useNewWorkoutForm";
+import {
+  AddWorkoutForm,
+  AddWorkoutFormFields,
+} from "../../../hooks/formHooks/workout/useNewWorkoutForm";
 import { Exercise } from "../../../shared/interfaces";
 import { ExerciseItem } from "../../../components";
 
 type ExerciseListProps = {
   exercises: Exercise[];
-  appendExercise: UseFieldArrayAppend<AddWorkoutForm, "exercises">;
+  appendExercise: UseFieldArrayAppend<
+    AddWorkoutForm,
+    AddWorkoutFormFields.EXERCISES
+  >;
   closeModal: () => void;
 };
 

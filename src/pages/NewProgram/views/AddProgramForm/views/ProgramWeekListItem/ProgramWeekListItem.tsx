@@ -15,6 +15,8 @@ import { styled } from "@mui/system";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
+import { AddProgramFormFields } from "../../../../../../hooks/formHooks/program/useNewProgramForm";
+
 import { WorkoutListItem } from "./views/WorkoutListItem";
 
 type ProgramWeekListItemProps = {
@@ -37,7 +39,8 @@ export const ProgramWeekListItem: React.FC<ProgramWeekListItemProps> = ({
     control,
     name: `program.${weekIndex}.weekWorkouts`,
   });
-  const program = watch("program");
+
+  const program = watch(AddProgramFormFields.PROGRAM);
 
   const generateFields = useCallback(() => {
     const currentCount = workoutFields.length;
@@ -76,7 +79,10 @@ export const ProgramWeekListItem: React.FC<ProgramWeekListItemProps> = ({
                       <Typography color="success.main">
                         {weekWorkout.title}
                       </Typography>
-                      <CheckCircleOutlineIcon color="success" />
+                      <CheckCircleOutlineIcon
+                        fontSize="small"
+                        color="success"
+                      />
                     </FlexBox>
                   );
                 }
@@ -109,9 +115,10 @@ const WorkoutAccordion = styled(Accordion)({
   width: "100%",
 });
 
-const WorkoutAccordionDetails = styled(AccordionDetails)({
+const WorkoutAccordionDetails = styled(AccordionDetails)(({ theme }) => ({
   padding: 0,
-});
+  paddingBottom: theme.spacing(1),
+}));
 
 const FlexBox = styled(Box)(({ theme }) => ({
   display: "flex",

@@ -2,7 +2,7 @@ import { LoadingButton } from "@mui/lab";
 import { Box, Button } from "@mui/material";
 import { styled } from "@mui/system";
 
-export const FormWrapper = styled("div")(({ theme }) => ({
+export const FormWrapper = styled(Box)(({ theme }) => ({
   margin: `${theme.spacing(2)} 0`,
 }));
 
