@@ -1,5 +1,6 @@
 export type { default as BodyWeight } from "./BodyWeight";
 export type { default as Exercise } from "./Exercise";
+export type { default as Gym } from "./Gym";
 export type { default as LoginCredentials } from "./LoginCredentials";
 export type { default as ChartMenuData } from "./ChartMenuData";
 export type { default as WorkoutExercise } from "./WorkoutExercise";

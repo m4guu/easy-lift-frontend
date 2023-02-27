@@ -89,9 +89,11 @@ export const AddWorkout: React.FC<AddWorkoutProps> = ({
           </ExercisesWrapper>
         )}
       </FormWrapper>
+
       {errors.exercises?.message && (
         <ErrorMessage>{errors.exercises?.message}</ErrorMessage>
       )}
+
       <FormActionsWrapper>
         <ChooseExercise onClick={openExerciseModal} size="small">
           + exercise

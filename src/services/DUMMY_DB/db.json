@@ -29,6 +29,22 @@
     "height": 180,
     "expirationDate": ""
   },
+  "users": [
+    {
+      "id": "55b65f22-3f5a-4881-bd4f-89d929012814",
+      "name": "",
+      "email": "krystian.domza@gmail.pl",
+      "password": "ddsadsadsadd",
+      "role": "user",
+      "isConfigured": false,
+      "image": "",
+      "description": "",
+      "gyms": [],
+      "bodyWeights": [],
+      "height": 0,
+      "expirationDate": ""
+    }
+  ],
   "programs": [
     {
       "id": "DUMMY-ID-2",

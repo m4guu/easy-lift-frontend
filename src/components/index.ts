@@ -2,6 +2,7 @@ export { default as ButtonBase } from "./ButtonBase";
 export { default as ErrorMessage } from "./ErrorMessage";
 export { default as ExerciseItem } from "./ExerciseItem";
 export { default as ExerciseProgresItem } from "./ExerciseProgresItem";
+export { default as MediaFooter } from "./MediaFooter";
 export { default as NavigationItem } from "./NavigationItem";
 export { default as ProgramItem } from "./ProgramItem";
 export { default as SectionContainer } from "./SectionContainer";

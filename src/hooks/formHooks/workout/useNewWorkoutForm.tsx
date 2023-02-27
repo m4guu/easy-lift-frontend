@@ -18,7 +18,7 @@ import { useUserContext } from "../../../contexts/userContext";
 import { generateWorkoutExercises } from "../../../utils/FormExercises";
 import { generateUserProgress } from "../../../utils/UserProgress";
 
-import { workoutTraienrSchema, workoutUserSchema } from "./constans";
+import { workoutTrainerSchema, workoutUserSchema } from "./constans";
 import { FormExercise } from "../../../shared/interfaces";
 import { Role } from "../../../shared/enums";
 
@@ -59,7 +59,7 @@ export const useNewWorkoutForm = ({
   const { mutateAsync: addQueryUserProgres } = useAddUserProgresMutation();
 
   const schema =
-    user?.role === Role.trainer ? workoutTraienrSchema : workoutUserSchema;
+    user?.role === Role.trainer ? workoutTrainerSchema : workoutUserSchema;
 
   const methods = useForm<AddWorkoutForm>({
     defaultValues: defaultWorkoutValues,

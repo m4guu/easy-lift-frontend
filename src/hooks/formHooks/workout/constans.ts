@@ -12,7 +12,7 @@ export const defaultSet: FormSet = {
 
 export const defaultSets: FormSet[] = [defaultSet];
 
-export const workoutTraienrSchema = yup.object().shape({
+export const workoutTrainerSchema = yup.object().shape({
   workoutTitle: yup.string().required().min(5),
   startTime: yup.date(),
   exercises: yup
