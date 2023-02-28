@@ -66,7 +66,6 @@ export const SetDone: React.FC<SetDoneProps> = ({
     name: `${AddWorkoutFormFields.EXERCISES}[${exerciseIndex}].sets[${setIndex}]`,
   });
 
-  // ? question: how to check validation of this value? [archived and goal]
   if (set.archived || !set.goal) {
     return null;
   }

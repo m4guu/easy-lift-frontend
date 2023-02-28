@@ -58,7 +58,6 @@ export const Gyms: React.FC = () => {
           )}
         >
           {gyms.map((gym) => {
-            // ? question: can i pass object to menuItem value ?
             return (
               <MenuItem key={gym.id} value={gym.name}>
                 {gym.name}

@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useCreateUserMutation } from "../../queryHooks/auth/useCreateUserMutation";
 
 import { defaultUser } from "./constans";
-import { Role } from "../../../shared/enums";
+import { AuthTypes, Role } from "../../../shared/enums";
 import { LoginCredentials, User } from "../../../shared/interfaces";
 import { useUserContext } from "../../../contexts/userContext";
 
@@ -47,13 +47,13 @@ const authSignUpSchema = yup.object().shape({
     .required(),
 });
 
-export const useAuthForm = (isLogin: boolean) => {
+export const useAuthForm = (authType: AuthTypes) => {
   const [pending, setPending] = useState(false);
-  // ? question: how handle server errors ?
   const { mutateAsync: createQueryUser } = useCreateUserMutation();
   const { login } = useUserContext();
 
-  const schema = isLogin ? authLoginSchema : authSignUpSchema;
+  const schema =
+    authType === AuthTypes.LOGIN ? authLoginSchema : authSignUpSchema;
 
   const methods = useForm<AuthForm>({
     defaultValues,
@@ -69,7 +69,7 @@ export const useAuthForm = (isLogin: boolean) => {
   const onSubmit = useCallback(
     (formValues: AuthForm) => {
       setPending(true);
-      if (isLogin) {
+      if (authType === AuthTypes.LOGIN) {
         const credentials: LoginCredentials = {
           email: formValues.email,
           password: formValues.password,
@@ -91,7 +91,7 @@ export const useAuthForm = (isLogin: boolean) => {
       }
       setPending(false);
     },
-    [isLogin, createQueryUser, resetForm, login]
+    [authType, createQueryUser, resetForm, login]
   );
 
   return {

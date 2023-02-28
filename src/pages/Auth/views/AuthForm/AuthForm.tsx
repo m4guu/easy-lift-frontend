@@ -15,13 +15,14 @@ import {
   AuthRole,
 } from "./views/Auth.form/Auth.form";
 import { Submit } from "../../../../components";
+import { AuthTypes } from "../../../../shared/enums";
 
 type AuthFormProps = {
-  isLogin: boolean;
+  authType: AuthTypes;
 };
 
-export const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
-  const { methods, onSubmit, pending } = useAuthForm(isLogin);
+export const AuthForm: React.FC<AuthFormProps> = ({ authType }) => {
+  const { methods, onSubmit, pending } = useAuthForm(authType);
 
   const { handleSubmit } = methods;
 
@@ -33,7 +34,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
           <AuthPassword />
         </InputWrapper>
 
-        {!isLogin && (
+        {authType === AuthTypes.SIGN_UP && (
           <InputWrapper>
             <ConfirmPassword />
             <AuthRole />
@@ -43,7 +44,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
 
       <FormActions>
         <Submit
-          label={isLogin ? "Login" : "Create Account"}
+          label={authType === AuthTypes.LOGIN ? "Login" : "Create Account"}
           variant="outlined"
           onClick={handleSubmit((data) => onSubmit(data))}
           loading={pending}

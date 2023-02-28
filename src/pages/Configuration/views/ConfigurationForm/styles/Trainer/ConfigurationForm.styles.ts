@@ -12,7 +12,7 @@ export const FormWrapper = styled("form")(({ theme }) => ({
 
 export const FormBox = styled(Box)(({ theme }) => ({
   display: "flex",
-  minWidth: "25vh",
+  minWidth: "15%",
   flexDirection: "column",
   alignItems: "cemter",
   gap: theme.spacing(2),

@@ -29,7 +29,40 @@
     "height": 180,
     "expirationDate": ""
   },
-  "users": [],
+  "users": [
+    {
+      "id": "547266d5-f25c-4664-a290-b590290c06de",
+      "name": "Krystian",
+      "email": "user@gmail.com",
+      "password": "ddddd",
+      "role": "user",
+      "isConfigured": true,
+      "image": {},
+      "bodyWeights": [
+        {
+          "weight": 100,
+          "date": ""
+        }
+      ],
+      "expirationDate": "2023-03-01T14:03:12.384Z",
+      "height": 190
+    },
+    {
+      "id": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+      "name": "sssss",
+      "email": "trener@gmail.com",
+      "password": "ddddd",
+      "role": "trainer",
+      "isConfigured": false,
+      "image": {
+        "0": {}
+      },
+      "bodyWeights": [],
+      "expirationDate": "2023-03-01T14:05:43.387Z",
+      "description": "dssssssssssssssssssssssssss",
+      "gyms": ["Calypsoo Morena", "Husarz Gym"]
+    }
+  ],
   "programs": [
     {
       "id": "DUMMY-ID-2",

@@ -35,7 +35,6 @@ const schema = yup.object().shape({
   [TrainerConfigFields.NAME]: yup.string().required().min(4).max(15),
   [TrainerConfigFields.DESCRIPTION]: yup.string().required().min(20).max(100),
   [TrainerConfigFields.GYMS]: yup.array().of(yup.string()),
-  // ? question: how validate image ? i need validate size on frontend ?
   [TrainerConfigFields.IMAGE]: yup.mixed().required(),
 });
 

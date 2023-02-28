@@ -5,10 +5,11 @@ import { styled } from "@mui/system";
 
 import { SectionContainer, MediaFooter, Logo } from "../../components";
 import { AuthForm } from "./views/AuthForm/AuthForm";
+import { AuthTypes } from "../../shared/enums";
 
 const AuthPage: React.FC = () => {
   const [value, setValue] = useState(0);
-  const isLogin = value === 0;
+  const authType = value === 0 ? AuthTypes.LOGIN : AuthTypes.SIGN_UP;
 
   const handleChange = (e: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -24,7 +25,7 @@ const AuthPage: React.FC = () => {
           <StyledTab label="signup" />
         </Tabs>
 
-        <AuthForm isLogin={isLogin} />
+        <AuthForm authType={authType} />
       </SectionContent>
 
       <MediaFooter />
