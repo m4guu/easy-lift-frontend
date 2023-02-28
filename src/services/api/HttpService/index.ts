@@ -23,6 +23,9 @@ const HttpService = {
   patch: <T = void>(path: string, data?: any) =>
     axiosInstance.patch<T>(path, data).then(pluckData).catch(throwError),
 
+  put: <T = void>(path: string, data?: any) =>
+    axiosInstance.put<T>(path, data).then(pluckData).catch(throwError),
+
   delete: <T = void>(path: string, data?: any) =>
     axiosInstance.delete<T>(path, data).then(pluckData).catch(throwError),
 };

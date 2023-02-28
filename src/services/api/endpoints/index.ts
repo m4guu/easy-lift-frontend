@@ -4,6 +4,8 @@ enum ENDPOINTS {
   WORKOUTS = "workouts",
   TRAINERS = "trainers",
   USERS_PROGRESS = "usersProgress",
+  USERS = "users",
+
   // auth
   LOGIN = "login",
   LOGOUT = "logout",

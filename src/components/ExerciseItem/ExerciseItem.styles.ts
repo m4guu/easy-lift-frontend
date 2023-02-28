@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 import {
   ListItem,
   Box,
@@ -85,11 +83,6 @@ export const ButtonsContainer = styled(Box)(({ theme }) => ({
     left: 0,
   },
 }));
-
-export const ButtonLink = styled(Link)({
-  color: "inherit",
-  textDecoration: "none",
-});
 
 export const DetailsList = styled(List)(({ theme }) => ({
   marginLeft: theme.spacing(2),

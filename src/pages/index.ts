@@ -7,12 +7,8 @@ export { default as Configuration } from "./Configuration";
 export { default as Home } from "./Home";
 
 export { default as NewWorkout } from "./NewWorkout";
-export { default as Exercises } from "./Exercises";
-export { default as Exercise } from "./Exercises/Exercise";
-export { default as ExerciseProgress } from "./Exercises/Exercise/ExerciseProgress";
 
 export { default as NewProgram } from "./NewProgram";
-export { default as Creator } from "./NewProgram/Creator/Creator";
 
 export { default as Workouts } from "./Workouts";
 export { default as Workout } from "./Workouts/Workout";

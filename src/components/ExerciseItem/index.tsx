@@ -1,7 +1,13 @@
 import React, { useState } from "react";
+import { UseFieldArrayAppend, useFormContext } from "react-hook-form";
+import { v4 as uuidv4 } from "uuid";
 
 import { Divider, Typography, Button } from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+
+import { useExerciseProgressModal } from "../../hooks/modalHooks/ExerciseProgress/useExerciseProgressModal";
+import { useUserContext } from "../../contexts/userContext";
+
 import {
   ExerciseListItem,
   ExerciseButtton,
@@ -13,31 +19,56 @@ import {
   ExerciseDetailImage,
   ExtandButton,
   ButtonsContainer,
-  ButtonLink,
   DetailsList,
   DetailItem,
 } from "./ExerciseItem.styles";
-
-import { useUserContext } from "../../contexts/userContext";
-
-import { PATHS } from "../../pages/paths";
 import { Exercise } from "../../shared/interfaces";
+import {
+  AddWorkoutForm,
+  AddWorkoutFormFields,
+} from "../../hooks/formHooks/workout/useNewWorkoutForm";
+import { defaultSets } from "../../hooks/formHooks/workout/constans";
 import { Role } from "../../shared/enums";
+
+import { ExerciseProgressModal } from "../../modals";
 
 type ExerciseItemProps = {
   exercise: Exercise;
+  appendExercise: UseFieldArrayAppend<
+    AddWorkoutForm,
+    AddWorkoutFormFields.EXERCISES
+  >;
+  closeModal: () => void;
 };
 
-const ExerciseItem: React.FC<ExerciseItemProps> = ({ exercise }) => {
-  const { user } = useUserContext();
+const ExerciseItem: React.FC<ExerciseItemProps> = ({
+  exercise,
+  appendExercise,
+  closeModal,
+}) => {
   const [expand, setExpand] = useState(false);
+  const { user } = useUserContext();
+  const { clearErrors } = useFormContext();
+  const {
+    open: openExerciseProgressModal,
+    close: closeExerciseProgressModal,
+    isOpen: isExerciseProgressModalOpen,
+  } = useExerciseProgressModal();
 
   const toggleAcordion = () => {
     setExpand((prevState) => !prevState);
   };
 
-  // todo: add workout slice and slice hooks to handle addExerciseToWorkout
-  const addExerciseToWorkout = (choosenExercise: Exercise) => {};
+  const addExerciseToWorkout = (choosenExercise: Exercise) => {
+    appendExercise({
+      id: uuidv4(),
+      _id: choosenExercise.id,
+      name: choosenExercise.name,
+      sets: defaultSets,
+    });
+    clearErrors();
+    closeModal();
+  };
 
   return (
     <>
@@ -94,17 +125,21 @@ const ExerciseItem: React.FC<ExerciseItemProps> = ({ exercise }) => {
               add
             </Button>
             {user?.role === Role.user && (
-              <Button variant="contained">
-                <ButtonLink to={`${PATHS.EXERCISES_PROGRESS}/${exercise.id}`}>
-                  yours progress{" "}
-                </ButtonLink>
+              <Button onClick={openExerciseProgressModal} variant="contained">
+                yours progress
               </Button>
             )}
           </ButtonsContainer>
         )}
       </ExerciseListItem>
-
       <Divider />
+      {isExerciseProgressModalOpen && (
+        <ExerciseProgressModal
+          exerciseId={exercise.id}
+          isOpen={isExerciseProgressModalOpen}
+          closeModal={closeExerciseProgressModal}
+        />
+      )}
     </>
   );
 };

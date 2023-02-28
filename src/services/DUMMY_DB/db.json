@@ -29,6 +29,40 @@
     "height": 180,
     "expirationDate": ""
   },
+  "users": [
+    {
+      "id": "547266d5-f25c-4664-a290-b590290c06de",
+      "name": "Krystian",
+      "email": "user@gmail.com",
+      "password": "ddddd",
+      "role": "user",
+      "isConfigured": true,
+      "image": {},
+      "bodyWeights": [
+        {
+          "weight": 100,
+          "date": ""
+        }
+      ],
+      "expirationDate": "2023-03-01T14:03:12.384Z",
+      "height": 190
+    },
+    {
+      "id": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+      "name": "sssss",
+      "email": "trener@gmail.com",
+      "password": "ddddd",
+      "role": "trainer",
+      "isConfigured": false,
+      "image": {
+        "0": {}
+      },
+      "bodyWeights": [],
+      "expirationDate": "2023-03-01T14:05:43.387Z",
+      "description": "dssssssssssssssssssssssssss",
+      "gyms": ["Calypsoo Morena", "Husarz Gym"]
+    }
+  ],
   "programs": [
     {
       "id": "DUMMY-ID-2",
@@ -118,8 +152,84 @@
       "name": "Random trainer 3"
     }
   ],
-  "workouts": [],
-  "usersProgress": [],
+  "workouts": [
+    {
+      "id": "01d9a386-b8f3-4c49-8c28-4521fe935419",
+      "creator": "DUMMY-USER-1",
+      "title": "Updated Title Workout",
+      "date": "2023-02-24",
+      "exercises": [
+        {
+          "name": "45° side bend",
+          "id": "0002",
+          "sets": [
+            {
+              "weight": 213,
+              "reps": 33,
+              "tempo": "2-2-2-2",
+              "repMax": 447
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e6f1724f-082e-4630-a5d0-0c9b701379f3",
+      "creator": "55b65f22-3f5a-4881-bd4f-89d929012814",
+      "title": "chest killer",
+      "date": "2023-02-28",
+      "exercises": [
+        {
+          "name": "3/4 sit-up",
+          "id": "0001",
+          "sets": [
+            {
+              "weight": 120,
+              "reps": 5,
+              "tempo": "2-2-2-2",
+              "repMax": 140
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "usersProgress": [
+    {
+      "id": "b7072707-7b1f-4c94-a7ba-d34871f1c5d5",
+      "workoutId": "01d9a386-b8f3-4c49-8c28-4521fe935419",
+      "userId": "DUMMY-USER-1",
+      "exerciseId": "0002",
+      "exerciseName": "45° side bend",
+      "date": "2023-02-24",
+      "repMax": 447,
+      "sets": [
+        {
+          "weight": 213,
+          "reps": 33,
+          "tempo": "2-2-2-2",
+          "repMax": 447
+        }
+      ]
+    },
+    {
+      "id": "2a953c47-7f72-4290-ba3b-ff953b30ad1f",
+      "workoutId": "e6f1724f-082e-4630-a5d0-0c9b701379f3",
+      "userId": "55b65f22-3f5a-4881-bd4f-89d929012814",
+      "exerciseId": "0001",
+      "exerciseName": "3/4 sit-up",
+      "date": "2023-02-28",
+      "repMax": 140,
+      "sets": [
+        {
+          "weight": 120,
+          "reps": 5,
+          "tempo": "2-2-2-2",
+          "repMax": 140
+        }
+      ]
+    }
+  ],
   "exercises": [
     {
       "bodyPart": "waist",

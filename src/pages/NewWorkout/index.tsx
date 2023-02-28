@@ -1,74 +1,41 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { FieldValues, UseFieldArrayUpdate } from "react-hook-form";
 
-import { LoadingButton } from "@mui/lab";
-import { Typography, Box } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { useUserContext } from "../../contexts/userContext";
-import { useAddWorkoutMutation } from "../../hooks/queryHooks/workoutsHooks/useAddWorkoutMutation";
-import { useAddUserProgresMutation } from "../../hooks/queryHooks/userProgressHooks/useAddUserProgresMutation";
 
-import { PATHS } from "../paths";
-import { DUMMY_WORKOUT } from "./constans";
+import { Role } from "../../shared/enums";
+import { AddWorkout } from "./views/AddWorkout/AddWorkout";
+import { SectionHeader } from "../../components";
 
-import { generateUserProgress } from "../../utils/UserProgress";
-import { Status, Role } from "../../shared/enums";
-import { SectionHeader, SectionContainer } from "../../components";
+type NewWorkoutPageProps = {
+  workoutIndex?: number;
+  updateWorkoutField?: UseFieldArrayUpdate<
+    FieldValues,
+    `program.${number}.weekWorkouts`
+  >;
+};
 
-const NewWorkoutPage: React.FC = () => {
+const NewWorkoutPage: React.FC<NewWorkoutPageProps> = ({
+  workoutIndex,
+  updateWorkoutField,
+}) => {
   const { user } = useUserContext();
-  const { status: addWorkotStatus, mutateAsync: addQueryWorkout } =
-    useAddWorkoutMutation();
-  const { status: addUserProgresStatus, mutate: addQueryUserProgres } =
-    useAddUserProgresMutation();
-
-  // ! refactory when the backend will be written addQueryWorkout won't be async
-  // ! addNewWorkout is different and depend on user ROLE
-  const addNewWorkout = () => {
-    addQueryWorkout(DUMMY_WORKOUT).then(() => {
-      // new user's progress depends on workout
-      const newUserProgress = generateUserProgress(DUMMY_WORKOUT);
-
-      return newUserProgress.map((userProgres) =>
-        addQueryUserProgres(userProgres)
-      );
-    });
-  };
-
-  const isLoading =
-    addWorkotStatus === Status.LOADING ||
-    addUserProgresStatus === Status.LOADING;
+  const isTrainer = user?.role === Role.trainer;
 
   return (
-    <SectionContainer>
-      <SectionHeader>New Workout</SectionHeader>
-
-      <SectionFooter>
-        <ExercisesLink to={PATHS.EXERCISES}>
-          <Typography color="primary">+ exercise</Typography>
-        </ExercisesLink>
-
-        <LoadingButton
-          loading={isLoading}
-          onClick={addNewWorkout}
-          variant="contained"
-        >
-          {user?.role === Role.user ? "finish" : "add"} workout
-        </LoadingButton>
-      </SectionFooter>
+    <SectionContainer sx={{ p: isTrainer ? 0 : 2 }}>
+      {!isTrainer && <SectionHeader>New Workout</SectionHeader>}
+      <AddWorkout
+        workoutIndex={workoutIndex}
+        updateWorkoutField={updateWorkoutField}
+      />
     </SectionContainer>
   );
 };
 
-const SectionFooter = styled(Box)({
-  display: "flex",
-  justifyContent: "space-between",
-});
-
-const ExercisesLink = styled(Link)({
-  textDecoration: "none",
-});
+const SectionContainer = styled("section")({});
 
 const NewWorkout = NewWorkoutPage;
 export default NewWorkout;

@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Box, Typography, Button } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
@@ -6,18 +7,24 @@ import { styled } from "@mui/system";
 
 import { useUserContext } from "../../contexts/userContext";
 
+import { PATHS } from "../paths";
 import logo from "../../assets/images/logo/mini_logo_yellow.svg";
 
 const WelcomePage: React.FC = () => {
   const { login, isLoading } = useUserContext();
+  const navigate = useNavigate();
 
   const loginHandle = () => {
     const DUMMY_CREDENTIALS = {
-      login: "dummy_login",
+      email: "krystian.domza@gmail.pl",
       password: "dummy_password",
     };
 
     login(DUMMY_CREDENTIALS);
+  };
+
+  const signUpHangle = () => {
+    navigate(PATHS.AUTH);
   };
 
   return (
@@ -36,7 +43,11 @@ const WelcomePage: React.FC = () => {
         >
           Log in
         </LoadingButton>
-        <Button variant="contained" size="small">
+        <Button
+          onClick={() => navigate(PATHS.AUTH)}
+          variant="contained"
+          size="small"
+        >
           Sign up
         </Button>
       </ButtonBox>

@@ -27,17 +27,19 @@ const useAuth = (): UseAuthReturnType => {
 
   let logOutTimer: number | NodeJS.Timeout | undefined;
 
+  // todo: change response[0] -> response (when backend will be written)
   const login = (credentials: LoginCredentials) => {
     loginMutation(credentials).then((response) => {
       const loginExpirationDate =
-        response.expirationDate ||
+        response[0].expirationDate ||
         new Date(new Date().getTime() + 1000 * 60 * 60 * 24).toISOString();
-      setUser({ ...response, expirationDate: loginExpirationDate });
+
+      setUser({ ...response[0], expirationDate: loginExpirationDate });
 
       localStorage.setItem(
         "userData",
         JSON.stringify({
-          ...response,
+          ...response[0],
           expirationDate: loginExpirationDate,
         })
       );
@@ -60,7 +62,11 @@ const useAuth = (): UseAuthReturnType => {
       storedData.id &&
       new Date(storedData.expirationDate) > new Date()
     ) {
-      login(storedData);
+      const credentials: LoginCredentials = {
+        email: storedData.email,
+        password: storedData.password,
+      };
+      login(credentials);
     }
   };
 

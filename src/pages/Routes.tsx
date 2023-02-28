@@ -15,7 +15,7 @@ const Routing: React.FC = () => {
   const { user } = useUserContext();
 
   let routes;
-  const isRouteWithLayout = !!user?.id;
+  const isRouteWithLayout = !!user?.id && user?.isConfigured;
 
   if (user?.id) {
     if (!user?.isConfigured) {
