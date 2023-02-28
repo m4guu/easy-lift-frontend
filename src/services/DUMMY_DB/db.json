@@ -32,35 +32,52 @@
   "users": [
     {
       "id": "547266d5-f25c-4664-a290-b590290c06de",
-      "name": "Krystian",
+      "name": "sdasd",
       "email": "user@gmail.com",
       "password": "ddddd",
       "role": "user",
       "isConfigured": true,
-      "image": {},
+      "image": {
+        "0": {}
+      },
       "bodyWeights": [
         {
-          "weight": 100,
+          "weight": 30,
           "date": ""
         }
       ],
       "expirationDate": "2023-03-01T14:03:12.384Z",
-      "height": 190
+      "height": 60
     },
     {
       "id": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-      "name": "sssss",
+      "name": "dsadsad",
       "email": "trener@gmail.com",
       "password": "ddddd",
       "role": "trainer",
-      "isConfigured": false,
+      "isConfigured": true,
       "image": {
         "0": {}
       },
       "bodyWeights": [],
       "expirationDate": "2023-03-01T14:05:43.387Z",
-      "description": "dssssssssssssssssssssssssss",
-      "gyms": ["Calypsoo Morena", "Husarz Gym"]
+      "description": "dsadsadasssssssssssssss",
+      "gyms": [
+        "default",
+        "Husarz Gym",
+        "Calypsoo Morena"
+      ]
+    },
+    {
+      "id": "77a3ad94-681d-4d2b-92c1-fc7e1ef2e2dc",
+      "name": "",
+      "email": "user@gmail.com",
+      "password": "dupad",
+      "role": "user",
+      "isConfigured": false,
+      "image": "",
+      "bodyWeights": [],
+      "expirationDate": ""
     }
   ],
   "programs": [
@@ -192,6 +209,26 @@
           ]
         }
       ]
+    },
+    {
+      "id": "68ae8b68-da8a-426d-bf8b-e3da6e929aeb",
+      "creator": "547266d5-f25c-4664-a290-b590290c06de",
+      "title": "dsadsa",
+      "date": "2023-02-28",
+      "exercises": [
+        {
+          "name": "3/4 sit-up",
+          "id": "0001",
+          "sets": [
+            {
+              "weight": 123,
+              "reps": 123,
+              "tempo": "1-2-3-1",
+              "repMax": 627
+            }
+          ]
+        }
+      ]
     }
   ],
   "usersProgress": [
@@ -226,6 +263,23 @@
           "reps": 5,
           "tempo": "2-2-2-2",
           "repMax": 140
+        }
+      ]
+    },
+    {
+      "id": "7d06a534-3a6e-49a7-b427-dba37ea00591",
+      "workoutId": "68ae8b68-da8a-426d-bf8b-e3da6e929aeb",
+      "userId": "547266d5-f25c-4664-a290-b590290c06de",
+      "exerciseId": "0001",
+      "exerciseName": "3/4 sit-up",
+      "date": "2023-02-28",
+      "repMax": 627,
+      "sets": [
+        {
+          "weight": 123,
+          "reps": 123,
+          "tempo": "1-2-3-1",
+          "repMax": 627
         }
       ]
     }

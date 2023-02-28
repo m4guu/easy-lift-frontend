@@ -6,6 +6,15 @@ export const FormContainer = styled(Box)(({ theme }) => ({
   marginLeft: "auto",
   marginRight: "auto",
   marginTop: theme.spacing(2),
+  [theme.breakpoints.down("lg")]: {
+    width: "30%",
+  },
+  [theme.breakpoints.down("md")]: {
+    width: "45%",
+  },
+  [theme.breakpoints.down("sm")]: {
+    width: "100%",
+  },
 }));
 
 export const FormWrapper = styled("form")(({ theme }) => ({

@@ -8,11 +8,11 @@ import { AuthForm } from "./views/AuthForm/AuthForm";
 import { AuthTypes } from "../../shared/enums";
 
 const AuthPage: React.FC = () => {
-  const [value, setValue] = useState(0);
-  const authType = value === 0 ? AuthTypes.LOGIN : AuthTypes.SIGN_UP;
+  const [tab, setTab] = useState(0);
+  const authType = tab === 0 ? AuthTypes.LOGIN : AuthTypes.SIGN_UP;
 
   const handleChange = (e: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+    setTab(newValue);
   };
   return (
     <SectionContainer>
@@ -20,12 +20,12 @@ const AuthPage: React.FC = () => {
         <Logo />
       </LogoWrapper>
       <SectionContent>
-        <Tabs value={value} onChange={handleChange} orientation="vertical">
+        <Tabs value={tab} onChange={handleChange}>
           <StyledTab label="login" />
           <StyledTab label="signup" />
         </Tabs>
 
-        <AuthForm authType={authType} />
+        <AuthForm authType={authType} setTab={setTab} />
       </SectionContent>
 
       <MediaFooter />
@@ -36,6 +36,7 @@ const AuthPage: React.FC = () => {
 const SectionContent = styled(Box)(({ theme }) => ({
   position: "absolute",
   display: "flex",
+  flexDirection: "column",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -60%)",
@@ -56,10 +57,12 @@ const LogoWrapper = styled(Box)(({ theme }) => ({
   },
 
   [theme.breakpoints.down("sm")]: {
-    width: "80%",
+    width: "100%",
   },
 }));
-const StyledTab = styled(Tab)({});
+const StyledTab = styled(Tab)({
+  // width: "50%",
+});
 
 const Auth = AuthPage;
 export default Auth;
