@@ -23,8 +23,8 @@ const AuthService = {
   [AuthMethods.CREATE]: (newUser: User) =>
     HttpService.post<void>(ENDPOINTS.USERS, newUser),
 
-  [AuthMethods.UPDATE]: (updatedUser: User, userId: string) =>
-    HttpService.put<void>(`${ENDPOINTS.USERS}/${userId}`, updatedUser),
+  [AuthMethods.UPDATE]: (updatedUser: User) =>
+    HttpService.put<void>(`${ENDPOINTS.USERS}/${updatedUser.id}`, updatedUser),
 };
 
 export default AuthService;

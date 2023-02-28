@@ -14,7 +14,7 @@ import {
   ConfirmPassword,
   AuthRole,
 } from "./views/Auth.form/Auth.form";
-import Submit from "./views/FormActions/Submit";
+import { Submit } from "../../../../components";
 
 type AuthFormProps = {
   isLogin: boolean;

@@ -14,5 +14,6 @@ export const defaultUser: User = {
   role: Role.trainer,
   isConfigured: false,
   image: "", // DUMMY DATA
+  bodyWeights: [],
   expirationDate: "",
 };

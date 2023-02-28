@@ -39,7 +39,7 @@ const useAuth = (): UseAuthReturnType => {
       localStorage.setItem(
         "userData",
         JSON.stringify({
-          ...response,
+          ...response[0],
           expirationDate: loginExpirationDate,
         })
       );
@@ -62,7 +62,11 @@ const useAuth = (): UseAuthReturnType => {
       storedData.id &&
       new Date(storedData.expirationDate) > new Date()
     ) {
-      login(storedData);
+      const credentials: LoginCredentials = {
+        email: storedData.email,
+        password: storedData.password,
+      };
+      login(credentials);
     }
   };
 

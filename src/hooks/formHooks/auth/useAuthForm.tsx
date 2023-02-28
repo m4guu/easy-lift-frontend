@@ -32,12 +32,12 @@ export const defaultValues = {
   [AuthFormFields.ROLE]: Role.user,
 };
 
-export const authLoginSchema = yup.object().shape({
+const authLoginSchema = yup.object().shape({
   [AuthFormFields.E_MAIL]: yup.string().email().required(),
   [AuthFormFields.PASSWORD]: yup.string().required().min(5).max(40),
 });
 
-export const authSignUpSchema = yup.object().shape({
+const authSignUpSchema = yup.object().shape({
   [AuthFormFields.E_MAIL]: yup.string().email().required(),
   [AuthFormFields.PASSWORD]: yup.string().required().min(5).max(40),
   [AuthFormFields.CONFIRM_PASSWORD]: yup.string().required().min(5).max(40),
@@ -49,6 +49,7 @@ export const authSignUpSchema = yup.object().shape({
 
 export const useAuthForm = (isLogin: boolean) => {
   const [pending, setPending] = useState(false);
+  // ? question: how handle server errors ?
   const { mutateAsync: createQueryUser } = useCreateUserMutation();
   const { login } = useUserContext();
 
@@ -86,7 +87,7 @@ export const useAuthForm = (isLogin: boolean) => {
           .then(resetForm)
           .finally(() => setPending(false));
       } else {
-        // throw error passwords doesnt match
+        // todo: throw error when passwords doesnt match
       }
       setPending(false);
     },

@@ -1,5 +1,4 @@
 import BodyWeight from "../BodyWeight";
-import Gym from "../Gym";
 import { Role } from "../../enums";
 
 interface User {
@@ -9,9 +8,9 @@ interface User {
   password: string;
   role: Role;
   isConfigured: boolean;
-  image: string; // DUMMY DATA
+  image: File | null; // DUMMY DATA
   description?: string;
-  gyms?: Gym[];
+  gyms?: string[];
   bodyWeights?: BodyWeight[];
   height?: number;
   expirationDate: string;

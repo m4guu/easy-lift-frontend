@@ -10,6 +10,7 @@ interface ControlledTextFieldProps<T extends FieldValues>
   textColor?: string;
   disabledUnderline?: boolean;
   children?: React.ReactNode;
+  multiple?: boolean;
 }
 
 const ControlledTextField = <T extends FieldValues>({
@@ -41,28 +42,30 @@ const ControlledTextField = <T extends FieldValues>({
     <Controller
       name={fieldName}
       control={control}
-      render={({ field, fieldState }) => (
-        <TextField
-          {...field}
-          variant={variant}
-          size={size}
-          type={type}
-          disabled={disabled}
-          multiline={multiline}
-          InputLabelProps={{ shrink: true }}
-          InputProps={inputProps}
-          rows={rows}
-          placeholder={placeholder}
-          error={!!fieldState.error}
-          label={label}
-          select={select}
-          helperText={fieldState.error?.message}
-          autoComplete="off"
-          color="primary"
-        >
-          {children}
-        </TextField>
-      )}
+      render={({ field, fieldState }) => {
+        return (
+          <TextField
+            {...field}
+            variant={variant}
+            size={size}
+            type={type}
+            disabled={disabled}
+            multiline={multiline}
+            InputLabelProps={{ shrink: true }}
+            InputProps={inputProps}
+            rows={rows}
+            placeholder={placeholder}
+            error={!!fieldState.error}
+            label={label}
+            select={select}
+            helperText={fieldState.error?.message}
+            autoComplete="off"
+            color="primary"
+          >
+            {children}
+          </TextField>
+        );
+      }}
     />
   );
 };

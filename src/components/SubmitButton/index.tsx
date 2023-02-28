@@ -13,9 +13,17 @@ const Submit: React.FC<SubmitProps> = ({
   variant,
   onClick,
   loading,
+  disabled,
+  fullWidth,
 }) => {
   return (
-    <LoadingButton variant={variant} onClick={onClick} loading={loading}>
+    <LoadingButton
+      variant={variant}
+      onClick={onClick}
+      loading={loading}
+      disabled={disabled}
+      fullWidth
+    >
       {label}
     </LoadingButton>
   );
