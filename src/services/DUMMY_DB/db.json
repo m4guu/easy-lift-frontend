@@ -32,14 +32,16 @@
   "users": [
     {
       "id": "547266d5-f25c-4664-a290-b590290c06de",
-      "name": "sdasd",
+      "name": "Krystian",
       "email": "user@gmail.com",
       "password": "ddddd",
       "role": "user",
       "isConfigured": true,
-      "image": {
-        "0": {}
-      },
+      "image": [
+        {
+          "path": "ship_wreck_480x300.JPG"
+        }
+      ],
       "bodyWeights": [
         {
           "weight": 30,
@@ -51,21 +53,24 @@
     },
     {
       "id": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-      "name": "dsadsad",
+      "name": "Krystian",
       "email": "trener@gmail.com",
       "password": "ddddd",
       "role": "trainer",
       "isConfigured": true,
-      "image": {
-        "0": {}
-      },
+      "image": [
+        {
+          "path": "pobrane.jfif"
+        }
+      ],
       "bodyWeights": [],
       "expirationDate": "2023-03-01T14:05:43.387Z",
-      "description": "dsadsadasssssssssssssss",
+      "description": "dssdsssssssssssssssss",
       "gyms": [
         "default",
+        "Calypsoo Morena",
         "Husarz Gym",
-        "Calypsoo Morena"
+        "Multisport"
       ]
     },
     {

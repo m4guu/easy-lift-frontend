@@ -61,7 +61,7 @@ export const useTrainerConfigForm = () => {
     (formValues: TrainerConfig) => {
       setPending(true);
       const updatedTrainer: User = {
-        ...user,
+        ...user!,
         name: formValues.name,
         image: formValues.image,
         description: formValues.description,
