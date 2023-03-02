@@ -150,7 +150,7 @@ export const useNewProgramForm = () => {
       setPending(true);
       const newProgram: Program = {
         id: uuidv4(),
-        creator: user!.id,
+        creator: { id: user!.id, name: user!.name },
         title: formValues.programTitle,
         level: formValues.programLevel,
         frequencyPerWeek: formValues.frequency,

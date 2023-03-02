@@ -20,7 +20,7 @@ const ProgramsService = {
     HttpService.get<Program[]>(`${ENDPOINTS.PROGRAMS}?_limit=10`),
 
   [ProgramsMethods.GET_TRAINER_PROGRAMS]: (trainerId: string) =>
-    HttpService.get<Program[]>(`${ENDPOINTS.PROGRAMS}?creator=${trainerId}`),
+    HttpService.get<Program[]>(`${ENDPOINTS.PROGRAMS}?creator.id=${trainerId}`),
 
   [ProgramsMethods.GET_PROGRAM_BY_ID]: (programId: string) =>
     HttpService.get<Program[]>(`${ENDPOINTS.PROGRAMS}?id=${programId}`),

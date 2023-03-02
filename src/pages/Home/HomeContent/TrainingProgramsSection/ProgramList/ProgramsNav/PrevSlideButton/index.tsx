@@ -22,11 +22,4 @@ export const PrevSlideButton: React.FC = () => {
   );
 };
 
-const PrevButton = styled(ButtonBase)(({ theme }) => ({
-  [theme.breakpoints.down("sm")]: {
-    position: "absolute",
-    paddingRight: 0,
-    left: 0,
-    bottom: "7.5rem",
-  },
-}));
+const PrevButton = styled(ButtonBase)(({ theme }) => ({}));

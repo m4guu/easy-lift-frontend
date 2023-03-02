@@ -18,6 +18,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { AddProgramFormFields } from "../../../../../../hooks/formHooks/program/useNewProgramForm";
 
 import { WorkoutListItem } from "./views/WorkoutListItem";
+import ProgramItem from "../../../../../../shared/interfaces/ProgramItem";
 
 type ProgramWeekListItemProps = {
   weekIndex: number;
@@ -40,7 +41,7 @@ export const ProgramWeekListItem: React.FC<ProgramWeekListItemProps> = ({
     name: `program.${weekIndex}.weekWorkouts`,
   });
 
-  const program = watch(AddProgramFormFields.PROGRAM);
+  const program: ProgramItem[] = watch(AddProgramFormFields.PROGRAM);
 
   const generateFields = useCallback(() => {
     const currentCount = workoutFields.length;
@@ -72,7 +73,7 @@ export const ProgramWeekListItem: React.FC<ProgramWeekListItemProps> = ({
         <WorkoutAccordionDetails>
           <WorkoutList>
             {program[weekIndex].weekWorkouts.map(
-              (weekWorkout: any, workoutIndex: number) => {
+              (weekWorkout, workoutIndex) => {
                 if (weekWorkout.id) {
                   return (
                     <FlexBox key={uuidv4()}>

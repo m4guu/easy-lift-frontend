@@ -46,6 +46,7 @@ const useAuth = (): UseAuthReturnType => {
     });
   };
 
+  // todo: remove expiration date form user --> update User
   const logout = () => {
     setUser(undefined);
     localStorage.removeItem("userData");

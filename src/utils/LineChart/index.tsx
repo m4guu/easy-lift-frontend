@@ -1,6 +1,6 @@
 import React from "react";
 
-import useTheme from "@mui/system/useTheme";
+import { styled, useTheme } from "@mui/system";
 
 import {
   Chart as ChartJS,
@@ -55,5 +55,11 @@ export const Chart: React.FC<ChartProps> = ({ labels, data, options }) => {
     ],
   };
 
-  return <Line options={{ ...defaultOptions, ...options }} data={chartData} />;
+  return (
+    <LineChart options={{ ...defaultOptions, ...options }} data={chartData} />
+  );
 };
+
+const LineChart = styled(Line)({
+  width: "100%",
+});

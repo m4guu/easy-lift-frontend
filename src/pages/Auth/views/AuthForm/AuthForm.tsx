@@ -46,8 +46,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ authType, setTab }) => {
           label={authType === AuthTypes.LOGIN ? "Login" : "Create Account"}
           variant="outlined"
           onClick={handleSubmit((data) => {
-            setTab(0);
-            onSubmit(data);
+            onSubmit(data).then(() => setTab(0));
           })}
           loading={pending}
         />

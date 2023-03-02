@@ -2,7 +2,7 @@ import React from "react";
 
 import { styled } from "@mui/system";
 
-import { useTrainers } from "../../hooks/queryHooks/trainersHooks/useTrainers";
+import { useTrainers } from "../../hooks/queryHooks/userHooks/useTrainers";
 
 import { Status } from "../../shared/enums";
 import { TrainerItem, SectionHeader, SectionContainer } from "../../components";

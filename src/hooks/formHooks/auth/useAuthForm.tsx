@@ -67,7 +67,7 @@ export const useAuthForm = (authType: AuthTypes) => {
   const canSubmit = email && password && confirmPassword;
 
   const onSubmit = useCallback(
-    (formValues: AuthForm) => {
+    async (formValues: AuthForm) => {
       setPending(true);
       if (authType === AuthTypes.LOGIN) {
         const credentials: LoginCredentials = {

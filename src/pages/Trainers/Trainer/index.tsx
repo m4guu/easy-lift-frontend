@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 import { Box, Alert } from "@mui/material";
 
-import { useTrainer } from "../../../hooks/queryHooks/trainersHooks/useTrainer";
+import { useUser } from "../../../hooks/queryHooks/userHooks/useUser";
 
 import { Status } from "../../../shared/enums";
 import { SectionHeader, SectionContainer } from "../../../components";
@@ -11,7 +11,7 @@ import { SectionHeader, SectionContainer } from "../../../components";
 const Trainer: React.FC = () => {
   const { trainerId } = useParams();
 
-  const { status, error, data: trainer } = useTrainer(trainerId || "");
+  const { status, error, data: trainer } = useUser(trainerId || "");
 
   return (
     <SectionContainer>
