@@ -9,17 +9,16 @@ import {
   FormActions,
   FormBox,
   BoxHeader,
-  BoxImage,
 } from "./styles/Trainer/ConfigurationForm.styles";
 import {
   Name,
   Description,
   Gyms,
   Image,
-} from "./views/Trainer/TrainerConfiguration.form";
+} from "./views/Trainer/form/TrainerConfiguration.form";
 import { Submit } from "../../../../components";
 
-import map from "../../../../assets/images/dummy_map.png";
+import { LeafletMap } from "./views/Trainer/map/LeafletMap";
 
 const TrainerConfigurationForm: React.FC = () => {
   const { methods, canSubmit, onSubmit, pending } = useTrainerConfigForm();
@@ -41,7 +40,7 @@ const TrainerConfigurationForm: React.FC = () => {
           </FormBox>
           <FormBox>
             <BoxHeader variant="caption">Map</BoxHeader>
-            <BoxImage component="img" src={map} alt="map" />
+            <LeafletMap />
           </FormBox>
         </FormWrapper>
         <FormActions>

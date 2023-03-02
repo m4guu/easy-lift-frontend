@@ -3,9 +3,9 @@ import { Controller, useFormContext } from "react-hook-form";
 import { MenuItem, Select, Box, Chip, TextField, List } from "@mui/material";
 import { styled } from "@mui/system";
 
-import { TrainerConfigFields } from "../../../../../../hooks/formHooks/configuration/useTrainerConfigForm";
-import { ControlledTextField } from "../../../../../../features";
-import ImagePicker from "../../../../../../features/ImagePicker";
+import { TrainerConfigFields } from "../../../../../../../hooks/formHooks/configuration/useTrainerConfigForm";
+import { ControlledTextField } from "../../../../../../../features";
+import ImagePicker from "../../../../../../../features/ImagePicker";
 import { gyms } from "./constans";
 
 // Name //
