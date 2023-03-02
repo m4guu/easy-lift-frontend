@@ -1,6 +1,13 @@
 import { Controller, useFormContext } from "react-hook-form";
 
-import { MenuItem, Select, Box, Chip, TextField, List } from "@mui/material";
+import {
+  MenuItem,
+  Select,
+  Chip,
+  TextField,
+  List,
+  SelectChangeEvent,
+} from "@mui/material";
 import { styled } from "@mui/system";
 
 import { TrainerConfigFields } from "../../../../../../../hooks/formHooks/configuration/useTrainerConfigForm";
@@ -37,34 +44,42 @@ export const Description = styled(() => (
 //
 
 // Gyms //
-export const Gyms: React.FC = () => {
+interface GymsProps {
+  selectedGyms: string[];
+  gymsChangeHandler: (newSelectedGyms: string[], selectedGym: string) => void;
+}
+export const Gyms: React.FC<GymsProps> = ({
+  selectedGyms,
+  gymsChangeHandler,
+}) => {
   const { control } = useFormContext();
   return (
     <Controller
       name={TrainerConfigFields.GYMS}
       control={control}
-      render={({ field }) => (
+      render={({ field: { onChange } }) => (
         <Select
-          {...field}
           label="Gyms"
           size="small"
           variant="standard"
           multiple
           input={<TextField select variant="standard" label="Gyms" />}
+          value={selectedGyms}
+          onChange={(event: SelectChangeEvent<string[]>) => {
+            onChange(event.target.value);
+            gymsChangeHandler(
+              event.target.value as string[],
+              event.target.name
+            );
+          }}
           renderValue={(selected) => (
             <GymsListContainer>
-              {selected.map((value: string) => {
-                const isDefaultValue = value === "default";
-                if (isDefaultValue) {
-                  return <Box>Choose Yours Gyms</Box>;
-                }
-                return <Chip key={value} label={value} />;
-              })}
+              {selected.map((value: string) => (
+                <Chip key={value} label={value} />
+              ))}
             </GymsListContainer>
           )}
         >
-          <MenuItem key="default" selected disabled value="default" />
-
           {gyms.map((gym) => {
             return (
               <MenuItem key={gym.id} value={gym.name}>

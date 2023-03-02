@@ -28,7 +28,12 @@ export const FormBox = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   gap: theme.spacing(2),
 }));
-
+export const FormMapBox = styled(Box)(({ theme }) => ({
+  display: "flex",
+  minWidth: "30%",
+  flexDirection: "column",
+  gap: theme.spacing(2),
+}));
 export const BoxHeader = styled(Typography)(({ theme }) => ({
   fontSize: "1rem",
   color: theme.palette.primary.main,

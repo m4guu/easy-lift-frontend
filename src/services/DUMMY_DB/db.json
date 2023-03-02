@@ -52,48 +52,21 @@
       "height": 190
     },
     {
-      "id": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+      "id": "4b64617c-41dd-460a-8dc0-4baa229145b8",
       "name": "Krystian",
       "email": "trener@gmail.com",
-      "password": "ddddd",
+      "password": "dupad",
       "role": "trainer",
-      "isConfigured": true,
+      "isConfigured": false,
       "image": [
         {
           "path": "pobrane.jfif"
         }
       ],
       "bodyWeights": [],
-      "expirationDate": "2023-03-03T14:05:43.387Z",
-      "description": "dssdsssssssssssssssss",
-      "gyms": [
-        "default",
-        "Calypsoo Morena",
-        "Husarz Gym",
-        "Multisport"
-      ]
-    },
-    {
-      "id": "77a3ad94-681d-4d2b-92c1-fc7e1ef2e2dc",
-      "name": "",
-      "email": "user@gmail.com",
-      "password": "dupad",
-      "role": "user",
-      "isConfigured": false,
-      "image": "",
-      "bodyWeights": [],
-      "expirationDate": ""
-    },
-    {
-      "id": "18879f9a-b121-4374-9d33-116e7d918c36",
-      "name": "",
-      "email": "trainer@gmail.com",
-      "password": "ddddd",
-      "role": "trainer",
-      "isConfigured": false,
-      "image": "",
-      "bodyWeights": [],
-      "expirationDate": ""
+      "expirationDate": "2023-03-03T18:10:42.961Z",
+      "description": "dsadsadasdasdasdasdasda",
+      "gyms": ["Husarz Gym", "CityFit", "Calypsoo Morena"]
     }
   ],
   "programs": [

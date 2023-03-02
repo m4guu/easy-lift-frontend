@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { FormProvider } from "react-hook-form";
 
-import { useTrainerConfigForm } from "../../../../hooks/formHooks/configuration/useTrainerConfigForm";
+import {
+  TrainerConfigFields,
+  useTrainerConfigForm,
+} from "../../../../hooks/formHooks/configuration/useTrainerConfigForm";
 
 import {
   FormContainer,
   FormWrapper,
   FormActions,
   FormBox,
+  FormMapBox,
   BoxHeader,
 } from "./styles/Trainer/ConfigurationForm.styles";
 import {
@@ -21,8 +25,30 @@ import { Submit } from "../../../../components";
 import { LeafletMap } from "./views/Trainer/map/LeafletMap";
 
 const TrainerConfigurationForm: React.FC = () => {
+  const [selectedGyms, setSelectedGyms] = useState<string[]>([]);
+
   const { methods, canSubmit, onSubmit, pending } = useTrainerConfigForm();
-  const { handleSubmit } = methods;
+  const { handleSubmit, setValue } = methods;
+
+  const gymsChangeHandler = (
+    newSelectedGyms: string[],
+    selectedGym: string
+  ) => {
+    const isSelected = selectedGyms.filter((gym) => gym === selectedGym);
+
+    if (isSelected.length !== 0) {
+      const filteredGyms = selectedGyms.filter((gym) => gym !== selectedGym);
+      // remove existing gym
+      setSelectedGyms(filteredGyms);
+      // update form field
+      setValue(TrainerConfigFields.GYMS, filteredGyms);
+    } else {
+      // add existing gym
+      setSelectedGyms(newSelectedGyms);
+      // update form field
+      setValue(TrainerConfigFields.GYMS, newSelectedGyms);
+    }
+  };
 
   return (
     <FormProvider {...methods}>
@@ -36,12 +62,18 @@ const TrainerConfigurationForm: React.FC = () => {
           </FormBox>
           <FormBox>
             <BoxHeader variant="caption">Personal Traning</BoxHeader>
-            <Gyms />
+            <Gyms
+              selectedGyms={selectedGyms}
+              gymsChangeHandler={gymsChangeHandler}
+            />
           </FormBox>
-          <FormBox>
+          <FormMapBox>
             <BoxHeader variant="caption">Map</BoxHeader>
-            <LeafletMap />
-          </FormBox>
+            <LeafletMap
+              selectedGyms={selectedGyms}
+              gymsChangeHandler={gymsChangeHandler}
+            />
+          </FormMapBox>
         </FormWrapper>
         <FormActions>
           <Submit
