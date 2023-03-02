@@ -48,14 +48,7 @@ export const ExercisesProgress: React.FC = () => {
 };
 
 const ExercisesProgressContainer = styled(Box)(({ theme }) => ({
-  display: "flex",
-  width: "80%",
   [theme.breakpoints.up("lg")]: {
-    height: "90%",
-  },
-  [theme.breakpoints.down("sm")]: {
-    flexDirection: "column",
-    alignItems: "center",
-    width: "100%",
+    display: "flex",
   },
 }));

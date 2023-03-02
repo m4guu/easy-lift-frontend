@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Alert } from "@mui/material";
+import { Alert, List, Divider } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { usePrograms } from "../../hooks/queryHooks/programsHooks/usePrograms";
@@ -14,26 +14,30 @@ const ProgramsPage: React.FC = () => {
   return (
     <SectionContainer>
       <SectionHeader>Programs</SectionHeader>
-
+      <NoPaddingDivider />
       {status === Status.LOADING && <div>loading...</div>}
       {status === Status.ERROR && <div>error!</div>}
 
-      <ProgramsList>
+      <List>
         {programs?.map((program) => {
           return <ProgramItem key={program.id} program={program} />;
         })}
-      </ProgramsList>
+      </List>
 
       {programs?.length === 0 && (
         <Alert variant="outlined" severity="info">
           There are no training programs yet.
         </Alert>
       )}
+      <NoPaddingDivider />
     </SectionContainer>
   );
 };
 
-const ProgramsList = styled("ul")({});
+const NoPaddingDivider = styled(Divider)(({ theme }) => ({
+  marginLeft: `-${theme.spacing(2)}`,
+  marginRight: `-${theme.spacing(2)}`,
+}));
 
 const Programs = ProgramsPage;
 export default Programs;

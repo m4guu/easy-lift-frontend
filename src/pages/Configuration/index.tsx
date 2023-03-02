@@ -52,7 +52,7 @@ const LogoWrapper = styled(Box)(({ theme }) => ({
   },
 
   [theme.breakpoints.down("sm")]: {
-    width: "80%",
+    width: "100%",
   },
 }));
 const Configuration = ConfigurationPage;

@@ -22,11 +22,4 @@ export const NextSlideButton: React.FC = () => {
   );
 };
 
-const NextButton = styled(ButtonBase)(({ theme }) => ({
-  [theme.breakpoints.down("sm")]: {
-    position: "absolute",
-    paddingLeft: 0,
-    right: 0,
-    bottom: "7.5rem",
-  },
-}));
+const NextButton = styled(ButtonBase)({});

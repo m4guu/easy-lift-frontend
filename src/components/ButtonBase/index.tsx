@@ -16,10 +16,6 @@ const ButtonBase: React.FCWithChildren<ButtonBaseProps> = ({
   );
 };
 
-const ButtonText = styled(Box)(({ theme }) => ({
-  [theme.breakpoints.down("sm")]: {
-    display: "none",
-  },
-}));
+const ButtonText = styled(Box)(({ theme }) => ({}));
 
 export default memo(ButtonBase);

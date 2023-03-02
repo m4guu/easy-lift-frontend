@@ -18,6 +18,7 @@ import {
 import { getHowMuchDaysUntill, getLongFormByDate } from "../../utils/Date";
 
 import { UserProgres } from "../../shared/interfaces";
+// todo: dummy user image -> user image  [when backend will be written]
 import userImage from "../../assets/images/DUMMY_PROFILE_IMG/profile-img-id.jpeg";
 import { labels } from "./constans";
 
@@ -39,10 +40,16 @@ const ExerciseProgresItem: React.FC<ExerciseProgresItemProps> = ({
 
       <ListItemContainer>
         <ListItemHeader>
-          <Typography variant="h3" color={theme.palette.custom_grey.tint_1}>
+          <Typography
+            variant="caption"
+            color={theme.palette.custom_grey.tint_1}
+          >
             {longFormDate}
           </Typography>
-          <Typography variant="h3" color={theme.palette.custom_grey.tint_1}>
+          <Typography
+            variant="caption"
+            color={theme.palette.custom_grey.tint_1}
+          >
             {daysAgo} {daysAgo === 1 ? "day" : "days"} ago
           </Typography>
         </ListItemHeader>
@@ -54,7 +61,7 @@ const ExerciseProgresItem: React.FC<ExerciseProgresItemProps> = ({
                 return (
                   <LabelTitle
                     key={label.name}
-                    variant="h3"
+                    variant="caption"
                     color={theme.palette.custom_grey.tint_2}
                     sx={{ textAlign: "right" }}
                   >
@@ -65,7 +72,7 @@ const ExerciseProgresItem: React.FC<ExerciseProgresItemProps> = ({
               return (
                 <LabelTitle
                   key={label.name}
-                  variant="h3"
+                  variant="caption"
                   color={theme.palette.custom_grey.tint_2}
                 >
                   {label.name}
@@ -80,20 +87,20 @@ const ExerciseProgresItem: React.FC<ExerciseProgresItemProps> = ({
             {exerciseProgres.sets.map((set, index) => {
               return (
                 <SetContent>
-                  <SetTitle variant="subtitle1" color="primary">
+                  <SetTitle variant="caption" color="primary">
                     {index + 1}
                   </SetTitle>
-                  <SetTitle variant="subtitle1">{set.weight}</SetTitle>
-                  <SetTitle variant="subtitle1">{set.reps}</SetTitle>
+                  <SetTitle variant="caption">{set.weight}</SetTitle>
+                  <SetTitle variant="caption">{set.reps}</SetTitle>
                   <SetTitle
-                    variant="h3"
+                    variant="caption"
                     color={theme.palette.custom_grey.tint_1}
                   >
                     {set.tempo}
                   </SetTitle>
                   <SetTitle
                     variant={
-                      set.repMax === exerciseProgres.repMax ? "subtitle1" : "h3"
+                      set.repMax === exerciseProgres.repMax ? "caption" : "h3"
                     }
                     color={
                       set.repMax === exerciseProgres.repMax

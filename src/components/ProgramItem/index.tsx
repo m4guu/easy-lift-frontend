@@ -1,17 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { LoadingButton } from "@mui/lab";
-import { Card, Typography, Button, Box } from "@mui/material";
-import styled from "@mui/system/styled";
-
-import { useUserContext } from "../../contexts/userContext";
-import { useUpdateProgramMutation } from "../../hooks/queryHooks/programsHooks/useUpdateProgramMutation";
-import { useDeleteProgramMutation } from "../../hooks/queryHooks/programsHooks/useDeleteProgramMutation";
+import { Typography, Box, Divider, Chip } from "@mui/material";
+import { styled, useTheme } from "@mui/system";
 
 import { Program } from "../../shared/interfaces";
 import { PATHS } from "../../pages/paths";
-import { Status } from "../../shared/enums";
+
+// todo: change dummy img into real Program Image -> change program FORM !
+import DUMMY_PROGRAM_IMG from "../../assets/images/programs/dummy-program-image.jpg";
+import { useUserContext } from "../../contexts/userContext";
 
 type ProgramItemProps = {
   program: Program;
@@ -19,104 +17,74 @@ type ProgramItemProps = {
 
 const ProgramItem: React.FC<ProgramItemProps> = ({ program }) => {
   const { user } = useUserContext();
-  const {
-    isLoading: isDeleting,
-    status: deleteStatus,
-    error: deleteError,
-    mutate: deleteQueryProgram,
-  } = useDeleteProgramMutation(program.id);
-  const {
-    isLoading: isUpdating,
-    status: updateStatus,
-    error: updateError,
-    mutate: updateQueryProgram,
-  } = useUpdateProgramMutation(program.id);
-
-  const deleteProgram = () => {
-    deleteQueryProgram(program.id);
-  };
-  const updateProgram = () => {
-    const updatedProgram = {
-      ...program,
-      title: "Updated Title Workout",
-    };
-    updateQueryProgram(updatedProgram);
-  };
-
+  const theme = useTheme();
   return (
-    <ProgramItemCard variant="outlined">
-      <Typography variant="caption">{program.title}</Typography>
+    <ProgramItemCard to={`${PATHS.PROGRAMS}/${program.id}`}>
+      <ProgramImage src={DUMMY_PROGRAM_IMG} alt="Program" />
 
-      <CardContainer>
-        <Typography>{program.description}</Typography>
-        <ButtonsContainer>
-          <ProgramItemLink to={`${PATHS.PROGRAMS}/${program.id}`}>
-            <Button variant="contained">Check it out!</Button>
-          </ProgramItemLink>
-
-          {user?.id === program.creator && (
-            <>
-              <LoadingButton
-                sx={{ marginRight: "1rem" }}
-                loading={isDeleting}
-                onClick={deleteProgram}
-                variant="outlined"
-                color="error"
-              >
-                delete
-              </LoadingButton>
-              <LoadingButton
-                loading={isUpdating}
-                onClick={updateProgram}
-                variant="outlined"
-                color="info"
-              >
-                update
-              </LoadingButton>
-            </>
+      <ProgramContent>
+        <TopDivider />
+        <ContentText variant="caption" color={theme.palette.custom_grey.tint_2}>
+          {program.creator.name}
+          {program.creator.id === user?.id && (
+            <Chip
+              color="info"
+              label={<Typography variant="caption">you</Typography>}
+              size="small"
+              variant="outlined"
+            />
           )}
-        </ButtonsContainer>
-
-        {deleteStatus === Status.SUCCESS && (
-          <div>Program deleted succesfully!</div>
-        )}
-        {deleteStatus === Status.ERROR && <div>error!</div>}
-      </CardContainer>
+        </ContentText>
+        <ContentText variant="subtitle1" color="primary">
+          {program.title}
+        </ContentText>
+        <ContentText variant="caption" color={theme.palette.custom_grey.tint_2}>
+          {program.price.toFixed(2)} $
+        </ContentText>
+        <BottomDivider />
+      </ProgramContent>
     </ProgramItemCard>
   );
 };
 
-const ProgramItemCard = styled(Card)(({ theme }) => ({
+const ProgramItemCard = styled(Link)(({ theme }) => ({
   display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-between",
+  position: "relative",
+  gap: theme.spacing(1),
+  marginBottom: theme.spacing(1),
   alignItems: "center",
-  borderRadius: "1rem",
-  boxShadow: "none",
-  height: "99%",
-  [theme.breakpoints.down("lg")]: {
-    height: "15rem",
-  },
-  [theme.breakpoints.down("sm")]: {
-    width: "50% ",
-    marginRight: "auto",
-    marginLeft: "auto",
-  },
-}));
-
-const CardContainer = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(1),
-  textAlign: "center",
-}));
-
-const ButtonsContainer = styled(Box)(({ theme }) => ({
-  display: "flex",
-  justifyContent: "center",
-  gap: theme.spacing(2),
-}));
-
-const ProgramItemLink = styled(Link)({
   textDecoration: "none",
+}));
+
+const ProgramImage = styled("img")({
+  width: "5rem",
+  height: "5rem",
+  objectFit: "cover",
+});
+
+const ProgramContent = styled(Box)({
+  display: "flex",
+  width: "100%",
+  flexDirection: "column",
+});
+
+const BottomDivider = styled(Divider)({
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  right: 0,
+});
+const TopDivider = styled(Divider)({
+  position: "absolute",
+  top: 0,
+  left: 0,
+  right: 0,
+});
+const ContentText = styled(Typography)({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  letterSpacing: "1px",
 });
 
 export default ProgramItem;

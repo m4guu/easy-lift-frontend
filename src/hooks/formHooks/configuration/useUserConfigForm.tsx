@@ -59,7 +59,7 @@ export const useUserConfigForm = () => {
     (formValues: UserConfig) => {
       setPending(true);
       const updatedUser: User = {
-        ...user,
+        ...user!,
         name: formValues.name,
         image: formValues.image,
         height: formValues.height,

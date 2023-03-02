@@ -7,7 +7,7 @@ export {
 
 export { default as ProgramsService, ProgramsMethods } from "./ProgramsService";
 
-export { default as TrainersService, TrainersMethods } from "./TrainersService";
+export { default as UserServices, UserMethods } from "./UserService";
 
 export { default as WorkoutsService, WorkoutsMethods } from "./WorkoutsService";
 

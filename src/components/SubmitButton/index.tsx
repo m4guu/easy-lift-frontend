@@ -14,7 +14,6 @@ const Submit: React.FC<SubmitProps> = ({
   onClick,
   loading,
   disabled,
-  fullWidth,
 }) => {
   return (
     <LoadingButton
@@ -22,7 +21,6 @@ const Submit: React.FC<SubmitProps> = ({
       onClick={onClick}
       loading={loading}
       disabled={disabled}
-      fullWidth
     >
       {label}
     </LoadingButton>

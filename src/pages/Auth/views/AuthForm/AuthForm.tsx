@@ -19,9 +19,10 @@ import { AuthTypes } from "../../../../shared/enums";
 
 type AuthFormProps = {
   authType: AuthTypes;
+  setTab: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export const AuthForm: React.FC<AuthFormProps> = ({ authType }) => {
+export const AuthForm: React.FC<AuthFormProps> = ({ authType, setTab }) => {
   const { methods, onSubmit, pending } = useAuthForm(authType);
 
   const { handleSubmit } = methods;
@@ -29,16 +30,14 @@ export const AuthForm: React.FC<AuthFormProps> = ({ authType }) => {
   return (
     <FormProvider {...methods}>
       <FormWrapper>
-        <InputWrapper>
-          <AuthEmail />
-          <AuthPassword />
-        </InputWrapper>
+        <AuthEmail />
+        <AuthPassword />
 
         {authType === AuthTypes.SIGN_UP && (
-          <InputWrapper>
+          <>
             <ConfirmPassword />
             <AuthRole />
-          </InputWrapper>
+          </>
         )}
       </FormWrapper>
 
@@ -46,7 +45,9 @@ export const AuthForm: React.FC<AuthFormProps> = ({ authType }) => {
         <Submit
           label={authType === AuthTypes.LOGIN ? "Login" : "Create Account"}
           variant="outlined"
-          onClick={handleSubmit((data) => onSubmit(data))}
+          onClick={handleSubmit((data) => {
+            onSubmit(data).then(() => setTab(0));
+          })}
           loading={pending}
         />
       </FormActions>

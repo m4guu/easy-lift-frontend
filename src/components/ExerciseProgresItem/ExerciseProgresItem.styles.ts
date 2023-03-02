@@ -34,6 +34,8 @@ export const SetContent = styled(Box)({
 });
 export const SetTitle = styled(Typography)({
   width: "20%",
+  fontWeight: "bold",
+  fontSize: "0.95rem",
 });
 
 export const SetsLabels = styled(Box)({
@@ -48,8 +50,8 @@ export const LabelTitle = styled(Typography)({
 
 export const UserAvatar = styled(Avatar)(({ theme }) => ({
   marginRight: theme.spacing(1),
-  width: "53px",
-  height: "53px",
+  width: "46px",
+  height: "46px",
   [theme.breakpoints.down("sm")]: {
     width: "40px",
     height: "40px",

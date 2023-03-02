@@ -13,7 +13,7 @@ export const defaultUser: User = {
   password: "",
   role: Role.trainer,
   isConfigured: false,
-  image: "", // DUMMY DATA
+  image: null, // DUMMY DATA
   bodyWeights: [],
   expirationDate: "",
 };

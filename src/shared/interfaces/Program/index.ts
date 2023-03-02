@@ -3,7 +3,7 @@ import ProgramItem from "../ProgramItem";
 
 interface Program {
   id: string;
-  creator: string;
+  creator: { id: string; name: string };
   title: string;
   level: ProgramLevels;
   frequencyPerWeek: number;

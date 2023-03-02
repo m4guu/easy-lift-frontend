@@ -23,7 +23,7 @@ export const Height = styled(() => (
     variant="standard"
     size="small"
     label="Height [cm]"
-    type="number"
+    type="tel"
     fieldName={UserConfigFields.HEIGHT}
     placeholder="190 [cm]"
   />
@@ -36,7 +36,7 @@ export const Weight = styled(() => (
     variant="standard"
     size="small"
     label="Weight [kg]"
-    type="number"
+    type="tel"
     fieldName={UserConfigFields.WEIGHT}
     placeholder="100 [kg]"
   />

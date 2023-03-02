@@ -1,8 +1,6 @@
 import React from "react";
 import { FormProvider } from "react-hook-form";
 
-import { Box, Typography } from "@mui/material";
-
 import { useTrainerConfigForm } from "../../../../hooks/formHooks/configuration/useTrainerConfigForm";
 
 import {
@@ -11,6 +9,7 @@ import {
   FormActions,
   FormBox,
   BoxHeader,
+  BoxImage,
 } from "./styles/Trainer/ConfigurationForm.styles";
 import {
   Name,
@@ -24,12 +23,7 @@ import map from "../../../../assets/images/dummy_map.png";
 
 const TrainerConfigurationForm: React.FC = () => {
   const { methods, canSubmit, onSubmit, pending } = useTrainerConfigForm();
-  const {
-    handleSubmit,
-    formState: { errors },
-  } = methods;
-
-  console.log(errors);
+  const { handleSubmit } = methods;
 
   return (
     <FormProvider {...methods}>
@@ -47,21 +41,16 @@ const TrainerConfigurationForm: React.FC = () => {
           </FormBox>
           <FormBox>
             <BoxHeader variant="caption">Map</BoxHeader>
-            <img
-              src={map}
-              alt="map"
-              style={{ width: "50vh", height: "50vh" }}
-            />
+            <BoxImage component="img" src={map} alt="map" />
           </FormBox>
         </FormWrapper>
         <FormActions>
           <Submit
-            label="configurate"
+            label="finish"
             variant="contained"
             onClick={handleSubmit((data) => onSubmit(data))}
             loading={pending}
             disabled={!canSubmit}
-            fullWidth
           />
         </FormActions>
       </FormContainer>

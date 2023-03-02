@@ -27,7 +27,7 @@ export interface TrainerConfig {
 export const defaultValues = {
   [TrainerConfigFields.NAME]: "",
   [TrainerConfigFields.DESCRIPTION]: "",
-  [TrainerConfigFields.GYMS]: [],
+  [TrainerConfigFields.GYMS]: ["default"],
   [TrainerConfigFields.IMAGE]: null,
 };
 
@@ -61,7 +61,7 @@ export const useTrainerConfigForm = () => {
     (formValues: TrainerConfig) => {
       setPending(true);
       const updatedTrainer: User = {
-        ...user,
+        ...user!,
         name: formValues.name,
         image: formValues.image,
         description: formValues.description,
