@@ -35,12 +35,3 @@ export const BoxHeader = styled(Typography)(({ theme }) => ({
 }));
 
 export const FormActions = styled(Box)(({ theme }) => ({}));
-
-export const BoxImage = styled(Box)(({ theme }) => ({
-  width: "70vh",
-  marginLeft: "auto",
-  marginRight: "auto",
-  [theme.breakpoints.down("lg")]: {
-    width: "100%",
-  },
-}));
