@@ -32,23 +32,23 @@
   "users": [
     {
       "id": "547266d5-f25c-4664-a290-b590290c06de",
-      "name": "Krystian",
+      "name": "dsadasdasda",
       "email": "user@gmail.com",
       "password": "ddddd",
       "role": "user",
       "isConfigured": true,
       "image": [
         {
-          "path": "ship_wreck_480x300.JPG"
+          "path": "pobrane.jfif"
         }
       ],
       "bodyWeights": [
         {
-          "weight": 84,
+          "weight": 321,
           "date": ""
         }
       ],
-      "expirationDate": "2023-03-03T14:03:12.384Z",
+      "expirationDate": "2023-10-03T14:03:12.384Z",
       "height": 190
     },
     {
@@ -57,16 +57,22 @@
       "email": "trener@gmail.com",
       "password": "dupad",
       "role": "trainer",
-      "isConfigured": false,
+      "isConfigured": true,
       "image": [
         {
-          "path": "pobrane.jfif"
+          "path": "ship_wreck_480x300.JPG"
         }
       ],
       "bodyWeights": [],
-      "expirationDate": "2023-03-03T18:10:42.961Z",
-      "description": "dsadsadasdasdasdasdasda",
-      "gyms": ["Husarz Gym", "CityFit", "Calypsoo Morena"]
+      "expirationDate": "2023-10-03T18:10:42.961Z",
+      "description": "dsaddddddddddddddddddddddddddddddddd",
+      "gyms": [
+        "de99a9f2-362f-459e-8b35-c6a601682aaa",
+        "99d34262-5fb8-4fb5-9d89-3ae9fb96f24f",
+        "bac748f8-3652-4e02-a7a8-3d7be0c9f8cc",
+        "ba6d8ba4-5dae-489e-bd1a-f91c2fae5ca8",
+        "ed0efdfe-41ba-4f7b-b18e-0394f728b106"
+      ]
     }
   ],
   "programs": [
@@ -1740,7 +1746,7 @@
     {
       "id": "68ae8b68-da8a-426d-bf8b-e3da6e929aeb",
       "creator": "547266d5-f25c-4664-a290-b590290c06de",
-      "title": "dsadsa",
+      "title": "Updated Title Workout",
       "date": "2023-02-28",
       "exercises": [
         {

@@ -1,15 +1,22 @@
 import React from "react";
+import L from "leaflet";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import MarkerClusterGroup from "react-leaflet-cluster";
 
 import { Box, Typography, Chip, Button } from "@mui/material";
 import { styled } from "@mui/system";
 
-import { latLngPositions } from "./constans";
+import { Gym } from "../../../../../../../shared/interfaces";
+import {
+  latLngPositions,
+  defaultMarkerIcon,
+  greenMarkerIcon,
+} from "./constans";
 import { gyms } from "../form/constans";
 
 interface LeafletMapProps {
-  selectedGyms: string[];
-  gymsChangeHandler: (newSelectedGyms: string[], selectedGym: string) => void;
+  selectedGyms: Gym[];
+  gymsChangeHandler: (selectedGym: Gym) => void;
 }
 
 export const LeafletMap: React.FC<LeafletMapProps> = ({
@@ -18,42 +25,47 @@ export const LeafletMap: React.FC<LeafletMapProps> = ({
 }) => {
   return (
     <Map
-      center={[latLngPositions.gdansk.x, latLngPositions.gdansk.y]}
-      zoom={12}
+      center={[latLngPositions.warsaw.x, latLngPositions.warsaw.y]}
+      zoom={5.5}
     >
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      <TileLayer url={import.meta.env.VITE_MAP_BOX_URL} />
 
-      {gyms.map((gym) => {
-        const isSelected = selectedGyms.filter(
-          (selectedGym) => selectedGym === gym.name
-        );
+      <MarkerClusterGroup>
+        {gyms.map((gym) => {
+          const isSelected = !!selectedGyms.filter(
+            (selectedGym) => selectedGym.id === gym.id
+          ).length;
 
-        return (
-          <Marker position={[gym.location.position.x, gym.location.position.y]}>
-            <Popup>
-              <Typography>{gym.name}</Typography>
-              <GymImage src={gym.image} alt="gym" />
-              <Chip
-                variant="filled"
-                color="primary"
-                label={<Typography>{gym.location.adres}</Typography>}
-              />
-              <GymActions>
-                <AddGym
-                  onClick={() =>
-                    gymsChangeHandler([...selectedGyms, gym.name], gym.name)
-                  }
-                  color={isSelected.length === 0 ? "primary" : "error"}
-                  variant="contained"
-                  fullWidth
-                >
-                  {isSelected.length === 0 ? "add" : "remove"}
-                </AddGym>
-              </GymActions>
-            </Popup>
-          </Marker>
-        );
-      })}
+          return (
+            <Marker
+              position={[gym.location.position.x, gym.location.position.y]}
+              key={gym.id}
+              icon={isSelected ? greenMarkerIcon : defaultMarkerIcon}
+              riseOnHover
+            >
+              <Popup>
+                <Typography>{gym.name}</Typography>
+                <GymImage src={gym.image} alt="gym" />
+                <Chip
+                  variant="filled"
+                  color="primary"
+                  label={<Typography>{gym.location.adres}</Typography>}
+                />
+                <GymActions>
+                  <AddGym
+                    onClick={() => gymsChangeHandler(gym)}
+                    color={isSelected ? "error" : "primary"}
+                    variant="contained"
+                    fullWidth
+                  >
+                    {isSelected ? "remove" : "add"}
+                  </AddGym>
+                </GymActions>
+              </Popup>
+            </Marker>
+          );
+        })}
+      </MarkerClusterGroup>
     </Map>
   );
 };

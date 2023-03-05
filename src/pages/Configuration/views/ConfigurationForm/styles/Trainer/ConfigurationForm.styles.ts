@@ -10,29 +10,32 @@ export const FormWrapper = styled("form")(({ theme }) => ({
   gap: theme.spacing(2),
   [theme.breakpoints.down("lg")]: {
     flexDirection: "column",
-    width: "35%",
-    marginLeft: "auto",
-    marginRight: "auto",
-  },
-  [theme.breakpoints.down("md")]: {
-    width: "50%",
-  },
-  [theme.breakpoints.down("sm")]: {
+    alignItems: "center",
     width: "100%",
   },
 }));
 
 export const FormBox = styled(Box)(({ theme }) => ({
   display: "flex",
-  minWidth: "12%",
+  width: "25%",
   flexDirection: "column",
   gap: theme.spacing(2),
+  [theme.breakpoints.down("lg")]: {
+    width: "50%",
+  },
+  [theme.breakpoints.down("md")]: {
+    width: "100%",
+  },
 }));
 export const FormMapBox = styled(Box)(({ theme }) => ({
   display: "flex",
-  minWidth: "30%",
+  minWidth: "50%",
   flexDirection: "column",
   gap: theme.spacing(2),
+
+  [theme.breakpoints.down("md")]: {
+    minWidth: "100%",
+  },
 }));
 export const BoxHeader = styled(Typography)(({ theme }) => ({
   fontSize: "1rem",

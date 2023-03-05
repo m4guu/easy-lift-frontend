@@ -1,19 +1,14 @@
 import { Controller, useFormContext } from "react-hook-form";
 
-import {
-  MenuItem,
-  Select,
-  Chip,
-  TextField,
-  List,
-  SelectChangeEvent,
-} from "@mui/material";
+import { TextField, Checkbox, Autocomplete } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { TrainerConfigFields } from "../../../../../../../hooks/formHooks/configuration/useTrainerConfigForm";
 import { ControlledTextField } from "../../../../../../../features";
 import ImagePicker from "../../../../../../../features/ImagePicker";
-import { gyms } from "./constans";
+import { gyms, icon, checkedIcon } from "./constans";
+import { Gym } from "../../../../../../../shared/interfaces";
+import { GymTags } from "./views/GymTags/GymTags";
 
 // Name //
 export const Name = styled(() => (
@@ -45,49 +40,62 @@ export const Description = styled(() => (
 
 // Gyms //
 interface GymsProps {
-  selectedGyms: string[];
-  gymsChangeHandler: (newSelectedGyms: string[], selectedGym: string) => void;
+  selectedGyms: Gym[];
+  gymsChangeHandler: (selectedGym: Gym) => void;
+  removeGym: (gym: Gym) => void;
 }
 export const Gyms: React.FC<GymsProps> = ({
   selectedGyms,
   gymsChangeHandler,
+  removeGym,
 }) => {
   const { control } = useFormContext();
   return (
     <Controller
       name={TrainerConfigFields.GYMS}
       control={control}
-      render={({ field: { onChange } }) => (
-        <Select
-          label="Gyms"
-          size="small"
-          variant="standard"
-          multiple
-          input={<TextField select variant="standard" label="Gyms" />}
+      render={() => (
+        <Autocomplete
+          options={gyms}
+          sx={{ width: "100%!important" }}
+          getOptionLabel={(option) => option.name}
+          groupBy={(option) => option.location.city}
           value={selectedGyms}
-          onChange={(event: SelectChangeEvent<string[]>) => {
-            onChange(event.target.value);
-            gymsChangeHandler(
-              event.target.value as string[],
-              event.target.name
+          onChange={(e, v, r, details) => {
+            if (details) {
+              gymsChangeHandler(details.option);
+            }
+          }}
+          multiple
+          disableClearable
+          disableCloseOnSelect
+          renderOption={(props, option, { selected }) => (
+            <li {...props}>
+              <Checkbox
+                icon={icon}
+                checkedIcon={checkedIcon}
+                style={{ marginRight: 8 }}
+                checked={selected}
+              />
+              {option.name}
+            </li>
+          )}
+          style={{ width: 500 }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              variant="standard"
+              size="small"
+              label="Gyms"
+              placeholder="Search gym..."
+            />
+          )}
+          renderTags={(selectedValues) => {
+            return (
+              <GymTags selectedGyms={selectedValues} removeGym={removeGym} />
             );
           }}
-          renderValue={(selected) => (
-            <GymsListContainer>
-              {selected.map((value: string) => (
-                <Chip key={value} label={value} />
-              ))}
-            </GymsListContainer>
-          )}
-        >
-          {gyms.map((gym) => {
-            return (
-              <MenuItem key={gym.id} value={gym.name}>
-                {gym.name}
-              </MenuItem>
-            );
-          })}
-        </Select>
+        />
       )}
     />
   );
@@ -101,10 +109,7 @@ export const Image = styled(() => (
 //
 
 // Styles //
-const GymsListContainer = styled(List)(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  gap: theme.spacing(1),
-  padding: 0,
-}));
+const AutoSelect = styled(Autocomplete)({
+  width: "300px",
+});
 //

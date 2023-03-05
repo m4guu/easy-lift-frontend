@@ -24,29 +24,38 @@ import { Submit } from "../../../../components";
 
 import { LeafletMap } from "./views/Trainer/map/LeafletMap";
 
+import { Gym } from "../../../../shared/interfaces";
+
 const TrainerConfigurationForm: React.FC = () => {
-  const [selectedGyms, setSelectedGyms] = useState<string[]>([]);
+  const [selectedGyms, setSelectedGyms] = useState<Gym[]>([]);
 
   const { methods, canSubmit, onSubmit, pending } = useTrainerConfigForm();
   const { handleSubmit, setValue } = methods;
 
-  const gymsChangeHandler = (
-    newSelectedGyms: string[],
-    selectedGym: string
-  ) => {
-    const isSelected = selectedGyms.filter((gym) => gym === selectedGym);
+  const removeGym = (gym: Gym) => {
+    const updatedGyms = selectedGyms.filter(
+      (selectedGym) => selectedGym.id !== gym.id
+    );
+    const updatedGymsIds = updatedGyms.map((updatedGym) => updatedGym.id);
+    // remove existing gym
+    setSelectedGyms(updatedGyms);
+    // remove form field existing gym
+    setValue(TrainerConfigFields.GYMS, updatedGymsIds);
+  };
 
-    if (isSelected.length !== 0) {
-      const filteredGyms = selectedGyms.filter((gym) => gym !== selectedGym);
-      // remove existing gym
-      setSelectedGyms(filteredGyms);
-      // update form field
-      setValue(TrainerConfigFields.GYMS, filteredGyms);
+  const gymsChangeHandler = (selectedGym: Gym) => {
+    const isSelected = !!selectedGyms.filter((gym) => gym.id === selectedGym.id)
+      .length;
+
+    if (isSelected) {
+      removeGym(selectedGym);
     } else {
-      // add existing gym
-      setSelectedGyms(newSelectedGyms);
-      // update form field
-      setValue(TrainerConfigFields.GYMS, newSelectedGyms);
+      const updatedGyms = [...selectedGyms, selectedGym];
+      const updatedGymsIds = updatedGyms.map((updatedGym) => updatedGym.id);
+      // change existing gyms
+      setSelectedGyms(updatedGyms);
+      // update form field gyms
+      setValue(TrainerConfigFields.GYMS, updatedGymsIds);
     }
   };
 
@@ -65,6 +74,7 @@ const TrainerConfigurationForm: React.FC = () => {
             <Gyms
               selectedGyms={selectedGyms}
               gymsChangeHandler={gymsChangeHandler}
+              removeGym={removeGym}
             />
           </FormBox>
           <FormMapBox>
