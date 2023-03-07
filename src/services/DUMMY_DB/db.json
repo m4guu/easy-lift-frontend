@@ -57,7 +57,7 @@
       "email": "trener@gmail.com",
       "password": "dupad",
       "role": "trainer",
-      "isConfigured": true,
+      "isConfigured": false,
       "image": [
         {
           "path": "ship_wreck_480x300.JPG"
