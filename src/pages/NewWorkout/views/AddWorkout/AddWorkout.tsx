@@ -5,7 +5,7 @@ import {
   UseFieldArrayUpdate,
 } from "react-hook-form";
 
-import { Box, FormControl } from "@mui/material";
+import { Box } from "@mui/material";
 
 import { useUserContext } from "../../../../contexts/userContext";
 import { useNewWorkoutForm } from "../../../../hooks/formHooks/workout/useNewWorkoutForm";

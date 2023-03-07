@@ -1,42 +1,54 @@
 import React from "react";
 
-import { Alert, List, Divider } from "@mui/material";
+import { Alert, List, Divider, Box, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { usePrograms } from "../../hooks/queryHooks/programsHooks/usePrograms";
 
 import { Status } from "../../shared/enums";
 import { ProgramItem, SectionHeader, SectionContainer } from "../../components";
+import { useProgramFilter } from "../../hooks/filters/useProgramFilter";
+import { FilterPanel } from "./views/FilterPanel/FilterPanel";
 
 const ProgramsPage: React.FC = () => {
   const { status, error, data: programs } = usePrograms();
+  const { updatedPrograms, filterProgramProps } = useProgramFilter(programs);
 
   return (
     <SectionContainer>
       <SectionHeader>Programs</SectionHeader>
-      <NoPaddingDivider />
       {status === Status.LOADING && <div>loading...</div>}
       {status === Status.ERROR && <div>error!</div>}
 
-      <List>
-        {programs?.map((program) => {
-          return <ProgramItem key={program.id} program={program} />;
-        })}
+      <FilterPanel filterHandlers={filterProgramProps} />
+
+      <List disablePadding>
+        {updatedPrograms.length === 0 ? (
+          <Typography>No search result</Typography>
+        ) : (
+          updatedPrograms.map((program) => {
+            return (
+              <Box key={program.id}>
+                <NoPaddingDivider />
+                <ProgramItem program={program} />
+              </Box>
+            );
+          })
+        )}
       </List>
+      <NoPaddingDivider />
 
       {programs?.length === 0 && (
         <Alert variant="outlined" severity="info">
           There are no training programs yet.
         </Alert>
       )}
-      <NoPaddingDivider />
     </SectionContainer>
   );
 };
 
 const NoPaddingDivider = styled(Divider)(({ theme }) => ({
-  marginLeft: `-${theme.spacing(2)}`,
-  marginRight: `-${theme.spacing(2)}`,
+  margin: `0 -${theme.spacing(2)}`,
 }));
 
 const Programs = ProgramsPage;

@@ -120,12 +120,18 @@ export const ChartMenu: React.FC<ChartMenuProps> = ({ sendData }) => {
 };
 
 const ChartMenuForm = styled("form")(({ theme }) => ({
-  margin: `0 ${theme.spacing(2)} ${theme.spacing(2)} ${theme.spacing(2)}`,
+  [theme.breakpoints.down("xl")]: {
+    display: "flex",
+    justifyContent: "space-around",
+    gap: theme.spacing(2),
+    marginTop: theme.spacing(2),
+  },
 }));
 
 const ChartMenuFormControl = styled(FormControl)(({ theme }) => ({
   m: 1,
   minWidth: 150,
+  width: "100%",
   paddingBottom: theme.spacing(2),
   [theme.breakpoints.down("sm")]: {
     minWidth: 100,
