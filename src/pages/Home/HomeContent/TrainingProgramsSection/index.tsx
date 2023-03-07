@@ -13,5 +13,6 @@ export const TrainingProgramsSection: React.FC = () => {
 };
 
 const SectionContainer = styled("section")(({ theme }) => ({
+  height: "50%",
   padding: theme.spacing(2),
 }));

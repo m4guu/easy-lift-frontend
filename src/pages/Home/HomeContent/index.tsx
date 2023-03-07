@@ -31,7 +31,8 @@ const HomeContainer = styled(Box)({
 });
 
 const Wrapper = styled(Box)(({ theme }) => ({
-  [theme.breakpoints.up("lg")]: {
+  height: "50%",
+  [theme.breakpoints.up("xl")]: {
     display: "flex",
   },
 }));

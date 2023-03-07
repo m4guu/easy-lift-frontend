@@ -43,7 +43,7 @@ const ProgramPage: React.FC = () => {
           />
           <PorgramActions>
             {program[0].creator.id !== user?.id ? (
-              <Buy variant="contained" size="small" fullWidth>
+              <Buy variant="contained" size="small">
                 buy
               </Buy>
             ) : (
@@ -71,8 +71,7 @@ const ProgramPage: React.FC = () => {
 const SectionContainer = styled(Box)({});
 const SectionWrapper = styled(Box)({});
 const PorgramActions = styled(Box)(({ theme }) => ({
-  textAlign: "right",
-  padding: theme.spacing(2),
+  padding: `0 ${theme.spacing(2)}`,
   [theme.breakpoints.down("sm")]: {
     padding: theme.spacing(1),
   },

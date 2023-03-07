@@ -2,44 +2,54 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-import { Box, Typography, ListItem } from "@mui/material";
+import { Box, Typography, ListItem, Button } from "@mui/material";
 import { styled, useTheme } from "@mui/system";
 
-import { Trainer } from "../../shared/interfaces";
+import { User } from "../../shared/interfaces";
 
 import { PATHS } from "../../pages/paths";
+import { UserAvatar } from "../ExerciseProgresItem/ExerciseProgresItem.styles";
+
+import DUMMY_TRAINER_IMAGE from "../../assets/images/DUMMY_PROFILE_IMG/profile-img-id.jpeg";
 
 type TrainerItemProps = {
-  trainer: Trainer;
+  trainer: User;
 };
 
 const TrainerItem: React.FC<TrainerItemProps> = ({ trainer }) => {
-  const theme = useTheme();
-
   return (
-    <TraienrListItem>
-      <ListItemLink to={`${PATHS.TRAINERS}/${trainer.id}`}>
-        <Box>
-          <Typography variant="subtitle1" color="primary">
-            TRAINER NAME:
-          </Typography>
-          <Typography variant="h3" color={theme.palette.text.primary}>
-            {trainer.name}
-          </Typography>
-        </Box>
-      </ListItemLink>
-    </TraienrListItem>
+    <TrainerListItem disablePadding>
+      <UserInfo>
+        <UserAvatar
+          src={DUMMY_TRAINER_IMAGE}
+          variant="square"
+          sx={{ width: 60, height: 60 }}
+          alt="Avatar"
+        />
+        <Typography variant="h3">{trainer.name}</Typography>
+      </UserInfo>
+      <InfoLink to={`${PATHS.TRAINERS}/${trainer.id}`}>
+        <Button size="small">info </Button>
+      </InfoLink>
+    </TrainerListItem>
   );
 };
-const ListItemLink = styled(Link)(({ theme }) => ({
-  padding: theme.spacing(1),
-  textDecoration: "none",
-  borderRadius: theme.spacing(1),
-  "&:hover": {
-    backgroundColor: theme.palette.action.hover,
-  },
+
+const TrainerListItem = styled(ListItem)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "space-between",
+  width: "100%",
+  alignItems: "center",
+  margin: `${theme.spacing(1)} 0`,
 }));
-const TraienrListItem = styled(ListItem)({
-  padding: 0,
+
+const InfoLink = styled(Link)({
+  textDecoration: "none",
 });
+
+const UserInfo = styled(Box)({
+  display: "flex",
+  alignItems: "center",
+});
+
 export default TrainerItem;

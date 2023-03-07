@@ -5,14 +5,18 @@ import { v4 as uuidv4 } from "uuid";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { ErrorMessages } from "../../../shared/enums";
-import { TEMPO_REGEX } from "../../../shared/regex/regex";
-
-import ProgramLevels from "../../../shared/enums/ProgramLevels";
-import ProgramItem from "../../../shared/interfaces/ProgramItem";
 import { useAddProgramMutation } from "../../queryHooks/programsHooks/useAddProgramMutation";
-import { Program } from "../../../shared/interfaces";
 import { useUserContext } from "../../../contexts/userContext";
+
+import { Program, ProgramItem } from "../../../shared/interfaces";
+import { ErrorMessages, ProgramLevels } from "../../../shared/enums";
+import { TEMPO_REGEX } from "../../../shared/regex/regex";
+import {
+  minFreqTraining,
+  maxFreqTraining,
+  minProgramLength,
+  maxProgramLength,
+} from "./constans";
 
 export enum AddProgramFormFields {
   // form step 1
@@ -40,8 +44,8 @@ export interface AddProgramForm {
 const defaultValues = {
   [AddProgramFormFields.PROGRAM_TITLE]: "",
   [AddProgramFormFields.PROGRAM_LEVEL]: ProgramLevels.NOVICE,
-  [AddProgramFormFields.FREQUENCY_PER_WEEK]: 2,
-  [AddProgramFormFields.PROGRAM_LENGTH]: 4,
+  [AddProgramFormFields.FREQUENCY_PER_WEEK]: minFreqTraining,
+  [AddProgramFormFields.PROGRAM_LENGTH]: minProgramLength,
   [AddProgramFormFields.PROGRAM]: [],
   [AddProgramFormFields.PROGRAM_PRICE]: 0,
   [AddProgramFormFields.PROGRAM_DESCRIPTION]: "",
@@ -90,14 +94,18 @@ const programSchema = yup.object().shape({
             })
           )
           .required()
-          .min(2)
-          .max(7),
+          .min(minFreqTraining)
+          .max(maxFreqTraining),
       })
     )
     .required()
-    .min(4)
-    .max(12),
-  [AddProgramFormFields.PROGRAM_LENGTH]: yup.number().required().min(4).max(12),
+    .min(minProgramLength)
+    .max(maxProgramLength),
+  [AddProgramFormFields.PROGRAM_LENGTH]: yup
+    .number()
+    .required()
+    .min(minProgramLength)
+    .max(maxProgramLength),
   [AddProgramFormFields.PROGRAM_PRICE]: yup.number().required().min(0),
   [AddProgramFormFields.PROGRAM_DESCRIPTION]: yup.string().min(20).max(150),
 });

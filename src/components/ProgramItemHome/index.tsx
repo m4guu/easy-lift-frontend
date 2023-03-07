@@ -1,14 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import {
-  Typography,
-  Box,
-  Divider,
-  Chip,
-  ListItem,
-  Button,
-} from "@mui/material";
+import { Typography, Box, Divider, Chip, Button } from "@mui/material";
 import { styled, useTheme } from "@mui/system";
 
 import { useUserContext } from "../../contexts/userContext";

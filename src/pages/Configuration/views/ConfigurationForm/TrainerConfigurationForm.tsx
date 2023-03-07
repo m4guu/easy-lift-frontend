@@ -20,6 +20,7 @@ import { Submit } from "../../../../components";
 
 import { LeafletMap } from "./views/Trainer/map/LeafletMap";
 
+// ! comment leafletmap to dont up unnessesery database requests
 const TrainerConfigurationForm: React.FC = () => {
   const { methods, canSubmit, onSubmit, pending } = useTrainerConfigForm();
   const { handleSubmit } = methods;
@@ -40,7 +41,7 @@ const TrainerConfigurationForm: React.FC = () => {
           </FormBox>
           <FormBox>
             <BoxHeader variant="caption">Map</BoxHeader>
-            <LeafletMap />
+            {/* <LeafletMap /> */}
           </FormBox>
         </FormWrapper>
         <FormActions>

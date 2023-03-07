@@ -11,6 +11,19 @@ export const MainGridContainer = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.down("lg")]: {
     overflowY: "visible",
     display: "inherit",
+    // Add custom scrollbar styles
+    "::-webkit-scrollbar": {
+      width: "4px",
+      height: "4px",
+    },
+    "::-webkit-scrollbar-thumb": {
+      backgroundColor: theme.palette.primary.main,
+      borderRadius: "8px",
+    },
+    "::-webkit-scrollbar-track": {
+      backgroundColor: theme.palette.background.paper,
+      borderRadius: "8px",
+    },
   },
 }));
 
@@ -43,6 +56,19 @@ export const ThirdGridItem = styled(Grid)(({ theme }) => ({
   marginBottom: theme.spacing(4),
   overflowY: "scroll",
 
+  // Add custom scrollbar styles
+  "::-webkit-scrollbar": {
+    width: "4px",
+    height: "4px",
+  },
+  "::-webkit-scrollbar-thumb": {
+    backgroundColor: theme.palette.primary.main,
+    borderRadius: "8px",
+  },
+  "::-webkit-scrollbar-track": {
+    backgroundColor: theme.palette.background.paper,
+    borderRadius: "8px",
+  },
   [theme.breakpoints.up("lg")]: {
     height: "92%",
   },
