@@ -10,12 +10,17 @@ const useIsDragging = () => {
     function dragLeaveHandler() {
       setDragCounter((prevCounter) => prevCounter - 1);
     }
+    function dropHandler() {
+      setDragCounter(0);
+    }
 
+    window.addEventListener("drop", dropHandler);
     window.addEventListener("dragenter", dragEnterHandler);
     window.addEventListener("dragleave", dragLeaveHandler);
 
     // clean up
     return () => {
+      window.removeEventListener("drop", dropHandler);
       window.removeEventListener("dragenter", dragEnterHandler);
       window.removeEventListener("dragleave", dragLeaveHandler);
     };

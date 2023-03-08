@@ -14,7 +14,7 @@ import {
   FormWrapper,
   FormActions,
 } from "./styles/User/ConfigurationForm.styles";
-import { Submit } from "../../../../components";
+import { SectionHeader, Submit } from "../../../../components";
 
 export const UserConfigurationForm: React.FC = () => {
   const { methods, canSubmit, onSubmit, pending } = useUserConfigForm();
@@ -22,6 +22,7 @@ export const UserConfigurationForm: React.FC = () => {
 
   return (
     <FormProvider {...methods}>
+      <SectionHeader>configuration</SectionHeader>
       <FormContainer>
         <FormWrapper>
           <Name />

@@ -6,7 +6,7 @@ import { styled } from "@mui/system";
 import { useUserContext } from "../../contexts/userContext";
 
 import { UserConfigurationForm } from "./views/ConfigurationForm/UserConfigurationForm";
-import { SectionContainer, Logo, SectionHeader } from "../../components";
+import { Logo, SectionHeader } from "../../components";
 import { Role } from "../../shared/enums";
 import TrainerConfigurationForm from "./views/ConfigurationForm/TrainerConfigurationForm";
 
@@ -19,8 +19,8 @@ const ConfigurationPage: React.FC = () => {
       </LogoWrapper>
 
       <SectionContent>
-        <SectionHeader>configuration</SectionHeader>
-        <Divider />
+        {/* <SectionHeader>configuration</SectionHeader> */}
+        <NoPaddingDivider />
         {user?.role === Role.user ? (
           <UserConfigurationForm />
         ) : (
@@ -31,13 +31,19 @@ const ConfigurationPage: React.FC = () => {
   );
 };
 
-const SectionContent = styled(Box)(({ theme }) => ({
-  textAlign: "center",
+const SectionContainer = styled("section")(({ theme }) => ({
+  display: "flex",
   flexDirection: "column",
-  width: "100%",
-  marginTop: theme.spacing(2),
-  gap: theme.spacing(2),
+  padding: theme.spacing(2),
+  height: "100vh",
 }));
+
+const SectionContent = styled(Box)({
+  display: "flex",
+  flexDirection: "column",
+  flex: 1,
+  textAlign: "center",
+});
 
 const LogoWrapper = styled(Box)(({ theme }) => ({
   textAlign: "center",
@@ -55,5 +61,10 @@ const LogoWrapper = styled(Box)(({ theme }) => ({
     width: "100%",
   },
 }));
+
+const NoPaddingDivider = styled(Divider)(({ theme }) => ({
+  margin: `0 -${theme.spacing(2)} ${theme.spacing(2)} -${theme.spacing(2)}`,
+}));
+
 const Configuration = ConfigurationPage;
 export default Configuration;

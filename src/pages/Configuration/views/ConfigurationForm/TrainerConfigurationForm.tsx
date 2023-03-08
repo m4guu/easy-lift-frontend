@@ -7,12 +7,10 @@ import {
 } from "../../../../hooks/formHooks/configuration/useTrainerConfigForm";
 
 import {
-  FormContainer,
   FormWrapper,
-  FormActions,
   FormBox,
   FormMapBox,
-  BoxHeader,
+  Title,
 } from "./styles/Trainer/ConfigurationForm.styles";
 import {
   Name,
@@ -20,7 +18,7 @@ import {
   Gyms,
   Image,
 } from "./views/Trainer/form/TrainerConfiguration.form";
-import { Submit } from "../../../../components";
+import { SectionHeader, Submit } from "../../../../components";
 
 import { LeafletMap } from "./views/Trainer/map/LeafletMap";
 
@@ -61,31 +59,20 @@ const TrainerConfigurationForm: React.FC = () => {
 
   return (
     <FormProvider {...methods}>
-      <FormContainer>
-        <FormWrapper>
-          <FormBox>
-            <BoxHeader variant="caption">Basin Information</BoxHeader>
-            <Name />
-            <Image />
-            <Description />
-          </FormBox>
-          <FormBox>
-            <BoxHeader variant="caption">Personal Traning</BoxHeader>
-            <Gyms
-              selectedGyms={selectedGyms}
-              gymsChangeHandler={gymsChangeHandler}
-              removeGym={removeGym}
-            />
-          </FormBox>
-          <FormMapBox>
-            <BoxHeader variant="caption">Map</BoxHeader>
-            <LeafletMap
-              selectedGyms={selectedGyms}
-              gymsChangeHandler={gymsChangeHandler}
-            />
-          </FormMapBox>
-        </FormWrapper>
-        <FormActions>
+      <FormWrapper>
+        <FormBox>
+          <SectionHeader>configuration</SectionHeader>
+          <Title variant="caption">Basin Information</Title>
+          <Name />
+          <Image />
+          <Description />
+          <Title variant="caption">Personal Traning</Title>
+          <Gyms
+            selectedGyms={selectedGyms}
+            gymsChangeHandler={gymsChangeHandler}
+            removeGym={removeGym}
+          />
+
           <Submit
             label="finish"
             variant="contained"
@@ -93,8 +80,15 @@ const TrainerConfigurationForm: React.FC = () => {
             loading={pending}
             disabled={!canSubmit}
           />
-        </FormActions>
-      </FormContainer>
+        </FormBox>
+
+        <FormMapBox>
+          <LeafletMap
+            selectedGyms={selectedGyms}
+            gymsChangeHandler={gymsChangeHandler}
+          />
+        </FormMapBox>
+      </FormWrapper>
     </FormProvider>
   );
 };

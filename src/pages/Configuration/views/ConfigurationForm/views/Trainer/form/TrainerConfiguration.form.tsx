@@ -3,12 +3,12 @@ import { Controller, useFormContext } from "react-hook-form";
 import { TextField, Checkbox, Autocomplete } from "@mui/material";
 import { styled } from "@mui/system";
 
+import ImagePicker from "../../../../../../../features/ImagePicker";
+
+import { Gym } from "../../../../../../../shared/interfaces";
 import { TrainerConfigFields } from "../../../../../../../hooks/formHooks/configuration/useTrainerConfigForm";
 import { ControlledTextField } from "../../../../../../../features";
-import ImagePicker from "../../../../../../../features/ImagePicker";
 import { gyms, icon, checkedIcon } from "./constans";
-import { Gym } from "../../../../../../../shared/interfaces";
-import { GymTags } from "./views/GymTags/GymTags";
 
 // Name //
 export const Name = styled(() => (
@@ -30,7 +30,7 @@ export const Description = styled(() => (
     size="small"
     label="Description"
     multiline
-    rows={10}
+    rows={8}
     type="text"
     fieldName={TrainerConfigFields.DESCRIPTION}
     placeholder="I'm passionate trainer ..."
@@ -42,12 +42,10 @@ export const Description = styled(() => (
 interface GymsProps {
   selectedGyms: Gym[];
   gymsChangeHandler: (selectedGym: Gym) => void;
-  removeGym: (gym: Gym) => void;
 }
 export const Gyms: React.FC<GymsProps> = ({
   selectedGyms,
   gymsChangeHandler,
-  removeGym,
 }) => {
   const { control } = useFormContext();
   return (
@@ -90,11 +88,6 @@ export const Gyms: React.FC<GymsProps> = ({
               placeholder="Search gym..."
             />
           )}
-          renderTags={(selectedValues) => {
-            return (
-              <GymTags selectedGyms={selectedValues} removeGym={removeGym} />
-            );
-          }}
         />
       )}
     />
@@ -106,10 +99,4 @@ export const Gyms: React.FC<GymsProps> = ({
 export const Image = styled(() => (
   <ImagePicker fieldName={TrainerConfigFields.IMAGE} />
 ))``;
-//
-
-// Styles //
-const AutoSelect = styled(Autocomplete)({
-  width: "300px",
-});
 //

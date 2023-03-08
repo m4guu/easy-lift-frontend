@@ -10,6 +10,7 @@ import SimCardAlertIcon from "@mui/icons-material/SimCardAlert";
 
 import { avatarPickerOptions } from "./constans";
 import { useIsDragging } from "../../../hooks";
+import { DragInfo } from "./views/DragInfo";
 
 type DropzoneProps = {
   changeImageField: (...event: any[]) => void;
@@ -67,12 +68,21 @@ export const Dropzone: React.FC<DropzoneProps> = ({ changeImageField }) => {
         ) : (
           <Box>
             {isDragging ? (
-              <DragContainer>
-                <CloudDownloadIcon color="info" />
-                <DragTitle variant="caption" color="info">
-                  Drag file here
-                </DragTitle>
-              </DragContainer>
+              <Box>
+                {(isDragAccept || isDragReject) && !imagePreview ? (
+                  <DragInfo
+                    isDragAccept={isDragAccept}
+                    isDragReject={isDragReject}
+                  />
+                ) : (
+                  <DragContainer>
+                    <CloudDownloadIcon color="info" />
+                    <DragTitle variant="caption" color="info">
+                      Drag file here
+                    </DragTitle>
+                  </DragContainer>
+                )}
+              </Box>
             ) : (
               <AddPhotoAlternateIcon color="primary" />
             )}
@@ -80,22 +90,6 @@ export const Dropzone: React.FC<DropzoneProps> = ({ changeImageField }) => {
         )}
       </DropzoneContent>
 
-      {isDragAccept && !imagePreview && (
-        <DragInfoContainer>
-          <TaskIcon color="success" />
-          <DragInfoTitle color="success.main" variant="caption">
-            File Accepted
-          </DragInfoTitle>
-        </DragInfoContainer>
-      )}
-      {isDragReject && !imagePreview && (
-        <DragInfoContainer>
-          <SimCardAlertIcon color="error" />
-          <DragInfoTitle color="error" variant="caption">
-            Wrong file extension,
-          </DragInfoTitle>
-        </DragInfoContainer>
-      )}
       <Button onClick={open}>{imagePreview ? "change" : "pick"} avatar</Button>
     </DropzoneContainer>
   );
