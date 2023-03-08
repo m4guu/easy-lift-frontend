@@ -27,7 +27,7 @@ export interface TrainerConfig {
 export const defaultValues = {
   [TrainerConfigFields.NAME]: "",
   [TrainerConfigFields.DESCRIPTION]: "",
-  [TrainerConfigFields.GYMS]: ["default"],
+  [TrainerConfigFields.GYMS]: [],
   [TrainerConfigFields.IMAGE]: null,
 };
 

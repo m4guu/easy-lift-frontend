@@ -5,6 +5,9 @@ export { default as ExerciseItem } from "./ExerciseItem";
 export { default as ExerciseItemWorkout } from "./ExerciseItemWorkout";
 
 export { default as ExerciseProgresItem } from "./ExerciseProgresItem";
+
+export { default as GymTag } from "./GymTag";
+
 export { default as MediaFooter } from "./MediaFooter";
 export { default as NavigationItem } from "./NavigationItem";
 

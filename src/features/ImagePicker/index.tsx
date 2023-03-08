@@ -2,7 +2,7 @@ import React from "react";
 import { useFormContext, Controller } from "react-hook-form";
 
 import { Box, Typography } from "@mui/material";
-import { useTheme } from "@mui/system";
+import { styled, useTheme } from "@mui/system";
 
 import { Dropzone } from "./views/Dropzone";
 

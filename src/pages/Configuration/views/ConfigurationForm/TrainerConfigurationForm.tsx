@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { FormProvider } from "react-hook-form";
 
-import { useTrainerConfigForm } from "../../../../hooks/formHooks/configuration/useTrainerConfigForm";
+import {
+  TrainerConfigFields,
+  useTrainerConfigForm,
+} from "../../../../hooks/formHooks/configuration/useTrainerConfigForm";
 
 import {
-  FormContainer,
   FormWrapper,
-  FormActions,
   FormBox,
-  BoxHeader,
+  FormMapBox,
+  Title,
 } from "./styles/Trainer/ConfigurationForm.styles";
 import {
   Name,
@@ -16,34 +18,61 @@ import {
   Gyms,
   Image,
 } from "./views/Trainer/form/TrainerConfiguration.form";
-import { Submit } from "../../../../components";
+import { SectionHeader, Submit } from "../../../../components";
 
 import { LeafletMap } from "./views/Trainer/map/LeafletMap";
 
+import { Gym } from "../../../../shared/interfaces";
+
 const TrainerConfigurationForm: React.FC = () => {
+  const [selectedGyms, setSelectedGyms] = useState<Gym[]>([]);
+
   const { methods, canSubmit, onSubmit, pending } = useTrainerConfigForm();
-  const { handleSubmit } = methods;
+  const { handleSubmit, setValue } = methods;
+
+  const removeGym = (gym: Gym) => {
+    const updatedGyms = selectedGyms.filter(
+      (selectedGym) => selectedGym.id !== gym.id
+    );
+    const updatedGymsIds = updatedGyms.map((updatedGym) => updatedGym.id);
+    // remove existing gym
+    setSelectedGyms(updatedGyms);
+    // remove form field existing gym
+    setValue(TrainerConfigFields.GYMS, updatedGymsIds);
+  };
+
+  const gymsChangeHandler = (selectedGym: Gym) => {
+    const isSelected = !!selectedGyms.filter((gym) => gym.id === selectedGym.id)
+      .length;
+
+    if (isSelected) {
+      removeGym(selectedGym);
+    } else {
+      const updatedGyms = [...selectedGyms, selectedGym];
+      const updatedGymsIds = updatedGyms.map((updatedGym) => updatedGym.id);
+      // change existing gyms
+      setSelectedGyms(updatedGyms);
+      // update form field gyms
+      setValue(TrainerConfigFields.GYMS, updatedGymsIds);
+    }
+  };
 
   return (
     <FormProvider {...methods}>
-      <FormContainer>
-        <FormWrapper>
-          <FormBox>
-            <BoxHeader variant="caption">Basin Information</BoxHeader>
-            <Name />
-            <Image />
-            <Description />
-          </FormBox>
-          <FormBox>
-            <BoxHeader variant="caption">Personal Traning</BoxHeader>
-            <Gyms />
-          </FormBox>
-          <FormBox>
-            <BoxHeader variant="caption">Map</BoxHeader>
-            <LeafletMap />
-          </FormBox>
-        </FormWrapper>
-        <FormActions>
+      <FormWrapper>
+        <FormBox>
+          <SectionHeader>configuration</SectionHeader>
+          <Title variant="caption">Basin Information</Title>
+          <Name />
+          <Image />
+          <Description />
+          <Title variant="caption">Personal Traning</Title>
+          <Gyms
+            selectedGyms={selectedGyms}
+            gymsChangeHandler={gymsChangeHandler}
+            removeGym={removeGym}
+          />
+
           <Submit
             label="finish"
             variant="contained"
@@ -51,8 +80,15 @@ const TrainerConfigurationForm: React.FC = () => {
             loading={pending}
             disabled={!canSubmit}
           />
-        </FormActions>
-      </FormContainer>
+        </FormBox>
+
+        <FormMapBox>
+          <LeafletMap
+            selectedGyms={selectedGyms}
+            gymsChangeHandler={gymsChangeHandler}
+          />
+        </FormMapBox>
+      </FormWrapper>
     </FormProvider>
   );
 };

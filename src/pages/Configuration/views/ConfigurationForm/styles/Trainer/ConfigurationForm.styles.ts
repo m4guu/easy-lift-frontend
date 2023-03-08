@@ -1,37 +1,42 @@
 import { Box, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
-export const FormContainer = styled(Box)(({ theme }) => ({}));
-
 export const FormWrapper = styled("form")(({ theme }) => ({
   display: "flex",
+  flex: 1,
   margin: `${theme.spacing(2)} 0`,
-  justifyContent: "center",
-  gap: theme.spacing(2),
+  justifyContent: "space-between",
   [theme.breakpoints.down("lg")]: {
     flexDirection: "column",
-    width: "35%",
-    marginLeft: "auto",
-    marginRight: "auto",
-  },
-  [theme.breakpoints.down("md")]: {
-    width: "50%",
-  },
-  [theme.breakpoints.down("sm")]: {
+    alignItems: "center",
     width: "100%",
   },
 }));
 
 export const FormBox = styled(Box)(({ theme }) => ({
   display: "flex",
-  minWidth: "12%",
+  width: "30%",
   flexDirection: "column",
+  justifyContent: "center",
+  marginLeft: "auto",
+  marginRight: "auto",
   gap: theme.spacing(2),
+  [theme.breakpoints.down("lg")]: {
+    width: "50%",
+  },
+  [theme.breakpoints.down("md")]: {
+    width: "100%",
+  },
 }));
-
-export const BoxHeader = styled(Typography)(({ theme }) => ({
+export const FormMapBox = styled(Box)(({ theme }) => ({
+  minWidth: "50%",
+  margin: ` -${theme.spacing(4)} -${theme.spacing(2)} -${theme.spacing(4)} 0`,
+  [theme.breakpoints.down("md")]: {
+    minWidth: "100%",
+  },
+}));
+export const Title = styled(Typography)(({ theme }) => ({
   fontSize: "1rem",
+  textAlign: "left",
   color: theme.palette.primary.main,
 }));
-
-export const FormActions = styled(Box)(({ theme }) => ({}));

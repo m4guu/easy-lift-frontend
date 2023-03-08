@@ -32,68 +32,41 @@
   "users": [
     {
       "id": "547266d5-f25c-4664-a290-b590290c06de",
-      "name": "Krystian",
+      "name": "dssssss",
       "email": "user@gmail.com",
       "password": "ddddd",
       "role": "user",
       "isConfigured": true,
       "image": [
         {
-          "path": "ship_wreck_480x300.JPG"
+          "path": "avatar-presentation.png"
         }
       ],
       "bodyWeights": [
         {
-          "weight": 84,
+          "weight": 30,
           "date": ""
         }
       ],
-      "expirationDate": "2023-03-03T14:03:12.384Z",
-      "height": 190
+      "expirationDate": "2023-10-03T14:03:12.384Z",
+      "height": 60
     },
     {
-      "id": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-      "name": "Krystian",
+      "id": "4b64617c-41dd-460a-8dc0-4baa229145b8",
+      "name": "dsadsa",
       "email": "trener@gmail.com",
-      "password": "ddddd",
+      "password": "dupad",
       "role": "trainer",
       "isConfigured": true,
       "image": [
         {
-          "path": "pobrane.jfif"
+          "path": "avatar-presentation.png"
         }
       ],
       "bodyWeights": [],
-      "expirationDate": "2023-03-03T14:05:43.387Z",
-      "description": "dssdsssssssssssssssss",
-      "gyms": [
-        "default",
-        "Calypsoo Morena",
-        "Husarz Gym",
-        "Multisport"
-      ]
-    },
-    {
-      "id": "77a3ad94-681d-4d2b-92c1-fc7e1ef2e2dc",
-      "name": "",
-      "email": "user@gmail.com",
-      "password": "dupad",
-      "role": "user",
-      "isConfigured": false,
-      "image": "",
-      "bodyWeights": [],
-      "expirationDate": ""
-    },
-    {
-      "id": "18879f9a-b121-4374-9d33-116e7d918c36",
-      "name": "",
-      "email": "trainer@gmail.com",
-      "password": "ddddd",
-      "role": "trainer",
-      "isConfigured": false,
-      "image": "",
-      "bodyWeights": [],
-      "expirationDate": ""
+      "expirationDate": "2023-10-03T18:10:42.961Z",
+      "description": "ssssssssssssssssssssssssssssssssssssss",
+      "gyms": []
     }
   ],
   "programs": [
@@ -1767,7 +1740,7 @@
     {
       "id": "68ae8b68-da8a-426d-bf8b-e3da6e929aeb",
       "creator": "547266d5-f25c-4664-a290-b590290c06de",
-      "title": "dsadsa",
+      "title": "Updated Title Workout",
       "date": "2023-02-28",
       "exercises": [
         {

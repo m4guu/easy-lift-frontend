@@ -1,11 +1,16 @@
 import React, { useState, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
 
-import { Box, Avatar, Button } from "@mui/material";
+import { Box, Avatar, Button, Typography } from "@mui/material";
 import { styled, useTheme } from "@mui/system";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
+import TaskIcon from "@mui/icons-material/Task";
+import SimCardAlertIcon from "@mui/icons-material/SimCardAlert";
 
 import { avatarPickerOptions } from "./constans";
+import { useIsDragging } from "../../../hooks";
+import { DragInfo } from "./views/DragInfo";
 
 type DropzoneProps = {
   changeImageField: (...event: any[]) => void;
@@ -13,6 +18,7 @@ type DropzoneProps = {
 
 export const Dropzone: React.FC<DropzoneProps> = ({ changeImageField }) => {
   const [imagePreview, setImage] = useState<string>("");
+  const isDragging = useIsDragging();
   const theme = useTheme();
 
   const onDrop = <T extends File>(acceptedFiles: T[]) => {
@@ -41,6 +47,9 @@ export const Dropzone: React.FC<DropzoneProps> = ({ changeImageField }) => {
 
   const borderColor = useMemo(() => {
     let color = theme.palette.primary.main;
+    if (isDragging && !imagePreview) {
+      color = theme.palette.info.main;
+    }
     if (isDragAccept) {
       color = theme.palette.success.main;
     } else if (isDragReject) {
@@ -48,7 +57,7 @@ export const Dropzone: React.FC<DropzoneProps> = ({ changeImageField }) => {
     }
     return color;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isDragAccept, isDragReject]);
+  }, [isDragAccept, isDragReject, isDragging, imagePreview]);
 
   return (
     <DropzoneContainer {...getRootProps()}>
@@ -57,7 +66,27 @@ export const Dropzone: React.FC<DropzoneProps> = ({ changeImageField }) => {
         {imagePreview ? (
           <PreviewAvatar src={imagePreview} alt="avatar" />
         ) : (
-          <AddPhotoAlternateIcon color="primary" />
+          <Box>
+            {isDragging ? (
+              <Box>
+                {(isDragAccept || isDragReject) && !imagePreview ? (
+                  <DragInfo
+                    isDragAccept={isDragAccept}
+                    isDragReject={isDragReject}
+                  />
+                ) : (
+                  <DragContainer>
+                    <CloudDownloadIcon color="info" />
+                    <DragTitle variant="caption" color="info">
+                      Drag file here
+                    </DragTitle>
+                  </DragContainer>
+                )}
+              </Box>
+            ) : (
+              <AddPhotoAlternateIcon color="primary" />
+            )}
+          </Box>
         )}
       </DropzoneContent>
 
@@ -75,13 +104,35 @@ const DropzoneContent = styled(Box)(({ theme }) => ({
   marginLeft: "auto",
   marginRight: "auto",
   marginBottom: theme.spacing(1),
-  width: "7.1rem",
-  height: "7.1rem",
+  width: "10.1rem",
+  height: "10.1rem",
   border: `solid 0.122rem`,
   borderStyle: "dashed",
   borderRadius: "55%",
 }));
+
 const PreviewAvatar = styled(Avatar)({
-  width: "6.8rem",
-  height: "6.8rem",
+  width: "9.8rem",
+  height: "9.8rem",
+});
+
+const DragContainer = styled(Box)({
+  display: "flex",
+  alignItems: "center",
+  flexDirection: "column",
+});
+
+const DragTitle = styled(Typography)({
+  fontSize: "0.9rem",
+});
+
+const DragInfoContainer = styled(Box)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "center",
+  textAlign: "center",
+  gap: theme.spacing(1),
+}));
+
+const DragInfoTitle = styled(Typography)({
+  fontSize: "0.9rem",
 });

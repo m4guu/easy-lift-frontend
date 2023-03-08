@@ -27,8 +27,6 @@ const AuthPage: React.FC = () => {
 
         <AuthForm authType={authType} setTab={setTab} />
       </SectionContent>
-
-      <MediaFooter />
     </SectionContainer>
   );
 };
@@ -42,6 +40,7 @@ const SectionContent = styled(Box)(({ theme }) => ({
   transform: "translate(-50%, -60%)",
   alignItems: "center",
   gap: theme.spacing(2),
+  padding: theme.spacing(2),
 }));
 
 const LogoWrapper = styled(Box)(({ theme }) => ({
