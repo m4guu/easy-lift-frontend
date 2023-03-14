@@ -82,9 +82,6 @@ const SegmentCaption = styled(Typography)(({ theme }) => ({
 
 const NoPaddingDivider = styled(Divider)(({ theme }) => ({
   margin: `0 -${theme.spacing(2)} ${theme.spacing(1)} -${theme.spacing(2)}`,
-  [theme.breakpoints.down("sm")]: {
-    margin: `0 -${theme.spacing(1)} ${theme.spacing(1)} -${theme.spacing(1)}`,
-  },
 }));
 const Workout = WorkoutPage;
 export default Workout;

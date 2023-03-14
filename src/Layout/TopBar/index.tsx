@@ -12,6 +12,8 @@ import { Role } from "../../shared/enums";
 
 import AccountSettings from "./AccountSettings";
 
+import DUMMY_USER_IMG from "../../assets/images/DUMMY_PROFILE_IMG/profile-img-id.jpeg";
+
 const TopBar: React.FC = () => {
   const { user } = useUserContext();
   const navigate = useNavigate();
@@ -32,7 +34,7 @@ const TopBar: React.FC = () => {
           {buttonText}
         </Button>
         <AccountSettingsBox>
-          <AccountSettings image={user?.image} />
+          <AccountSettings image={DUMMY_USER_IMG} />
         </AccountSettingsBox>
       </Content>
     </TopBarSectionContainer>
@@ -42,7 +44,7 @@ const TopBar: React.FC = () => {
 const TopBarSectionContainer = styled("section")({});
 
 const Content = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(2),
+  padding: `${theme.spacing(1)} ${theme.spacing(2)}`,
   display: "flex",
   alignItems: "center",
   justifyContent: "right",

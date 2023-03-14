@@ -1,7 +1,7 @@
 import React from "react";
 import { UseFieldArrayAppend } from "react-hook-form";
 
-import { Box, Alert, Button, Modal } from "@mui/material";
+import { Box, Typography, Button, Modal } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { useExercises } from "../../hooks/queryHooks/exerciseDB/useExercises";
@@ -11,8 +11,10 @@ import {
 } from "../../hooks/formHooks/workout/useNewWorkoutForm";
 
 import { Status } from "../../shared/enums";
-import { ExerciseList } from "./ExercisesContent/ExerciseList";
+import { ExerciseList } from "./views/ExercisesContent/ExerciseList";
 import { SectionContainer, SectionHeader } from "../../components";
+import { FilterPanel } from "./views/FilterPanel/FilterPanel";
+import { useExerciseFilter } from "../../hooks/filters/useExerciseFilter";
 
 type ExercisesProps = {
   appendExercise: UseFieldArrayAppend<
@@ -30,6 +32,8 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
 }) => {
   const { status, error, data: exercises } = useExercises();
 
+  const { updatedExercises, filterPanelProps } = useExerciseFilter(exercises);
+
   return (
     <ExercisesMuiModal
       open={isOpen}
@@ -40,20 +44,15 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
         <SectionContainer>
           <SectionHeader>Exercise list</SectionHeader>
 
-          <ExerciseFilterContainer>
-            <Box>search ...</Box>
-            <Box>target -categories</Box>
-          </ExerciseFilterContainer>
+          <FilterPanel filterHandlers={filterPanelProps} />
 
           {status === Status.LOADING && <div>loading...</div>}
 
-          {exercises && exercises.length === 0 ? (
-            <Alert variant="outlined" severity="error">
-              An Error has occurred. Please try again later.
-            </Alert>
+          {updatedExercises?.length === 0 ? (
+            <Typography>No search result</Typography>
           ) : (
             <ExerciseList
-              exercises={exercises!}
+              exercises={updatedExercises}
               appendExercise={appendExercise}
               closeModal={closeModal}
             />
@@ -63,6 +62,7 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
             onClick={closeModal}
             color="error"
             variant="contained"
+            size="small"
           >
             close modal
           </CloseModalButton>
@@ -72,20 +72,19 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
   );
 };
 
-const ExerciseFilterContainer = styled(Box)(({ theme }) => ({
-  display: "flex",
-  gap: theme.spacing(2),
+const CloseModalButton = styled(Button)(({ theme }) => ({
+  position: "absolute",
+  right: theme.spacing(2),
+  top: theme.spacing(2),
 }));
 
-const CloseModalButton = styled(Button)({
-  position: "fixed",
-  right: 5,
-  top: 5,
-});
-
 const ExercisesMuiModal = styled(Modal)(({ theme }) => ({
+  margin: 0,
   backgroundColor: theme.palette.background.default,
   overflowY: "scroll",
+  "::-webkit-scrollbar": {
+    display: "none",
+  },
 }));
 
 export default ExercisesModal;

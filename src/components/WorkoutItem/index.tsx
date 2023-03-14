@@ -22,6 +22,7 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
   const { mutate: deleteQueryUserProgress } = useDeleteUserProgresMutation();
   const { mutate: updateQueryWorkout } = useUpdateWorkoutMutation(workout.id);
 
+  // todo: change when backend will be written => delete user progress will be in delete workout route
   const deleteWorkout = () => {
     deleteQueryWorkout(workout.id);
     deleteQueryUserProgress(workout.id);

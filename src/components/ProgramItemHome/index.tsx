@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { Typography, Box, Divider, Chip, Button } from "@mui/material";
+import { Typography, Box, Divider } from "@mui/material";
 import { styled, useTheme } from "@mui/system";
 
 import { useUserContext } from "../../contexts/userContext";
@@ -28,71 +28,62 @@ const ProgramItemHome: React.FC<ProgramItemHomeProps> = ({ program }) => {
           {program.title}
         </ProgramTitle>
       </HeaderContainer>
-      <ProgramContent>
-        <ContentHeader>
-          <ContentText
-            variant="caption"
-            color={theme.palette.custom_grey.tint_2}
-          >
-            {program.creator.name}
-            {"  "}
-            {program.creator.id === user?.id && (
-              <Chip
-                color="info"
-                label={<Typography variant="caption">you</Typography>}
-                size="small"
-                variant="outlined"
-              />
-            )}
-          </ContentText>
-          <Price
-            variant="filled"
-            color="primary"
-            size="small"
-            label={
-              <Typography variant="caption">
-                {program.price.toFixed(2)} $
-              </Typography>
-            }
-          />
-        </ContentHeader>
 
-        <Box>
-          <Box>
-            <Typography color="whitesmoke" variant="caption">
-              Program Description
+      <ProgramContent>
+        <ContentWrapper>
+          <AuthorBox>
+            <Typography color="primary" variant="caption">
+              Author
             </Typography>
-            <Typography
-              variant="body2"
+            <ContentText
+              variant="caption"
               color={theme.palette.custom_grey.tint_2}
             >
-              {program.description}
-            </Typography>
-          </Box>
-        </Box>
+              {program.creator.name}
+              {"  "}
+              {program.creator.id === user?.id && (
+                <Typography variant="caption" color="info.main">
+                  you
+                </Typography>
+              )}
+            </ContentText>
+          </AuthorBox>
 
-        <ProgramAtions>
-          {program.creator.id !== user?.id ? (
-            <Buy variant="contained" size="small" fullWidth>
-              buy
-            </Buy>
-          ) : (
-            <Edit variant="contained" size="small" color="info" fullWidth>
-              edit
-            </Edit>
-          )}
-        </ProgramAtions>
-        <Divider />
+          <Divider />
+
+          <Description>
+            <DescriptionHeader color="primary" variant="caption">
+              Program Description
+            </DescriptionHeader>
+
+            <Divider />
+
+            <DescriptionContent
+              variant="body2"
+              color={theme.palette.custom_grey.tint_2}
+              sx={{ height: "100%" }}
+            >
+              {program.description.substring(0, 100)}...
+            </DescriptionContent>
+          </Description>
+
+          <Price variant="subtitle1" color="primary">
+            {program.price.toFixed(2)} $
+          </Price>
+        </ContentWrapper>
       </ProgramContent>
     </ProgramItemCard>
   );
 };
 const ProgramItemCard = styled(Link)(({ theme }) => ({
   position: "relative",
-  gap: theme.spacing(1),
+  display: "flex",
+  flex: 1,
+  flexDirection: "column",
   marginBottom: theme.spacing(1),
   alignItems: "center",
   textDecoration: "none",
+  borderRadius: theme.spacing(1),
 }));
 
 const HeaderContainer = styled("header")({
@@ -116,34 +107,52 @@ const Overlay = styled(Box)({
   top: 0,
   bottom: 0,
   background:
-    "linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6923144257703081) 72%, rgba(8,8,8,0.6895133053221288) 100%)",
+    "linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6923144257703081) 42%, rgba(8,8,8,0.1895133053221288) 100%)",
 });
+
 const ProgramTitle = styled(Typography)({
   position: "absolute",
   bottom: 15,
+  textAlign: "center",
   textTransform: "uppercase",
   letterSpacing: "1px",
 });
 
 const ProgramContent = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(1),
+  width: "100%",
+  flex: 1,
+}));
+const ContentWrapper = styled(Box)(({ theme }) => ({
+  position: "relative",
+  height: "100%",
+  border: `solid thin ${theme.palette.others.border_color}`,
+  borderTop: "none",
 }));
 
-const ContentHeader = styled(Box)(({ theme }) => ({
+const AuthorBox = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(0.5),
   display: "flex",
-  justifyContent: "space-between",
   alignItems: "center",
+  justifyContent: "space-between",
 }));
 
-const ProgramAtions = styled(Box)(({ theme }) => ({
-  margin: `${theme.spacing(1)} 0`,
+const Description = styled(Box)(({ theme }) => ({
+  paddingBottom: theme.spacing(3),
 }));
-const Buy = styled(Button)({});
-const Edit = styled(Button)({});
+const DescriptionHeader = styled(Typography)(({ theme }) => ({
+  padding: theme.spacing(0.5),
+}));
+const DescriptionContent = styled(Typography)(({ theme }) => ({
+  padding: theme.spacing(0.5),
+}));
 const ContentText = styled(Typography)({
   letterSpacing: "1px",
 });
 
-const Price = styled(Chip)({});
+const Price = styled(Typography)(({ theme }) => ({
+  position: "absolute",
+  left: theme.spacing(0.5),
+  bottom: theme.spacing(0.5),
+}));
 
 export default ProgramItemHome;

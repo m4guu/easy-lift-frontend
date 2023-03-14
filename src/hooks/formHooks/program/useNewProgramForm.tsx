@@ -27,6 +27,7 @@ export enum AddProgramFormFields {
   // form step 2
   PROGRAM = "program",
   // form step 3
+  IMAGE = "image",
   PROGRAM_PRICE = "programPrice",
   PROGRAM_DESCRIPTION = "programDescription",
 }
@@ -37,6 +38,7 @@ export interface AddProgramForm {
   [AddProgramFormFields.FREQUENCY_PER_WEEK]: number;
   [AddProgramFormFields.PROGRAM_LENGTH]: number;
   [AddProgramFormFields.PROGRAM]: ProgramItem[];
+  [AddProgramFormFields.IMAGE]: File | null;
   [AddProgramFormFields.PROGRAM_PRICE]: number;
   [AddProgramFormFields.PROGRAM_DESCRIPTION]: string;
 }
@@ -47,6 +49,7 @@ const defaultValues = {
   [AddProgramFormFields.FREQUENCY_PER_WEEK]: minFreqTraining,
   [AddProgramFormFields.PROGRAM_LENGTH]: minProgramLength,
   [AddProgramFormFields.PROGRAM]: [],
+  [AddProgramFormFields.IMAGE]: null,
   [AddProgramFormFields.PROGRAM_PRICE]: 0,
   [AddProgramFormFields.PROGRAM_DESCRIPTION]: "",
 };
@@ -106,6 +109,7 @@ const programSchema = yup.object().shape({
     .required()
     .min(minProgramLength)
     .max(maxProgramLength),
+  [AddProgramFormFields.IMAGE]: yup.mixed().required(),
   [AddProgramFormFields.PROGRAM_PRICE]: yup.number().required().min(0),
   [AddProgramFormFields.PROGRAM_DESCRIPTION]: yup.string().min(20).max(150),
 });
@@ -131,6 +135,7 @@ export const useNewProgramForm = () => {
     frequency,
     programLength,
     program,
+    image,
     programPrice,
     programDescription,
   } = watch();
@@ -141,6 +146,7 @@ export const useNewProgramForm = () => {
     frequency &&
     programLength &&
     program &&
+    image &&
     programPrice &&
     programDescription;
 
@@ -164,6 +170,7 @@ export const useNewProgramForm = () => {
         frequencyPerWeek: formValues.frequency,
         programLength: formValues.programLength,
         program: formValues.program,
+        image: formValues.image,
         price: formValues.programPrice,
         description: formValues.programDescription,
       };

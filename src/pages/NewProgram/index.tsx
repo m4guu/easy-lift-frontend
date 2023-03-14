@@ -2,6 +2,7 @@ import React from "react";
 import { FormProvider } from "react-hook-form";
 
 import { Button, Step, StepLabel, Alert } from "@mui/material";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 import {
   useNewProgramForm,
@@ -30,6 +31,7 @@ import {
   Program,
   ProgramPrice,
   ProgramDescription,
+  Image,
 } from "./views/AddProgramForm/AddProgram.form";
 import { steps } from "./constans";
 
@@ -60,7 +62,7 @@ const NewProgramPage: React.FC = () => {
       <SectionHeader>New Training Program</SectionHeader>
 
       {isProgramAdded ? (
-        <Alert color="success">Programe added.</Alert>
+        <Alert color="success">Program added successfuly.</Alert>
       ) : (
         <>
           <FormStepper activeStep={currentStep - 1} alternativeLabel>
@@ -98,6 +100,7 @@ const NewProgramPage: React.FC = () => {
 
               {currentStep === 3 && (
                 <ThirdFormStepWrapper>
+                  <Image />
                   <ProgramPrice />
                   <ProgramDescription />
                 </ThirdFormStepWrapper>
@@ -111,12 +114,19 @@ const NewProgramPage: React.FC = () => {
 
               <FormActions>
                 {currentStep !== 3 && (
-                  <Button onClick={() => nextStep(trigger)}>next step</Button>
+                  <Button
+                    onClick={() => nextStep(trigger)}
+                    endIcon={<NavigateNextIcon />}
+                    variant="outlined"
+                  >
+                    next step
+                  </Button>
                 )}
                 {currentStep === 3 && (
                   <Button
                     onClick={handleSubmit((data) => onSubmit(data))}
                     disabled={!canSubmit}
+                    variant="outlined"
                   >
                     create program
                   </Button>

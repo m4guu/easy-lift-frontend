@@ -14,7 +14,7 @@ export const YoursProgramsList: React.FC = () => {
   const { status, error, data: userPrograms } = useTrainerPrograms(user?.id);
 
   return (
-    <List>
+    <List disablePadding>
       {status === Status.LOADING && <div>loading...</div>}
       {status === Status.ERROR && <div>error</div>}
 

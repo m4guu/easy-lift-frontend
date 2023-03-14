@@ -9,6 +9,7 @@ import { useUpdateUserMutation } from "../../queryHooks/auth/useUpdateUserMutati
 import { useUserContext } from "../../../contexts/userContext";
 
 import { User } from "../../../shared/interfaces";
+import { getTodayDate } from "../../../utils/Date";
 
 export enum UserConfigFields {
   NAME = "name",
@@ -63,7 +64,7 @@ export const useUserConfigForm = () => {
         name: formValues.name,
         image: formValues.image,
         height: formValues.height,
-        bodyWeights: [{ weight: formValues.weight, date: "" }],
+        bodyWeights: [{ weight: formValues.weight, date: getTodayDate() }],
         isConfigured: true,
       };
       updateUserQuery(updatedUser)

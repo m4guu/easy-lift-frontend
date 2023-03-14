@@ -44,6 +44,16 @@ export const getLongFormByDate = (stringDate: string) => {
   });
 };
 
+export const getLongMonthFormByDate = (stringDate: string) => {
+  const date = new Date(stringDate);
+
+  return date.toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+};
+
 export const getHowMuchDaysUntill = (stringDate: string) => {
   const today = new Date();
   const date = new Date(stringDate);

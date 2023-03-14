@@ -32,7 +32,7 @@
   "users": [
     {
       "id": "547266d5-f25c-4664-a290-b590290c06de",
-      "name": "dssssss",
+      "name": "Krystianooo",
       "email": "user@gmail.com",
       "password": "ddddd",
       "role": "user",
@@ -44,8 +44,88 @@
       ],
       "bodyWeights": [
         {
-          "weight": 30,
-          "date": ""
+          "date": "2023-01-01",
+          "weight": 105
+        },
+        {
+          "date": "2023-01-06",
+          "weight": 101
+        },
+        {
+          "date": "2023-01-14",
+          "weight": 98
+        },
+        {
+          "date": "2023-01-21",
+          "weight": 95
+        },
+        {
+          "date": "2023-02-01",
+          "weight": 91
+        },
+        {
+          "date": "2023-03-13",
+          "weight": 92
+        },
+        {
+          "date": "2023-03-13",
+          "weight": 93
+        },
+        {
+          "date": "2023-03-13",
+          "weight": 93
+        },
+        {
+          "date": "2023-03-13",
+          "weight": 95
+        },
+        {
+          "date": "2023-03-13",
+          "weight": 96
+        },
+        {
+          "date": "2023-03-13",
+          "weight": 96
+        },
+        {
+          "date": "2023-03-13",
+          "weight": 95
+        },
+        {
+          "date": "2023-03-13",
+          "weight": 95
+        },
+        {
+          "date": "2023-03-13",
+          "weight": 95
+        },
+        {
+          "date": "2023-03-13",
+          "weight": 95
+        },
+        {
+          "date": "2023-03-13",
+          "weight": 33
+        },
+        {
+          "date": "2023-03-13",
+          "weight": 33
+        },
+        {
+          "date": "2023-03-13",
+          "weight": 33
+        },
+        {
+          "date": "2023-03-13",
+          "weight": 33
+        },
+        {
+          "date": "2023-03-13",
+          "weight": 95
+        },
+        {
+          "date": "2023-03-14",
+          "weight": 96
         }
       ],
       "expirationDate": "2023-10-03T14:03:12.384Z",
@@ -83,7 +163,12 @@
       "bodyWeights": [],
       "expirationDate": "2023-03-03T14:05:43.387Z",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id felis rutrum, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id felis rutrum, p posuere lectus sit amet, tristique metus. Suspendisse eleifend rutrum rutrum. Morbi at lorem at orci accumsan elementum at vel libero. Maecenas a imperdiet odio. Integer iaculis sed libero dictum cursus. Phasellus vitae lectus turpis. Maecenas eleifend mauris eget.",
-      "gyms": ["default", "Calypsoo Morena", "Husarz Gym", "Multisport"]
+      "gyms": [
+        "default",
+        "Calypsoo Morena",
+        "Husarz Gym",
+        "Multisport"
+      ]
     },
     {
       "id": "e4f197f4-7168-42db-a0b9-456f8a37830a",
@@ -100,7 +185,12 @@
       "bodyWeights": [],
       "expirationDate": "2023-03-03T14:05:43.387Z",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mollis lectus iaculis laoreet luctus. Vivamus at efficitur massa, varius pharetra urna. Donec consequat pharetra accumsan. Aliquam at sapien eu leo blandit congue nec nec turpis. Fusce ac rutrum tellus. Pellentesque accumsan porta eros, eu imperdiet mi viverra in. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis nulla suscipit, consectetur mi sed, placerat nibh. Phasellus rhoncus, lacus non fermentum pretium, ex orci tincidunt sapien, ut maximus neque orci venenatis tellus. Donec et augue porta, accumsan ligula non, eleifend sapien. Integer scelerisque lobortis nunc ac vulputate. In eget turpis non.",
-      "gyms": ["default", "Calypsoo Morena", "Husarz Gym", "Multisport"]
+      "gyms": [
+        "default",
+        "Calypsoo Morena",
+        "Husarz Gym",
+        "Multisport"
+      ]
     },
     {
       "id": "e4f197f4-7d68-42db-a0a9-456f8a37830a",
@@ -117,7 +207,12 @@
       "bodyWeights": [],
       "expirationDate": "2023-03-03T14:05:43.387Z",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac urna venenatis mauris accumsan mattis. Proin vel felis quis felis.",
-      "gyms": ["default", "Calypsoo Morena", "Husarz Gym", "Multisport"]
+      "gyms": [
+        "default",
+        "Calypsoo Morena",
+        "Husarz Gym",
+        "Multisport"
+      ]
     },
     {
       "id": "77a3aa94-681d-4d2b-92c1-fc7e1ef2e2dc",
@@ -1519,6 +1614,206 @@
       ],
       "price": 899,
       "description": "Najlepszy plan treningowy klaty jaki znajdziesz. Oraz najniższa cena na rynku EasyLift."
+    },
+    {
+      "id": "618e5de4-c7d7-40f0-98fc-ee047478be3c",
+      "creator": {
+        "id": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+        "name": "Krystian Domzalowicz"
+      },
+      "title": "dsadsadad",
+      "level": "novice",
+      "frequencyPerWeek": 2,
+      "programLength": 4,
+      "program": [
+        {
+          "id": "9bdf7759-cf7e-430a-ae96-74b31ca312df",
+          "weekWorkouts": [
+            {
+              "id": "5c95c16c-1251-4825-810a-218acd23e62d",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsadsa",
+              "date": "2023-03-13",
+              "exercises": [
+                {
+                  "name": "3/4 sit-up",
+                  "id": "0001",
+                  "sets": [
+                    {
+                      "weight": 321,
+                      "reps": 32,
+                      "tempo": "2-3-1-3",
+                      "repMax": 663
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "5166891c-f88f-485b-93fe-2e7d9242dbac",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "2313123123",
+              "date": "2023-03-13",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "weight": 321,
+                      "reps": 321,
+                      "tempo": "2-3-1-2",
+                      "repMax": 3752
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "2185c459-1413-47a9-98c3-cc1720a5572c",
+          "weekWorkouts": [
+            {
+              "id": "9d989cd7-48ef-4c54-a7b2-17fa0d82165f",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "32132131",
+              "date": "2023-03-13",
+              "exercises": [
+                {
+                  "name": "45° side bend",
+                  "id": "0002",
+                  "sets": [
+                    {
+                      "weight": 321,
+                      "reps": 31,
+                      "tempo": "1-2-3-1",
+                      "repMax": 652
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "107c830e-bcf4-4bc7-afcc-56e8439fb2d4",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "3213123123",
+              "date": "2023-03-13",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "weight": 321,
+                      "reps": 321,
+                      "tempo": "1-2-3-1",
+                      "repMax": 3752
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "32535e69-79d3-4c78-a1ed-cdb6c99d33a5",
+          "weekWorkouts": [
+            {
+              "id": "6cf01501-213d-4910-bddc-dd33670d212d",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "3213213",
+              "date": "2023-03-13",
+              "exercises": [
+                {
+                  "name": "45° side bend",
+                  "id": "0002",
+                  "sets": [
+                    {
+                      "weight": 321,
+                      "reps": 321,
+                      "tempo": "2-1-3-1",
+                      "repMax": 3752
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "81df6dcb-e220-4e7f-92f8-7b361cf34bbf",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "31231231",
+              "date": "2023-03-13",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "weight": 321,
+                      "reps": 3,
+                      "tempo": "2-1-3-2",
+                      "repMax": 353
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "c913af64-0605-4127-a107-bbc6dac57d53",
+          "weekWorkouts": [
+            {
+              "id": "80658ecb-1862-44a7-9508-9c641da64fff",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "3213213",
+              "date": "2023-03-13",
+              "exercises": [
+                {
+                  "name": "3/4 sit-up",
+                  "id": "0001",
+                  "sets": [
+                    {
+                      "weight": 321,
+                      "reps": 31,
+                      "tempo": "1-2-3-2",
+                      "repMax": 652
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "4877fe14-6878-46c9-9871-db16fe8ac3af",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "321321d",
+              "date": "2023-03-13",
+              "exercises": [
+                {
+                  "name": "alternate heel touchers",
+                  "id": "0006",
+                  "sets": [
+                    {
+                      "weight": 321,
+                      "reps": 23,
+                      "tempo": "2-3-1-3",
+                      "repMax": 567
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "image": [
+        {
+          "path": "avatar-presentation.png"
+        }
+      ],
+      "price": 222,
+      "description": "dsadsadddddddddddddddddddd"
     }
   ],
   "trainers": [
@@ -1580,82 +1875,20 @@
       ]
     },
     {
-      "id": "68ae8b68-da8a-426d-bf8b-e3da6e929aeb",
+      "id": "bfc63e71-110e-43f4-b16b-585ef185ca23",
       "creator": "547266d5-f25c-4664-a290-b590290c06de",
-      "title": "Updated Title Workout",
-      "date": "2023-02-28",
+      "title": "dsadsad",
+      "date": "2023-03-14",
       "exercises": [
         {
-          "name": "3/4 sit-up",
-          "id": "0001",
+          "name": "air bike",
+          "id": "0003",
           "sets": [
             {
-              "weight": 123,
+              "weight": 213,
               "reps": 123,
-              "tempo": "1-2-3-1",
-              "repMax": 627
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "e9ae5b8a-d318-4d09-bf4a-2c71dfc17f70",
-      "creator": "547266d5-f25c-4664-a290-b590290c06de",
-      "title": "Chest trening A",
-      "date": "2023-03-02",
-      "exercises": [
-        {
-          "name": "3/4 sit-up",
-          "id": "0001",
-          "sets": [
-            {
-              "weight": 100,
-              "reps": 5,
-              "tempo": "2-2-2-2",
-              "repMax": 117
-            },
-            {
-              "weight": 120,
-              "reps": 6,
-              "tempo": "2-2-2-2",
-              "repMax": 144
-            }
-          ]
-        },
-        {
-          "name": "alternate heel touchers",
-          "id": "0006",
-          "sets": [
-            {
-              "weight": 100,
-              "reps": 5,
-              "tempo": "1-1-1-1",
-              "repMax": 117
-            },
-            {
-              "weight": 100,
-              "reps": 5,
-              "tempo": "1-1-1-1",
-              "repMax": 117
-            },
-            {
-              "weight": 100,
-              "reps": 5,
-              "tempo": "1-1-1-1",
-              "repMax": 117
-            }
-          ]
-        },
-        {
-          "name": "alternate lateral pulldown",
-          "id": "0007",
-          "sets": [
-            {
-              "weight": 100,
-              "reps": 5,
-              "tempo": "1-0-0-0",
-              "repMax": 117
+              "tempo": "2-3-1-3",
+              "repMax": 1085
             }
           ]
         }
@@ -1664,122 +1897,19 @@
   ],
   "usersProgress": [
     {
-      "id": "b7072707-7b1f-4c94-a7ba-d34871f1c5d5",
-      "workoutId": "01d9a386-b8f3-4c49-8c28-4521fe935419",
-      "userId": "DUMMY-USER-1",
-      "exerciseId": "0002",
-      "exerciseName": "45° side bend",
-      "date": "2023-02-24",
-      "repMax": 447,
+      "id": "cc247c9e-e6bf-4532-a0b9-59d943ec86be",
+      "workoutId": "bfc63e71-110e-43f4-b16b-585ef185ca23",
+      "userId": "547266d5-f25c-4664-a290-b590290c06de",
+      "exerciseId": "0003",
+      "exerciseName": "air bike",
+      "date": "2023-03-14",
+      "repMax": 1085,
       "sets": [
         {
           "weight": 213,
-          "reps": 33,
-          "tempo": "2-2-2-2",
-          "repMax": 447
-        }
-      ]
-    },
-    {
-      "id": "2a953c47-7f72-4290-ba3b-ff953b30ad1f",
-      "workoutId": "e6f1724f-082e-4630-a5d0-0c9b701379f3",
-      "userId": "55b65f22-3f5a-4881-bd4f-89d929012814",
-      "exerciseId": "0001",
-      "exerciseName": "3/4 sit-up",
-      "date": "2023-02-28",
-      "repMax": 140,
-      "sets": [
-        {
-          "weight": 120,
-          "reps": 5,
-          "tempo": "2-2-2-2",
-          "repMax": 140
-        }
-      ]
-    },
-    {
-      "id": "7d06a534-3a6e-49a7-b427-dba37ea00591",
-      "workoutId": "68ae8b68-da8a-426d-bf8b-e3da6e929aeb",
-      "userId": "547266d5-f25c-4664-a290-b590290c06de",
-      "exerciseId": "0001",
-      "exerciseName": "3/4 sit-up",
-      "date": "2023-02-28",
-      "repMax": 627,
-      "sets": [
-        {
-          "weight": 123,
           "reps": 123,
-          "tempo": "1-2-3-1",
-          "repMax": 627
-        }
-      ]
-    },
-    {
-      "id": "ef42d424-e2e6-4fdc-a769-64f02f6ff0d0",
-      "workoutId": "e9ae5b8a-d318-4d09-bf4a-2c71dfc17f70",
-      "userId": "547266d5-f25c-4664-a290-b590290c06de",
-      "exerciseId": "0001",
-      "exerciseName": "3/4 sit-up",
-      "date": "2023-03-02",
-      "repMax": 144,
-      "sets": [
-        {
-          "weight": 100,
-          "reps": 5,
-          "tempo": "2-2-2-2",
-          "repMax": 117
-        },
-        {
-          "weight": 120,
-          "reps": 6,
-          "tempo": "2-2-2-2",
-          "repMax": 144
-        }
-      ]
-    },
-    {
-      "id": "eb9e1096-8d8d-4bfb-b74e-8def9b542c56",
-      "workoutId": "e9ae5b8a-d318-4d09-bf4a-2c71dfc17f70",
-      "userId": "547266d5-f25c-4664-a290-b590290c06de",
-      "exerciseId": "0007",
-      "exerciseName": "alternate lateral pulldown",
-      "date": "2023-03-02",
-      "repMax": 117,
-      "sets": [
-        {
-          "weight": 100,
-          "reps": 5,
-          "tempo": "1-0-0-0",
-          "repMax": 117
-        }
-      ]
-    },
-    {
-      "id": "f80fe150-35d4-4551-9cd3-467dc7177a1a",
-      "workoutId": "e9ae5b8a-d318-4d09-bf4a-2c71dfc17f70",
-      "userId": "547266d5-f25c-4664-a290-b590290c06de",
-      "exerciseId": "0006",
-      "exerciseName": "alternate heel touchers",
-      "date": "2023-03-02",
-      "repMax": 117,
-      "sets": [
-        {
-          "weight": 100,
-          "reps": 5,
-          "tempo": "1-1-1-1",
-          "repMax": 117
-        },
-        {
-          "weight": 100,
-          "reps": 5,
-          "tempo": "1-1-1-1",
-          "repMax": 117
-        },
-        {
-          "weight": 100,
-          "reps": 5,
-          "tempo": "1-1-1-1",
-          "repMax": 117
+          "tempo": "2-3-1-3",
+          "repMax": 1085
         }
       ]
     }

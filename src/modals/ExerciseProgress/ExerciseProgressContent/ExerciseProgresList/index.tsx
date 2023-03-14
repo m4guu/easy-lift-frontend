@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Box, Divider, List } from "@mui/material";
+import { styled } from "@mui/system";
 
 import { UserProgres } from "../../../../shared/interfaces";
 
@@ -19,10 +20,14 @@ export const ExerciseProgresList: React.FC<ExerciseProgresListProps> = ({
         return (
           <Box key={exerciseProgres.id}>
             <ExerciseProgresItem exerciseProgres={exerciseProgres} />
-            <Divider />
+            <NoPaddingDivider />
           </Box>
         );
       })}
     </List>
   );
 };
+
+const NoPaddingDivider = styled(Divider)(({ theme }) => ({
+  margin: `0 -${theme.spacing(2)}`,
+}));

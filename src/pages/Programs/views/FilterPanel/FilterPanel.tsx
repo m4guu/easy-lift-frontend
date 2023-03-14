@@ -1,12 +1,10 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState } from "react";
 
-import { FormControl, Button, Box, Badge } from "@mui/material";
+import { FormControl, Button, Box } from "@mui/material";
 import { styled } from "@mui/system";
 import TuneIcon from "@mui/icons-material/Tune";
-
-import { areArrayEqual } from "../../../../utils/assets/areArraysEqual";
 
 import { ProgramLevels } from "../../../../shared/enums";
 import {
@@ -53,30 +51,10 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
   },
 }) => {
   const [showFilters, setShowFilters] = useState(false);
-  const [filterCounter, setFilterCounter] = useState(0);
-
-  const countFilters = useCallback(() => {
-    let counter = 0;
-
-    // frequency touched control
-    if (!areArrayEqual(selectedFrequency, [minFreqTraining, maxFreqTraining]))
-      counter++;
-    // program length touched control
-    if (!areArrayEqual(selectedLength, [minProgramLength, maxProgramLength]))
-      counter++;
-    // price touched control
-    if (!areArrayEqual(selectedPrice, [minPrice, maxPrice])) counter++;
-
-    setFilterCounter(counter + 1);
-  }, [selectedFrequency, selectedLength, selectedPrice, maxPrice, minPrice]);
 
   const toggleShowFilter = () => {
     setShowFilters((prevState) => !prevState);
   };
-
-  useEffect(() => {
-    countFilters();
-  }, [countFilters]);
 
   return (
     <Form>
@@ -87,16 +65,14 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
           onChange={handleSelectTitle}
         />
 
-        <Badge badgeContent={filterCounter} color="primary">
-          <Button
-            onClick={toggleShowFilter}
-            startIcon={<TuneIcon />}
-            size="small"
-            color={showFilters ? "error" : "primary"}
-          >
-            {showFilters && "hide"} filters
-          </Button>
-        </Badge>
+        <Button
+          onClick={toggleShowFilter}
+          startIcon={<TuneIcon />}
+          size="small"
+          color={showFilters ? "error" : "primary"}
+        >
+          {showFilters && "hide"} filters
+        </Button>
       </Header>
 
       {showFilters && (

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { Typography, Box, Button, Chip } from "@mui/material";
+import { Typography, Box, Button } from "@mui/material";
 import { styled, useTheme } from "@mui/system";
 
 import { Program } from "../../shared/interfaces";
@@ -33,12 +33,9 @@ const ProgramItem: React.FC<ProgramItemProps> = ({ program }) => {
           >
             {program.creator.name}
             {program.creator.id === user?.id && (
-              <Chip
-                color="info"
-                label={<Typography variant="caption">you</Typography>}
-                size="small"
-                variant="outlined"
-              />
+              <Typography variant="caption" color="info.main">
+                you
+              </Typography>
             )}
           </ContentText>
           <ContentText variant="h3" color="primary">
@@ -52,17 +49,17 @@ const ProgramItem: React.FC<ProgramItemProps> = ({ program }) => {
           </ContentText>
         </ContentContainer>
 
-        <ProgramAtions>
+        <Box>
           {program.creator.id !== user?.id ? (
-            <Buy variant="contained" size="small" fullWidth>
+            <Button variant="contained" size="small" fullWidth>
               buy
-            </Buy>
+            </Button>
           ) : (
-            <Edit variant="contained" size="small" color="info" fullWidth>
+            <Button variant="contained" size="small" color="info" fullWidth>
               edit
-            </Edit>
+            </Button>
           )}
-        </ProgramAtions>
+        </Box>
       </ProgramContent>
     </ProgramItemCard>
   );
@@ -113,11 +110,7 @@ const ImageOverlay = styled(Box)({
   top: 0,
   bottom: 0,
   background:
-    "linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5074404761904762) 72%, rgba(8,8,8,0.6895133053221288) 100%)",
+    "linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.3074404761904762) 72%, rgba(8,8,8,0.3895133053221288) 100%)",
 });
-
-const ProgramAtions = styled(Box)({});
-const Buy = styled(Button)({});
-const Edit = styled(Button)({});
 
 export default ProgramItem;

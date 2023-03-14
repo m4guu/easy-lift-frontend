@@ -56,7 +56,7 @@ const Overlay = styled(Box)({
   top: 0,
   bottom: 0,
   background:
-    "linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6923144257703081) 72%, rgba(8,8,8,0.6895133053221288) 100%)",
+    "linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.3923144257703081) 72%, rgba(8,8,8,0.3895133053221288) 100%)",
 });
 
 const ProgramTitle = styled(Typography)({
