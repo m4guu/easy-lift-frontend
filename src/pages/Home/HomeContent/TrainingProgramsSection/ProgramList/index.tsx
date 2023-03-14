@@ -23,9 +23,12 @@ export const ProgramList: React.FC = () => {
   const { status, error, data: programs } = use10Programs();
 
   return (
-    <>
+    <Box>
       <ProgramSwiperHeader>
         <SectionHeader>training programs</SectionHeader>
+        <ButtonLink variant="outlined" size="small">
+          <LinkButton to={PATHS.PROGRAMS}>show all</LinkButton>
+        </ButtonLink>
       </ProgramSwiperHeader>
 
       <ProgramsSwiper breakpoints={swiperBreakPoints} className="mySwiper">
@@ -34,16 +37,10 @@ export const ProgramList: React.FC = () => {
 
         <SlideContainer>
           {programs?.map((program: Program) => (
-            <SwiperSlide key={program.id}>
+            <Slide key={program.id}>
               <ProgramItemHome program={program} />
-            </SwiperSlide>
+            </Slide>
           ))}
-
-          <SwiperSlide>
-            <ButtonLink variant="outlined">
-              <LinkButton to={PATHS.PROGRAMS}>See all programs</LinkButton>
-            </ButtonLink>
-          </SwiperSlide>
         </SlideContainer>
 
         {programs?.length === 0 && (
@@ -54,30 +51,35 @@ export const ProgramList: React.FC = () => {
 
         {programs?.length ? <ProgramsNav /> : null}
       </ProgramsSwiper>
-    </>
+    </Box>
   );
 };
 
-const ProgramsSwiper = styled(Swiper)({});
+const ProgramsSwiper = styled(Swiper)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  gap: theme.spacing(1),
+}));
 
 const ProgramSwiperHeader = styled("header")(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  paddingBottom: theme.spacing(1),
+  marginBottom: theme.spacing(1),
 }));
 
 const SlideContainer = styled(Box)(({ theme }) => ({
-  [theme.breakpoints.down("sm")]: {
-    display: "flex",
-  },
+  display: "flex",
+  paddingBottom: theme.spacing(1),
 }));
 
-const ButtonLink = styled(Button)({
-  padding: 0,
+const Slide = styled(SwiperSlide)({
+  display: "flex",
+  height: "auto !important",
 });
+
+const ButtonLink = styled(Button)({});
 const LinkButton = styled(Link)(({ theme }) => ({
   textDecoration: "none",
-  padding: theme.spacing(2),
   color: "inherit",
 }));

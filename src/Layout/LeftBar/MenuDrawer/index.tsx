@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 
-import { Drawer, Button } from "@mui/material";
+import { Box, Drawer, Button, Divider } from "@mui/material";
+import { styled } from "@mui/system";
 
 import Navigation from "../Navigation";
+import { SectionHeader } from "../../../components";
 
 export default function TemporaryDrawer() {
   const [isShowDrawer, setIsShowDrawer] = useState(false);
@@ -23,8 +25,17 @@ export default function TemporaryDrawer() {
     <>
       <Button onClick={toggleDrawer()}>menu</Button>
       <Drawer open={isShowDrawer} onClose={toggleDrawer()}>
-        <Navigation />
+        <Container>
+          <SectionHeader>menu</SectionHeader>
+          <Divider />
+        </Container>
+        <Navigation toggleDrawer={toggleDrawer} />
       </Drawer>
     </>
   );
 }
+
+const Container = styled(Box)(({ theme }) => ({
+  marginTop: theme.spacing(1),
+  textAlign: "center",
+}));

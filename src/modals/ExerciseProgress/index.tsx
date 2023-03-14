@@ -50,7 +50,7 @@ const ExerciseProgressModal: React.FC<{
           {!!userExerciseProgress && userExerciseProgress?.length !== 0 ? (
             <>
               <Chart labels={labels} data={data} options={chartOptions} />
-              <Divider />
+              <NoPaddingDivider />
               <ExerciseProgresList exerciseProgress={userExerciseProgress!} />
             </>
           ) : (
@@ -72,12 +72,15 @@ const ModalBox = styled(Box)(({ theme }) => ({
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "60%",
-  border: "0.2rem solid #000",
-  borderRadius: "2rem",
+  border: `thin solid ${theme.palette.others.border_color}`,
+  borderRadius: theme.spacing(2),
   backgroundColor: theme.palette.background.layout,
   [theme.breakpoints.down("md")]: {
     width: "100%",
   },
+}));
+const NoPaddingDivider = styled(Divider)(({ theme }) => ({
+  margin: `0 -${theme.spacing(2)}`,
 }));
 
 export default ExerciseProgressModal;

@@ -25,7 +25,5 @@ export const YoursSection: React.FC = () => {
 
 const SectionContainer = styled("section")(({ theme }) => ({
   padding: theme.spacing(2),
-  [theme.breakpoints.up("lg")]: {
-    width: "100%",
-  },
+  width: "100%",
 }));

@@ -43,17 +43,17 @@ const ProgramPage: React.FC = () => {
           />
           <PorgramActions>
             {program[0].creator.id !== user?.id ? (
-              <Buy variant="contained" size="small">
+              <Button variant="contained" size="small">
                 buy
-              </Buy>
+              </Button>
             ) : (
               <TrainerProgramActions>
-                <Edit variant="contained" size="small" color="info">
+                <Button variant="contained" size="small" color="info">
                   edit
-                </Edit>
-                <Delete variant="contained" size="small" color="error">
+                </Button>
+                <Button variant="contained" size="small" color="error">
                   delete
-                </Delete>
+                </Button>
               </TrainerProgramActions>
             )}
           </PorgramActions>
@@ -80,13 +80,6 @@ const TrainerProgramActions = styled(Box)(({ theme }) => ({
   display: "flex",
   gap: theme.spacing(2),
 }));
-const Buy = styled(Button)({});
-const Edit = styled(Button)({
-  width: "100%",
-});
-const Delete = styled(Button)({
-  width: "100%",
-});
 
 const Program = ProgramPage;
 export default Program;

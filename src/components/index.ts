@@ -1,3 +1,5 @@
+export { default as BodyWeightItem } from "./BodyWeightItem";
+
 export { default as ButtonBase } from "./ButtonBase";
 export { default as ErrorMessage } from "./ErrorMessage";
 

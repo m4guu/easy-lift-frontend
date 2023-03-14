@@ -7,6 +7,10 @@ import { TrainerConfigFields } from "../../../../../../../hooks/formHooks/config
 import { ControlledTextField } from "../../../../../../../features";
 import ImagePicker from "../../../../../../../features/ImagePicker";
 import { gyms } from "./constans";
+import {
+  ImagePickerSize,
+  ImagePickerType,
+} from "../../../../../../../shared/enums";
 
 // Name //
 export const Name = styled(() => (
@@ -81,7 +85,11 @@ export const Gyms: React.FC = () => {
 
 // Image //
 export const Image = styled(() => (
-  <ImagePicker fieldName={TrainerConfigFields.IMAGE} />
+  <ImagePicker
+    fieldName={TrainerConfigFields.IMAGE}
+    type={ImagePickerType.CIRCLE}
+    size={ImagePickerSize.SMALL}
+  />
 ))``;
 //
 

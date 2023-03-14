@@ -16,12 +16,14 @@ export const SectionContainer = styled("section")(({ theme }) => ({
 }));
 
 export const LeftBarContainer = styled(Box)(({ theme }) => ({
-  textAlign: "center",
+  display: "flex",
+  flexDirection: "column",
+
   [theme.breakpoints.up("lg")]: {
     borderBottom: `solid thin ${theme.palette.others.border_color}`,
   },
   [theme.breakpoints.down("lg")]: {
-    display: "flex",
+    flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
   },

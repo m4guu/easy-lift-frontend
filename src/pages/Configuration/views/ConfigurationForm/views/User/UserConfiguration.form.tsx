@@ -3,6 +3,10 @@ import { styled } from "@mui/system";
 import { UserConfigFields } from "../../../../../../hooks/formHooks/configuration/useUserConfigForm";
 import { ControlledTextField } from "../../../../../../features";
 import ImagePicker from "../../../../../../features/ImagePicker";
+import {
+  ImagePickerSize,
+  ImagePickerType,
+} from "../../../../../../shared/enums";
 
 // Name //
 export const Name = styled(() => (
@@ -45,6 +49,10 @@ export const Weight = styled(() => (
 
 // Image //
 export const Image = styled(() => (
-  <ImagePicker fieldName={UserConfigFields.IMAGE} />
+  <ImagePicker
+    fieldName={UserConfigFields.IMAGE}
+    type={ImagePickerType.CIRCLE}
+    size={ImagePickerSize.MEDIUM}
+  />
 ))``;
 //

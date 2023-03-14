@@ -32,8 +32,8 @@ export const ThirdFormStepWrapper = styled(Box)(({ theme }) => ({
 }));
 
 export const FormActions = styled(Box)(({ theme }) => ({
-  textAlign: "right",
-  marginTop: theme.spacing(1),
+  textAlign: "center",
+  marginTop: theme.spacing(2),
 }));
 
 export const FormStepper = styled(Stepper)(({ theme }) => ({

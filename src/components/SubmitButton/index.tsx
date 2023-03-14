@@ -8,20 +8,9 @@ interface SubmitProps extends ButtonProps {
   loading: boolean;
 }
 
-const Submit: React.FC<SubmitProps> = ({
-  label,
-  variant,
-  onClick,
-  loading,
-  disabled,
-}) => {
+const Submit: React.FC<SubmitProps> = ({ label, loading, ...buttonProps }) => {
   return (
-    <LoadingButton
-      variant={variant}
-      onClick={onClick}
-      loading={loading}
-      disabled={disabled}
-    >
+    <LoadingButton loading={loading} {...buttonProps}>
       {label}
     </LoadingButton>
   );

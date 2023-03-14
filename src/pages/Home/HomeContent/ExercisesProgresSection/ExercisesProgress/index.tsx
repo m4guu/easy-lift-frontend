@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { Box } from "@mui/material";
-import { styled, useTheme } from "@mui/system";
+import { styled } from "@mui/system";
 
 import { Chart } from "../../../../../utils/LineChart";
 import { ChartMenu } from "./ChartMenu";
@@ -12,8 +12,6 @@ export const ExercisesProgress: React.FC = () => {
   const [labels, setLabels] = useState<string[]>([]);
   const [data, setData] = useState<number[]>([]);
   const [dateRange, setDateRange] = useState<string>("");
-
-  const theme = useTheme();
 
   const aspectRatio = 2 / 1;
 
@@ -45,8 +43,6 @@ export const ExercisesProgress: React.FC = () => {
 };
 
 const ExercisesProgressContainer = styled(Box)(({ theme }) => ({
-  height: "90%",
-
   [theme.breakpoints.up("xl")]: {
     display: "flex",
   },
