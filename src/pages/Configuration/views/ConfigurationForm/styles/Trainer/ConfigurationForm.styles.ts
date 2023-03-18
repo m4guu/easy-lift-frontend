@@ -32,6 +32,7 @@ export const FormMapBox = styled(Box)(({ theme }) => ({
   minWidth: "50%",
   margin: ` -${theme.spacing(4)} -${theme.spacing(2)} -${theme.spacing(4)} 0`,
   [theme.breakpoints.down("md")]: {
+    margin: `${theme.spacing(2)} 0`,
     minWidth: "100%",
   },
 }));

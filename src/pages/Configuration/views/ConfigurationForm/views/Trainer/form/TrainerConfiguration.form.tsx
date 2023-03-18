@@ -104,7 +104,7 @@ export const Image = styled(() => (
   <ImagePicker
     fieldName={TrainerConfigFields.IMAGE}
     type={ImagePickerType.CIRCLE}
-    size={ImagePickerSize.SMALL}
+    size={ImagePickerSize.LARGE}
   />
 ))``;
 //

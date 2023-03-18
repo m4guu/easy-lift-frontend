@@ -71,7 +71,6 @@ const TrainerConfigurationForm: React.FC = () => {
           <Gyms
             selectedGyms={selectedGyms}
             gymsChangeHandler={gymsChangeHandler}
-            removeGym={removeGym}
           />
 
           <Submit
@@ -84,10 +83,10 @@ const TrainerConfigurationForm: React.FC = () => {
         </FormBox>
 
         <FormMapBox>
-          <LeafletMap
+          {/* <LeafletMap
             selectedGyms={selectedGyms}
             gymsChangeHandler={gymsChangeHandler}
-          />
+          /> */}
         </FormMapBox>
       </FormWrapper>
     </FormProvider>

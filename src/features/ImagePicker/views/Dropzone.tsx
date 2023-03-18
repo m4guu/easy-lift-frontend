@@ -1,13 +1,14 @@
 import React, { useState, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
 
-import { Box, Avatar, Button, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { styled, useTheme } from "@mui/system";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
-import TaskIcon from "@mui/icons-material/Task";
-import SimCardAlertIcon from "@mui/icons-material/SimCardAlert";
 
+import { useIsDragging } from "../../../hooks";
+
+import { DragInfo } from "./views/DragInfo";
 import { ImagePickerSize, ImagePickerType } from "../../../shared/enums";
 import { avatarPickerOptions, sizes } from "./constans";
 
@@ -84,7 +85,27 @@ export const Dropzone: React.FC<DropzoneProps> = ({
         {imagePreview ? (
           <ImagePreview src={imagePreview} alt="preview" type={type} />
         ) : (
-          <AddPhotoAlternateIcon color="primary" />
+          <Box>
+            {isDragging ? (
+              <Box>
+                {(isDragAccept || isDragReject) && !imagePreview ? (
+                  <DragInfo
+                    isDragAccept={isDragAccept}
+                    isDragReject={isDragReject}
+                  />
+                ) : (
+                  <DragContainer>
+                    <CloudDownloadIcon color="info" />
+                    <DragTitle variant="caption" color="info">
+                      Drag file here
+                    </DragTitle>
+                  </DragContainer>
+                )}
+              </Box>
+            ) : (
+              <AddPhotoAlternateIcon color="primary" />
+            )}
+          </Box>
         )}
       </DropzoneContent>
 
@@ -95,6 +116,16 @@ export const Dropzone: React.FC<DropzoneProps> = ({
 
 const DropzoneContainer = styled(Box)({
   textAlign: "center",
+});
+
+const DragContainer = styled(Box)({
+  display: "flex",
+  alignItems: "center",
+  flexDirection: "column",
+});
+
+const DragTitle = styled(Typography)({
+  fontSize: "0.9rem",
 });
 
 const DropzoneContent = styled(Box)<DropzoneContentProps>(
