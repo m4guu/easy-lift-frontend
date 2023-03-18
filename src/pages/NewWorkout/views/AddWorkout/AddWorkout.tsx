@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   FormProvider,
   FieldValues,
   UseFieldArrayUpdate,
 } from "react-hook-form";
+import { useSnackbar } from "notistack";
 
 import { Box } from "@mui/material";
 
@@ -61,10 +62,21 @@ export const AddWorkout: React.FC<AddWorkoutProps> = ({
 
   const {
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful },
   } = methods;
 
+  const { enqueueSnackbar } = useSnackbar();
+
   const component = user?.role === Role.user ? "form" : Box;
+
+  useEffect(() => {
+    if (isSubmitSuccessful && user?.role === Role.user) {
+      enqueueSnackbar("Workout added successfuly.", {
+        variant: "success",
+        autoHideDuration: 3000,
+      });
+    }
+  }, [enqueueSnackbar, isSubmitSuccessful, user]);
 
   return (
     <FormProvider {...methods}>

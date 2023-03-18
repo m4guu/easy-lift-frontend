@@ -9,17 +9,15 @@ import {
   maxProgramLength,
 } from "../formHooks/program/constans";
 
-export const useProgramFilter = (programs: Program[] | undefined) => {
+export const useProgramFilter = (programs: Program[]) => {
   const [updatedPrograms, setUpdatedPrograms] = useState<Program[]>([]);
 
-  const maxPrice =
-    programs?.reduce((prev, current) =>
-      prev.price > current.price ? prev : current
-    ).price || 999;
-  const minPrice =
-    programs?.reduce((prev, current) =>
-      prev.price < current.price ? prev : current
-    ).price || 0;
+  const maxPrice = programs.reduce((prev, current) =>
+    prev.price > current.price ? prev : current
+  ).price;
+  const minPrice = programs.reduce((prev, current) =>
+    prev.price < current.price ? prev : current
+  ).price;
 
   const [selectedTitle, setSelectedTitle] = useState("");
   const [selectedLevel, setSelectedLevel] = useState<ProgramLevels>(
@@ -59,7 +57,7 @@ export const useProgramFilter = (programs: Program[] | undefined) => {
   };
 
   const applyFilters = useCallback(() => {
-    let filteredPrograms = programs || [];
+    let filteredPrograms = programs;
 
     // title filter
     if (selectedTitle) {

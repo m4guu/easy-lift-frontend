@@ -116,7 +116,6 @@ const programSchema = yup.object().shape({
 
 export const useNewProgramForm = () => {
   const [pending, setPending] = useState(false);
-  const [isProgramAdded, setIsProgramAdded] = useState(false);
   const { mutateAsync: addQueryProgram } = useAddProgramMutation();
   const { user } = useUserContext();
 
@@ -178,7 +177,6 @@ export const useNewProgramForm = () => {
         .then(resetForm)
         .finally(() => {
           setPending(false);
-          setIsProgramAdded(true);
         });
     },
     [user, addQueryProgram, resetForm]
@@ -192,7 +190,6 @@ export const useNewProgramForm = () => {
     programFields,
     appendProgramField,
     removeProgramField,
-    isProgramAdded,
     resetForm,
   };
 };

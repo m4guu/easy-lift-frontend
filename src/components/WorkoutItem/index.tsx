@@ -77,8 +77,5 @@ const ListItemLink = styled(Link)(({ theme }) => ({
   padding: `${theme.spacing(1)} 0`,
   textDecoration: "none",
   borderRadius: theme.spacing(1),
-  "&:hover": {
-    // todo: add hover style
-  },
 }));
 export default WorkoutItem;

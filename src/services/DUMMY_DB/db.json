@@ -126,6 +126,14 @@
         {
           "date": "2023-03-14",
           "weight": 96
+        },
+        {
+          "date": "2023-03-16",
+          "weight": 421
+        },
+        {
+          "date": "2023-03-16",
+          "weight": 421
         }
       ],
       "expirationDate": "2023-10-03T14:03:12.384Z",
@@ -1893,6 +1901,46 @@
           ]
         }
       ]
+    },
+    {
+      "id": "30d325b0-f4ce-4f50-932a-657ca037075c",
+      "creator": "547266d5-f25c-4664-a290-b590290c06de",
+      "title": "dsadsa",
+      "date": "2023-03-16",
+      "exercises": [
+        {
+          "name": "3/4 sit-up",
+          "id": "0001",
+          "sets": [
+            {
+              "weight": 312,
+              "reps": 32,
+              "tempo": "2-3-1-3",
+              "repMax": 644
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "379b1fce-1e6e-43f8-909e-95328ca7e312",
+      "creator": "547266d5-f25c-4664-a290-b590290c06de",
+      "title": "dsadsad",
+      "date": "2023-03-16",
+      "exercises": [
+        {
+          "name": "3/4 sit-up",
+          "id": "0001",
+          "sets": [
+            {
+              "weight": 123,
+              "reps": 123,
+              "tempo": "2-3-1-3",
+              "repMax": 627
+            }
+          ]
+        }
+      ]
     }
   ],
   "usersProgress": [
@@ -1910,6 +1958,40 @@
           "reps": 123,
           "tempo": "2-3-1-3",
           "repMax": 1085
+        }
+      ]
+    },
+    {
+      "id": "3a10ba59-a045-47ca-816f-672d9b5d81da",
+      "workoutId": "30d325b0-f4ce-4f50-932a-657ca037075c",
+      "userId": "547266d5-f25c-4664-a290-b590290c06de",
+      "exerciseId": "0001",
+      "exerciseName": "3/4 sit-up",
+      "date": "2023-03-16",
+      "repMax": 644,
+      "sets": [
+        {
+          "weight": 312,
+          "reps": 32,
+          "tempo": "2-3-1-3",
+          "repMax": 644
+        }
+      ]
+    },
+    {
+      "id": "405183ec-a05d-4b86-9ec4-041b6a4c64a5",
+      "workoutId": "379b1fce-1e6e-43f8-909e-95328ca7e312",
+      "userId": "547266d5-f25c-4664-a290-b590290c06de",
+      "exerciseId": "0001",
+      "exerciseName": "3/4 sit-up",
+      "date": "2023-03-16",
+      "repMax": 627,
+      "sets": [
+        {
+          "weight": 123,
+          "reps": 123,
+          "tempo": "2-3-1-3",
+          "repMax": 627
         }
       ]
     }

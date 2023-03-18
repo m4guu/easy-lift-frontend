@@ -31,7 +31,7 @@ export const WeightChart: React.FC = () => {
 
   const { labels, data } = generateChartData(
     ChartType.weight,
-    user?.bodyWeights!
+    user!.bodyWeights!
   );
 
   const isLosingWeight = data[data.length - 1] < data[data.length - 2];

@@ -1,55 +1,31 @@
 import React from "react";
 
-import { Alert, List, Divider, Box, Typography } from "@mui/material";
-import { styled } from "@mui/system";
+import { Alert, Typography } from "@mui/material";
 
 import { usePrograms } from "../../hooks/queryHooks/programsHooks/usePrograms";
 
 import { Status } from "../../shared/enums";
-import { ProgramItem, SectionHeader, SectionContainer } from "../../components";
-import { useProgramFilter } from "../../hooks/filters/useProgramFilter";
-import { FilterPanel } from "./views/FilterPanel/FilterPanel";
+import { Programs } from "./views/Programs/Programs";
+import { SectionHeader, SectionContainer } from "../../components";
 
 const ProgramsPage: React.FC = () => {
   const { status, error, data: programs } = usePrograms();
-  const { updatedPrograms, filterProgramProps } = useProgramFilter(programs);
 
   return (
     <SectionContainer>
       <SectionHeader>Programs</SectionHeader>
-      {status === Status.LOADING && <div>loading...</div>}
-      {status === Status.ERROR && <div>error!</div>}
-
-      <FilterPanel filterHandlers={filterProgramProps} />
-
-      <List disablePadding>
-        {updatedPrograms.length === 0 ? (
-          <Typography>No search result</Typography>
-        ) : (
-          updatedPrograms.map((program) => {
-            return (
-              <Box key={program.id}>
-                <NoPaddingDivider />
-                <ProgramItem program={program} />
-              </Box>
-            );
-          })
-        )}
-      </List>
-      <NoPaddingDivider />
+      {status === Status.LOADING && <Typography>loading...</Typography>}
+      {status === Status.ERROR && <Typography>error!</Typography>}
 
       {programs?.length === 0 && (
         <Alert variant="outlined" severity="info">
           There are no training programs yet.
         </Alert>
       )}
+
+      {programs && <Programs programs={programs} />}
     </SectionContainer>
   );
 };
 
-const NoPaddingDivider = styled(Divider)(({ theme }) => ({
-  margin: `0 -${theme.spacing(2)}`,
-}));
-
-const Programs = ProgramsPage;
-export default Programs;
+export default ProgramsPage;
