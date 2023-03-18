@@ -13,6 +13,7 @@ import {
   GridWrapper,
   SecondGridItem,
   ThirdGridItem,
+  HelpBox,
 } from "./Layout.styles";
 
 const Layout: React.FCWithChildren = ({ children }) => {
@@ -26,6 +27,7 @@ const Layout: React.FCWithChildren = ({ children }) => {
       <FirstGridItem item xl={2} lg={3} xs={12}>
         <LeftBar />
       </FirstGridItem>
+
       <GridWrapper item xl={10} lg={9} xs={12}>
         <SecondGridItem item xl={12}>
           {(currentPath === PATHS.NEW_PROGRAM ||
@@ -34,8 +36,10 @@ const Layout: React.FCWithChildren = ({ children }) => {
           {currentPath !== PATHS.NEW_PROGRAM &&
             currentPath !== PATHS.NEW_WORKOUT && <TopBar />}
         </SecondGridItem>
+
         <ThirdGridItem item xl={12}>
           {children}
+          <HelpBox />
         </ThirdGridItem>
       </GridWrapper>
     </MainGridContainer>

@@ -16,12 +16,19 @@ const Logo: React.FC = () => {
 };
 
 const LogoImage = styled("img")(({ theme }) => ({
-  width: "80%",
+  width: "175.8px",
+  marginLeft: "auto",
+  marginRight: "auto",
+  paddingBottom: theme.spacing(2.5),
   [theme.breakpoints.down("lg")]: {
-    width: "30% ",
+    width: "19% ",
+    padding: 0,
   },
   [theme.breakpoints.down("md")]: {
-    width: "40% ",
+    width: "25% ",
+  },
+  [theme.breakpoints.down("sm")]: {
+    width: "32% ",
   },
 }));
 export default Logo;

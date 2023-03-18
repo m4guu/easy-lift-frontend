@@ -5,12 +5,21 @@ import { Box, Typography } from "@mui/material";
 import { styled, useTheme } from "@mui/system";
 
 import { Dropzone } from "./views/Dropzone";
+import { ImagePickerSize, ImagePickerType } from "../../shared/enums";
 
 interface ImagePickerProps {
   fieldName: string;
+  type: ImagePickerType;
+  size: ImagePickerSize;
+  fullWidth?: boolean;
 }
 
-const ImagePicker: React.FC<ImagePickerProps> = ({ fieldName }) => {
+const ImagePicker: React.FC<ImagePickerProps> = ({
+  fieldName,
+  type,
+  size,
+  fullWidth,
+}) => {
   const { control } = useFormContext();
   const theme = useTheme();
 
@@ -23,7 +32,12 @@ const ImagePicker: React.FC<ImagePickerProps> = ({ fieldName }) => {
         name={fieldName}
         control={control}
         render={({ field: { onChange } }) => (
-          <Dropzone changeImageField={onChange} />
+          <Dropzone
+            changeImageField={onChange}
+            type={type}
+            size={size}
+            fullWidth={fullWidth}
+          />
         )}
       />
     </Box>

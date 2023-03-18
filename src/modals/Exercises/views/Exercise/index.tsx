@@ -3,10 +3,10 @@ import { useParams } from "react-router-dom";
 
 import { Box } from "@mui/material";
 
-import { useExercise } from "../../../hooks/queryHooks/exerciseDB/useExercise";
+import { useExercise } from "../../../../hooks/queryHooks/exerciseDB/useExercise";
 
-import { Status } from "../../../shared/enums";
-import { SectionContainer, SectionHeader } from "../../../components";
+import { Status } from "../../../../shared/enums";
+import { SectionContainer, SectionHeader } from "../../../../components";
 
 const ExercisePage: React.FC = () => {
   const { exerciseId } = useParams();

@@ -9,6 +9,10 @@ import { Gym } from "../../../../../../../shared/interfaces";
 import { TrainerConfigFields } from "../../../../../../../hooks/formHooks/configuration/useTrainerConfigForm";
 import { ControlledTextField } from "../../../../../../../features";
 import { gyms, icon, checkedIcon } from "./constans";
+import {
+  ImagePickerSize,
+  ImagePickerType,
+} from "../../../../../../../shared/enums";
 
 // Name //
 export const Name = styled(() => (
@@ -97,6 +101,10 @@ export const Gyms: React.FC<GymsProps> = ({
 
 // Image //
 export const Image = styled(() => (
-  <ImagePicker fieldName={TrainerConfigFields.IMAGE} />
+  <ImagePicker
+    fieldName={TrainerConfigFields.IMAGE}
+    type={ImagePickerType.CIRCLE}
+    size={ImagePickerSize.SMALL}
+  />
 ))``;
 //

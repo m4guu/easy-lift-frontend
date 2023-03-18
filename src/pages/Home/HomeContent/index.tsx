@@ -27,11 +27,13 @@ export const HomeContent: React.FC = () => {
 };
 
 const HomeContainer = styled(Box)({
-  height: "100%",
+  display: "flex",
+  flexDirection: "column",
+  flex: 1,
 });
 
 const Wrapper = styled(Box)(({ theme }) => ({
-  [theme.breakpoints.up("lg")]: {
+  [theme.breakpoints.up("xl")]: {
     display: "flex",
   },
 }));

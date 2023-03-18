@@ -4,6 +4,8 @@ import { Workout } from "../../shared/interfaces";
 
 export enum WorkoutsMethods {
   GET_USER_WORKOUTS = "getUserWorkouts",
+  // todo: add this method when backend will be written
+  GET_USER_WORKOUTS_BY_MONTH = "getUserWorkoutsByMonth",
   GET_WORKOUT_BY_ID = "getWorkoutById",
   CREATE = "create",
   DELETE = "delete",

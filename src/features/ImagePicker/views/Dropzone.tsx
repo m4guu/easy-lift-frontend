@@ -8,15 +8,28 @@ import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import TaskIcon from "@mui/icons-material/Task";
 import SimCardAlertIcon from "@mui/icons-material/SimCardAlert";
 
-import { avatarPickerOptions } from "./constans";
-import { useIsDragging } from "../../../hooks";
-import { DragInfo } from "./views/DragInfo";
+import { ImagePickerSize, ImagePickerType } from "../../../shared/enums";
+import { avatarPickerOptions, sizes } from "./constans";
 
-type DropzoneProps = {
+interface DropzoneContentProps extends React.ComponentProps<typeof Box> {
+  type: ImagePickerType;
+  size: ImagePickerSize;
+  fullWidth?: boolean;
+}
+
+interface DropzoneProps {
   changeImageField: (...event: any[]) => void;
-};
+  type: ImagePickerType;
+  size: ImagePickerSize;
+  fullWidth?: boolean;
+}
 
-export const Dropzone: React.FC<DropzoneProps> = ({ changeImageField }) => {
+export const Dropzone: React.FC<DropzoneProps> = ({
+  changeImageField,
+  type,
+  size,
+  fullWidth,
+}) => {
   const [imagePreview, setImage] = useState<string>("");
   const isDragging = useIsDragging();
   const theme = useTheme();
@@ -61,78 +74,57 @@ export const Dropzone: React.FC<DropzoneProps> = ({ changeImageField }) => {
 
   return (
     <DropzoneContainer {...getRootProps()}>
-      <DropzoneContent sx={{ borderColor: { borderColor } }}>
+      <DropzoneContent
+        sx={{ borderColor: { borderColor } }}
+        fullWidth={fullWidth}
+        type={type}
+        size={size}
+      >
         <input {...getInputProps()} />
         {imagePreview ? (
-          <PreviewAvatar src={imagePreview} alt="avatar" />
+          <ImagePreview src={imagePreview} alt="preview" type={type} />
         ) : (
-          <Box>
-            {isDragging ? (
-              <Box>
-                {(isDragAccept || isDragReject) && !imagePreview ? (
-                  <DragInfo
-                    isDragAccept={isDragAccept}
-                    isDragReject={isDragReject}
-                  />
-                ) : (
-                  <DragContainer>
-                    <CloudDownloadIcon color="info" />
-                    <DragTitle variant="caption" color="info">
-                      Drag file here
-                    </DragTitle>
-                  </DragContainer>
-                )}
-              </Box>
-            ) : (
-              <AddPhotoAlternateIcon color="primary" />
-            )}
-          </Box>
+          <AddPhotoAlternateIcon color="primary" />
         )}
       </DropzoneContent>
 
-      <Button onClick={open}>{imagePreview ? "change" : "pick"} avatar</Button>
+      <Button onClick={open}>{imagePreview ? "change" : "pick"} image</Button>
     </DropzoneContainer>
   );
 };
 
-const DropzoneContainer = styled(Box)({});
-
-const DropzoneContent = styled(Box)(({ theme }) => ({
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  marginLeft: "auto",
-  marginRight: "auto",
-  marginBottom: theme.spacing(1),
-  width: "10.1rem",
-  height: "10.1rem",
-  border: `solid 0.122rem`,
-  borderStyle: "dashed",
-  borderRadius: "55%",
-}));
-
-const PreviewAvatar = styled(Avatar)({
-  width: "9.8rem",
-  height: "9.8rem",
-});
-
-const DragContainer = styled(Box)({
-  display: "flex",
-  alignItems: "center",
-  flexDirection: "column",
-});
-
-const DragTitle = styled(Typography)({
-  fontSize: "0.9rem",
-});
-
-const DragInfoContainer = styled(Box)(({ theme }) => ({
-  display: "flex",
-  justifyContent: "center",
+const DropzoneContainer = styled(Box)({
   textAlign: "center",
-  gap: theme.spacing(1),
-}));
-
-const DragInfoTitle = styled(Typography)({
-  fontSize: "0.9rem",
 });
+
+const DropzoneContent = styled(Box)<DropzoneContentProps>(
+  ({ theme, type, size, fullWidth }) => {
+    const { width = 0, height = 0 } =
+      sizes.find(
+        (sizeItem) => sizeItem.type === type && sizeItem.size === size
+      ) || {};
+
+    const widthValue = fullWidth ? "100%" : width;
+
+    return {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      marginLeft: "auto",
+      marginRight: "auto",
+      marginBottom: theme.spacing(1),
+      width: widthValue,
+      height,
+      border: `solid 0.122rem`,
+      borderStyle: "dashed",
+      borderRadius: type === ImagePickerType.CIRCLE ? "55%" : 0,
+    };
+  }
+);
+
+const ImagePreview = styled("img")<{ type: ImagePickerType }>(({ type }) => ({
+  width: "99%",
+  height: "99%",
+  objectFit: "cover",
+  borderRadius: type === ImagePickerType.CIRCLE ? "55%" : 0,
+}));

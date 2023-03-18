@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import { useMediaQuery, Box } from "@mui/material";
-import { styled, useTheme } from "@mui/system";
+import { Box } from "@mui/material";
+import { styled } from "@mui/system";
 
 import { Chart } from "../../../../../utils/LineChart";
 import { ChartMenu } from "./ChartMenu";
@@ -13,12 +13,7 @@ export const ExercisesProgress: React.FC = () => {
   const [data, setData] = useState<number[]>([]);
   const [dateRange, setDateRange] = useState<string>("");
 
-  const theme = useTheme();
-  const isBetweenSmLgBreakpoints = useMediaQuery(
-    theme.breakpoints.between("sm", "lg")
-  );
-
-  const aspectRatio = isBetweenSmLgBreakpoints ? 2 / 1 : 1 / 1;
+  const aspectRatio = 2 / 1;
 
   const chartOptions = {
     aspectRatio,
@@ -48,7 +43,7 @@ export const ExercisesProgress: React.FC = () => {
 };
 
 const ExercisesProgressContainer = styled(Box)(({ theme }) => ({
-  [theme.breakpoints.up("lg")]: {
+  [theme.breakpoints.up("xl")]: {
     display: "flex",
   },
 }));

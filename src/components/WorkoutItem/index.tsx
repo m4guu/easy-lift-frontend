@@ -22,6 +22,7 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
   const { mutate: deleteQueryUserProgress } = useDeleteUserProgresMutation();
   const { mutate: updateQueryWorkout } = useUpdateWorkoutMutation(workout.id);
 
+  // todo: change when backend will be written => delete user progress will be in delete workout route
   const deleteWorkout = () => {
     deleteQueryWorkout(workout.id);
     deleteQueryUserProgress(workout.id);
@@ -40,10 +41,10 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
     <WorkoutListItem disablePadding>
       <ListItemLink to={`${PATHS.WORKOUTS}/${workout.id}`}>
         <Box>
-          <Typography variant="subtitle1" color="primary">
+          <Typography variant="h3" color="primary">
             {workout.title}
           </Typography>
-          <Typography variant="h3" color={theme.palette.text.primary}>
+          <Typography variant="caption" color={theme.palette.text.secondary}>
             {workout.date}
           </Typography>
         </Box>
@@ -69,17 +70,12 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
   );
 };
 
-const WorkoutListItem = styled(ListItem)(({ theme }) => ({
-  marginBottom: theme.spacing(1),
-}));
+const WorkoutListItem = styled(ListItem)(({ theme }) => ({}));
 
 const ListItemLink = styled(Link)(({ theme }) => ({
   width: "100%",
-  padding: theme.spacing(1),
+  padding: `${theme.spacing(1)} 0`,
   textDecoration: "none",
   borderRadius: theme.spacing(1),
-  "&:hover": {
-    transform: "scale(0.99)",
-  },
 }));
 export default WorkoutItem;

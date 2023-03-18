@@ -43,6 +43,7 @@ export const AccSummaryContent = styled(Box)(({ theme }) => ({
   gap: theme.spacing(2),
 }));
 export const AccDetails = styled(AccordionDetails)(({ theme }) => ({
+  padding: `${theme.spacing(2)} 0`,
   display: "flex",
   [theme.breakpoints.down("sm")]: {
     flexDirection: "column",

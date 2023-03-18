@@ -60,6 +60,4 @@ export const Chart: React.FC<ChartProps> = ({ labels, data, options }) => {
   );
 };
 
-const LineChart = styled(Line)({
-  width: "100%",
-});
+const LineChart = styled(Line)(({ theme }) => ({}));

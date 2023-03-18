@@ -6,9 +6,9 @@ import { List } from "@mui/material";
 import {
   AddWorkoutForm,
   AddWorkoutFormFields,
-} from "../../../hooks/formHooks/workout/useNewWorkoutForm";
-import { Exercise } from "../../../shared/interfaces";
-import { ExerciseItem } from "../../../components";
+} from "../../../../hooks/formHooks/workout/useNewWorkoutForm";
+import { Exercise } from "../../../../shared/interfaces";
+import { ExerciseItem } from "../../../../components";
 
 type ExerciseListProps = {
   exercises: Exercise[];

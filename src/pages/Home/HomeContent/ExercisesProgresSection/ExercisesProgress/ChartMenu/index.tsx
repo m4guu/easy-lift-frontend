@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 
-import { InputLabel, MenuItem, FormControl } from "@mui/material";
+import { InputLabel, MenuItem, FormControl, Box } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import styled from "@mui/system/styled";
 
@@ -68,12 +68,12 @@ export const ChartMenu: React.FC<ChartMenuProps> = ({ sendData }) => {
   return (
     <ChartMenuForm>
       <ChartMenuFormControl size="small">
-        <InputLabel id="demo-select-small date-range">
+        <InputLabel id="select-small date-range">
           {formInputs.dateRange.label}
         </InputLabel>
         <Select
           labelId="date-range"
-          id="demo-select-small"
+          id="select-small"
           value={formInputs.dateRange.value}
           name={formInputs.dateRange.name}
           label={formInputs.dateRange.label}
@@ -88,6 +88,7 @@ export const ChartMenu: React.FC<ChartMenuProps> = ({ sendData }) => {
           })}
         </Select>
       </ChartMenuFormControl>
+
       <ChartMenuFormControl size="small">
         <InputLabel id="demo-select-small exercise">
           {formInputs.exerciseID.label}
@@ -102,7 +103,7 @@ export const ChartMenu: React.FC<ChartMenuProps> = ({ sendData }) => {
         >
           {menuItemProgressData?.length === 0 ? (
             <MenuItem value="">
-              <em>No exercises yet</em>
+              <Box>No exercises yet</Box>
             </MenuItem>
           ) : (
             menuItemProgressData.map((item) => {
@@ -120,15 +121,27 @@ export const ChartMenu: React.FC<ChartMenuProps> = ({ sendData }) => {
 };
 
 const ChartMenuForm = styled("form")(({ theme }) => ({
-  margin: `0 ${theme.spacing(2)} ${theme.spacing(2)} ${theme.spacing(2)}`,
+  position: "absolute",
+  right: theme.spacing(2),
+  top: theme.spacing(2),
+  gap: theme.spacing(2),
+  display: "flex",
+  [theme.breakpoints.down("sm")]: {
+    position: "inherit",
+    justifyContent: "space-around",
+  },
 }));
 
 const ChartMenuFormControl = styled(FormControl)(({ theme }) => ({
   m: 1,
-  minWidth: 150,
+  width: 170,
   paddingBottom: theme.spacing(2),
+  [theme.breakpoints.down("md")]: {
+    maxWidth: 140,
+  },
   [theme.breakpoints.down("sm")]: {
-    minWidth: 100,
-    margin: theme.spacing(1),
+    maxWidth: "100%",
+    width: "100%",
+    marginTop: theme.spacing(2),
   },
 }));

@@ -5,14 +5,18 @@ import { v4 as uuidv4 } from "uuid";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { ErrorMessages } from "../../../shared/enums";
-import { TEMPO_REGEX } from "../../../shared/regex/regex";
-
-import ProgramLevels from "../../../shared/enums/ProgramLevels";
-import ProgramItem from "../../../shared/interfaces/ProgramItem";
 import { useAddProgramMutation } from "../../queryHooks/programsHooks/useAddProgramMutation";
-import { Program } from "../../../shared/interfaces";
 import { useUserContext } from "../../../contexts/userContext";
+
+import { Program, ProgramItem } from "../../../shared/interfaces";
+import { ErrorMessages, ProgramLevels } from "../../../shared/enums";
+import { TEMPO_REGEX } from "../../../shared/regex/regex";
+import {
+  minFreqTraining,
+  maxFreqTraining,
+  minProgramLength,
+  maxProgramLength,
+} from "./constans";
 
 export enum AddProgramFormFields {
   // form step 1
@@ -23,6 +27,7 @@ export enum AddProgramFormFields {
   // form step 2
   PROGRAM = "program",
   // form step 3
+  IMAGE = "image",
   PROGRAM_PRICE = "programPrice",
   PROGRAM_DESCRIPTION = "programDescription",
 }
@@ -33,6 +38,7 @@ export interface AddProgramForm {
   [AddProgramFormFields.FREQUENCY_PER_WEEK]: number;
   [AddProgramFormFields.PROGRAM_LENGTH]: number;
   [AddProgramFormFields.PROGRAM]: ProgramItem[];
+  [AddProgramFormFields.IMAGE]: File | null;
   [AddProgramFormFields.PROGRAM_PRICE]: number;
   [AddProgramFormFields.PROGRAM_DESCRIPTION]: string;
 }
@@ -40,9 +46,10 @@ export interface AddProgramForm {
 const defaultValues = {
   [AddProgramFormFields.PROGRAM_TITLE]: "",
   [AddProgramFormFields.PROGRAM_LEVEL]: ProgramLevels.NOVICE,
-  [AddProgramFormFields.FREQUENCY_PER_WEEK]: 2,
-  [AddProgramFormFields.PROGRAM_LENGTH]: 4,
+  [AddProgramFormFields.FREQUENCY_PER_WEEK]: minFreqTraining,
+  [AddProgramFormFields.PROGRAM_LENGTH]: minProgramLength,
   [AddProgramFormFields.PROGRAM]: [],
+  [AddProgramFormFields.IMAGE]: null,
   [AddProgramFormFields.PROGRAM_PRICE]: 0,
   [AddProgramFormFields.PROGRAM_DESCRIPTION]: "",
 };
@@ -90,21 +97,25 @@ const programSchema = yup.object().shape({
             })
           )
           .required()
-          .min(2)
-          .max(7),
+          .min(minFreqTraining)
+          .max(maxFreqTraining),
       })
     )
     .required()
-    .min(4)
-    .max(12),
-  [AddProgramFormFields.PROGRAM_LENGTH]: yup.number().required().min(4).max(12),
+    .min(minProgramLength)
+    .max(maxProgramLength),
+  [AddProgramFormFields.PROGRAM_LENGTH]: yup
+    .number()
+    .required()
+    .min(minProgramLength)
+    .max(maxProgramLength),
+  [AddProgramFormFields.IMAGE]: yup.mixed().required(),
   [AddProgramFormFields.PROGRAM_PRICE]: yup.number().required().min(0),
   [AddProgramFormFields.PROGRAM_DESCRIPTION]: yup.string().min(20).max(150),
 });
 
 export const useNewProgramForm = () => {
   const [pending, setPending] = useState(false);
-  const [isProgramAdded, setIsProgramAdded] = useState(false);
   const { mutateAsync: addQueryProgram } = useAddProgramMutation();
   const { user } = useUserContext();
 
@@ -123,6 +134,7 @@ export const useNewProgramForm = () => {
     frequency,
     programLength,
     program,
+    image,
     programPrice,
     programDescription,
   } = watch();
@@ -133,6 +145,7 @@ export const useNewProgramForm = () => {
     frequency &&
     programLength &&
     program &&
+    image &&
     programPrice &&
     programDescription;
 
@@ -156,6 +169,7 @@ export const useNewProgramForm = () => {
         frequencyPerWeek: formValues.frequency,
         programLength: formValues.programLength,
         program: formValues.program,
+        image: formValues.image,
         price: formValues.programPrice,
         description: formValues.programDescription,
       };
@@ -163,7 +177,6 @@ export const useNewProgramForm = () => {
         .then(resetForm)
         .finally(() => {
           setPending(false);
-          setIsProgramAdded(true);
         });
     },
     [user, addQueryProgram, resetForm]
@@ -177,7 +190,6 @@ export const useNewProgramForm = () => {
     programFields,
     appendProgramField,
     removeProgramField,
-    isProgramAdded,
     resetForm,
   };
 };

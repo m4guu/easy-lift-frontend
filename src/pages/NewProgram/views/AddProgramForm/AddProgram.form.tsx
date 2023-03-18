@@ -5,16 +5,21 @@ import { v4 as uuidv4 } from "uuid";
 import { MenuItem } from "@mui/material";
 import { styled } from "@mui/system";
 
-import { ControlledTextField } from "../../../../features";
+import { ControlledTextField, ImagePicker } from "../../../../features";
 
 import {
   AddProgramForm,
   AddProgramFormFields,
 } from "../../../../hooks/formHooks/program/useNewProgramForm";
 
-import ProgramLevels from "../../../../shared/enums/ProgramLevels";
-import ProgramItem from "../../../../shared/interfaces/ProgramItem";
+import {
+  ProgramLevels,
+  ImagePickerSize,
+  ImagePickerType,
+} from "../../../../shared/enums";
+import { ProgramItem } from "../../../../shared/interfaces";
 import { programFrequencies, programLengths } from "./constans";
+
 import { ProgramWeekList } from "./styles/AddProgramForm.styles";
 import { ProgramWeekListItem } from "./views/ProgramWeekListItem/ProgramWeekListItem";
 
@@ -135,6 +140,15 @@ export const Program: React.FC<ProgramProps> = ({
 };
 
 //
+// Program Image //
+export const Image = styled(() => (
+  <ImagePicker
+    fieldName={AddProgramFormFields.IMAGE}
+    type={ImagePickerType.SQUARE}
+    size={ImagePickerSize.LARGE}
+    fullWidth
+  />
+))``; //
 
 // Program Price //
 export const ProgramPrice = styled(() => (
@@ -142,7 +156,7 @@ export const ProgramPrice = styled(() => (
     variant="standard"
     size="small"
     label="Price"
-    type="number"
+    type="tel"
     placeholder="999 $"
     fieldName={AddProgramFormFields.PROGRAM_PRICE}
   />

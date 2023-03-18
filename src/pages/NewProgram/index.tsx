@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider } from "react-hook-form";
+import { useSnackbar } from "notistack";
 
-import { Button, Step, StepLabel, Alert } from "@mui/material";
+import { Button, Step, StepLabel } from "@mui/material";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 import {
   useNewProgramForm,
@@ -30,6 +32,7 @@ import {
   Program,
   ProgramPrice,
   ProgramDescription,
+  Image,
 } from "./views/AddProgramForm/AddProgram.form";
 import { steps } from "./constans";
 
@@ -41,91 +44,102 @@ const NewProgramPage: React.FC = () => {
     programFields,
     canSubmit,
     onSubmit,
-    isProgramAdded,
   } = useNewProgramForm();
   const { currentStep, nextStep } = useFormSteps();
+  const { enqueueSnackbar } = useSnackbar();
 
   const {
     watch,
     trigger,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful },
   } = methods;
 
   const programLength = watch(AddProgramFormFields.PROGRAM_LENGTH);
   const programFrequency = watch(AddProgramFormFields.FREQUENCY_PER_WEEK);
 
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      enqueueSnackbar("Program added successfuly.", {
+        variant: "success",
+        autoHideDuration: 3000,
+      });
+    }
+  }, [enqueueSnackbar, isSubmitSuccessful]);
+
   return (
     <SectionContainer>
       <SectionHeader>New Training Program</SectionHeader>
 
-      {isProgramAdded ? (
-        <Alert color="success">Programe added.</Alert>
-      ) : (
-        <>
-          <FormStepper activeStep={currentStep - 1} alternativeLabel>
-            {steps.map((step) => {
-              return (
-                <Step key={step}>
-                  <StepLabel>{step}</StepLabel>
-                </Step>
-              );
-            })}
-          </FormStepper>
+      <FormStepper activeStep={currentStep - 1} alternativeLabel>
+        {steps.map((step) => {
+          return (
+            <Step key={step}>
+              <StepLabel>{step}</StepLabel>
+            </Step>
+          );
+        })}
+      </FormStepper>
 
-          <FormProvider {...methods}>
-            <FormWrapper>
-              {currentStep === 1 && (
-                <FirstFormStepWrapper>
-                  <ProgramTitle />
-                  <ProgramLevel />
-                  <ProgramFrequency />
-                  <ProgramLength />
-                </FirstFormStepWrapper>
-              )}
+      <FormProvider {...methods}>
+        <FormWrapper>
+          {currentStep === 1 && (
+            <FirstFormStepWrapper>
+              <ProgramTitle />
+              <ProgramLevel />
+              <ProgramFrequency />
+              <ProgramLength />
+            </FirstFormStepWrapper>
+          )}
 
-              {currentStep === 2 && (
-                <SecondFormStepWrapper>
-                  <Program
-                    programLength={programLength}
-                    programFrequency={programFrequency}
-                    programFields={programFields}
-                    appendProgram={appendProgramField}
-                    removeProgram={removeProgramField}
-                  />
-                </SecondFormStepWrapper>
-              )}
+          {currentStep === 2 && (
+            <SecondFormStepWrapper>
+              <Program
+                programLength={programLength}
+                programFrequency={programFrequency}
+                programFields={programFields}
+                appendProgram={appendProgramField}
+                removeProgram={removeProgramField}
+              />
+            </SecondFormStepWrapper>
+          )}
 
-              {currentStep === 3 && (
-                <ThirdFormStepWrapper>
-                  <ProgramPrice />
-                  <ProgramDescription />
-                </ThirdFormStepWrapper>
-              )}
+          {currentStep === 3 && (
+            <ThirdFormStepWrapper>
+              <Image />
+              <ProgramPrice />
+              <ProgramDescription />
+            </ThirdFormStepWrapper>
+          )}
 
-              {errors?.program && currentStep === 2 && (
-                <ErrorMessage>
-                  Enter all workouts to proceed to the next step!
-                </ErrorMessage>
-              )}
+          {errors?.program && currentStep === 2 && (
+            <ErrorMessage>
+              Enter all workouts to proceed to the next step!
+            </ErrorMessage>
+          )}
 
-              <FormActions>
-                {currentStep !== 3 && (
-                  <Button onClick={() => nextStep(trigger)}>next step</Button>
-                )}
-                {currentStep === 3 && (
-                  <Button
-                    onClick={handleSubmit((data) => onSubmit(data))}
-                    disabled={!canSubmit}
-                  >
-                    create program
-                  </Button>
-                )}
-              </FormActions>
-            </FormWrapper>
-          </FormProvider>
-        </>
-      )}
+          <FormActions>
+            {currentStep !== 3 && (
+              <Button
+                onClick={() => nextStep(trigger)}
+                endIcon={<NavigateNextIcon />}
+                variant="outlined"
+              >
+                next step
+              </Button>
+            )}
+            {currentStep === 3 && (
+              <Button
+                onClick={handleSubmit((data) => onSubmit(data))}
+                disabled={!canSubmit}
+                variant="outlined"
+              >
+                create program
+              </Button>
+            )}
+          </FormActions>
+        </FormWrapper>
+      </FormProvider>
     </SectionContainer>
   );
 };

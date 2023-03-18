@@ -24,6 +24,7 @@ import { LeafletMap } from "./views/Trainer/map/LeafletMap";
 
 import { Gym } from "../../../../shared/interfaces";
 
+// ! comment leafletmap to dont up unnessesery database requests
 const TrainerConfigurationForm: React.FC = () => {
   const [selectedGyms, setSelectedGyms] = useState<Gym[]>([]);
 

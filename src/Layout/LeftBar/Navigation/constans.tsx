@@ -21,20 +21,20 @@ export const Constans = () => {
             id: uuidv4(),
             title: "Home",
             link: PATHS.default,
-            icon: <HomeIcon color="primary" fontSize="large" />,
+            icon: <HomeIcon color="primary" fontSize="medium" />,
           },
           {
             id: uuidv4(),
             title: "Programs",
             link: PATHS.PROGRAMS,
-            icon: <FitnessCenterIcon color="primary" fontSize="large" />,
+            icon: <FitnessCenterIcon color="primary" fontSize="medium" />,
           },
 
           {
             id: uuidv4(),
             title: "Trainers",
             link: PATHS.TRAINERS,
-            icon: <EngineeringIcon color="primary" fontSize="large" />,
+            icon: <EngineeringIcon color="primary" fontSize="medium" />,
           },
         ]
       : [
@@ -42,25 +42,25 @@ export const Constans = () => {
             id: uuidv4(),
             title: "Home",
             link: PATHS.default,
-            icon: <HomeIcon color="primary" fontSize="large" />,
+            icon: <HomeIcon color="primary" fontSize="medium" />,
           },
           {
             id: uuidv4(),
             title: "Workouts",
             link: PATHS.WORKOUTS,
-            icon: <FitnessCenterIcon color="primary" fontSize="large" />,
+            icon: <FitnessCenterIcon color="primary" fontSize="medium" />,
           },
           {
             id: uuidv4(),
             title: "Body Weight",
             link: PATHS.BODY_WEIGHT,
-            icon: <ScaleIcon color="primary" fontSize="large" />,
+            icon: <ScaleIcon color="primary" fontSize="medium" />,
           },
           {
             id: uuidv4(),
             title: "Trainers",
             link: PATHS.TRAINERS,
-            icon: <EngineeringIcon color="primary" fontSize="large" />,
+            icon: <EngineeringIcon color="primary" fontSize="medium" />,
           },
         ];
 
