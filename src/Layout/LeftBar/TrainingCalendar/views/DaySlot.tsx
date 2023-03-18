@@ -6,9 +6,11 @@ import { PickersDay, PickersDayProps } from "@mui/x-date-pickers";
 import { Badge } from "@mui/material";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 
-export const DaySlot = (
-  props: PickersDayProps<Dayjs> & { highlightedDays?: number[] }
-) => {
+interface DaySlotProps extends PickersDayProps<Dayjs> {
+  highlightedDays?: number[];
+}
+
+export const DaySlot: React.FC<DaySlotProps> = (props) => {
   const { highlightedDays = [], day, outsideCurrentMonth, ...other } = props;
 
   const isSelected =

@@ -8,7 +8,7 @@ import { User, LoginCredentials } from "../../shared/interfaces";
 
 type UseAuthReturnType = {
   isLoading: boolean;
-  user: User | undefined;
+  user?: User;
   login: (credentials: LoginCredentials) => void;
   logout: () => void;
   autoLogin: () => void;

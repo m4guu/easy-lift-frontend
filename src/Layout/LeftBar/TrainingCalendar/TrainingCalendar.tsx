@@ -5,12 +5,15 @@ import { Box } from "@mui/material";
 import { DateCalendar } from "@mui/x-date-pickers";
 import { styled } from "@mui/system";
 
+import { initialHighlightedDays } from "./views/constans";
 import { DaySlot } from "./views/DaySlot";
 
 interface TrainingCalendarProps {}
 
 export const TrainingCalendar: React.FC<TrainingCalendarProps> = () => {
-  const [highlightedDays, setHighlightedDays] = useState([2, 5, 20]);
+  const [highlightedDays, setHighlightedDays] = useState(
+    initialHighlightedDays
+  );
 
   const onMonthChange = (date: Dayjs) => {
     // todo: add functionality when backend will be written! --> GET_USER_WORKOUTS_BY_MONTH....

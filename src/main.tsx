@@ -9,6 +9,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
+import { SnackbarProvider } from "notistack";
+
 import { Provider } from "react-redux";
 import store from "./store/redux-store/store-config";
 
@@ -23,16 +25,18 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <BrowserRouter>
-          <UserProvider>
-            <Provider store={store}>
-              <ThemeConfig>
-                <App />
-                <ReactQueryDevtools />
-              </ThemeConfig>
-            </Provider>
-          </UserProvider>
-        </BrowserRouter>
+        <SnackbarProvider>
+          <BrowserRouter>
+            <UserProvider>
+              <Provider store={store}>
+                <ThemeConfig>
+                  <App />
+                  <ReactQueryDevtools />
+                </ThemeConfig>
+              </Provider>
+            </UserProvider>
+          </BrowserRouter>
+        </SnackbarProvider>
       </LocalizationProvider>
     </QueryClientProvider>
   </React.StrictMode>
