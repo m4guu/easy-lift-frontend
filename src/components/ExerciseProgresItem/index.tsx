@@ -90,8 +90,7 @@ const ExerciseProgresItem: React.FC<ExerciseProgresItemProps> = ({
                   <SetTitle variant="caption" color="primary">
                     {index + 1}
                   </SetTitle>
-                  <SetTitle variant="caption">{set.weight}</SetTitle>
-                  <SetTitle variant="caption">{set.reps}</SetTitle>
+                  <SetTitle variant="caption">{set.archived}</SetTitle>
                   <SetTitle
                     variant="caption"
                     color={theme.palette.custom_grey.tint_1}

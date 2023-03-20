@@ -13,6 +13,7 @@ import { AuthorDetails } from "./views/AuthorDetails/AuthorDetails";
 import { WorkoutDetails } from "./views/WorkoutDetails/WorkoutDetails";
 import { WorkoutActions } from "./views/WorkoutActions/WorkoutActions";
 
+// todo: change workout[0] --> workout [when backend wil be written]
 const WorkoutPage: React.FC = () => {
   const { workoutId } = useParams();
 

@@ -1,7 +1,7 @@
 interface Set {
-  weight: number;
-  reps: number;
+  goal: string;
   tempo: string;
-  repMax: number;
+  archived: string;
+  repMax?: number;
 }
 export default Set;

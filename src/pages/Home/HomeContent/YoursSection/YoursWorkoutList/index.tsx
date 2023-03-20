@@ -1,6 +1,7 @@
 import React from "react";
 
 import { List, Alert } from "@mui/material";
+import { styled } from "@mui/system";
 
 import { useUserContext } from "../../../../../contexts/userContext";
 import { useUserWorkouts } from "../../../../../hooks/queryHooks/workoutsHooks/useUserWorkouts";
@@ -13,7 +14,7 @@ export const YourWorkoutList: React.FC = () => {
   const { status, error, data: userWorkouts } = useUserWorkouts(user?.id);
 
   return (
-    <List>
+    <WorkoutList>
       {status === Status.LOADING && <div>loading...</div>}
       {status === Status.ERROR && <div>error</div>}
 
@@ -25,6 +26,11 @@ export const YourWorkoutList: React.FC = () => {
           There are no training workouts yet.
         </Alert>
       )}
-    </List>
+    </WorkoutList>
   );
 };
+
+const WorkoutList = styled(List)({
+  display: "flex",
+  flexDirection: "column-reverse",
+});

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Divider, Box, Typography } from "@mui/material";
+import { Divider, Box, Typography, List } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { useUserContext } from "../../contexts/userContext";
@@ -25,7 +25,8 @@ const WorkoutsPage: React.FC = () => {
 
       <FilterPanel filterHandlers={filterPanelProps} />
 
-      <WorkoutsList>
+      <WorkoutList disablePadding>
+        <NoPaddingDivider />
         {updatedWorkouts.length === 0 ? (
           <Typography>No search result</Typography>
         ) : (
@@ -38,14 +39,14 @@ const WorkoutsPage: React.FC = () => {
             );
           })
         )}
-        <NoPaddingDivider />
-      </WorkoutsList>
+      </WorkoutList>
     </SectionContainer>
   );
 };
 
-const WorkoutsList = styled("ul")({
-  padding: 0,
+const WorkoutList = styled(List)({
+  display: "flex",
+  flexDirection: "column-reverse",
 });
 
 const NoPaddingDivider = styled(Divider)(({ theme }) => ({

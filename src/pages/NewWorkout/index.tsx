@@ -35,7 +35,9 @@ const NewWorkoutPage: React.FC<NewWorkoutPageProps> = ({
   );
 };
 
-const SectionContainer = styled("section")({});
+const SectionContainer = styled("section")({
+  position: "relative",
+});
 
 const NewWorkout = NewWorkoutPage;
 export default NewWorkout;

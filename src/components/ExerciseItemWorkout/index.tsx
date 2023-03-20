@@ -22,9 +22,7 @@ const ExerciseItemWorkout: React.FC<ExerciseItemWorkoutProps> = ({
         <ExerciseName variant="caption">{name}</ExerciseName>
         <SetsArchived>
           {sets.map((set) => (
-            <SetArchived variant="caption">
-              {set.weight} x {set.reps} |
-            </SetArchived>
+            <SetArchived variant="caption">{set.archived} |</SetArchived>
           ))}
         </SetsArchived>
       </Content>

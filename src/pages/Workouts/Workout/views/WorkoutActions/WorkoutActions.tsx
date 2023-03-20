@@ -1,15 +1,20 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
-import { Box, Menu, MenuItem, IconButton, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { styled } from "@mui/system";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 
 import { useDeleteWorkoutMutation } from "../../../../../hooks/queryHooks/workoutsHooks/useDeleteWorkoutMutation";
 import { useDeleteUserProgresMutation } from "../../../../../hooks/queryHooks/userProgressHooks/useDeleteUserProgressMutation";
 
 import { PATHS } from "../../../../paths";
-import { actions, WorkoutActionsEnum } from "./constans";
+import { WorkoutActionsEnum } from "./constans";
+
+import { SettingAction } from "../../../../../components/DotsSettings";
+import { DotsSettings } from "../../../../../components";
 
 interface WorkoutActionsProps {
   workoutId: string;
@@ -24,77 +29,40 @@ export const WorkoutActions: React.FC<WorkoutActionsProps> = ({
   const { mutate: deleteQueryWorkout } = useDeleteWorkoutMutation(workoutId);
   const { mutate: deleteQueryUserProgress } = useDeleteUserProgresMutation();
 
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   // todo: change when backend will be written => delete user progress will be in delete workout route
   const deleteWorkout = () => {
     deleteQueryWorkout(workoutId);
     deleteQueryUserProgress(workoutId);
+    navigate(PATHS.WORKOUTS);
+  };
+  const editWorkout = () => {
+    console.log("edit worrkout");
   };
 
-  const handleAction = (actionName: WorkoutActionsEnum) => {
-    setAnchorEl(null);
-    if (actionName === WorkoutActionsEnum.DELETE) {
-      deleteWorkout();
-      navigate(PATHS.WORKOUTS);
-    } else if (actionName === WorkoutActionsEnum.EDIT) {
-      // edit workout
-    }
-  };
+  const actions: SettingAction[] = [
+    {
+      id: uuidv4(),
+      name: WorkoutActionsEnum.EDIT,
+      icon: <EditIcon fontSize="small" color="info" />,
+      onClick: editWorkout,
+    },
+    {
+      id: uuidv4(),
+      name: WorkoutActionsEnum.DELETE,
+      icon: <DeleteIcon fontSize="small" color="error" />,
+      onClick: deleteWorkout,
+    },
+  ];
 
   return (
-    <Settings>
-      <IconButton color="primary" onClick={handleClick}>
-        <MoreVertIcon />
-      </IconButton>
-
-      <Menu
-        id="long-menu"
-        MenuListProps={{
-          "aria-labelledby": "long-button",
-        }}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-      >
-        {actions.map((action) => (
-          <Item key={action.id} onClick={() => handleAction(action.name)}>
-            <ActionName
-              color={
-                action.name === WorkoutActionsEnum.DELETE
-                  ? "error"
-                  : "info.main"
-              }
-            >
-              {action.name}
-            </ActionName>
-            {action.icon}
-          </Item>
-        ))}
-      </Menu>
-    </Settings>
+    <Container>
+      <DotsSettings actions={actions} />
+    </Container>
   );
 };
 
-const Settings = styled(Box)(({ theme }) => ({
+const Container = styled(Box)(({ theme }) => ({
   position: "absolute",
-  top: 10,
+  top: theme.spacing(2),
   right: theme.spacing(2),
 }));
-
-const Item = styled(MenuItem)({
-  display: "flex",
-  justifyContent: "space-between",
-  minWidth: "7rem",
-});
-
-const ActionName = styled(Typography)({
-  textTransform: "capitalize",
-});
