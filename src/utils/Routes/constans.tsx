@@ -39,7 +39,10 @@ export const trainerRoutes = (
 export const userRoutes = (
   <>
     <Route path={PATHS.default} element={<Home />} />
+
     <Route path={PATHS.NEW_WORKOUT} element={<NewWorkout />} />
+    <Route path={NESTED_PATHS.EDIT_WORKOUT} element={<NewWorkout />} />
+
     <Route path={PATHS.WORKOUTS}>
       <Route index element={<Workouts />} />
       <Route path={NESTED_PATHS.WORKOUT} element={<Workout />} />

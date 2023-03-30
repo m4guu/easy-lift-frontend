@@ -30,7 +30,11 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
     <ListItem disablePadding>
       <ListItemLink
         // todo: add edit path (on next branch feat/add-edits)
-        to={workout.isDraft ? `edit path` : `${PATHS.WORKOUTS}/${workout.id}`}
+        to={
+          workout.isDraft
+            ? `${PATHS.NEW_WORKOUT}/${workout.id}`
+            : `${PATHS.WORKOUTS}/${workout.id}`
+        }
       >
         <Box>
           <Container>

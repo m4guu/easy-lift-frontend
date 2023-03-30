@@ -1,7 +1,10 @@
 import { v4 as uuidv4 } from "uuid";
 import { format } from "date-fns";
 
-import { AddWorkoutForm } from "../../hooks/formHooks/workout/useNewWorkoutForm";
+import {
+  AddWorkoutForm,
+  AddWorkoutFormFields,
+} from "../../hooks/formHooks/workout/useNewWorkoutForm";
 
 import { Role } from "../../shared/enums";
 import {
@@ -43,14 +46,35 @@ export const generateWorkoutExercises = (
 
   return workoutExercises;
 };
+export const generateEditExercises = (
+  workoutExercises: WorkoutExercise[]
+): FormExercise[] => {
+  const editExercises = workoutExercises.map((workoutExercise) => {
+    const editSets = workoutExercise.sets.map((set) => {
+      return {
+        goal: set.goal,
+        tempo: set.tempo,
+        archived: set.archived,
+      };
+    });
+    return {
+      name: workoutExercise.name,
+      id: uuidv4(),
+      _id: workoutExercise.id,
+      sets: editSets,
+    };
+  });
+  return editExercises;
+};
 
 export const generateNewWorkout = (
   data: AddWorkoutForm,
   user: User,
-  isDraft: boolean
+  isDraft: boolean,
+  id?: string
 ): Workout => {
   return {
-    id: uuidv4(),
+    id: id || uuidv4(),
     creator: user.id,
     title: data.workoutTitle,
     date: format(data.startTime, "yyyy-MM-dd"),
@@ -58,5 +82,13 @@ export const generateNewWorkout = (
       ? data.exercises
       : generateWorkoutExercises(data.exercises, user.role),
     isDraft,
+  };
+};
+
+export const generateWorkoutToEdit = (workout: Workout): AddWorkoutForm => {
+  return {
+    [AddWorkoutFormFields.WORKOUT_TITLE]: workout.title,
+    [AddWorkoutFormFields.START_TIME]: new Date(workout.date),
+    [AddWorkoutFormFields.EXERCISES]: generateEditExercises(workout.exercises),
   };
 };

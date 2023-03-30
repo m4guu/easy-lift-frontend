@@ -26,7 +26,7 @@ const WorkoutsService = {
     HttpService.delete<void>(`${ENDPOINTS.WORKOUTS}/${workoutId}`),
 
   [WorkoutsMethods.UPDATE]: (updatedWorkout: Workout) =>
-    HttpService.patch<void>(
+    HttpService.put<void>(
       `${ENDPOINTS.WORKOUTS}/${updatedWorkout.id}`,
       updatedWorkout
     ),

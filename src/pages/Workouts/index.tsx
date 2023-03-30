@@ -21,7 +21,7 @@ const WorkoutsPage: React.FC = () => {
     <SectionContainer>
       <SectionHeader>Your Workouts</SectionHeader>
       {status === Status.LOADING && <div>loading...</div>}
-      {status === Status.ERROR && <div>loading...</div>}
+      {status === Status.ERROR && <div>error</div>}
 
       <FilterPanel filterHandlers={filterPanelProps} />
 

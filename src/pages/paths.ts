@@ -17,7 +17,9 @@ export enum PATHS {
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export enum NESTED_PATHS {
-  TRAINER = "/trainers/:trainerId",
+  TRAINER = `/trainers/:trainerId`,
   PROGRAM = "/programs/:programId",
+
   WORKOUT = "/workouts/:workoutId",
+  EDIT_WORKOUT = "/newworkout/:workoutId",
 }
