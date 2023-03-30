@@ -7,7 +7,7 @@ import MoreVertSharpIcon from "@mui/icons-material/MoreVertSharp";
 export interface SettingAction {
   id: string;
   name: string;
-  onClick: (...event: any) => void;
+  onClick: () => void;
   icon?: React.ReactNode;
 }
 

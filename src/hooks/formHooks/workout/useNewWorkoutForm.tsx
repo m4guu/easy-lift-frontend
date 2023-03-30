@@ -141,7 +141,8 @@ export const useNewWorkoutForm = ({
           setPending(false);
           setIsDraftSubmited(true);
         });
-    } catch (error: unknown) {
+    } catch (error) {
+      // ! meeting
       // ? question -  do i have to handle else ?
       // ?          -  path from ValidationError is string, setError requires one of AddWorkoutFormFields enum how to resolve it ?
       if (error instanceof ValidationError) {
