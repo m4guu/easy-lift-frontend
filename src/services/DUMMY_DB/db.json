@@ -1846,20 +1846,32 @@
   ],
   "workouts": [
     {
-      "id": "5a1281d4-0582-430f-8488-b7e73cb1ea40",
+      "id": "7f97f2b3-53e9-4fab-a026-8c5e99a810cf",
       "creator": "547266d5-f25c-4664-a290-b590290c06de",
-      "title": "dsadsa",
+      "title": "123222",
       "date": "2023-03-30",
       "exercises": [
         {
           "name": "3/4 sit-up",
-          "id": "0001",
+          "id": "ce889c74-286f-4331-9892-595c754ecb75",
           "sets": [
             {
-              "goal": "120 x 5",
-              "tempo": "2-2-2-2",
-              "archived": "120 x 3",
-              "repMax": 132
+              "goal": "123 x 213",
+              "tempo": "1-2-3-1",
+              "archived": "231 x 2",
+              "repMax": 246
+            }
+          ]
+        },
+        {
+          "name": "45° side bend",
+          "id": "f481f1ef-68ef-4d7b-b5dd-3040627a3b27",
+          "sets": [
+            {
+              "goal": "321 x 32",
+              "tempo": "1-2-3-1",
+              "archived": "123 x 23",
+              "repMax": 217
             }
           ]
         }
@@ -1867,153 +1879,71 @@
       "isDraft": false
     },
     {
-      "id": "79e04148-ad1d-444a-ab57-c3191f9cf294",
+      "id": "2023a718-89f8-46f1-93c4-dbbb5f6225d3",
       "creator": "547266d5-f25c-4664-a290-b590290c06de",
-      "title": "mój trening",
+      "title": "123222",
       "date": "2023-03-30",
       "exercises": [
         {
-          "id": "bebd2857-fed9-41a1-b1d6-6e5d1e5d0a47",
-          "_id": "0001",
           "name": "3/4 sit-up",
+          "id": "27478547-40b3-4028-b1ee-e4ee614e2061",
+          "_id": "ce889c74-286f-4331-9892-595c754ecb75",
           "sets": [
             {
               "goal": "123 x 213",
               "tempo": "1-2-3-1",
-              "archived": ""
-            },
+              "archived": "231 x 2"
+            }
+          ]
+        },
+        {
+          "name": "45° side bend",
+          "id": "2cfe2246-4d67-48b7-8981-10889ac45f97",
+          "_id": "f481f1ef-68ef-4d7b-b5dd-3040627a3b27",
+          "sets": [
             {
-              "goal": "123 x 23",
-              "tempo": "2-1-3-1",
-              "archived": ""
+              "goal": "321 x 32",
+              "tempo": "1-2-3-1",
+              "archived": "123 x 23"
             }
           ]
         }
       ],
       "isDraft": true
-    },
-    {
-      "id": "558dc065-d2c9-42c6-9d5e-b09368b5f6b2",
-      "creator": "547266d5-f25c-4664-a290-b590290c06de",
-      "title": "mój trening",
-      "date": "2023-03-30",
-      "exercises": [
-        {
-          "name": "3/4 sit-up",
-          "id": "5aa4404e-d75d-4424-9e9f-d0d9704dfc61",
-          "_id": "bebd2857-fed9-41a1-b1d6-6e5d1e5d0a47",
-          "sets": [
-            {
-              "goal": "123 x 213",
-              "tempo": "1-2-3-1",
-              "archived": ""
-            },
-            {
-              "goal": "123 x 23",
-              "tempo": "2-1-3-1",
-              "archived": ""
-            }
-          ]
-        }
-      ],
-      "isDraft": true
-    },
-    {
-      "id": "01a4392f-73f8-4c59-9b5d-d7cf1ea4313c",
-      "creator": "547266d5-f25c-4664-a290-b590290c06de",
-      "title": "dssdsa",
-      "date": "2023-03-30",
-      "exercises": [
-        {
-          "name": "3/4 sit-up",
-          "id": "0001",
-          "sets": [
-            {
-              "goal": "213 x 123",
-              "tempo": "1-2-3-1",
-              "archived": "123 x 123",
-              "repMax": 627
-            }
-          ]
-        }
-      ],
-      "isDraft": false
     }
   ],
   "usersProgress": [
     {
-      "id": "7001d819-ebf3-45a0-95c0-168d2696638a",
-      "workoutId": "5a1281d4-0582-430f-8488-b7e73cb1ea40",
+      "id": "c79918ee-b676-498f-823a-09fafd16aba7",
+      "workoutId": "7f97f2b3-53e9-4fab-a026-8c5e99a810cf",
       "userId": "547266d5-f25c-4664-a290-b590290c06de",
-      "exerciseId": "0001",
+      "exerciseId": "ce889c74-286f-4331-9892-595c754ecb75",
       "exerciseName": "3/4 sit-up",
       "date": "2023-03-30",
-      "repMax": 132,
-      "sets": [
-        {
-          "goal": "120 x 5",
-          "tempo": "2-2-2-2",
-          "archived": "120 x 3",
-          "repMax": 132
-        }
-      ]
-    },
-    {
-      "id": "b8ee715c-bf5c-406a-82e6-41e82776f3b8",
-      "workoutId": "79e04148-ad1d-444a-ab57-c3191f9cf294",
-      "userId": "547266d5-f25c-4664-a290-b590290c06de",
-      "exerciseId": "bebd2857-fed9-41a1-b1d6-6e5d1e5d0a47",
-      "exerciseName": "3/4 sit-up",
-      "date": "2023-03-30",
-      "repMax": null,
+      "repMax": 246,
       "sets": [
         {
           "goal": "123 x 213",
           "tempo": "1-2-3-1",
-          "archived": ""
-        },
-        {
-          "goal": "123 x 23",
-          "tempo": "2-1-3-1",
-          "archived": ""
+          "archived": "231 x 2",
+          "repMax": 246
         }
       ]
     },
     {
-      "id": "158fd394-3aa9-4264-a7c5-ca306d28037e",
-      "workoutId": "558dc065-d2c9-42c6-9d5e-b09368b5f6b2",
+      "id": "7844a826-e7b4-46ae-974b-219c64f60bbd",
+      "workoutId": "7f97f2b3-53e9-4fab-a026-8c5e99a810cf",
       "userId": "547266d5-f25c-4664-a290-b590290c06de",
-      "exerciseId": "5aa4404e-d75d-4424-9e9f-d0d9704dfc61",
-      "exerciseName": "3/4 sit-up",
+      "exerciseId": "f481f1ef-68ef-4d7b-b5dd-3040627a3b27",
+      "exerciseName": "45° side bend",
       "date": "2023-03-30",
-      "repMax": null,
+      "repMax": 217,
       "sets": [
         {
-          "goal": "123 x 213",
+          "goal": "321 x 32",
           "tempo": "1-2-3-1",
-          "archived": ""
-        },
-        {
-          "goal": "123 x 23",
-          "tempo": "2-1-3-1",
-          "archived": ""
-        }
-      ]
-    },
-    {
-      "id": "09f9c11a-48b3-4c86-b66b-52bb800e341c",
-      "workoutId": "01a4392f-73f8-4c59-9b5d-d7cf1ea4313c",
-      "userId": "547266d5-f25c-4664-a290-b590290c06de",
-      "exerciseId": "0001",
-      "exerciseName": "3/4 sit-up",
-      "date": "2023-03-30",
-      "repMax": 627,
-      "sets": [
-        {
-          "goal": "213 x 123",
-          "tempo": "1-2-3-1",
-          "archived": "123 x 123",
-          "repMax": 627
+          "archived": "123 x 23",
+          "repMax": 217
         }
       ]
     }

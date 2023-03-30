@@ -36,7 +36,7 @@ export const WorkoutActions: React.FC<WorkoutActionsProps> = ({
     navigate(PATHS.WORKOUTS);
   };
   const editWorkout = () => {
-    console.log("edit worrkout");
+    navigate(`${PATHS.NEW_WORKOUT}/${workoutId}`);
   };
 
   const actions: SettingAction[] = [

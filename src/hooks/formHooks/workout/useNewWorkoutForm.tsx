@@ -152,14 +152,7 @@ export const useNewWorkoutForm = ({
 
       // todo: refactory when backend will be written. Delete addQueryUserProgress because it will be done in backend in addNewWorkout route
       addQueryWorkout(newDraftWorkout)
-        .then(() => {
-          resetForm();
-
-          const newUserProgress = generateUserProgress(newDraftWorkout);
-          return newUserProgress.map((userProgres) =>
-            addQueryUserProgres(userProgres)
-          );
-        })
+        .then(resetForm)
         .finally(() => {
           setPending(false);
           setIsDraftSubmited(true);

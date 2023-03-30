@@ -11,7 +11,7 @@ export enum UserProgressMethods {
 const UserProgressService = {
   [UserProgressMethods.GET_USER_PROGRESS]: (userId: string) =>
     HttpService.get<UserProgres[]>(
-      `${ENDPOINTS.USERS_PROGRESS}?userId=${userId}`
+      `${ENDPOINTS.USERS_PROGRESS}?userId=${userId}&isDraft=false`
     ),
 
   [UserProgressMethods.GET_USER_EXERCISE_PROGRESS]: (
