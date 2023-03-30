@@ -33,7 +33,7 @@ export const SetContent = styled(Box)({
   display: "flex",
 });
 export const SetTitle = styled(Typography)({
-  width: "20%",
+  width: "25%",
   fontWeight: "bold",
   fontSize: "0.95rem",
 });
@@ -45,7 +45,7 @@ export const SetsLabels = styled(Box)({
 });
 
 export const LabelTitle = styled(Typography)({
-  width: "20%",
+  width: "25%",
 });
 
 export const UserAvatar = styled(Avatar)(({ theme }) => ({

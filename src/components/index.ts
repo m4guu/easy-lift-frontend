@@ -1,6 +1,9 @@
 export { default as BodyWeightItem } from "./BodyWeightItem";
 
 export { default as ButtonBase } from "./ButtonBase";
+
+export { default as DotsSettings } from "./DotsSettings";
+
 export { default as ErrorMessage } from "./ErrorMessage";
 
 export { default as ExerciseItem } from "./ExerciseItem";

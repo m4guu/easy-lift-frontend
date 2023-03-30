@@ -64,6 +64,10 @@ export const workoutUserSchema = yup.object().shape({
                 .string()
                 .required(ErrorMessages.REQUIRED)
                 .matches(TEMPO_REGEX, ErrorMessages.TEMPO_MATCHES),
+              archived: yup
+                .string()
+                .required(ErrorMessages.REQUIRED)
+                .matches(WEIGHT_REPS_REGEX, ErrorMessages.WEIGHT_REPS_MATCHES),
             })
           )
           .required()
@@ -72,4 +76,8 @@ export const workoutUserSchema = yup.object().shape({
     )
     .required()
     .min(1),
+});
+
+export const draftSchema = yup.object().shape({
+  workoutTitle: yup.string().required().min(5),
 });

@@ -10,8 +10,8 @@ import { Box } from "@mui/material";
 
 import { useUserContext } from "../../../../contexts/userContext";
 import { useNewWorkoutForm } from "../../../../hooks/formHooks/workout/useNewWorkoutForm";
+import { useExerciseModal } from "../../../../hooks/modalHooks/Exercises/useExerciseModal";
 
-import { Role } from "../../../../shared/enums";
 import {
   ChooseExercise,
   ExercisesWrapper,
@@ -26,9 +26,10 @@ import {
   StartTime,
   WorkoutTitle,
 } from "./views/AddWorkoutForm/AddWorkout.form";
-import { useExerciseModal } from "../../../../hooks/modalHooks/Exercises/useExerciseModal";
 import { ExercisesModal } from "../../../../modals";
+import { Role } from "../../../../shared/enums";
 import { ErrorMessage } from "../../../../components";
+import { NewWorkoutSettings } from "./views/NewWorkoutSettings/NewWorkoutActions";
 
 type AddWorkoutProps = {
   workoutIndex?: number;
@@ -43,11 +44,14 @@ export const AddWorkout: React.FC<AddWorkoutProps> = ({
   updateWorkoutField,
 }) => {
   const { user } = useUserContext();
+
   const {
     pending,
     methods,
     resetForm,
     onSubmit,
+    onDraftSave,
+    isDraftSubmited,
     canSubmit,
     exerciseFields,
     removeExercise,
@@ -70,13 +74,13 @@ export const AddWorkout: React.FC<AddWorkoutProps> = ({
   const component = user?.role === Role.user ? "form" : Box;
 
   useEffect(() => {
-    if (isSubmitSuccessful && user?.role === Role.user) {
+    if ((isSubmitSuccessful && user?.role === Role.user) || isDraftSubmited) {
       enqueueSnackbar("Workout added successfuly.", {
         variant: "success",
         autoHideDuration: 3000,
       });
     }
-  }, [enqueueSnackbar, isSubmitSuccessful, user]);
+  }, [enqueueSnackbar, isSubmitSuccessful, user, isDraftSubmited]);
 
   return (
     <FormProvider {...methods}>
@@ -101,11 +105,9 @@ export const AddWorkout: React.FC<AddWorkoutProps> = ({
           </ExercisesWrapper>
         )}
       </FormWrapper>
-
       {errors.exercises?.message && (
         <ErrorMessage>{errors.exercises?.message}</ErrorMessage>
       )}
-
       <FormActionsWrapper>
         <ChooseExercise onClick={openExerciseModal} size="small">
           + exercise
@@ -116,7 +118,7 @@ export const AddWorkout: React.FC<AddWorkoutProps> = ({
         </Reset>
 
         <Submit
-          onClick={handleSubmit((data) => onSubmit(data))}
+          onClick={handleSubmit(onSubmit)}
           size="small"
           loading={pending}
           disabled={!canSubmit}
@@ -125,13 +127,16 @@ export const AddWorkout: React.FC<AddWorkoutProps> = ({
           {user?.role === Role.user ? "finish" : "add"} workout
         </Submit>
       </FormActionsWrapper>
-
       {isExerciseModalOpen && (
         <ExercisesModal
           appendExercise={appendExercise}
           isOpen={isExerciseModalOpen}
           closeModal={closeExerciseModal}
         />
+      )}
+
+      {user?.role === Role.user && (
+        <NewWorkoutSettings saveDraft={onDraftSave} />
       )}
     </FormProvider>
   );

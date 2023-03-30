@@ -6,7 +6,6 @@ import { ListItem, Typography, Box, Button } from "@mui/material";
 import { styled, useTheme } from "@mui/system";
 
 import { useDeleteWorkoutMutation } from "../../hooks/queryHooks/workoutsHooks/useDeleteWorkoutMutation";
-import { useUpdateWorkoutMutation } from "../../hooks/queryHooks/workoutsHooks/useUpdateWorkouteMutation";
 
 import { Workout } from "../../shared/interfaces";
 import { PATHS } from "../../pages/paths";
@@ -20,7 +19,6 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
   const theme = useTheme();
   const { mutate: deleteQueryWorkout } = useDeleteWorkoutMutation(workout.id);
   const { mutate: deleteQueryUserProgress } = useDeleteUserProgresMutation();
-  const { mutate: updateQueryWorkout } = useUpdateWorkoutMutation(workout.id);
 
   // todo: change when backend will be written => delete user progress will be in delete workout route
   const deleteWorkout = () => {
@@ -28,36 +26,30 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
     deleteQueryUserProgress(workout.id);
   };
 
-  const updateWorkout = () => {
-    const updatedWorkout = {
-      ...workout,
-      title: "Updated Title Workout",
-    };
-
-    updateQueryWorkout(updatedWorkout);
-  };
-
   return (
-    <WorkoutListItem disablePadding>
-      <ListItemLink to={`${PATHS.WORKOUTS}/${workout.id}`}>
+    <ListItem disablePadding>
+      <ListItemLink
+        // todo: add edit path (on next branch feat/add-edits)
+        to={workout.isDraft ? `edit path` : `${PATHS.WORKOUTS}/${workout.id}`}
+      >
         <Box>
-          <Typography variant="h3" color="primary">
-            {workout.title}
-          </Typography>
+          <Container>
+            <Typography variant="h3" color="primary">
+              {workout.title}
+            </Typography>
+            {workout.isDraft && (
+              <Typography variant="caption" color="info.main">
+                DRAFT
+              </Typography>
+            )}
+          </Container>
+
           <Typography variant="caption" color={theme.palette.text.secondary}>
             {workout.date}
           </Typography>
         </Box>
       </ListItemLink>
-      <Button
-        onClick={updateWorkout}
-        sx={{ marginRight: "1rem" }}
-        variant="outlined"
-        size="small"
-        color="info"
-      >
-        update
-      </Button>
+
       <Button
         onClick={deleteWorkout}
         variant="outlined"
@@ -66,11 +58,9 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
       >
         delete
       </Button>
-    </WorkoutListItem>
+    </ListItem>
   );
 };
-
-const WorkoutListItem = styled(ListItem)(({ theme }) => ({}));
 
 const ListItemLink = styled(Link)(({ theme }) => ({
   width: "100%",
@@ -78,4 +68,10 @@ const ListItemLink = styled(Link)(({ theme }) => ({
   textDecoration: "none",
   borderRadius: theme.spacing(1),
 }));
+
+const Container = styled(Box)(({ theme }) => ({
+  display: "flex",
+  gap: theme.spacing(1),
+}));
+
 export default WorkoutItem;

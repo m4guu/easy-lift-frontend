@@ -6,6 +6,7 @@ interface Workout {
   title: string;
   date: string;
   exercises: WorkoutExercise[];
+  isDraft: boolean;
 }
 
 export default Workout;

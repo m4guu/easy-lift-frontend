@@ -1,5 +1,15 @@
+import { v4 as uuidv4 } from "uuid";
+import { format } from "date-fns";
+
+import { AddWorkoutForm } from "../../hooks/formHooks/workout/useNewWorkoutForm";
+
 import { Role } from "../../shared/enums";
-import { WorkoutExercise, FormExercise } from "../../shared/interfaces";
+import {
+  WorkoutExercise,
+  FormExercise,
+  User,
+  Workout,
+} from "../../shared/interfaces";
 
 export const generateWorkoutExercises = (
   formExercises: FormExercise[],
@@ -18,9 +28,9 @@ export const generateWorkoutExercises = (
       // calculate 1 rep max with epley formula
       const repMax = Math.round(weight * (1 + 0.0333 * reps));
       return {
-        weight,
-        reps,
+        goal,
         tempo,
+        archived,
         repMax,
       };
     });
@@ -32,4 +42,21 @@ export const generateWorkoutExercises = (
   });
 
   return workoutExercises;
+};
+
+export const generateNewWorkout = (
+  data: AddWorkoutForm,
+  user: User,
+  isDraft: boolean
+): Workout => {
+  return {
+    id: uuidv4(),
+    creator: user.id,
+    title: data.workoutTitle,
+    date: format(data.startTime, "yyyy-MM-dd"),
+    exercises: isDraft
+      ? data.exercises
+      : generateWorkoutExercises(data.exercises, user.role),
+    isDraft,
+  };
 };
