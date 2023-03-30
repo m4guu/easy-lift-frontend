@@ -4,7 +4,7 @@ import { FieldValues, UseFieldArrayUpdate } from "react-hook-form";
 import { ListItem, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
-import NewWorkout from "../../../../../../NewWorkout";
+import NewWorkout from "../../../../../../../../NewWorkout";
 
 type WorkoutListItemProps = {
   workoutIndex: number;

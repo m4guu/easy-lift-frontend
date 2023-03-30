@@ -2,25 +2,24 @@ import React, { useEffect } from "react";
 import { UseFieldArrayAppend, UseFieldArrayRemove } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 
-import { MenuItem } from "@mui/material";
+import { MenuItem, List } from "@mui/material";
 import { styled } from "@mui/system";
 
-import { ControlledTextField, ImagePicker } from "../../../../features";
+import { ControlledTextField, ImagePicker } from "../../../../../../features";
 
 import {
   AddProgramForm,
   AddProgramFormFields,
-} from "../../../../hooks/formHooks/program/useNewProgramForm";
+} from "../../../../../../hooks/formHooks/program/useNewProgramForm";
 
 import {
   ProgramLevels,
   ImagePickerSize,
   ImagePickerType,
-} from "../../../../shared/enums";
-import { ProgramItem } from "../../../../shared/interfaces";
+} from "../../../../../../shared/enums";
+import { ProgramItem } from "../../../../../../shared/interfaces";
 import { programFrequencies, programLengths } from "./constans";
 
-import { ProgramWeekList } from "./styles/AddProgramForm.styles";
 import { ProgramWeekListItem } from "./views/ProgramWeekListItem/ProgramWeekListItem";
 
 // Program Title //
@@ -125,7 +124,7 @@ export const Program: React.FC<ProgramProps> = ({
   }, [programLength, appendProgram, removeProgram]);
 
   return (
-    <ProgramWeekList>
+    <List>
       {programFields.map((programField, i) => {
         return (
           <ProgramWeekListItem
@@ -135,7 +134,7 @@ export const Program: React.FC<ProgramProps> = ({
           />
         );
       })}
-    </ProgramWeekList>
+    </List>
   );
 };
 

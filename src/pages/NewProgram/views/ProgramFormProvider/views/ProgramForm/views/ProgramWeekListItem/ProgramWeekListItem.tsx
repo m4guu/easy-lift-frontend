@@ -15,10 +15,10 @@ import { styled } from "@mui/system";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
-import { AddProgramFormFields } from "../../../../../../hooks/formHooks/program/useNewProgramForm";
+import { AddProgramFormFields } from "../../../../../../../../hooks/formHooks/program/useNewProgramForm";
 
 import { WorkoutListItem } from "./views/WorkoutListItem";
-import ProgramItem from "../../../../../../shared/interfaces/ProgramItem";
+import ProgramItem from "../../../../../../../../shared/interfaces/ProgramItem";
 
 type ProgramWeekListItemProps = {
   weekIndex: number;

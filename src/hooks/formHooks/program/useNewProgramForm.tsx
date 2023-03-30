@@ -20,14 +20,14 @@ import {
 
 export enum AddProgramFormFields {
   // form step 1
-  PROGRAM_TITLE = "programTitle",
-  PROGRAM_LEVEL = "programLevel",
-  FREQUENCY_PER_WEEK = "frequency",
   PROGRAM_LENGTH = "programLength",
+  FREQUENCY_PER_WEEK = "frequency",
+  PROGRAM_LEVEL = "programLevel",
   // form step 2
   PROGRAM = "program",
   // form step 3
   IMAGE = "image",
+  PROGRAM_TITLE = "programTitle",
   PROGRAM_PRICE = "programPrice",
   PROGRAM_DESCRIPTION = "programDescription",
 }
@@ -43,7 +43,7 @@ export interface AddProgramForm {
   [AddProgramFormFields.PROGRAM_DESCRIPTION]: string;
 }
 
-const defaultValues = {
+const defaultValues: AddProgramForm = {
   [AddProgramFormFields.PROGRAM_TITLE]: "",
   [AddProgramFormFields.PROGRAM_LEVEL]: ProgramLevels.NOVICE,
   [AddProgramFormFields.FREQUENCY_PER_WEEK]: minFreqTraining,
