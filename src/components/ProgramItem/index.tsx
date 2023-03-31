@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Typography, Box, Button } from "@mui/material";
 import { styled, useTheme } from "@mui/system";
@@ -17,6 +17,7 @@ type ProgramItemProps = {
 
 const ProgramItem: React.FC<ProgramItemProps> = ({ program }) => {
   const { user } = useUserContext();
+  const navigate = useNavigate();
   const theme = useTheme();
   return (
     <ProgramItemCard to={`${PATHS.PROGRAMS}/${program.id}`}>
@@ -55,7 +56,13 @@ const ProgramItem: React.FC<ProgramItemProps> = ({ program }) => {
               buy
             </Button>
           ) : (
-            <Button variant="contained" size="small" color="info" fullWidth>
+            <Button
+              onClick={() => navigate(`${PATHS.NEW_PROGRAM}/${program.id}`)}
+              variant="contained"
+              size="small"
+              color="info"
+              fullWidth
+            >
               edit
             </Button>
           )}

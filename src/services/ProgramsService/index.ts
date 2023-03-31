@@ -31,7 +31,7 @@ const ProgramsService = {
   [ProgramsMethods.DELETE]: (programId: string): Promise<void> =>
     HttpService.delete<void>(`${ENDPOINTS.PROGRAMS}/${programId}`),
 
-  [ProgramsMethods.UPDATE]: (updatedProgram: Program): Promise<void> =>
+  [ProgramsMethods.UPDATE]: (updatedProgram: any): Promise<void> =>
     HttpService.patch<void>(
       `${ENDPOINTS.PROGRAMS}/${updatedProgram.id}`,
       updatedProgram

@@ -18,9 +18,8 @@ import {
 export const trainerRoutes = (
   <>
     <Route path={PATHS.default} element={<Home />} />
-    <Route path={PATHS.NEW_PROGRAM}>
-      <Route index element={<NewProgram />} />
-    </Route>
+    <Route path={PATHS.NEW_PROGRAM} element={<NewProgram />} />
+    <Route path={NESTED_PATHS.EDIT_PROGRAM} element={<NewProgram />} />
 
     <Route path={PATHS.NEW_WORKOUT} element={<NewWorkout />} />
 

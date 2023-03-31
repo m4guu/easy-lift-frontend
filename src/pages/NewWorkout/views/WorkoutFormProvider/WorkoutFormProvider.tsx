@@ -32,7 +32,7 @@ import { Role } from "../../../../shared/enums";
 import { ErrorMessage } from "../../../../components";
 import { NewWorkoutSettings } from "./views/NewWorkoutSettings/NewWorkoutActions";
 
-type AddWorkoutProps = {
+type WorkoutFormProviderProps = {
   workoutIndex?: number;
   updateWorkoutField?: UseFieldArrayUpdate<
     FieldValues,
@@ -41,7 +41,7 @@ type AddWorkoutProps = {
   editWorkout?: Workout[];
 };
 
-export const WorkoutFormProvider: React.FC<AddWorkoutProps> = ({
+export const WorkoutFormProvider: React.FC<WorkoutFormProviderProps> = ({
   workoutIndex,
   updateWorkoutField,
   editWorkout,

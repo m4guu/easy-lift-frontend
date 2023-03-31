@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { Box, Alert, Button } from "@mui/material";
 import { styled } from "@mui/system";
@@ -15,20 +15,22 @@ import { ProgramDetails } from "./views/ProgramDetails/ProgramDetails";
 
 // todo: change dummy img into real Program Image -> change program FORM !
 import DUMMY_PROGRAM_IMAGE from "../../../assets/images/programs/dummy-program-image.jpg";
+import { PATHS } from "../../paths";
 
 // todo: change  program[0] ---> program [when backend will be written]
 const ProgramPage: React.FC = () => {
+  const navigate = useNavigate();
   const { user } = useUserContext();
   const { programId } = useParams();
 
-  const { status, error, data: program } = useProgram(programId || "");
+  const { status, error, data: program } = useProgram(programId);
 
   return (
     <SectionContainer>
       {status === Status.LOADING && <div>loading...</div>}
       {status === Status.ERROR && <div>error!</div>}
 
-      {status === Status.SUCCESS && program.length !== 0 && (
+      {status === Status.SUCCESS && program?.at(0) && (
         <SectionWrapper>
           <Header
             title={program[0].title}
@@ -48,7 +50,14 @@ const ProgramPage: React.FC = () => {
               </Button>
             ) : (
               <TrainerProgramActions>
-                <Button variant="contained" size="small" color="info">
+                <Button
+                  onClick={() =>
+                    navigate(`${PATHS.NEW_PROGRAM}/${program[0].id}`)
+                  }
+                  variant="contained"
+                  size="small"
+                  color="info"
+                >
                   edit
                 </Button>
                 <Button variant="contained" size="small" color="error">
@@ -59,7 +68,7 @@ const ProgramPage: React.FC = () => {
           </PorgramActions>
         </SectionWrapper>
       )}
-      {status === "success" && program.length === 0 && (
+      {status === "success" && program?.length === 0 && (
         <Alert variant="outlined" severity="info">
           There is no program with provided ID.
         </Alert>

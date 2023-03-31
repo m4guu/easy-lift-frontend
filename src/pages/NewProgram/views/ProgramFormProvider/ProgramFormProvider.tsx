@@ -29,8 +29,15 @@ import {
   Image,
 } from "./views/ProgramForm/Program.form";
 import { ErrorMessage } from "../../../../components";
+import { Program as ProgramInterface } from "../../../../shared/interfaces";
 
-export const ProgramFormProvider = () => {
+type ProgramFormProviderProps = {
+  editProgram?: ProgramInterface;
+};
+
+export const ProgramFormProvider: React.FC<ProgramFormProviderProps> = ({
+  editProgram,
+}) => {
   const {
     methods,
     appendProgramField,
@@ -38,8 +45,8 @@ export const ProgramFormProvider = () => {
     programFields,
     canSubmit,
     onSubmit,
-  } = useNewProgramForm();
-  const { currentStep, nextStep } = useFormSteps();
+  } = useNewProgramForm({ editProgram });
+  const { currentStep, nextStep } = useFormSteps(!!editProgram);
   const { enqueueSnackbar } = useSnackbar();
 
   const {
@@ -114,8 +121,9 @@ export const ProgramFormProvider = () => {
               onClick={handleSubmit((data) => onSubmit(data))}
               disabled={!canSubmit}
               variant="outlined"
+              color={editProgram ? "info" : "primary"}
             >
-              create program
+              {editProgram ? "update" : "create"} program
             </Button>
           )}
         </FormActions>

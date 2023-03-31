@@ -30,7 +30,7 @@ import { Role } from "../../../shared/enums";
 import { useUpdateWorkoutMutation } from "../../queryHooks/workoutsHooks/useUpdateWorkouteMutation";
 
 export enum AddWorkoutFormFields {
-  WORKOUT_TITLE = "workoutTitle",
+  WORKOUT_TITLE = "title",
   START_TIME = "startTime",
   EXERCISES = "exercises",
 }
@@ -85,9 +85,9 @@ export const useNewWorkoutForm = ({
 
   const resetForm = useCallback(() => reset(), [reset]);
 
-  const { workoutTitle, startTime, exercises } = watch();
+  const { title, startTime, exercises } = watch();
 
-  const canSubmit = workoutTitle && startTime && exercises;
+  const canSubmit = title && startTime && exercises;
 
   const {
     fields: exerciseFields,
@@ -125,6 +125,8 @@ export const useNewWorkoutForm = ({
           .finally(() => setPending(false));
       } else {
         updateWorkoutField!(workoutIndex!, newWorkout);
+        console.log(newWorkout);
+
         setPending(false);
       }
     },
@@ -169,15 +171,7 @@ export const useNewWorkoutForm = ({
       }
       setPending(false);
     }
-  }, [
-    getValues,
-    setError,
-    addQueryWorkout,
-    addQueryUserProgres,
-    resetForm,
-    clearErrors,
-    user,
-  ]);
+  }, [getValues, setError, addQueryWorkout, resetForm, clearErrors, user]);
 
   return {
     pending,

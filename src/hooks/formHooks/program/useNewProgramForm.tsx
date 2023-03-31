@@ -17,6 +17,8 @@ import {
   minProgramLength,
   maxProgramLength,
 } from "./constans";
+import { useUpdateProgramMutation } from "../../queryHooks/programsHooks/useUpdateProgramMutation";
+import { workoutTrainerSchema } from "../workout/constans";
 
 export enum AddProgramFormFields {
   // form step 1
@@ -43,7 +45,7 @@ export interface AddProgramForm {
   [AddProgramFormFields.PROGRAM_DESCRIPTION]: string;
 }
 
-const defaultValues: AddProgramForm = {
+const defaultProgramValues: AddProgramForm = {
   [AddProgramFormFields.PROGRAM_TITLE]: "",
   [AddProgramFormFields.PROGRAM_LEVEL]: ProgramLevels.NOVICE,
   [AddProgramFormFields.FREQUENCY_PER_WEEK]: minFreqTraining,
@@ -71,31 +73,7 @@ const programSchema = yup.object().shape({
         id: yup.string().required(),
         weekWorkouts: yup
           .array()
-          .of(
-            yup.object().shape({
-              id: yup.string().required(),
-              creator: yup.string().required(),
-              title: yup.string().required(),
-              date: yup.string(),
-              exercises: yup.array().of(
-                yup.object().shape({
-                  id: yup.string().required(),
-                  name: yup.string().required(),
-                  sets: yup.array().of(
-                    yup.object().shape({
-                      weight: yup.number().required(),
-                      reps: yup.number().required(),
-                      tempo: yup
-                        .string()
-                        .required()
-                        .matches(TEMPO_REGEX, ErrorMessages.TEMPO_MATCHES),
-                      repMax: yup.number().required(),
-                    })
-                  ),
-                })
-              ),
-            })
-          )
+          .of(workoutTrainerSchema)
           .required()
           .min(minFreqTraining)
           .max(maxFreqTraining),
@@ -113,11 +91,26 @@ const programSchema = yup.object().shape({
   [AddProgramFormFields.PROGRAM_PRICE]: yup.number().required().min(0),
   [AddProgramFormFields.PROGRAM_DESCRIPTION]: yup.string().min(20).max(150),
 });
+type UseProgramFormProps = {
+  editProgram?: Program;
+};
 
-export const useNewProgramForm = () => {
+export const useNewProgramForm = ({ editProgram }: UseProgramFormProps) => {
   const [pending, setPending] = useState(false);
   const { mutateAsync: addQueryProgram } = useAddProgramMutation();
+  const { mutateAsync: updateQueryProgram } = useUpdateProgramMutation("s");
   const { user } = useUserContext();
+
+  const defaultValues = editProgram
+    ? {
+        ...defaultProgramValues,
+        [AddProgramFormFields.PROGRAM]: editProgram.program,
+        [AddProgramFormFields.PROGRAM_TITLE]: editProgram.title,
+        [AddProgramFormFields.IMAGE]: editProgram.image,
+        [AddProgramFormFields.PROGRAM_PRICE]: editProgram.price,
+        [AddProgramFormFields.PROGRAM_DESCRIPTION]: editProgram.description,
+      }
+    : defaultProgramValues;
 
   const methods = useForm<AddProgramForm>({
     defaultValues,
@@ -173,13 +166,24 @@ export const useNewProgramForm = () => {
         price: formValues.programPrice,
         description: formValues.programDescription,
       };
-      addQueryProgram(newProgram)
-        .then(resetForm)
-        .finally(() => {
-          setPending(false);
-        });
+
+      const updatedProgram = {
+        id: editProgram?.id,
+        title: formValues.programTitle,
+        image: formValues.image,
+        price: formValues.programPrice,
+        description: formValues.programDescription,
+      };
+
+      const method = editProgram
+        ? updateQueryProgram(updatedProgram)
+        : addQueryProgram(newProgram);
+
+      method.then(resetForm).finally(() => {
+        setPending(false);
+      });
     },
-    [user, addQueryProgram, resetForm]
+    [user, addQueryProgram, resetForm, updateQueryProgram, editProgram]
   );
 
   return {

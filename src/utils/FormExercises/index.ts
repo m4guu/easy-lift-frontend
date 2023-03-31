@@ -76,7 +76,7 @@ export const generateNewWorkout = (
   return {
     id: id || uuidv4(),
     creator: user.id,
-    title: data.workoutTitle,
+    title: data.title,
     date: format(data.startTime, "yyyy-MM-dd"),
     exercises: isDraft
       ? data.exercises
