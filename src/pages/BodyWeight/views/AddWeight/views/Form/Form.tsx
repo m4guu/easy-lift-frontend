@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { FormProvider } from "react-hook-form";
-import { useSnackbar } from "notistack";
 
 import { styled } from "@mui/system";
 
 import { useBodyWeightUpdate } from "../../../../../../hooks/formHooks/update/useBodyWeightUpdate";
+import { useSnackbar } from "../../../../../../hooks";
 
 import { BodyWeight } from "./views/BodyWeightUpdate.form";
 import { Submit } from "../../../../../../components";
+import { SnackbarStatus } from "../../../../../../shared/enums";
 
 export const Form: React.FC = () => {
   const { methods, canSubmit, onSubmit, pending } = useBodyWeightUpdate();
@@ -15,16 +16,14 @@ export const Form: React.FC = () => {
     handleSubmit,
     formState: { isSubmitSuccessful },
   } = methods;
-  const { enqueueSnackbar } = useSnackbar();
+
+  const snackbar = useSnackbar();
 
   useEffect(() => {
     if (isSubmitSuccessful) {
-      enqueueSnackbar("Body weight updated successfuly !", {
-        variant: "success",
-        autoHideDuration: 3000,
-      });
+      snackbar("Body weight updated successfuly !", SnackbarStatus.SUCCESS);
     }
-  }, [enqueueSnackbar, isSubmitSuccessful]);
+  }, [snackbar, isSubmitSuccessful]);
 
   return (
     <FormProvider {...methods}>

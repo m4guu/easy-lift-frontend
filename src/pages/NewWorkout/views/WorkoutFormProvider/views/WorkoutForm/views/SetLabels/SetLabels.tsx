@@ -26,13 +26,13 @@ export const SetLabels = () => {
           );
         }
         return (
-          <LabelTitle
+          <SetTitle
             key={label.name}
             variant="h3"
             color={theme.palette.custom_grey.tint_2}
           >
             {label.name}
-          </LabelTitle>
+          </SetTitle>
         );
       })}
     </Container>
@@ -48,9 +48,6 @@ const Container = styled(Box)(({ theme }) => ({
   },
 }));
 
-const LabelTitle = styled(Typography)({
-  width: "25%",
-});
 const SetTitle = styled(Typography)(({ theme }) => ({
   width: "25%",
   [theme.breakpoints.down("sm")]: {

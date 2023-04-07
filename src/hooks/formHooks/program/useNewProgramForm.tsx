@@ -8,9 +8,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useAddProgramMutation } from "../../queryHooks/programsHooks/useAddProgramMutation";
 import { useUserContext } from "../../../contexts/userContext";
 
-import { Program, ProgramItem } from "../../../shared/interfaces";
-import { ErrorMessages, ProgramLevels } from "../../../shared/enums";
-import { TEMPO_REGEX } from "../../../shared/regex/regex";
+import {
+  Program,
+  ProgramItem,
+  ProgramUpdates,
+} from "../../../shared/interfaces";
+import { ProgramLevels } from "../../../shared/enums";
 import {
   minFreqTraining,
   maxFreqTraining,
@@ -167,8 +170,8 @@ export const useNewProgramForm = ({ editProgram }: UseProgramFormProps) => {
         description: formValues.programDescription,
       };
 
-      const updatedProgram = {
-        id: editProgram?.id,
+      const updatedProgram: ProgramUpdates = {
+        id: editProgram!.id,
         title: formValues.programTitle,
         image: formValues.image,
         price: formValues.programPrice,

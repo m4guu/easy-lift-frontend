@@ -18,14 +18,15 @@ const NewProgramPage: React.FC = () => {
 
   const { currentStep } = useFormSteps();
 
+  const isEditProgram = status !== Status.LOADING && !editProgram;
+
   return (
     <SectionContainer>
       <SectionHeader>
-        {status !== Status.LOADING && !editProgram ? "New" : "update"} Training
-        Program
+        {isEditProgram ? "New" : "update"} Training Program
       </SectionHeader>
 
-      {status !== Status.LOADING && !editProgram && (
+      {isEditProgram && (
         <FormStepper activeStep={currentStep - 1} alternativeLabel>
           {steps.map((step) => {
             return (

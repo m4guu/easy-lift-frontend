@@ -1,6 +1,6 @@
 import { ENDPOINTS, HttpService } from "../api";
 
-import { Program } from "../../shared/interfaces";
+import { Program, ProgramUpdates } from "../../shared/interfaces";
 
 export enum ProgramsMethods {
   GET_ALL_PROGRAMS = "getAllPrograms",
@@ -31,7 +31,7 @@ const ProgramsService = {
   [ProgramsMethods.DELETE]: (programId: string): Promise<void> =>
     HttpService.delete<void>(`${ENDPOINTS.PROGRAMS}/${programId}`),
 
-  [ProgramsMethods.UPDATE]: (updatedProgram: any): Promise<void> =>
+  [ProgramsMethods.UPDATE]: (updatedProgram: ProgramUpdates): Promise<void> =>
     HttpService.patch<void>(
       `${ENDPOINTS.PROGRAMS}/${updatedProgram.id}`,
       updatedProgram

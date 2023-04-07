@@ -4,13 +4,13 @@ import {
   FieldValues,
   UseFieldArrayUpdate,
 } from "react-hook-form";
-import { useSnackbar } from "notistack";
 
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
 import { useUserContext } from "../../../../contexts/userContext";
 import { useNewWorkoutForm } from "../../../../hooks/formHooks/workout/useNewWorkoutForm";
 import { useExerciseModal } from "../../../../hooks/modalHooks/Exercises/useExerciseModal";
+import { useSnackbar } from "../../../../hooks";
 
 import {
   ChooseExercise,
@@ -28,7 +28,7 @@ import {
 } from "./views/WorkoutForm/Workout.form";
 import { ExercisesModal } from "../../../../modals";
 import { Workout } from "../../../../shared/interfaces";
-import { Role } from "../../../../shared/enums";
+import { Role, SnackbarStatus } from "../../../../shared/enums";
 import { ErrorMessage } from "../../../../components";
 import { NewWorkoutSettings } from "./views/NewWorkoutSettings/NewWorkoutActions";
 
@@ -72,25 +72,23 @@ export const WorkoutFormProvider: React.FC<WorkoutFormProviderProps> = ({
     formState: { errors, isSubmitSuccessful },
   } = methods;
 
-  const { enqueueSnackbar } = useSnackbar();
+  const snackbar = useSnackbar();
 
-  const component = user?.role === Role.user ? "form" : Box;
+  const isUserLogin = user?.role === Role.user;
+  const component = isUserLogin ? "form" : Box;
 
   useEffect(() => {
-    if ((isSubmitSuccessful && user?.role === Role.user) || isDraftSubmited) {
-      enqueueSnackbar("Workout added successfuly.", {
-        variant: "success",
-        autoHideDuration: 3000,
-      });
+    if ((isSubmitSuccessful && isUserLogin) || isDraftSubmited) {
+      snackbar("Workout added successfuly.", SnackbarStatus.SUCCESS);
     }
-  }, [enqueueSnackbar, isSubmitSuccessful, user, isDraftSubmited]);
+  }, [snackbar, isSubmitSuccessful, user, isDraftSubmited, isUserLogin]);
 
   return (
     <FormProvider {...methods}>
       <FormWrapper component={component}>
         <HeaderInputsWrapper>
           <WorkoutTitle />
-          {user?.role === Role.user && <StartTime />}
+          {isUserLogin && <StartTime />}
         </HeaderInputsWrapper>
 
         {exerciseFields.length !== 0 && (
@@ -128,11 +126,7 @@ export const WorkoutFormProvider: React.FC<WorkoutFormProviderProps> = ({
           variant="contained"
           color={editWorkout ? "info" : "primary"}
         >
-          {user?.role === Role.user ? (
-            <Box>{editWorkout ? "update" : "finish"}</Box>
-          ) : (
-            "add"
-          )}
+          {isUserLogin ? <Box>{editWorkout ? "update" : "finish"}</Box> : "add"}
           &nbsp;workout
         </Submit>
       </FormActionsWrapper>
@@ -144,9 +138,7 @@ export const WorkoutFormProvider: React.FC<WorkoutFormProviderProps> = ({
         />
       )}
 
-      {user?.role === Role.user && (
-        <NewWorkoutSettings saveDraft={onDraftSave} />
-      )}
+      {isUserLogin && <NewWorkoutSettings saveDraft={onDraftSave} />}
     </FormProvider>
   );
 };

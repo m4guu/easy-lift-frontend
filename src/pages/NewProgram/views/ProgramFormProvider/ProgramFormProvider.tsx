@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { FormProvider } from "react-hook-form";
-import { useSnackbar } from "notistack";
 
 import { Button } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
@@ -10,6 +9,10 @@ import {
   AddProgramFormFields,
 } from "../../../../hooks/formHooks/program/useNewProgramForm";
 import { useFormSteps } from "../../../../hooks/formHooks/formStepHook/useFormSteps";
+import { useSnackbar } from "../../../../hooks";
+
+import { SnackbarStatus } from "../../../../shared/enums";
+import { Program as ProgramInterface } from "../../../../shared/interfaces";
 
 import {
   FormWrapper,
@@ -29,7 +32,9 @@ import {
   Image,
 } from "./views/ProgramForm/Program.form";
 import { ErrorMessage } from "../../../../components";
-import { Program as ProgramInterface } from "../../../../shared/interfaces";
+import { FirstFormStep } from "./views/FormSteps/FirstFormStep";
+import { SecondFormStep } from "./views/FormSteps/SecondFormStep";
+import { ThirdFormStep } from "./views/FormSteps/ThirdFormStep";
 
 type ProgramFormProviderProps = {
   editProgram?: ProgramInterface;
@@ -47,58 +52,32 @@ export const ProgramFormProvider: React.FC<ProgramFormProviderProps> = ({
     onSubmit,
   } = useNewProgramForm({ editProgram });
   const { currentStep, nextStep } = useFormSteps(!!editProgram);
-  const { enqueueSnackbar } = useSnackbar();
+  const snackbar = useSnackbar();
 
   const {
-    watch,
     trigger,
     handleSubmit,
     formState: { errors, isSubmitSuccessful },
   } = methods;
 
-  const programLength = watch(AddProgramFormFields.PROGRAM_LENGTH);
-  const programFrequency = watch(AddProgramFormFields.FREQUENCY_PER_WEEK);
-
   useEffect(() => {
     if (isSubmitSuccessful) {
-      enqueueSnackbar("Program added successfuly.", {
-        variant: "success",
-        autoHideDuration: 3000,
-      });
+      snackbar("Program added successfuly.", SnackbarStatus.SUCCESS);
     }
-  }, [enqueueSnackbar, isSubmitSuccessful]);
+  }, [snackbar, isSubmitSuccessful]);
 
   return (
     <FormProvider {...methods}>
       <FormWrapper>
-        {currentStep === 1 && (
-          <FirstFormStepWrapper>
-            <ProgramLength />
-            <ProgramFrequency />
-            <ProgramLevel />
-          </FirstFormStepWrapper>
-        )}
-
+        {currentStep === 1 && <FirstFormStep />}
         {currentStep === 2 && (
-          <SecondFormStepWrapper>
-            <Program
-              programLength={programLength}
-              programFrequency={programFrequency}
-              programFields={programFields}
-              appendProgram={appendProgramField}
-              removeProgram={removeProgramField}
-            />
-          </SecondFormStepWrapper>
+          <SecondFormStep
+            programFields={programFields}
+            appendProgram={appendProgramField}
+            removeProgram={removeProgramField}
+          />
         )}
-
-        {currentStep === 3 && (
-          <ThirdFormStepWrapper>
-            <ProgramTitle />
-            <Image />
-            <ProgramPrice />
-            <ProgramDescription />
-          </ThirdFormStepWrapper>
-        )}
+        {currentStep === 3 && <ThirdFormStep />}
 
         {errors?.program && currentStep === 2 && (
           <ErrorMessage>

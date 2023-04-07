@@ -1,5 +1,6 @@
 export { default as AuthTypes } from "./AuthTypes";
 export { default as Role } from "./Role";
+export { default as SnackbarStatus } from "./SnackbarStatus";
 export { default as ChartType } from "./ChartType";
 export { default as ErrorMessages } from "./ErrorMessages";
 export { default as ExerciseFormActions } from "./ExerciseFormActions";

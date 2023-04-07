@@ -125,8 +125,6 @@ export const useNewWorkoutForm = ({
           .finally(() => setPending(false));
       } else {
         updateWorkoutField!(workoutIndex!, newWorkout);
-        console.log(newWorkout);
-
         setPending(false);
       }
     },
