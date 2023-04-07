@@ -8,7 +8,7 @@ export const useWorkout = (workoutId?: string) => {
   if (!workoutId) {
     return {
       status: Status.ERROR,
-      data: [],
+      data: undefined,
       error: { message: "Expected provided ID.", code: 404 },
     };
   }

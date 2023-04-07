@@ -138,6 +138,10 @@
         {
           "date": "2023-03-18",
           "weight": 120
+        },
+        {
+          "date": "2023-04-07",
+          "weight": 120
         }
       ],
       "expirationDate": "2023-10-03T14:03:12.384Z",
@@ -250,1581 +254,1024 @@
   ],
   "programs": [
     {
-      "id": "6c197198-10ba-44ed-bb99-a14fd5dce0b3",
+      "id": "3cf95d03-0d59-403b-b073-7938b5f088ad",
       "creator": {
         "id": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-        "name": "Krystian"
+        "name": "Krystiano"
       },
-      "title": "Best Squat Routine",
+      "title": "test program UPDATED",
       "level": "novice",
       "frequencyPerWeek": 2,
-      "programLength": 4,
+      "programLength": 5,
       "program": [
         {
-          "id": "dab38ebd-893c-48a4-994d-836ba113e15b",
+          "id": "4f69ae3e-3e3f-42fc-8930-b9c33f158b51",
           "weekWorkouts": [
             {
-              "id": "81c6fc1d-f154-450d-aefe-ac3d8487435d",
+              "id": "8565f4b5-bbea-469e-8c7b-f99901a994a3",
               "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening A",
-              "date": "2023-03-01",
-              "exercises": [
-                {
-                  "name": "3/4 sit-up",
-                  "id": "0001",
-                  "sets": [
-                    {
-                      "weight": 120,
-                      "reps": 5,
-                      "tempo": "2-2-2-2",
-                      "repMax": 140
-                    },
-                    {
-                      "weight": 120,
-                      "reps": 2,
-                      "tempo": "2-1-3-1",
-                      "repMax": 128
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "9a2b34ec-5ff1-4d3d-a447-89d2ee231f05",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening B",
-              "date": "2023-03-01",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 213,
-                      "reps": 22,
-                      "tempo": "2-1-3-1",
-                      "repMax": 369
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "45da033b-b108-4447-95be-78647a286ab2",
-          "weekWorkouts": [
-            {
-              "id": "ef2719c6-b42b-48b8-9628-ecc3f1f96ec8",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening B",
-              "date": "2023-03-01",
+              "title": "dasdasdasd",
+              "date": "2023-04-07",
               "exercises": [
                 {
                   "name": "air bike",
                   "id": "0003",
                   "sets": [
                     {
-                      "weight": 123,
-                      "reps": 123,
-                      "tempo": "1-2-3-1",
-                      "repMax": 627
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "4ead1e8d-ad9a-41d0-ba66-f92c8748cb0a",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening A",
-              "date": "2023-03-01",
-              "exercises": [
-                {
-                  "name": "archer pull up",
-                  "id": "3293",
-                  "sets": [
-                    {
-                      "weight": 321,
-                      "reps": 321,
-                      "tempo": "3-2-1-3",
-                      "repMax": 3752
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "96622341-fa1a-4316-83b0-eafacc667397",
-          "weekWorkouts": [
-            {
-              "id": "5cfa4163-3e53-4126-86e8-bf0f36377bea",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening C",
-              "date": "2023-03-01",
-              "exercises": [
-                {
-                  "name": "3/4 sit-up",
-                  "id": "0001",
-                  "sets": [
-                    {
-                      "weight": 123,
-                      "reps": 2,
-                      "tempo": "2-1-3-3",
-                      "repMax": 131
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "a30ccdf6-6db8-452a-93d3-0755ac8f8e83",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening D",
-              "date": "2023-03-01",
-              "exercises": [
-                {
-                  "name": "assisted lying leg raise with throw down",
-                  "id": "0013",
-                  "sets": [
-                    {
-                      "weight": 213,
-                      "reps": 2,
-                      "tempo": "2-3-1-2",
-                      "repMax": 227
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "1b4dddc8-eef1-404b-8813-ae67a9a4d716",
-          "weekWorkouts": [
-            {
-              "id": "bd746cbc-eba6-4167-9543-c7d440dfdb25",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening D",
-              "date": "2023-03-01",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 321,
-                      "reps": 3,
-                      "tempo": "2-3-4-1",
-                      "repMax": 353
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "64288400-3dc6-4fe7-adb8-6483b236d6bb",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening C",
-              "date": "2023-03-01",
-              "exercises": [
-                {
-                  "name": "alternate heel touchers",
-                  "id": "0006",
-                  "sets": [
-                    {
-                      "weight": 213,
-                      "reps": 12,
-                      "tempo": "1-2-3-1",
-                      "repMax": 298
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "price": 199.19,
-      "description": "Najlepszy plan treningowy nóg jaki znajdziesz. Oraz najniższa cena na rynku EasyLift."
-    },
-    {
-      "id": "6c127198-10ba-44ed-bb99-a14fd5dce0b3",
-      "creator": {
-        "id": "e4g197f4-7168-42db-a0a9-456f8a37830a",
-        "name": "Big Pop"
-      },
-      "title": "Chest Killer",
-      "level": "novice",
-      "frequencyPerWeek": 2,
-      "programLength": 4,
-      "program": [
-        {
-          "id": "dab38ebd-893c-48a4-994d-836ba113e15b",
-          "weekWorkouts": [
-            {
-              "id": "81c6fc1d-f154-450d-aefe-ac3d8487435d",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening A",
-              "date": "2023-03-01",
-              "exercises": [
-                {
-                  "name": "3/4 sit-up",
-                  "id": "0001",
-                  "sets": [
-                    {
-                      "weight": 120,
-                      "reps": 5,
-                      "tempo": "2-2-2-2",
-                      "repMax": 140
-                    },
-                    {
-                      "weight": 120,
-                      "reps": 2,
-                      "tempo": "2-1-3-1",
-                      "repMax": 128
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "9a2b34ec-5ff1-4d3d-a447-89d2ee231f05",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening B",
-              "date": "2023-03-01",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 213,
-                      "reps": 22,
-                      "tempo": "2-1-3-1",
-                      "repMax": 369
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "45da033b-b108-4447-95be-78647a286ab2",
-          "weekWorkouts": [
-            {
-              "id": "ef2719c6-b42b-48b8-9628-ecc3f1f96ec8",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening B",
-              "date": "2023-03-01",
-              "exercises": [
-                {
-                  "name": "air bike",
-                  "id": "0003",
-                  "sets": [
-                    {
-                      "weight": 123,
-                      "reps": 123,
-                      "tempo": "1-2-3-1",
-                      "repMax": 627
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "4ead1e8d-ad9a-41d0-ba66-f92c8748cb0a",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening A",
-              "date": "2023-03-01",
-              "exercises": [
-                {
-                  "name": "archer pull up",
-                  "id": "3293",
-                  "sets": [
-                    {
-                      "weight": 321,
-                      "reps": 321,
-                      "tempo": "3-2-1-3",
-                      "repMax": 3752
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "96622341-fa1a-4316-83b0-eafacc667397",
-          "weekWorkouts": [
-            {
-              "id": "5cfa4163-3e53-4126-86e8-bf0f36377bea",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening C",
-              "date": "2023-03-01",
-              "exercises": [
-                {
-                  "name": "3/4 sit-up",
-                  "id": "0001",
-                  "sets": [
-                    {
-                      "weight": 123,
-                      "reps": 2,
-                      "tempo": "2-1-3-3",
-                      "repMax": 131
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "a30ccdf6-6db8-452a-93d3-0755ac8f8e83",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening D",
-              "date": "2023-03-01",
-              "exercises": [
-                {
-                  "name": "assisted lying leg raise with throw down",
-                  "id": "0013",
-                  "sets": [
-                    {
-                      "weight": 213,
-                      "reps": 2,
-                      "tempo": "2-3-1-2",
-                      "repMax": 227
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "1b4dddc8-eef1-404b-8813-ae67a9a4d716",
-          "weekWorkouts": [
-            {
-              "id": "bd746cbc-eba6-4167-9543-c7d440dfdb25",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening D",
-              "date": "2023-03-01",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 321,
-                      "reps": 3,
-                      "tempo": "2-3-4-1",
-                      "repMax": 353
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "64288400-3dc6-4fe7-adb8-6483b236d6bb",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening C",
-              "date": "2023-03-01",
-              "exercises": [
-                {
-                  "name": "alternate heel touchers",
-                  "id": "0006",
-                  "sets": [
-                    {
-                      "weight": 213,
-                      "reps": 12,
-                      "tempo": "1-2-3-1",
-                      "repMax": 298
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "price": 299.19,
-      "description": "Najlepszy plan treningowy klaty jaki znajdziesz. Oraz najniższa cena na rynku EasyLift."
-    },
-    {
-      "id": "991a8e31-8216-42f6-aac0-9d5923b84e2c",
-      "creator": {
-        "id": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-        "name": "Krystian Domzal"
-      },
-      "title": "New Program Training",
-      "level": "advanced",
-      "frequencyPerWeek": 2,
-      "programLength": 4,
-      "program": [
-        {
-          "id": "232db5d9-b215-46a1-b597-9b0164b500f5",
-          "weekWorkouts": [
-            {
-              "id": "980beb93-b981-4262-a5dd-84294ff7b4f3",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening A",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "3/4 sit-up",
-                  "id": "0001",
-                  "sets": [
-                    {
-                      "weight": 120,
-                      "reps": 5,
-                      "tempo": "1-1-1-1",
-                      "repMax": 140
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "6c305861-b04b-48a8-bdba-eabe63904e48",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening B",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "air bike",
-                  "id": "0003",
-                  "sets": [
-                    {
-                      "weight": 213,
-                      "reps": 213,
-                      "tempo": "2-3-1-2",
-                      "repMax": 1724
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "c45b3e1c-4978-4e6e-b149-257fd2f64dfc",
-          "weekWorkouts": [
-            {
-              "id": "8f29ab9e-1a83-4c23-8a6e-afbbdb0bdd15",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "dsadsad",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 321,
-                      "reps": 321,
-                      "tempo": "2-3-1-3",
-                      "repMax": 3752
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "a8a75a11-d3cf-4daf-8efc-111e7926a183",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "23131",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 321,
-                      "reps": 32,
-                      "tempo": "2-3-1-3",
-                      "repMax": 663
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "8705f0fc-55b2-48e1-b086-9eef797deedf",
-          "weekWorkouts": [
-            {
-              "id": "345cfb0a-8574-44f7-905c-3e5af37582c8",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "e1231231",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 123,
-                      "reps": 123,
-                      "tempo": "1-2-3-1",
-                      "repMax": 627
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "ec150878-ab4b-48d3-aec9-6b2ffa755992",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "3213213123",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 321,
-                      "reps": 32,
-                      "tempo": "2-3-1-1",
-                      "repMax": 663
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "74c63093-8dd7-4288-86d0-7f93de27fe30",
-          "weekWorkouts": [
-            {
-              "id": "99f7dedc-05b0-4611-adb1-075ae316bb2b",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "dsadsadasd",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 213,
-                      "reps": 123,
-                      "tempo": "2-3-1-2",
+                      "goal": "213 x 123",
+                      "tempo": "3-2-3-2",
+                      "archived": "",
                       "repMax": 1085
                     }
                   ]
                 }
-              ]
+              ],
+              "isDraft": false
             },
             {
-              "id": "35e84c87-bcac-4254-82a3-d2cfb0a04e4f",
+              "id": "9be2a674-6b16-4aa3-a38f-db4f2e91150f",
               "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "dsagrwegre",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "archer pull up",
-                  "id": "3293",
-                  "sets": [
-                    {
-                      "weight": 123,
-                      "reps": 123,
-                      "tempo": "1-2-3-1",
-                      "repMax": 627
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "price": 899,
-      "description": "Najlepszy plan treningowy klaty jaki znajdziesz. Oraz najniższa cena na rynku EasyLift."
-    },
-    {
-      "id": "991a8e31-2216-42f6-aac0-9d5923b84e2c",
-      "creator": {
-        "id": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-        "name": "Krystian Domzal"
-      },
-      "title": "New Program Training",
-      "level": "advanced",
-      "frequencyPerWeek": 2,
-      "programLength": 4,
-      "program": [
-        {
-          "id": "232db5d9-b215-46a1-b597-9b0164b500f5",
-          "weekWorkouts": [
-            {
-              "id": "980beb93-b981-4262-a5dd-84294ff7b4f3",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening A",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "3/4 sit-up",
-                  "id": "0001",
-                  "sets": [
-                    {
-                      "weight": 120,
-                      "reps": 5,
-                      "tempo": "1-1-1-1",
-                      "repMax": 140
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "6c305861-b04b-48a8-bdba-eabe63904e48",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening B",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "air bike",
-                  "id": "0003",
-                  "sets": [
-                    {
-                      "weight": 213,
-                      "reps": 213,
-                      "tempo": "2-3-1-2",
-                      "repMax": 1724
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "c45b3e1c-4978-4e6e-b149-257fd2f64dfc",
-          "weekWorkouts": [
-            {
-              "id": "8f29ab9e-1a83-4c23-8a6e-afbbdb0bdd15",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "dsadsad",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 321,
-                      "reps": 321,
-                      "tempo": "2-3-1-3",
-                      "repMax": 3752
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "a8a75a11-d3cf-4daf-8efc-111e7926a183",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "23131",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 321,
-                      "reps": 32,
-                      "tempo": "2-3-1-3",
-                      "repMax": 663
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "8705f0fc-55b2-48e1-b086-9eef797deedf",
-          "weekWorkouts": [
-            {
-              "id": "345cfb0a-8574-44f7-905c-3e5af37582c8",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "e1231231",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 123,
-                      "reps": 123,
-                      "tempo": "1-2-3-1",
-                      "repMax": 627
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "ec150878-ab4b-48d3-aec9-6b2ffa755992",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "3213213123",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 321,
-                      "reps": 32,
-                      "tempo": "2-3-1-1",
-                      "repMax": 663
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "74c63093-8dd7-4288-86d0-7f93de27fe30",
-          "weekWorkouts": [
-            {
-              "id": "99f7dedc-05b0-4611-adb1-075ae316bb2b",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "dsadsadasd",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 213,
-                      "reps": 123,
-                      "tempo": "2-3-1-2",
-                      "repMax": 1085
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "35e84c87-bcac-4254-82a3-d2cfb0a04e4f",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "dsagrwegre",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "archer pull up",
-                  "id": "3293",
-                  "sets": [
-                    {
-                      "weight": 123,
-                      "reps": 123,
-                      "tempo": "1-2-3-1",
-                      "repMax": 627
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "price": 899,
-      "description": "Najlepszy plan treningowy klaty jaki znajdziesz. Oraz najniższa cena na rynku EasyLift."
-    },
-    {
-      "id": "991ase31-8216-42f6-aac0-9d5923b84e2c",
-      "creator": {
-        "id": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-        "name": "Krystian Domzal"
-      },
-      "title": "New Program Training",
-      "level": "advanced",
-      "frequencyPerWeek": 2,
-      "programLength": 4,
-      "program": [
-        {
-          "id": "232db5d9-b215-46a1-b597-9b0164b500f5",
-          "weekWorkouts": [
-            {
-              "id": "980beb93-b981-4262-a5dd-84294ff7b4f3",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening A",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "3/4 sit-up",
-                  "id": "0001",
-                  "sets": [
-                    {
-                      "weight": 120,
-                      "reps": 5,
-                      "tempo": "1-1-1-1",
-                      "repMax": 140
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "6c305861-b04b-48a8-bdba-eabe63904e48",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening B",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "air bike",
-                  "id": "0003",
-                  "sets": [
-                    {
-                      "weight": 213,
-                      "reps": 213,
-                      "tempo": "2-3-1-2",
-                      "repMax": 1724
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "c45b3e1c-4978-4e6e-b149-257fd2f64dfc",
-          "weekWorkouts": [
-            {
-              "id": "8f29ab9e-1a83-4c23-8a6e-afbbdb0bdd15",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "dsadsad",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 321,
-                      "reps": 321,
-                      "tempo": "2-3-1-3",
-                      "repMax": 3752
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "a8a75a11-d3cf-4daf-8efc-111e7926a183",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "23131",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 321,
-                      "reps": 32,
-                      "tempo": "2-3-1-3",
-                      "repMax": 663
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "8705f0fc-55b2-48e1-b086-9eef797deedf",
-          "weekWorkouts": [
-            {
-              "id": "345cfb0a-8574-44f7-905c-3e5af37582c8",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "e1231231",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 123,
-                      "reps": 123,
-                      "tempo": "1-2-3-1",
-                      "repMax": 627
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "ec150878-ab4b-48d3-aec9-6b2ffa755992",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "3213213123",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 321,
-                      "reps": 32,
-                      "tempo": "2-3-1-1",
-                      "repMax": 663
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "74c63093-8dd7-4288-86d0-7f93de27fe30",
-          "weekWorkouts": [
-            {
-              "id": "99f7dedc-05b0-4611-adb1-075ae316bb2b",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "dsadsadasd",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 213,
-                      "reps": 123,
-                      "tempo": "2-3-1-2",
-                      "repMax": 1085
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "35e84c87-bcac-4254-82a3-d2cfb0a04e4f",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "dsagrwegre",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "archer pull up",
-                  "id": "3293",
-                  "sets": [
-                    {
-                      "weight": 123,
-                      "reps": 123,
-                      "tempo": "1-2-3-1",
-                      "repMax": 627
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "price": 899,
-      "description": "Najlepszy plan treningowy klaty jaki znajdziesz. Oraz najniższa cena na rynku EasyLift."
-    },
-    {
-      "id": "991a8x31-8216-42f6-aac0-9d5923b84e2c",
-      "creator": {
-        "id": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-        "name": "Krystian Domzal"
-      },
-      "title": "New Program Training",
-      "level": "advanced",
-      "frequencyPerWeek": 2,
-      "programLength": 4,
-      "program": [
-        {
-          "id": "232db5d9-b215-46a1-b597-9b0164b500f5",
-          "weekWorkouts": [
-            {
-              "id": "980beb93-b981-4262-a5dd-84294ff7b4f3",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening A",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "3/4 sit-up",
-                  "id": "0001",
-                  "sets": [
-                    {
-                      "weight": 120,
-                      "reps": 5,
-                      "tempo": "1-1-1-1",
-                      "repMax": 140
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "6c305861-b04b-48a8-bdba-eabe63904e48",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening B",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "air bike",
-                  "id": "0003",
-                  "sets": [
-                    {
-                      "weight": 213,
-                      "reps": 213,
-                      "tempo": "2-3-1-2",
-                      "repMax": 1724
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "c45b3e1c-4978-4e6e-b149-257fd2f64dfc",
-          "weekWorkouts": [
-            {
-              "id": "8f29ab9e-1a83-4c23-8a6e-afbbdb0bdd15",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "dsadsad",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 321,
-                      "reps": 321,
-                      "tempo": "2-3-1-3",
-                      "repMax": 3752
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "a8a75a11-d3cf-4daf-8efc-111e7926a183",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "23131",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 321,
-                      "reps": 32,
-                      "tempo": "2-3-1-3",
-                      "repMax": 663
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "8705f0fc-55b2-48e1-b086-9eef797deedf",
-          "weekWorkouts": [
-            {
-              "id": "345cfb0a-8574-44f7-905c-3e5af37582c8",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "e1231231",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 123,
-                      "reps": 123,
-                      "tempo": "1-2-3-1",
-                      "repMax": 627
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "ec150878-ab4b-48d3-aec9-6b2ffa755992",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "3213213123",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 321,
-                      "reps": 32,
-                      "tempo": "2-3-1-1",
-                      "repMax": 663
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "74c63093-8dd7-4288-86d0-7f93de27fe30",
-          "weekWorkouts": [
-            {
-              "id": "99f7dedc-05b0-4611-adb1-075ae316bb2b",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "dsadsadasd",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 213,
-                      "reps": 123,
-                      "tempo": "2-3-1-2",
-                      "repMax": 1085
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "35e84c87-bcac-4254-82a3-d2cfb0a04e4f",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "dsagrwegre",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "archer pull up",
-                  "id": "3293",
-                  "sets": [
-                    {
-                      "weight": 123,
-                      "reps": 123,
-                      "tempo": "1-2-3-1",
-                      "repMax": 627
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "price": 899,
-      "description": "Najlepszy plan treningowy klaty jaki znajdziesz. Oraz najniższa cena na rynku EasyLift."
-    },
-    {
-      "id": "991a8e31-8216-42f6-aac0-9d5923b8de2c",
-      "creator": {
-        "id": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-        "name": "Krystian Domzal"
-      },
-      "title": "New Program Training",
-      "level": "advanced",
-      "frequencyPerWeek": 2,
-      "programLength": 4,
-      "program": [
-        {
-          "id": "232db5d9-b215-46a1-b597-9b0164b500f5",
-          "weekWorkouts": [
-            {
-              "id": "980beb93-b981-4262-a5dd-84294ff7b4f3",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening A",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "3/4 sit-up",
-                  "id": "0001",
-                  "sets": [
-                    {
-                      "weight": 120,
-                      "reps": 5,
-                      "tempo": "1-1-1-1",
-                      "repMax": 140
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "6c305861-b04b-48a8-bdba-eabe63904e48",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "Trening B",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "air bike",
-                  "id": "0003",
-                  "sets": [
-                    {
-                      "weight": 213,
-                      "reps": 213,
-                      "tempo": "2-3-1-2",
-                      "repMax": 1724
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "c45b3e1c-4978-4e6e-b149-257fd2f64dfc",
-          "weekWorkouts": [
-            {
-              "id": "8f29ab9e-1a83-4c23-8a6e-afbbdb0bdd15",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "dsadsad",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 321,
-                      "reps": 321,
-                      "tempo": "2-3-1-3",
-                      "repMax": 3752
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "a8a75a11-d3cf-4daf-8efc-111e7926a183",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "23131",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 321,
-                      "reps": 32,
-                      "tempo": "2-3-1-3",
-                      "repMax": 663
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "8705f0fc-55b2-48e1-b086-9eef797deedf",
-          "weekWorkouts": [
-            {
-              "id": "345cfb0a-8574-44f7-905c-3e5af37582c8",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "e1231231",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 123,
-                      "reps": 123,
-                      "tempo": "1-2-3-1",
-                      "repMax": 627
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "ec150878-ab4b-48d3-aec9-6b2ffa755992",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "3213213123",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 321,
-                      "reps": 32,
-                      "tempo": "2-3-1-1",
-                      "repMax": 663
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "74c63093-8dd7-4288-86d0-7f93de27fe30",
-          "weekWorkouts": [
-            {
-              "id": "99f7dedc-05b0-4611-adb1-075ae316bb2b",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "dsadsadasd",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "all fours squad stretch",
-                  "id": "1512",
-                  "sets": [
-                    {
-                      "weight": 213,
-                      "reps": 123,
-                      "tempo": "2-3-1-2",
-                      "repMax": 1085
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "35e84c87-bcac-4254-82a3-d2cfb0a04e4f",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "dsagrwegre",
-              "date": "2023-03-07",
-              "exercises": [
-                {
-                  "name": "archer pull up",
-                  "id": "3293",
-                  "sets": [
-                    {
-                      "weight": 123,
-                      "reps": 123,
-                      "tempo": "1-2-3-1",
-                      "repMax": 627
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "price": 899,
-      "description": "Najlepszy plan treningowy klaty jaki znajdziesz. Oraz najniższa cena na rynku EasyLift."
-    },
-    {
-      "id": "618e5de4-c7d7-40f0-98fc-ee047478be3c",
-      "creator": {
-        "id": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-        "name": "Krystian Domzalowicz"
-      },
-      "title": "dsadsadad",
-      "level": "novice",
-      "frequencyPerWeek": 2,
-      "programLength": 4,
-      "program": [
-        {
-          "id": "9bdf7759-cf7e-430a-ae96-74b31ca312df",
-          "weekWorkouts": [
-            {
-              "id": "5c95c16c-1251-4825-810a-218acd23e62d",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "dsadsa",
-              "date": "2023-03-13",
-              "exercises": [
-                {
-                  "name": "3/4 sit-up",
-                  "id": "0001",
-                  "sets": [
-                    {
-                      "weight": 321,
-                      "reps": 32,
-                      "tempo": "2-3-1-3",
-                      "repMax": 663
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "5166891c-f88f-485b-93fe-2e7d9242dbac",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "2313123123",
-              "date": "2023-03-13",
-              "exercises": [
-                {
-                  "name": "air bike",
-                  "id": "0003",
-                  "sets": [
-                    {
-                      "weight": 321,
-                      "reps": 321,
-                      "tempo": "2-3-1-2",
-                      "repMax": 3752
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "2185c459-1413-47a9-98c3-cc1720a5572c",
-          "weekWorkouts": [
-            {
-              "id": "9d989cd7-48ef-4c54-a7b2-17fa0d82165f",
-              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "32132131",
-              "date": "2023-03-13",
+              "title": "dsadsffd",
+              "date": "2023-04-07",
               "exercises": [
                 {
                   "name": "45° side bend",
                   "id": "0002",
                   "sets": [
                     {
-                      "weight": 321,
-                      "reps": 31,
-                      "tempo": "1-2-3-1",
-                      "repMax": 652
+                      "goal": "321 x 321",
+                      "tempo": "2-1-3-1",
+                      "archived": "",
+                      "repMax": 3752
                     }
                   ]
                 }
-              ]
-            },
+              ],
+              "isDraft": false
+            }
+          ]
+        },
+        {
+          "id": "6b506590-6063-4638-9651-32a98b7c29da",
+          "weekWorkouts": [
             {
-              "id": "107c830e-bcf4-4bc7-afcc-56e8439fb2d4",
+              "id": "0b9aa238-0728-4c53-a03e-f3bdb201a5f0",
               "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "3213123123",
-              "date": "2023-03-13",
+              "title": "dsadsadas",
+              "date": "2023-04-07",
               "exercises": [
                 {
                   "name": "air bike",
                   "id": "0003",
                   "sets": [
                     {
-                      "weight": 321,
-                      "reps": 321,
-                      "tempo": "1-2-3-1",
+                      "goal": "321 x 321",
+                      "tempo": "2-3-1-3",
+                      "archived": "",
                       "repMax": 3752
                     }
                   ]
                 }
-              ]
+              ],
+              "isDraft": false
+            },
+            {
+              "id": "64ec462b-5d3f-4f06-9a3f-27cd34224abe",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsagerftbhfgd",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "goal": "123 x 123",
+                      "tempo": "2-1-3-1",
+                      "archived": "",
+                      "repMax": 627
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
             }
           ]
         },
         {
-          "id": "32535e69-79d3-4c78-a1ed-cdb6c99d33a5",
+          "id": "7b8ecbc8-87a6-4d1f-b45f-e9cf98c4f86f",
           "weekWorkouts": [
             {
-              "id": "6cf01501-213d-4910-bddc-dd33670d212d",
+              "id": "5bc82f6e-bdd1-45b6-bd94-e0187ed1ba2c",
               "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "3213213",
-              "date": "2023-03-13",
+              "title": "dsadasd",
+              "date": "2023-04-07",
               "exercises": [
                 {
                   "name": "45° side bend",
                   "id": "0002",
                   "sets": [
                     {
-                      "weight": 321,
-                      "reps": 321,
-                      "tempo": "2-1-3-1",
-                      "repMax": 3752
+                      "goal": "231 x 231",
+                      "tempo": "3-2-1-3",
+                      "archived": "",
+                      "repMax": 2008
                     }
                   ]
                 }
-              ]
+              ],
+              "isDraft": false
             },
             {
-              "id": "81df6dcb-e220-4e7f-92f8-7b361cf34bbf",
+              "id": "4c37ba2a-2b09-46c7-9996-d5b836f648df",
               "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "31231231",
-              "date": "2023-03-13",
+              "title": "sdfagfghbb",
+              "date": "2023-04-07",
               "exercises": [
                 {
                   "name": "air bike",
                   "id": "0003",
                   "sets": [
                     {
-                      "weight": 321,
-                      "reps": 3,
-                      "tempo": "2-1-3-2",
-                      "repMax": 353
+                      "goal": "231 x 231",
+                      "tempo": "2-3-1-3",
+                      "archived": "",
+                      "repMax": 2008
                     }
                   ]
                 }
-              ]
+              ],
+              "isDraft": false
             }
           ]
         },
         {
-          "id": "c913af64-0605-4127-a107-bbc6dac57d53",
+          "id": "ee310bf9-ac6d-4024-80b9-06701646c562",
           "weekWorkouts": [
             {
-              "id": "80658ecb-1862-44a7-9508-9c641da64fff",
+              "id": "cf5569e0-f3a5-4489-aca7-f56519e7a840",
               "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "3213213",
-              "date": "2023-03-13",
+              "title": "dsadasda",
+              "date": "2023-04-07",
               "exercises": [
                 {
-                  "name": "3/4 sit-up",
-                  "id": "0001",
+                  "name": "all fours squad stretch",
+                  "id": "1512",
                   "sets": [
                     {
-                      "weight": 321,
-                      "reps": 31,
-                      "tempo": "1-2-3-2",
-                      "repMax": 652
+                      "goal": "213 x 123",
+                      "tempo": "2-3-1-2",
+                      "archived": "",
+                      "repMax": 1085
                     }
                   ]
                 }
-              ]
+              ],
+              "isDraft": false
             },
             {
-              "id": "4877fe14-6878-46c9-9871-db16fe8ac3af",
+              "id": "5841d32d-f1c3-4f6f-b8a5-0c811d0aff7c",
               "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
-              "title": "321321d",
-              "date": "2023-03-13",
+              "title": "DSADSADASD",
+              "date": "2023-04-07",
               "exercises": [
                 {
-                  "name": "alternate heel touchers",
-                  "id": "0006",
+                  "name": "air bike",
+                  "id": "0003",
                   "sets": [
                     {
-                      "weight": 321,
-                      "reps": 23,
-                      "tempo": "2-3-1-3",
-                      "repMax": 567
+                      "goal": "123 x 123",
+                      "tempo": "3-1-2-3",
+                      "archived": "",
+                      "repMax": 627
                     }
                   ]
                 }
-              ]
+              ],
+              "isDraft": false
+            }
+          ]
+        },
+        {
+          "id": "9275f1eb-8d18-4e3f-a41a-58b7444ed827",
+          "weekWorkouts": [
+            {
+              "id": "77c7b892-f71a-4f06-940b-ab41160167cd",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsadsada",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "goal": "123 x 123",
+                      "tempo": "1-2-3-1",
+                      "archived": "",
+                      "repMax": 627
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            },
+            {
+              "id": "d1a157f0-24a4-41c0-adc3-46f1c83c3260",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsadas",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "goal": "123 x 123",
+                      "tempo": "1-2-3-1",
+                      "archived": "",
+                      "repMax": 627
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
             }
           ]
         }
       ],
       "image": [
         {
-          "path": "avatar-presentation.png"
+          "path": "whiteboard-training.jpg"
         }
       ],
-      "price": 222,
-      "description": "dsadsadddddddddddddddddddd"
+      "price": 99999999999,
+      "description": "program for refactory testsss"
+    },
+    {
+      "id": "3cfg5d03-0d59-403a-b07g-7938b5f088ad",
+      "creator": {
+        "id": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+        "name": "Krystiano"
+      },
+      "title": "test program UPDATED",
+      "level": "novice",
+      "frequencyPerWeek": 2,
+      "programLength": 5,
+      "program": [
+        {
+          "id": "4f69ae3e-3e3f-42fc-8930-b9c33f158b51",
+          "weekWorkouts": [
+            {
+              "id": "8565f4b5-bbea-469e-8c7b-f99901a994a3",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dasdasdasd",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "goal": "213 x 123",
+                      "tempo": "3-2-3-2",
+                      "archived": "",
+                      "repMax": 1085
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            },
+            {
+              "id": "9be2a674-6b16-4aa3-a38f-db4f2e91150f",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsadsffd",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "45° side bend",
+                  "id": "0002",
+                  "sets": [
+                    {
+                      "goal": "321 x 321",
+                      "tempo": "2-1-3-1",
+                      "archived": "",
+                      "repMax": 3752
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            }
+          ]
+        },
+        {
+          "id": "6b506590-6063-4638-9651-32a98b7c29da",
+          "weekWorkouts": [
+            {
+              "id": "0b9aa238-0728-4c53-a03e-f3bdb201a5f0",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsadsadas",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "goal": "321 x 321",
+                      "tempo": "2-3-1-3",
+                      "archived": "",
+                      "repMax": 3752
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            },
+            {
+              "id": "64ec462b-5d3f-4f06-9a3f-27cd34224abe",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsagerftbhfgd",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "goal": "123 x 123",
+                      "tempo": "2-1-3-1",
+                      "archived": "",
+                      "repMax": 627
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            }
+          ]
+        },
+        {
+          "id": "7b8ecbc8-87a6-4d1f-b45f-e9cf98c4f86f",
+          "weekWorkouts": [
+            {
+              "id": "5bc82f6e-bdd1-45b6-bd94-e0187ed1ba2c",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsadasd",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "45° side bend",
+                  "id": "0002",
+                  "sets": [
+                    {
+                      "goal": "231 x 231",
+                      "tempo": "3-2-1-3",
+                      "archived": "",
+                      "repMax": 2008
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            },
+            {
+              "id": "4c37ba2a-2b09-46c7-9996-d5b836f648df",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "sdfagfghbb",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "goal": "231 x 231",
+                      "tempo": "2-3-1-3",
+                      "archived": "",
+                      "repMax": 2008
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            }
+          ]
+        },
+        {
+          "id": "ee310bf9-ac6d-4024-80b9-06701646c562",
+          "weekWorkouts": [
+            {
+              "id": "cf5569e0-f3a5-4489-aca7-f56519e7a840",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsadasda",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "all fours squad stretch",
+                  "id": "1512",
+                  "sets": [
+                    {
+                      "goal": "213 x 123",
+                      "tempo": "2-3-1-2",
+                      "archived": "",
+                      "repMax": 1085
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            },
+            {
+              "id": "5841d32d-f1c3-4f6f-b8a5-0c811d0aff7c",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "DSADSADASD",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "goal": "123 x 123",
+                      "tempo": "3-1-2-3",
+                      "archived": "",
+                      "repMax": 627
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            }
+          ]
+        },
+        {
+          "id": "9275f1eb-8d18-4e3f-a41a-58b7444ed827",
+          "weekWorkouts": [
+            {
+              "id": "77c7b892-f71a-4f06-940b-ab41160167cd",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsadsada",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "goal": "123 x 123",
+                      "tempo": "1-2-3-1",
+                      "archived": "",
+                      "repMax": 627
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            },
+            {
+              "id": "d1a157f0-24a4-41c0-adc3-46f1c83c3260",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsadas",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "goal": "123 x 123",
+                      "tempo": "1-2-3-1",
+                      "archived": "",
+                      "repMax": 627
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            }
+          ]
+        }
+      ],
+      "image": [
+        {
+          "path": "whiteboard-training.jpg"
+        }
+      ],
+      "price": 99999999999,
+      "description": "program for refactory testsss"
+    },
+    {
+      "id": "3c595d03-0d59-403a-b073-7938b52088ad",
+      "creator": {
+        "id": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+        "name": "Krystiano"
+      },
+      "title": "test program UPDATED",
+      "level": "novice",
+      "frequencyPerWeek": 2,
+      "programLength": 5,
+      "program": [
+        {
+          "id": "4f69ae3e-3e3f-42fc-8930-b9c33f158b51",
+          "weekWorkouts": [
+            {
+              "id": "8565f4b5-bbea-469e-8c7b-f99901a994a3",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dasdasdasd",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "goal": "213 x 123",
+                      "tempo": "3-2-3-2",
+                      "archived": "",
+                      "repMax": 1085
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            },
+            {
+              "id": "9be2a674-6b16-4aa3-a38f-db4f2e91150f",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsadsffd",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "45° side bend",
+                  "id": "0002",
+                  "sets": [
+                    {
+                      "goal": "321 x 321",
+                      "tempo": "2-1-3-1",
+                      "archived": "",
+                      "repMax": 3752
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            }
+          ]
+        },
+        {
+          "id": "6b506590-6063-4638-9651-32a98b7c29da",
+          "weekWorkouts": [
+            {
+              "id": "0b9aa238-0728-4c53-a03e-f3bdb201a5f0",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsadsadas",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "goal": "321 x 321",
+                      "tempo": "2-3-1-3",
+                      "archived": "",
+                      "repMax": 3752
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            },
+            {
+              "id": "64ec462b-5d3f-4f06-9a3f-27cd34224abe",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsagerftbhfgd",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "goal": "123 x 123",
+                      "tempo": "2-1-3-1",
+                      "archived": "",
+                      "repMax": 627
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            }
+          ]
+        },
+        {
+          "id": "7b8ecbc8-87a6-4d1f-b45f-e9cf98c4f86f",
+          "weekWorkouts": [
+            {
+              "id": "5bc82f6e-bdd1-45b6-bd94-e0187ed1ba2c",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsadasd",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "45° side bend",
+                  "id": "0002",
+                  "sets": [
+                    {
+                      "goal": "231 x 231",
+                      "tempo": "3-2-1-3",
+                      "archived": "",
+                      "repMax": 2008
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            },
+            {
+              "id": "4c37ba2a-2b09-46c7-9996-d5b836f648df",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "sdfagfghbb",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "goal": "231 x 231",
+                      "tempo": "2-3-1-3",
+                      "archived": "",
+                      "repMax": 2008
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            }
+          ]
+        },
+        {
+          "id": "ee310bf9-ac6d-4024-80b9-06701646c562",
+          "weekWorkouts": [
+            {
+              "id": "cf5569e0-f3a5-4489-aca7-f56519e7a840",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsadasda",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "all fours squad stretch",
+                  "id": "1512",
+                  "sets": [
+                    {
+                      "goal": "213 x 123",
+                      "tempo": "2-3-1-2",
+                      "archived": "",
+                      "repMax": 1085
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            },
+            {
+              "id": "5841d32d-f1c3-4f6f-b8a5-0c811d0aff7c",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "DSADSADASD",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "goal": "123 x 123",
+                      "tempo": "3-1-2-3",
+                      "archived": "",
+                      "repMax": 627
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            }
+          ]
+        },
+        {
+          "id": "9275f1eb-8d18-4e3f-a41a-58b7444ed827",
+          "weekWorkouts": [
+            {
+              "id": "77c7b892-f71a-4f06-940b-ab41160167cd",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsadsada",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "goal": "123 x 123",
+                      "tempo": "1-2-3-1",
+                      "archived": "",
+                      "repMax": 627
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            },
+            {
+              "id": "d1a157f0-24a4-41c0-adc3-46f1c83c3260",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsadas",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "goal": "123 x 123",
+                      "tempo": "1-2-3-1",
+                      "archived": "",
+                      "repMax": 627
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            }
+          ]
+        }
+      ],
+      "image": [
+        {
+          "path": "whiteboard-training.jpg"
+        }
+      ],
+      "price": 99999999999,
+      "description": "program for refactory testsss"
+    },
+    {
+      "id": "3cfg5d03-0d59-403a-bp73-7938b5f081ad",
+      "creator": {
+        "id": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+        "name": "Krystiano"
+      },
+      "title": "test program UPDATED",
+      "level": "novice",
+      "frequencyPerWeek": 2,
+      "programLength": 5,
+      "program": [
+        {
+          "id": "4f69ae3e-3e3f-42fc-8930-b9c33f158b51",
+          "weekWorkouts": [
+            {
+              "id": "8565f4b5-bbea-469e-8c7b-f99901a994a3",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dasdasdasd",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "goal": "213 x 123",
+                      "tempo": "3-2-3-2",
+                      "archived": "",
+                      "repMax": 1085
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            },
+            {
+              "id": "9be2a674-6b16-4aa3-a38f-db4f2e91150f",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsadsffd",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "45° side bend",
+                  "id": "0002",
+                  "sets": [
+                    {
+                      "goal": "321 x 321",
+                      "tempo": "2-1-3-1",
+                      "archived": "",
+                      "repMax": 3752
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            }
+          ]
+        },
+        {
+          "id": "6b506590-6063-4638-9651-32a98b7c29da",
+          "weekWorkouts": [
+            {
+              "id": "0b9aa238-0728-4c53-a03e-f3bdb201a5f0",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsadsadas",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "goal": "321 x 321",
+                      "tempo": "2-3-1-3",
+                      "archived": "",
+                      "repMax": 3752
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            },
+            {
+              "id": "64ec462b-5d3f-4f06-9a3f-27cd34224abe",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsagerftbhfgd",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "goal": "123 x 123",
+                      "tempo": "2-1-3-1",
+                      "archived": "",
+                      "repMax": 627
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            }
+          ]
+        },
+        {
+          "id": "7b8ecbc8-87a6-4d1f-b45f-e9cf98c4f86f",
+          "weekWorkouts": [
+            {
+              "id": "5bc82f6e-bdd1-45b6-bd94-e0187ed1ba2c",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsadasd",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "45° side bend",
+                  "id": "0002",
+                  "sets": [
+                    {
+                      "goal": "231 x 231",
+                      "tempo": "3-2-1-3",
+                      "archived": "",
+                      "repMax": 2008
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            },
+            {
+              "id": "4c37ba2a-2b09-46c7-9996-d5b836f648df",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "sdfagfghbb",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "goal": "231 x 231",
+                      "tempo": "2-3-1-3",
+                      "archived": "",
+                      "repMax": 2008
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            }
+          ]
+        },
+        {
+          "id": "ee310bf9-ac6d-4024-80b9-06701646c562",
+          "weekWorkouts": [
+            {
+              "id": "cf5569e0-f3a5-4489-aca7-f56519e7a840",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsadasda",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "all fours squad stretch",
+                  "id": "1512",
+                  "sets": [
+                    {
+                      "goal": "213 x 123",
+                      "tempo": "2-3-1-2",
+                      "archived": "",
+                      "repMax": 1085
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            },
+            {
+              "id": "5841d32d-f1c3-4f6f-b8a5-0c811d0aff7c",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "DSADSADASD",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "goal": "123 x 123",
+                      "tempo": "3-1-2-3",
+                      "archived": "",
+                      "repMax": 627
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            }
+          ]
+        },
+        {
+          "id": "9275f1eb-8d18-4e3f-a41a-58b7444ed827",
+          "weekWorkouts": [
+            {
+              "id": "77c7b892-f71a-4f06-940b-ab41160167cd",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsadsada",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "goal": "123 x 123",
+                      "tempo": "1-2-3-1",
+                      "archived": "",
+                      "repMax": 627
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            },
+            {
+              "id": "d1a157f0-24a4-41c0-adc3-46f1c83c3260",
+              "creator": "e4f197f4-7168-42db-a0a9-456f8a37830a",
+              "title": "dsadas",
+              "date": "2023-04-07",
+              "exercises": [
+                {
+                  "name": "air bike",
+                  "id": "0003",
+                  "sets": [
+                    {
+                      "goal": "123 x 123",
+                      "tempo": "1-2-3-1",
+                      "archived": "",
+                      "repMax": 627
+                    }
+                  ]
+                }
+              ],
+              "isDraft": false
+            }
+          ]
+        }
+      ],
+      "image": [
+        {
+          "path": "whiteboard-training.jpg"
+        }
+      ],
+      "price": 99999999999,
+      "description": "program for refactory testsss"
     }
   ],
   "trainers": [
@@ -1846,129 +1293,32 @@
   ],
   "workouts": [
     {
-      "id": "01d9a386-b8f3-4c49-8c28-4521fe935419",
-      "creator": "DUMMY-USER-1",
-      "title": "Updated Title Workout",
-      "date": "2023-02-24",
-      "exercises": [
-        {
-          "name": "45° side bend",
-          "id": "0002",
-          "sets": [
-            {
-              "weight": 213,
-              "reps": 33,
-              "tempo": "2-2-2-2",
-              "repMax": 447
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "e6f1724f-082e-4630-a5d0-0c9b701379f3",
-      "creator": "55b65f22-3f5a-4881-bd4f-89d929012814",
-      "title": "chest killer",
-      "date": "2023-02-28",
+      "id": "2023a718-89f8-46f1-93c4-dbbb5f6225d3",
+      "creator": "547266d5-f25c-4664-a290-b590290c06de",
+      "title": "123222",
+      "date": "2023-03-30",
       "exercises": [
         {
           "name": "3/4 sit-up",
-          "id": "0001",
+          "id": "27478547-40b3-4028-b1ee-e4ee614e2061",
+          "_id": "ce889c74-286f-4331-9892-595c754ecb75",
           "sets": [
             {
-              "weight": 120,
-              "reps": 5,
-              "tempo": "2-2-2-2",
-              "repMax": 140
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "1308fcd2-f5e4-4e65-beb2-8718c6266461",
-      "creator": "547266d5-f25c-4664-a290-b590290c06de",
-      "title": "3213CFDS",
-      "date": "2023-03-18",
-      "exercises": [
-        {
-          "name": "45° side bend",
-          "sets": [
-            {
-              "goal": "321 x 322",
-              "tempo": "2-3-1-3",
-              "archived": "231 x 231",
-              "repMax": 2008
+              "goal": "123 x 213",
+              "tempo": "1-2-3-1",
+              "archived": "231 x 2"
             }
           ]
         },
         {
-          "name": "3/4 sit-up",
-          "id": "0001",
+          "name": "45° side bend",
+          "id": "2cfe2246-4d67-48b7-8981-10889ac45f97",
+          "_id": "f481f1ef-68ef-4d7b-b5dd-3040627a3b27",
           "sets": [
             {
-              "goal": "321 x 31",
-              "tempo": "2-3-1-3",
-              "archived": "321 x 321",
-              "repMax": 3752
-            }
-          ]
-        }
-      ],
-      "isDraft": false
-    },
-    {
-      "id": "7e8d3974-5eb9-4948-8e7f-b60a717c187d",
-      "creator": "547266d5-f25c-4664-a290-b590290c06de",
-      "title": "dsad2",
-      "date": "2023-03-20",
-      "exercises": [
-        {
-          "name": "3/4 sit-up",
-          "id": "0001",
-          "sets": [
-            {
-              "goal": "123 x 1",
-              "tempo": "2-3-1-2",
-              "archived": "123 x 123",
-              "repMax": 627
-            }
-          ]
-        }
-      ],
-      "isDraft": false
-    },
-    {
-      "id": "ff118b8b-78bb-4074-825a-69160caac5bd",
-      "creator": "547266d5-f25c-4664-a290-b590290c06de",
-      "title": "asdsssssssssss",
-      "date": "2023-03-20",
-      "exercises": [],
-      "isDraft": true
-    },
-    {
-      "id": "7a9ded22-cce1-45a0-9d8d-fad88b057a84",
-      "creator": "547266d5-f25c-4664-a290-b590290c06de",
-      "title": "ddddd",
-      "date": "2023-03-20",
-      "exercises": [],
-      "isDraft": true
-    },
-    {
-      "id": "872d5f9f-2183-4585-8196-b6f90ab59e44",
-      "creator": "547266d5-f25c-4664-a290-b590290c06de",
-      "title": "ddsads",
-      "date": "2023-03-20",
-      "exercises": [
-        {
-          "id": "06766ca1-269d-4764-a138-dba203f887b4",
-          "_id": "0001",
-          "name": "3/4 sit-up",
-          "sets": [
-            {
-              "goal": "123 x 123",
+              "goal": "321 x 32",
               "tempo": "1-2-3-1",
-              "archived": ""
+              "archived": "123 x 23"
             }
           ]
         }
@@ -1976,58 +1326,7 @@
       "isDraft": true
     }
   ],
-  "usersProgress": [
-    {
-      "id": "ebf43bc2-c617-4988-a512-b1e985f10c8b",
-      "workoutId": "1308fcd2-f5e4-4e65-beb2-8718c6266461",
-      "userId": "547266d5-f25c-4664-a290-b590290c06de",
-      "exerciseName": "45° side bend",
-      "date": "2023-03-18",
-      "repMax": 2008,
-      "sets": [
-        {
-          "goal": "321 x 322",
-          "tempo": "2-3-1-3",
-          "archived": "231 x 231",
-          "repMax": 2008
-        }
-      ]
-    },
-    {
-      "id": "4e3bd5e6-08e7-4f92-a6e9-4e7fad4ab430",
-      "workoutId": "1308fcd2-f5e4-4e65-beb2-8718c6266461",
-      "userId": "547266d5-f25c-4664-a290-b590290c06de",
-      "exerciseId": "0001",
-      "exerciseName": "3/4 sit-up",
-      "date": "2023-03-18",
-      "repMax": 3752,
-      "sets": [
-        {
-          "goal": "321 x 31",
-          "tempo": "2-3-1-3",
-          "archived": "321 x 321",
-          "repMax": 3752
-        }
-      ]
-    },
-    {
-      "id": "effb3b6a-6d02-483c-9ca0-e37ce6695526",
-      "workoutId": "7e8d3974-5eb9-4948-8e7f-b60a717c187d",
-      "userId": "547266d5-f25c-4664-a290-b590290c06de",
-      "exerciseId": "0001",
-      "exerciseName": "3/4 sit-up",
-      "date": "2023-03-20",
-      "repMax": 627,
-      "sets": [
-        {
-          "goal": "123 x 1",
-          "tempo": "2-3-1-2",
-          "archived": "123 x 123",
-          "repMax": 627
-        }
-      ]
-    }
-  ],
+  "usersProgress": [],
   "exercises": [
     {
       "bodyPart": "waist",

@@ -1,15 +1,16 @@
-import React from "react";
-
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { ListItem, Typography, Box, Button } from "@mui/material";
 import { styled, useTheme } from "@mui/system";
 
 import { useDeleteWorkoutMutation } from "../../hooks/queryHooks/workoutsHooks/useDeleteWorkoutMutation";
 
+import { SnackbarStatus, Status } from "../../shared/enums";
 import { Workout } from "../../shared/interfaces";
 import { PATHS } from "../../pages/paths";
 import { useDeleteUserProgresMutation } from "../../hooks/queryHooks/userProgressHooks/useDeleteUserProgressMutation";
+import { useSnackbar } from "../../hooks";
 
 type WorkoutItemProps = {
   workout: Workout;
@@ -17,7 +18,12 @@ type WorkoutItemProps = {
 
 const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
   const theme = useTheme();
-  const { mutate: deleteQueryWorkout } = useDeleteWorkoutMutation(workout.id);
+  const navigate = useNavigate();
+  const snackbar = useSnackbar();
+
+  const { status, mutate: deleteQueryWorkout } = useDeleteWorkoutMutation(
+    workout.id
+  );
   const { mutate: deleteQueryUserProgress } = useDeleteUserProgresMutation();
 
   // todo: change when backend will be written => delete user progress will be in delete workout route
@@ -26,12 +32,26 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
     deleteQueryUserProgress(workout.id);
   };
 
+  const onWorkoutChoose = () => {
+    if (workout.isDraft) {
+      navigate(`${PATHS.NEW_WORKOUT}/${workout.id}`);
+    } else {
+      navigate(`${PATHS.WORKOUTS}/${workout.id}`);
+    }
+  };
+
+  useEffect(() => {
+    if (status === Status.SUCCESS) {
+      snackbar("Workout deleted successfully!", SnackbarStatus.SUCCESS);
+    }
+    if (status === Status.ERROR) {
+      snackbar("Something goes wrong. Please try later.", SnackbarStatus.ERROR);
+    }
+  }, [snackbar, status]);
+
   return (
-    <ListItem disablePadding>
-      <ListItemLink
-        // todo: add edit path (on next branch feat/add-edits)
-        to={workout.isDraft ? `edit path` : `${PATHS.WORKOUTS}/${workout.id}`}
-      >
+    <Item disablePadding>
+      <ItemButton onClick={onWorkoutChoose}>
         <Box>
           <Container>
             <Typography variant="h3" color="primary">
@@ -48,30 +68,39 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
             {workout.date}
           </Typography>
         </Box>
-      </ListItemLink>
+      </ItemButton>
 
-      <Button
+      <DeleteButton
         onClick={deleteWorkout}
         variant="outlined"
         size="small"
         color="error"
       >
         delete
-      </Button>
-    </ListItem>
+      </DeleteButton>
+    </Item>
   );
 };
 
-const ListItemLink = styled(Link)(({ theme }) => ({
+const Item = styled(ListItem)({
+  position: "relative",
+});
+
+const ItemButton = styled(Button)({
   width: "100%",
-  padding: `${theme.spacing(1)} 0`,
   textDecoration: "none",
-  borderRadius: theme.spacing(1),
-}));
+  borderRadius: 0,
+  justifyContent: "flex-start",
+});
 
 const Container = styled(Box)(({ theme }) => ({
   display: "flex",
   gap: theme.spacing(1),
+}));
+
+const DeleteButton = styled(Button)(({ theme }) => ({
+  position: "absolute",
+  right: theme.spacing(1),
 }));
 
 export default WorkoutItem;

@@ -13,7 +13,11 @@ import { useAddWorkoutMutation } from "../../queryHooks/workoutsHooks/useAddWork
 import { useAddUserProgresMutation } from "../../queryHooks/userProgressHooks/useAddUserProgresMutation";
 import { useUserContext } from "../../../contexts/userContext";
 
-import { generateNewWorkout } from "../../../utils/FormExercises";
+import {
+  generateEditExercises,
+  generateNewWorkout,
+  generateWorkoutToEdit,
+} from "../../../utils/FormExercises";
 import { generateUserProgress } from "../../../utils/UserProgress";
 
 import {
@@ -21,11 +25,12 @@ import {
   workoutTrainerSchema,
   workoutUserSchema,
 } from "./constans";
-import { FormExercise } from "../../../shared/interfaces";
+import { FormExercise, Workout } from "../../../shared/interfaces";
 import { Role } from "../../../shared/enums";
+import { useUpdateWorkoutMutation } from "../../queryHooks/workoutsHooks/useUpdateWorkouteMutation";
 
 export enum AddWorkoutFormFields {
-  WORKOUT_TITLE = "workoutTitle",
+  WORKOUT_TITLE = "title",
   START_TIME = "startTime",
   EXERCISES = "exercises",
 }
@@ -36,7 +41,7 @@ export interface AddWorkoutForm {
   [AddWorkoutFormFields.EXERCISES]: FormExercise[];
 }
 
-export const defaultWorkoutValues = {
+export const defaultWorkoutValues: AddWorkoutForm = {
   [AddWorkoutFormFields.WORKOUT_TITLE]: "",
   [AddWorkoutFormFields.START_TIME]: new Date(),
   [AddWorkoutFormFields.EXERCISES]: [],
@@ -48,33 +53,41 @@ type UseNewWorkoutFormProps = {
     FieldValues,
     `program.${number}.weekWorkouts`
   >;
+  editWorkout?: Workout[];
 };
 
 export const useNewWorkoutForm = ({
   workoutIndex,
   updateWorkoutField,
+  editWorkout,
 }: UseNewWorkoutFormProps) => {
   const [pending, setPending] = useState(false);
   const [isDraftSubmited, setIsDraftSubmited] = useState(false);
 
+  // todo: refactory editWorkout[0] --> editWorkout when backend will be written
+  const editWorkoutValues = editWorkout
+    ? generateWorkoutToEdit(editWorkout[0])
+    : undefined;
+
   const { user } = useUserContext();
   const { mutateAsync: addQueryWorkout } = useAddWorkoutMutation();
   const { mutateAsync: addQueryUserProgres } = useAddUserProgresMutation();
+  const { mutateAsync: updateQueryWorkout } = useUpdateWorkoutMutation("s");
 
   const schema =
     user?.role === Role.trainer ? workoutTrainerSchema : workoutUserSchema;
 
   const methods = useForm<AddWorkoutForm>({
-    defaultValues: defaultWorkoutValues,
+    defaultValues: editWorkoutValues || defaultWorkoutValues,
     resolver: yupResolver(schema),
   });
   const { watch, control, reset, getValues, setError, clearErrors } = methods;
 
   const resetForm = useCallback(() => reset(), [reset]);
 
-  const { workoutTitle, startTime, exercises } = watch();
+  const { title, startTime, exercises } = watch();
 
-  const canSubmit = workoutTitle && startTime && exercises;
+  const canSubmit = title && startTime && exercises;
 
   const {
     fields: exerciseFields,
@@ -88,11 +101,19 @@ export const useNewWorkoutForm = ({
   const onSubmit = useCallback(
     (formValues: AddWorkoutForm) => {
       setPending(true);
-      const newWorkout = generateNewWorkout(formValues, user!, false);
+      const newWorkout = generateNewWorkout(
+        formValues,
+        user!,
+        false,
+        // todo: refactory editWorkout?.at(0)?.id --> editWorkout?.id when backend will be written
+        editWorkout?.at(0)?.id
+      );
 
       // todo: refactory when backend will be written. Delete addQueryUserProgress because it will be done in backend in addNewWorkout route
       if (user?.role === Role.user) {
-        addQueryWorkout(newWorkout)
+        const method = editWorkout ? updateQueryWorkout : addQueryWorkout;
+
+        method(newWorkout)
           .then(() => {
             resetForm();
 
@@ -112,6 +133,8 @@ export const useNewWorkoutForm = ({
       addQueryWorkout,
       resetForm,
       addQueryUserProgres,
+      updateQueryWorkout,
+      editWorkout,
       updateWorkoutField,
       workoutIndex,
     ]
@@ -129,14 +152,7 @@ export const useNewWorkoutForm = ({
 
       // todo: refactory when backend will be written. Delete addQueryUserProgress because it will be done in backend in addNewWorkout route
       addQueryWorkout(newDraftWorkout)
-        .then(() => {
-          resetForm();
-
-          const newUserProgress = generateUserProgress(newDraftWorkout);
-          return newUserProgress.map((userProgres) =>
-            addQueryUserProgres(userProgres)
-          );
-        })
+        .then(resetForm)
         .finally(() => {
           setPending(false);
           setIsDraftSubmited(true);
@@ -153,15 +169,7 @@ export const useNewWorkoutForm = ({
       }
       setPending(false);
     }
-  }, [
-    getValues,
-    setError,
-    addQueryWorkout,
-    addQueryUserProgres,
-    resetForm,
-    clearErrors,
-    user,
-  ]);
+  }, [getValues, setError, addQueryWorkout, resetForm, clearErrors, user]);
 
   return {
     pending,

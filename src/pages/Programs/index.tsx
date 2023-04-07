@@ -23,7 +23,9 @@ const ProgramsPage: React.FC = () => {
         </Alert>
       )}
 
-      {programs && <Programs programs={programs} />}
+      {status !== Status.LOADING && programs && programs.length !== 0 && (
+        <Programs programs={programs} />
+      )}
     </SectionContainer>
   );
 };

@@ -8,6 +8,7 @@ export type { default as UserProgres } from "./UserProgres";
 export type { default as NavigationItem } from "./NavigationItem";
 export type { default as Program } from "./Program";
 export type { default as ProgramItem } from "./ProgramItem";
+export type { default as ProgramUpdates } from "./ProgramUpdates";
 export type { default as Set } from "./Set";
 export type { default as Workout } from "./Workout";
 export type { default as Trainer } from "./Trainer";
