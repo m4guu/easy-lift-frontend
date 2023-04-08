@@ -1648,39 +1648,6 @@
       "isDraft": false
     },
     {
-      "id": "8b45791b-d484-4f53-a6a5-b0a890c3fc10",
-      "creator": "547266d5-f25c-4664-a290-b590290c06de",
-      "title": "123222",
-      "date": "2023-03-30",
-      "exercises": [
-        {
-          "name": "3/4 sit-up",
-          "id": "27478547-40b3-4028-b1ee-e4ee614e2061",
-          "_id": "ce889c74-286f-4331-9892-595c754ecb75",
-          "sets": [
-            {
-              "goal": "123 x 213",
-              "tempo": "1-2-3-1",
-              "archived": "231 x 2"
-            }
-          ]
-        },
-        {
-          "name": "45° side bend",
-          "id": "2cfe2246-4d67-48b7-8981-10889ac45f97",
-          "_id": "f481f1ef-68ef-4d7b-b5dd-3040627a3b27",
-          "sets": [
-            {
-              "goal": "321 x 32",
-              "tempo": "1-2-3-1",
-              "archived": "123 x 23"
-            }
-          ]
-        }
-      ],
-      "isDraft": false
-    },
-    {
       "id": "312aedb6-ff5b-41a1-9499-368c8169d6f7",
       "creator": "547266d5-f25c-4664-a290-b590290c06de",
       "title": "123222",
