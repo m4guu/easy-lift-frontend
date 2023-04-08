@@ -24,6 +24,8 @@ export const YoursSection: React.FC = () => {
 };
 
 const SectionContainer = styled("section")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
   padding: theme.spacing(2),
   width: "100%",
 }));
