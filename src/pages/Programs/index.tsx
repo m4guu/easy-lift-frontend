@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box, Typography, Divider } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { usePrograms } from "../../hooks/queryHooks/programsHooks/usePrograms";
@@ -34,7 +34,7 @@ const ProgramsPage: React.FC = () => {
   const isItemLoaded = (index: number) =>
     !hasNextPage || index < programs.length;
   // Render an item or a loading indicator.
-  const Item = ({ index, style }) => {
+  const Item = ({ index, style }: { index: number; style: any }) => {
     return (
       <Box style={style}>
         {isItemLoaded(index) ? (
