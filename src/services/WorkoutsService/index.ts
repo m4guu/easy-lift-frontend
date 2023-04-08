@@ -13,8 +13,10 @@ export enum WorkoutsMethods {
 }
 
 const WorkoutsService = {
-  [WorkoutsMethods.GET_USER_WORKOUTS]: (userId: string) =>
-    HttpService.get<Workout[]>(`${ENDPOINTS.WORKOUTS}?creator=${userId}`),
+  [WorkoutsMethods.GET_USER_WORKOUTS]: (userId: string, pageParam: number) =>
+    HttpService.get<Workout[]>(
+      `${ENDPOINTS.WORKOUTS}?creator=${userId}&_page=${pageParam}`
+    ),
 
   [WorkoutsMethods.GET_WORKOUT_BY_ID]: (workoutuId: string) =>
     HttpService.get<Workout[]>(`${ENDPOINTS.WORKOUTS}?id=${workoutuId}`),
