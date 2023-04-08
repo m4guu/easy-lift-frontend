@@ -14,11 +14,9 @@ interface ProgramsProps {
 }
 
 export const Programs: React.FC<ProgramsProps> = ({ programs }) => {
-  const { updatedPrograms, filterProgramProps } = useProgramFilter(programs);
 
   return (
     <Box>
-      <FilterPanel filterHandlers={filterProgramProps} />
 
       <List disablePadding>
         {updatedPrograms.length === 0 ? (
