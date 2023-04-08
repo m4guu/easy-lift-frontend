@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box, Divider, Typography, ListItem } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { useUserContext } from "../../contexts/userContext";
@@ -40,13 +40,13 @@ const WorkoutsPage: React.FC = () => {
   // Render an item or a loading indicator.
   const Item = ({ index, style }) => {
     return (
-      <ListItem disablePadding style={style}>
+      <Box style={style}>
         {isItemLoaded(index) ? (
           <WorkoutItem workout={workouts[index]} />
         ) : (
           <Box>loading...</Box>
         )}
-      </ListItem>
+      </Box>
     );
   };
 

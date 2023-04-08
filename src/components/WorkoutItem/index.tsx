@@ -86,12 +86,12 @@ const Item = styled(ListItem)({
   position: "relative",
 });
 
-const ItemButton = styled(Button)({
+const ItemButton = styled(Button)(({ theme }) => ({
   width: "100%",
   textDecoration: "none",
-  borderRadius: 0,
+  borderRadius: theme.spacing(1),
   justifyContent: "flex-start",
-});
+}));
 
 const Container = styled(Box)(({ theme }) => ({
   display: "flex",

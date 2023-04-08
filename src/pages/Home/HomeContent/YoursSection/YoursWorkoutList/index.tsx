@@ -1,7 +1,6 @@
 import React from "react";
 
-import { ListItem, Box } from "@mui/material";
-import { styled } from "@mui/system";
+import { ListItem, Box, Typography } from "@mui/material";
 
 import { useUserContext } from "../../../../../contexts/userContext";
 import { useUserWorkouts } from "../../../../../hooks/queryHooks/workoutsHooks/useUserWorkouts";
@@ -48,6 +47,7 @@ export const YourWorkoutList: React.FC = () => {
     <Box sx={{ flex: 1 }}>
       {status === Status.LOADING && <div>loading...</div>}
       {status === Status.ERROR && <div>error</div>}
+      {noWorkouts && <Typography>You dont have any workouts yet.</Typography>}
 
       <InfiniteList
         items={workouts}

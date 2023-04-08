@@ -1330,27 +1330,6 @@
       "isDraft": true
     },
     {
-      "id": "9db00546-e841-4925-8d9a-af515976d440",
-      "creator": "547266d5-f25c-4664-a290-b590290c06de",
-      "title": "dsadsa",
-      "date": "2023-04-07",
-      "exercises": [
-        {
-          "name": "3/4 sit-up",
-          "id": "0001",
-          "sets": [
-            {
-              "goal": "123 x 123",
-              "tempo": "1-2-3-1",
-              "archived": "321 x 312",
-              "repMax": 3656
-            }
-          ]
-        }
-      ],
-      "isDraft": false
-    },
-    {
       "id": "24895bbf-f435-4dac-99aa-e7c2f8384b5a",
       "creator": "547266d5-f25c-4664-a290-b590290c06de",
       "title": "123222",
@@ -2636,27 +2615,42 @@
         }
       ],
       "isDraft": false
-    }
-  ],
-  "usersProgress": [
+    },
     {
-      "id": "38362f6b-7366-4e29-8a0e-7280f5157aeb",
-      "workoutId": "9db00546-e841-4925-8d9a-af515976d440",
-      "userId": "547266d5-f25c-4664-a290-b590290c06de",
-      "exerciseId": "0001",
-      "exerciseName": "3/4 sit-up",
-      "date": "2023-04-07",
-      "repMax": 3656,
-      "sets": [
+      "id": "b729869a-a881-4c4c-85dc-88c49bb9fdf4",
+      "creator": "547266d5-f25c-4664-a290-b590290c06de",
+      "title": "123222",
+      "date": "2023-03-30",
+      "exercises": [
         {
-          "goal": "123 x 123",
-          "tempo": "1-2-3-1",
-          "archived": "321 x 312",
-          "repMax": 3656
+          "name": "3/4 sit-up",
+          "id": "edd7c1b3-348b-4e3f-9a4f-f5c650f9b65c",
+          "sets": [
+            {
+              "goal": "123 x 213",
+              "tempo": "1-2-3-1",
+              "archived": "231 x 2",
+              "repMax": 246
+            }
+          ]
+        },
+        {
+          "name": "45° side bend",
+          "id": "d2475a55-8722-478f-b6cd-c2c2fcabab53",
+          "sets": [
+            {
+              "goal": "321 x 32",
+              "tempo": "1-2-3-1",
+              "archived": "123 x 23",
+              "repMax": 217
+            }
+          ]
         }
-      ]
+      ],
+      "isDraft": false
     }
   ],
+  "usersProgress": [],
   "exercises": [
     {
       "bodyPart": "waist",

@@ -143,6 +143,8 @@ export const useNewWorkoutForm = ({
   const onDraftSave = useCallback(async () => {
     setPending(true);
     clearErrors();
+    console.log("dupa");
+
     const formData: AddWorkoutForm = getValues();
     try {
       // validate for draft save
@@ -160,6 +162,8 @@ export const useNewWorkoutForm = ({
     } catch (error: unknown) {
       // ? question -  do i have to handle else ?
       // ?          -  path from ValidationError is string, setError requires one of AddWorkoutFormFields enum how to resolve it ?
+      console.log(error);
+
       if (error instanceof ValidationError) {
         error.inner?.map((inner, index) => {
           const { type, path, errors } = inner;

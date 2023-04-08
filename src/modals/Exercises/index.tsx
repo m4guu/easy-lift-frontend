@@ -5,14 +5,20 @@ import { Box, Typography, Button, Modal } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { useExercises } from "../../hooks/queryHooks/exerciseDB/useExercises";
+import { usePaginatedResultItems } from "../../hooks";
+
 import {
   AddWorkoutForm,
   AddWorkoutFormFields,
 } from "../../hooks/formHooks/workout/useNewWorkoutForm";
 
 import { Status } from "../../shared/enums";
-import { ExerciseList } from "./views/ExercisesContent/ExerciseList";
-import { SectionContainer, SectionHeader } from "../../components";
+import { InfiniteList } from "../../features";
+import {
+  SectionContainer,
+  SectionHeader,
+  ExerciseItem,
+} from "../../components";
 import { FilterPanel } from "./views/FilterPanel/FilterPanel";
 import { useExerciseFilter } from "../../hooks/filters/useExerciseFilter";
 
@@ -30,9 +36,43 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
   closeModal,
   isOpen,
 }) => {
-  const { status, error, data: exercises } = useExercises();
+  const {
+    status,
+    error,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+    data: infinityExercises,
+  } = useExercises();
 
-  const { updatedExercises, filterPanelProps } = useExerciseFilter(exercises);
+  //! REFACTORY FILTERING WHEN BACKEND WILL BE WRITTEN
+  // const { updatedExercises, filterPanelProps } = useExerciseFilter(exercises);
+
+  const exercises = usePaginatedResultItems(
+    infinityExercises,
+    (response) => response
+  );
+  const noExercises = status === Status.SUCCESS && exercises.length === 0;
+
+  // Every row is loaded except for our loading indicator row.
+  const isItemLoaded = (index: number) =>
+    !hasNextPage || index < exercises.length;
+  // Render an item or a loading indicator.
+  const Item = ({ index, style }) => {
+    return (
+      <Box style={style}>
+        {isItemLoaded(index) ? (
+          <ExerciseItem
+            exercise={exercises[index]}
+            appendExercise={appendExercise}
+            closeModal={closeModal}
+          />
+        ) : (
+          <Box>loading...</Box>
+        )}
+      </Box>
+    );
+  };
 
   return (
     <ExercisesMuiModal
@@ -40,37 +80,45 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
       onClose={closeModal}
       slotProps={{ backdrop: { style: { backgroundColor: "inherit" } } }}
     >
-      <Box>
-        <SectionContainer>
-          <SectionHeader>Exercise list</SectionHeader>
+      <Container>
+        <SectionHeader>Exercise list</SectionHeader>
+        {status === Status.LOADING && <Box>loading...</Box>}
+        {noExercises && (
+          <Typography>Somethings goes wrong. Please try later.</Typography>
+        )}
 
-          <FilterPanel filterHandlers={filterPanelProps} />
+        {/* <FilterPanel filterHandlers={filterPanelProps} /> */}
 
-          {status === Status.LOADING && <div>loading...</div>}
+        <Box sx={{ flex: 1 }}>
+          <InfiniteList
+            items={exercises}
+            Item={Item}
+            isFetchingNextPage={isFetchingNextPage}
+            hasNextPage={hasNextPage}
+            fetchNextPage={fetchNextPage}
+            itemSize={150}
+          />
+        </Box>
 
-          {updatedExercises?.length === 0 ? (
-            <Typography>No search result</Typography>
-          ) : (
-            <ExerciseList
-              exercises={updatedExercises}
-              appendExercise={appendExercise}
-              closeModal={closeModal}
-            />
-          )}
-
-          <CloseModalButton
-            onClick={closeModal}
-            color="error"
-            variant="contained"
-            size="small"
-          >
-            close modal
-          </CloseModalButton>
-        </SectionContainer>
-      </Box>
+        <CloseModalButton
+          onClick={closeModal}
+          color="error"
+          variant="contained"
+          size="small"
+        >
+          close modal
+        </CloseModalButton>
+      </Container>
     </ExercisesMuiModal>
   );
 };
+
+const Container = styled("section")(({ theme }) => ({
+  paddinf: theme.spacing(2),
+  height: "100%",
+  display: "flex",
+  flexDirection: "column",
+}));
 
 const CloseModalButton = styled(Button)(({ theme }) => ({
   position: "absolute",

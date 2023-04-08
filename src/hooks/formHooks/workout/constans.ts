@@ -79,5 +79,5 @@ export const workoutUserSchema = yup.object().shape({
 });
 
 export const draftSchema = yup.object().shape({
-  workoutTitle: yup.string().required().min(5),
+  title: yup.string().required().min(5),
 });
