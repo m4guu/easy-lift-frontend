@@ -1,7 +1,7 @@
 import React from "react";
 
-import { List, Divider, Box, Typography } from "@mui/material";
-import { styled } from "@mui/system";
+import { Divider, Box, Typography, useMediaQuery } from "@mui/material";
+import { styled, useTheme } from "@mui/system";
 
 import { useTrainers } from "../../hooks/queryHooks/userHooks/useTrainers";
 import { usePaginatedResultItems } from "../../hooks";
@@ -11,9 +11,12 @@ import { InfiniteList } from "../../features";
 
 import { Status } from "../../shared/enums";
 import { FilterPanel } from "./views/FilterPanel/FilterPanel";
-import { TrainerItem, SectionHeader, SectionContainer } from "../../components";
+import { TrainerItem, SectionHeader } from "../../components";
 
 const TrainersPage: React.FC = () => {
+  const theme = useTheme();
+  const isBelowSm = useMediaQuery(theme.breakpoints.down("sm"));
+
   const {
     status,
     error,
@@ -31,12 +34,13 @@ const TrainersPage: React.FC = () => {
     (response) => response
   );
   const noTrainers = status === Status.SUCCESS && trainers.length === 0;
+  const itemSize = isBelowSm ? 58 : 78;
 
   // Every row is loaded except for our loading indicator row.
   const isItemLoaded = (index: number) =>
     !hasNextPage || index < trainers.length;
   // Render an item or a loading indicator.
-  const Item = ({ index, style }) => {
+  const Item = ({ index, style }: { index: number; style: any }) => {
     return (
       <Box style={style}>
         {isItemLoaded(index) ? (
@@ -67,7 +71,7 @@ const TrainersPage: React.FC = () => {
           isFetchingNextPage={isFetchingNextPage}
           hasNextPage={hasNextPage}
           fetchNextPage={fetchNextPage}
-          itemSize={80}
+          itemSize={itemSize}
         />
       </Box>
     </Container>

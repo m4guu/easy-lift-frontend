@@ -1,7 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Typography, Box, Button, ListItem } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Button,
+  ListItem,
+  useMediaQuery,
+} from "@mui/material";
 import { styled, useTheme } from "@mui/system";
 
 import { Program } from "../../shared/interfaces";
@@ -19,6 +25,7 @@ const ProgramItem: React.FC<ProgramItemProps> = ({ program }) => {
   const { user } = useUserContext();
   const navigate = useNavigate();
   const theme = useTheme();
+  const isUpSm = useMediaQuery(theme.breakpoints.up("sm"));
 
   return (
     <Item disablePadding>
@@ -54,23 +61,25 @@ const ProgramItem: React.FC<ProgramItemProps> = ({ program }) => {
         </ProgramContent>
       </Container>
 
-      <ProgramActions>
-        {program.creator.id !== user?.id ? (
-          <Button variant="contained" size="small" fullWidth>
-            buy
-          </Button>
-        ) : (
-          <Button
-            onClick={() => navigate(`${PATHS.NEW_PROGRAM}/${program.id}`)}
-            variant="contained"
-            size="small"
-            color="info"
-            fullWidth
-          >
-            edit
-          </Button>
-        )}
-      </ProgramActions>
+      {isUpSm && (
+        <ProgramActions>
+          {program.creator.id !== user?.id ? (
+            <Button variant="contained" size="small" fullWidth>
+              buy
+            </Button>
+          ) : (
+            <Button
+              onClick={() => navigate(`${PATHS.NEW_PROGRAM}/${program.id}`)}
+              variant="contained"
+              size="small"
+              color="info"
+              fullWidth
+            >
+              edit
+            </Button>
+          )}
+        </ProgramActions>
+      )}
     </Item>
   );
 };

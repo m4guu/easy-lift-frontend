@@ -1,6 +1,7 @@
 import React from "react";
 
-import { ListItem, Box, Typography } from "@mui/material";
+import { ListItem, Box, Typography, useMediaQuery } from "@mui/material";
+import { useTheme } from "@mui/system";
 
 import { useUserContext } from "../../../../../contexts/userContext";
 import { useUserWorkouts } from "../../../../../hooks/queryHooks/workoutsHooks/useUserWorkouts";
@@ -12,6 +13,9 @@ import { Status } from "../../../../../shared/enums";
 import { WorkoutItem } from "../../../../../components";
 
 export const YourWorkoutList: React.FC = () => {
+  const theme = useTheme();
+  const isBelowLg = useMediaQuery(theme.breakpoints.down("lg"));
+
   const { user } = useUserContext();
   const {
     status,
@@ -32,7 +36,7 @@ export const YourWorkoutList: React.FC = () => {
   const isItemLoaded = (index: number) =>
     !hasNextPage || index < workouts.length;
   // Render an item or a loading indicator.
-  const Item = ({ index, style }) => {
+  const Item = ({ index, style }: { index: number; style: any }) => {
     return (
       <ListItem disablePadding style={style}>
         {isItemLoaded(index) ? (
@@ -43,8 +47,9 @@ export const YourWorkoutList: React.FC = () => {
       </ListItem>
     );
   };
+
   return (
-    <Box sx={{ flex: 1 }}>
+    <Box sx={isBelowLg ? { height: 500 } : { flex: 1 }}>
       {status === Status.LOADING && <div>loading...</div>}
       {status === Status.ERROR && <div>error</div>}
       {noWorkouts && <Typography>You dont have any workouts yet.</Typography>}

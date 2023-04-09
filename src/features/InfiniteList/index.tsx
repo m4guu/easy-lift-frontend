@@ -17,6 +17,7 @@ interface InfiniteListProps<T> {
   ) => Promise<UseInfiniteQueryResult>;
   hasNextPage: boolean | undefined;
   itemSize: number;
+  customHeight?: number;
 }
 
 const InfiniteList = <T,>({
@@ -26,10 +27,12 @@ const InfiniteList = <T,>({
   fetchNextPage,
   hasNextPage,
   itemSize,
+  customHeight,
 }: InfiniteListProps<T>) => {
   // if there are more items to be loaded then add an extra row to hold a loading indicator
   const itemCount = hasNextPage ? items.length + 1 : items.length;
   const loadMoreItems = isFetchingNextPage ? () => {} : fetchNextPage;
+  console.log(customHeight);
 
   // Every row is loaded except for our loading indicator row.
   const isItemLoaded = (index: number) => !hasNextPage || index < items.length;
@@ -43,7 +46,7 @@ const InfiniteList = <T,>({
         >
           {({ onItemsRendered, ref }) => (
             <List
-              height={height}
+              height={customHeight || height}
               width={width}
               itemCount={itemCount}
               itemSize={itemSize}

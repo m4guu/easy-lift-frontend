@@ -1,8 +1,8 @@
 import React from "react";
 import { UseFieldArrayAppend } from "react-hook-form";
 
-import { Box, Typography, Button, Modal } from "@mui/material";
-import { styled } from "@mui/system";
+import { Box, Typography, Button, Modal, useMediaQuery } from "@mui/material";
+import { styled, useTheme } from "@mui/system";
 
 import { useExercises } from "../../hooks/queryHooks/exerciseDB/useExercises";
 import { usePaginatedResultItems } from "../../hooks";
@@ -14,11 +14,7 @@ import {
 
 import { Status } from "../../shared/enums";
 import { InfiniteList } from "../../features";
-import {
-  SectionContainer,
-  SectionHeader,
-  ExerciseItem,
-} from "../../components";
+import { ExerciseItem } from "../../components";
 import { FilterPanel } from "./views/FilterPanel/FilterPanel";
 import { useExerciseFilter } from "../../hooks/filters/useExerciseFilter";
 
@@ -36,6 +32,9 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
   closeModal,
   isOpen,
 }) => {
+  const theme = useTheme();
+  const isBelowSm = useMediaQuery(theme.breakpoints.down("sm"));
+
   const {
     status,
     error,
@@ -74,6 +73,8 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
     );
   };
 
+  const itemSize = isBelowSm ? 100 : 150;
+
   return (
     <ExercisesMuiModal
       open={isOpen}
@@ -81,7 +82,8 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
       slotProps={{ backdrop: { style: { backgroundColor: "inherit" } } }}
     >
       <Container>
-        <SectionHeader>Exercise list</SectionHeader>
+        <Header>Exercise list</Header>
+
         {status === Status.LOADING && <Box>loading...</Box>}
         {noExercises && (
           <Typography>Somethings goes wrong. Please try later.</Typography>
@@ -96,7 +98,7 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
             isFetchingNextPage={isFetchingNextPage}
             hasNextPage={hasNextPage}
             fetchNextPage={fetchNextPage}
-            itemSize={150}
+            itemSize={itemSize}
           />
         </Box>
 
@@ -118,6 +120,13 @@ const Container = styled("section")(({ theme }) => ({
   height: "100%",
   display: "flex",
   flexDirection: "column",
+}));
+
+const Header = styled("header")(({ theme }) => ({
+  padding: theme.spacing(2),
+  fontSize: "1.2rem",
+  textTransform: "uppercase",
+  background: theme.palette.background.layout,
 }));
 
 const CloseModalButton = styled(Button)(({ theme }) => ({
