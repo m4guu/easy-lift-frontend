@@ -263,7 +263,7 @@
         "id": "e4f197f4-7168-42db-a0a9-456f8a37830a",
         "name": "Krystiano"
       },
-      "title": "test program UPDATED",
+      "title": "tested UPDATED",
       "level": "novice",
       "frequencyPerWeek": 2,
       "programLength": 5,
@@ -509,8 +509,8 @@
           "path": "whiteboard-training.jpg"
         }
       ],
-      "price": 99999999999,
-      "description": "program for refactory testsss"
+      "price": 999,
+      "description": "updated 20 characters\n"
     },
     {
       "id": "3cfg5d03-0d59-403a-b07g-7938b5f088ad",

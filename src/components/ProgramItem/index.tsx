@@ -93,7 +93,6 @@ const Container = styled(Button)(({ theme }) => ({
   width: "100%",
   position: "relative",
   gap: theme.spacing(1),
-  margin: `${theme.spacing(1)} 0`,
   alignItems: "center",
   textDecoration: "none",
 }));
