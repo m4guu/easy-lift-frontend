@@ -3,9 +3,9 @@ import React from "react";
 import { List } from "@mui/material";
 import { styled } from "@mui/system";
 
-import { WorkoutExercise } from "../../../../../shared/interfaces";
+import { WorkoutExercise } from "../../../../../../shared/interfaces";
 
-import { ExerciseItemWorkout } from "../../../../../components";
+import { ExerciseItemWorkout } from "../../../../../../components";
 
 interface WorkoutDetailsProps {
   exercises: WorkoutExercise[];

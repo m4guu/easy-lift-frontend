@@ -6,20 +6,19 @@ import styled from "@mui/system/styled";
 
 import { getUniqueArrayByKey } from "../../../../../../utils/assets/getUniqueArrayByKey";
 
-import { useUserContext } from "../../../../../../contexts/userContext";
 import { useUserProgress } from "../../../../../../hooks/queryHooks/userProgressHooks/useUserProgress";
 
 import { ChartMenuData } from "../../../../../../shared/interfaces";
 import { initialFormInputs } from "./constans";
 
 type ChartMenuProps = {
+  userId: string;
   sendData: (childData: ChartMenuData) => void;
 };
 
-export const ChartMenu: React.FC<ChartMenuProps> = ({ sendData }) => {
+export const ChartMenu: React.FC<ChartMenuProps> = ({ userId, sendData }) => {
   const [formInputs, setFormInputs] = useState(initialFormInputs);
-  const { user } = useUserContext();
-  const { status, error, data: userProgress } = useUserProgress(user?.id);
+  const { status, error, data: userProgress } = useUserProgress(userId);
 
   const menuItemProgressData = getUniqueArrayByKey(userProgress, "exerciseId");
 

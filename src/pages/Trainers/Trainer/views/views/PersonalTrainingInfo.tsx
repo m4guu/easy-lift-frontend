@@ -14,7 +14,7 @@ import {
   Gym,
 } from "./styles/TrainerViews.styles";
 
-import { gyms } from "../../../Configuration/views/ConfigurationForm/views/Trainer/form/constans";
+import { gyms } from "../../../../Configuration/views/ConfigurationForm/views/Trainer/form/constans";
 
 interface PersonalTrainingInfoProps {
   trainerGymsIds: string[] | undefined;

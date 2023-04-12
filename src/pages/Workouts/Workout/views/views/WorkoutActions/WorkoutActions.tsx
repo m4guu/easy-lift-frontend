@@ -7,16 +7,16 @@ import { styled } from "@mui/system";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
-import { useDeleteWorkoutMutation } from "../../../../../hooks/queryHooks/workoutsHooks/useDeleteWorkoutMutation";
-import { useDeleteUserProgresMutation } from "../../../../../hooks/queryHooks/userProgressHooks/useDeleteUserProgressMutation";
-import { useSnackbar } from "../../../../../hooks";
+import { useDeleteWorkoutMutation } from "../../../../../../hooks/queryHooks/workoutsHooks/useDeleteWorkoutMutation";
+import { useDeleteUserProgresMutation } from "../../../../../../hooks/queryHooks/userProgressHooks/useDeleteUserProgressMutation";
+import { useSnackbar } from "../../../../../../hooks";
 
-import { SnackbarStatus, Status } from "../../../../../shared/enums";
-import { PATHS } from "../../../../paths";
+import { SnackbarStatus, Status } from "../../../../../../shared/enums";
+import { PATHS } from "../../../../../paths";
 import { WorkoutActionsEnum } from "./constans";
 
-import { SettingAction } from "../../../../../components/DotsSettings";
-import { DotsSettings } from "../../../../../components";
+import { SettingAction } from "../../../../../../components/DotsSettings";
+import { DotsSettings } from "../../../../../../components";
 
 interface WorkoutActionsProps {
   workoutId: string;

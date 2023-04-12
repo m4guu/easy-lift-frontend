@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { FormProvider } from "react-hook-form";
 
-import { Button } from "@mui/material";
+import { Step, StepLabel, Button } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 import { useNewProgramForm } from "../../../../hooks/formHooks/program/useNewProgramForm";
@@ -11,20 +11,20 @@ import { useSnackbar } from "../../../../hooks";
 import { SnackbarStatus } from "../../../../shared/enums";
 import { Program as ProgramInterface } from "../../../../shared/interfaces";
 
-import { FormWrapper, FormActions } from "./styles/ProgramForm.styles";
-
+import { steps } from "./constans";
+import {
+  FormWrapper,
+  FormActions,
+  FormStepper,
+} from "./styles/ProgramForm.styles";
 import { ErrorMessage } from "../../../../components";
 import { FirstFormStep } from "./views/FormSteps/FirstFormStep";
 import { SecondFormStep } from "./views/FormSteps/SecondFormStep";
 import { ThirdFormStep } from "./views/FormSteps/ThirdFormStep";
 
-type ProgramFormProviderProps = {
+export const ProgramFormProvider: React.FC<{
   editProgram?: ProgramInterface;
-};
-
-export const ProgramFormProvider: React.FC<ProgramFormProviderProps> = ({
-  editProgram,
-}) => {
+}> = ({ editProgram }) => {
   const {
     methods,
     appendProgramField,
@@ -50,6 +50,18 @@ export const ProgramFormProvider: React.FC<ProgramFormProviderProps> = ({
 
   return (
     <FormProvider {...methods}>
+      {!editProgram && (
+        <FormStepper activeStep={currentStep - 1} alternativeLabel>
+          {steps.map((step) => {
+            return (
+              <Step key={step}>
+                <StepLabel>{step}</StepLabel>
+              </Step>
+            );
+          })}
+        </FormStepper>
+      )}
+
       <FormWrapper>
         {currentStep === 1 && <FirstFormStep />}
         {currentStep === 2 && (

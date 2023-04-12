@@ -2,22 +2,18 @@ import React from "react";
 
 import { Box, Alert } from "@mui/material";
 
-import { useTrainerPrograms } from "../../../../hooks/queryHooks/programsHooks/useTrainerPrograms";
+import { useTrainerPrograms } from "../../../../../hooks/queryHooks/programsHooks/useTrainerPrograms";
 
-import { Status } from "../../../../shared/enums";
+import { Status } from "../../../../../shared/enums";
 import {
   SegmentTitle,
   NoPaddingDivider,
   ProgramsContainer,
   ProgramList,
 } from "./styles/TrainerViews.styles";
-import { ProgramItem } from "../../../../components";
+import { ProgramItem } from "../../../../../components";
 
-interface TrainerProgramsProps {
-  trainerId: string | undefined;
-}
-
-export const TrainerPrograms: React.FC<TrainerProgramsProps> = ({
+export const TrainerPrograms: React.FC<{ trainerId: string }> = ({
   trainerId,
 }) => {
   const {

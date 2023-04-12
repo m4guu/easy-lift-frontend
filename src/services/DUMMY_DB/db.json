@@ -148,7 +148,7 @@
           "weight": 90
         }
       ],
-      "expirationDate": "2023-04-13T14:28:44.972Z",
+      "expirationDate": "",
       "height": 190
     },
     {
@@ -160,7 +160,7 @@
       "isConfigured": true,
       "image": [],
       "bodyWeights": [],
-      "expirationDate": "2023-12-04T14:05:43.387Z",
+      "expirationDate": "2023-04-13T16:43:27.881Z",
       "description": "dsaddddddddddddddddddddddddddddddddd",
       "gyms": [
         "34329df1-2363-4e54-9f96-9a7d8b424596",
@@ -263,7 +263,7 @@
         "id": "e4f197f4-7168-42db-a0a9-456f8a37830a",
         "name": "Krystiano"
       },
-      "title": "tested UPDATED",
+      "title": "UPDATED 2",
       "level": "novice",
       "frequencyPerWeek": 2,
       "programLength": 5,
@@ -1332,30 +1332,47 @@
     {
       "id": "24895bbf-f435-4dac-99aa-e7c2f8384b5a",
       "creator": "547266d5-f25c-4664-a290-b590290c06de",
-      "title": "123222",
+      "title": "Updated workout",
       "date": "2023-03-30",
       "exercises": [
         {
           "name": "3/4 sit-up",
           "id": "27478547-40b3-4028-b1ee-e4ee614e2061",
-          "_id": "ce889c74-286f-4331-9892-595c754ecb75",
           "sets": [
             {
               "goal": "123 x 213",
               "tempo": "1-2-3-1",
-              "archived": "231 x 2"
+              "archived": "231 x 2",
+              "repMax": 246
             }
           ]
         },
         {
           "name": "45° side bend",
           "id": "2cfe2246-4d67-48b7-8981-10889ac45f97",
-          "_id": "f481f1ef-68ef-4d7b-b5dd-3040627a3b27",
           "sets": [
             {
               "goal": "321 x 32",
               "tempo": "1-2-3-1",
-              "archived": "123 x 23"
+              "archived": "123 x 23",
+              "repMax": 217
+            },
+            {
+              "goal": "213 x 123",
+              "tempo": "1-2-3-1",
+              "archived": "123 x 213",
+              "repMax": 995
+            }
+          ]
+        },
+        {
+          "name": "all fours squad stretch",
+          "sets": [
+            {
+              "goal": "123 x 123",
+              "tempo": "2-1-3-2",
+              "archived": "213 x 213",
+              "repMax": 1724
             }
           ]
         }
@@ -2759,6 +2776,39 @@
         }
       ],
       "isDraft": false
+    },
+    {
+      "id": "06e2711e-d10b-4436-a1d8-2a4d5d09aa55",
+      "creator": "547266d5-f25c-4664-a290-b590290c06de",
+      "title": "123222",
+      "date": "2023-03-30",
+      "exercises": [
+        {
+          "name": "3/4 sit-up",
+          "id": "bcd5287f-2af8-4cde-84d6-ab63af809b34",
+          "_id": "27478547-40b3-4028-b1ee-e4ee614e2061",
+          "sets": [
+            {
+              "goal": "123 x 213",
+              "tempo": "1-2-3-1",
+              "archived": "231 x 2"
+            }
+          ]
+        },
+        {
+          "name": "45° side bend",
+          "id": "282b48e1-f729-4899-9e42-d8a7b0395dd9",
+          "_id": "2cfe2246-4d67-48b7-8981-10889ac45f97",
+          "sets": [
+            {
+              "goal": "321 x 32",
+              "tempo": "1-2-3-1",
+              "archived": "12 x 23"
+            }
+          ]
+        }
+      ],
+      "isDraft": true
     }
   ],
   "usersProgress": [
@@ -2844,6 +2894,113 @@
           "tempo": "3-2-1-3",
           "archived": "123 x 123",
           "repMax": 627
+        }
+      ]
+    },
+    {
+      "id": "bb8a65fe-3c9a-4a97-94fe-3eacfd14d67d",
+      "workoutId": "24895bbf-f435-4dac-99aa-e7c2f8384b5a",
+      "userId": "547266d5-f25c-4664-a290-b590290c06de",
+      "exerciseId": "27478547-40b3-4028-b1ee-e4ee614e2061",
+      "exerciseName": "3/4 sit-up",
+      "date": "2023-04-12",
+      "repMax": 246,
+      "sets": [
+        {
+          "goal": "123 x 213",
+          "tempo": "1-2-3-1",
+          "archived": "231 x 2",
+          "repMax": 246
+        }
+      ]
+    },
+    {
+      "id": "d7518e80-ec9c-43c9-8a61-fe5b5cddc6cf",
+      "workoutId": "24895bbf-f435-4dac-99aa-e7c2f8384b5a",
+      "userId": "547266d5-f25c-4664-a290-b590290c06de",
+      "exerciseId": "2cfe2246-4d67-48b7-8981-10889ac45f97",
+      "exerciseName": "45° side bend",
+      "date": "2023-04-12",
+      "repMax": 1863,
+      "sets": [
+        {
+          "goal": "321 x 32",
+          "tempo": "1-2-2-2",
+          "archived": "222 x 222",
+          "repMax": 1863
+        }
+      ]
+    },
+    {
+      "id": "e43cce5c-598e-4fe2-a141-81f5d9e507e2",
+      "workoutId": "24895bbf-f435-4dac-99aa-e7c2f8384b5a",
+      "userId": "547266d5-f25c-4664-a290-b590290c06de",
+      "exerciseId": "1512",
+      "exerciseName": "all fours squad stretch",
+      "date": "2023-04-12",
+      "repMax": 1724,
+      "sets": [
+        {
+          "goal": "123 x 123",
+          "tempo": "2-1-3-2",
+          "archived": "213 x 213",
+          "repMax": 1724
+        }
+      ]
+    },
+    {
+      "id": "3f4d07c2-b832-4303-bc76-c3db49412511",
+      "workoutId": "24895bbf-f435-4dac-99aa-e7c2f8384b5a",
+      "userId": "547266d5-f25c-4664-a290-b590290c06de",
+      "exerciseId": "27478547-40b3-4028-b1ee-e4ee614e2061",
+      "exerciseName": "3/4 sit-up",
+      "date": "2023-04-12",
+      "repMax": 246,
+      "sets": [
+        {
+          "goal": "123 x 213",
+          "tempo": "1-2-3-1",
+          "archived": "231 x 2",
+          "repMax": 246
+        }
+      ]
+    },
+    {
+      "id": "d2816b7a-54c7-43a5-92dc-8b023cb9f180",
+      "workoutId": "24895bbf-f435-4dac-99aa-e7c2f8384b5a",
+      "userId": "547266d5-f25c-4664-a290-b590290c06de",
+      "exerciseId": "2cfe2246-4d67-48b7-8981-10889ac45f97",
+      "exerciseName": "45° side bend",
+      "date": "2023-04-12",
+      "repMax": 995,
+      "sets": [
+        {
+          "goal": "321 x 32",
+          "tempo": "1-2-3-1",
+          "archived": "123 x 23",
+          "repMax": 217
+        },
+        {
+          "goal": "213 x 123",
+          "tempo": "1-2-3-1",
+          "archived": "123 x 213",
+          "repMax": 995
+        }
+      ]
+    },
+    {
+      "id": "79aaea43-a156-452f-8c26-c5ed909c5bc6",
+      "workoutId": "24895bbf-f435-4dac-99aa-e7c2f8384b5a",
+      "userId": "547266d5-f25c-4664-a290-b590290c06de",
+      "exerciseName": "all fours squad stretch",
+      "date": "2023-04-12",
+      "repMax": 1724,
+      "sets": [
+        {
+          "goal": "123 x 123",
+          "tempo": "2-1-3-2",
+          "archived": "213 x 213",
+          "repMax": 1724
         }
       ]
     }

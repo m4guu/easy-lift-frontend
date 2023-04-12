@@ -71,7 +71,7 @@ export const useNewWorkoutForm = ({
   const { user } = useUserContext();
   const { mutateAsync: addQueryWorkout } = useAddWorkoutMutation();
   const { mutateAsync: addQueryUserProgres } = useAddUserProgresMutation();
-  const { mutateAsync: updateQueryWorkout } = useUpdateWorkoutMutation("s");
+  const { mutateAsync: updateQueryWorkout } = useUpdateWorkoutMutation();
 
   const schema =
     user?.role === Role.trainer ? workoutTrainerSchema : workoutUserSchema;

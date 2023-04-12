@@ -2,15 +2,14 @@ import React from "react";
 import { FieldValues, UseFieldArrayUpdate } from "react-hook-form";
 import { useParams } from "react-router-dom";
 
-import { Box, Alert } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { useUserContext } from "../../contexts/userContext";
 
-import { Role, Status } from "../../shared/enums";
+import { Role } from "../../shared/enums";
 import { WorkoutFormProvider } from "./views/WorkoutFormProvider/WorkoutFormProvider";
 import { SectionHeader } from "../../components";
-import { useWorkout } from "../../hooks/queryHooks/workoutsHooks/useWorkout";
+import { EditWorkoutFormProvider } from "./views/EditWorkoutFormProvidert";
 
 type NewWorkoutPageProps = {
   workoutIndex?: number;
@@ -20,37 +19,27 @@ type NewWorkoutPageProps = {
   >;
 };
 
-const NewWorkoutPage: React.FC<NewWorkoutPageProps> = ({
+const NewWorkout: React.FC<NewWorkoutPageProps> = ({
   workoutIndex,
   updateWorkoutField,
 }) => {
-  const { workoutId: editWorkoutId } = useParams();
-  const { status, error, data: editWorkout } = useWorkout(editWorkoutId);
-
   const { user } = useUserContext();
+  const { workoutId: editWorkoutId } = useParams();
+
   const isTrainer = user?.role === Role.trainer;
 
   return (
     <SectionContainer sx={{ p: isTrainer ? 0 : 2 }}>
       {!isTrainer && <SectionHeader>New Workout</SectionHeader>}
-      {editWorkoutId &&
-      status === Status.SUCCESS &&
-      editWorkout?.length === 0 ? (
-        <Alert variant="outlined" severity="info">
-          There are no workout with provided id. Try again later.
-        </Alert>
+
+      {editWorkoutId ? (
+        <EditWorkoutFormProvider editWorkoutId={editWorkoutId} />
       ) : (
-        <Box>
-          {status !== Status.LOADING && (
-            <WorkoutFormProvider
-              workoutIndex={workoutIndex}
-              updateWorkoutField={updateWorkoutField}
-              editWorkout={editWorkout}
-            />
-          )}
-        </Box>
+        <WorkoutFormProvider
+          workoutIndex={workoutIndex}
+          updateWorkoutField={updateWorkoutField}
+        />
       )}
-      {status === Status.LOADING && <Box>loading...</Box>}
     </SectionContainer>
   );
 };
@@ -59,5 +48,4 @@ const SectionContainer = styled("section")({
   position: "relative",
 });
 
-const NewWorkout = NewWorkoutPage;
 export default NewWorkout;

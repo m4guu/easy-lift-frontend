@@ -18,11 +18,8 @@ export const YoursSection: React.FC = () => {
       <SectionHeader>
         yours {user?.role === Role.user ? "workouts" : "programs"}
       </SectionHeader>
-      {user?.role === Role.user ? (
-        <YourWorkoutList userId={user.id} />
-      ) : (
-        <YoursProgramsList />
-      )}
+      {user?.role === Role.user && <YourWorkoutList userId={user.id} />}
+      {user?.role === Role.trainer && <YoursProgramsList userId={user.id} />}
     </SectionContainer>
   );
 };

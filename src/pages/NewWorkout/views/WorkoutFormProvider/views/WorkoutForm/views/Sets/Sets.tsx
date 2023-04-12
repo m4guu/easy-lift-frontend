@@ -119,8 +119,9 @@ export const Sets: React.FC<SetsProps> = ({
         </Box>
       </SetsActionsWrapper>
 
-      {isExerciseProgressModalOpen && (
+      {isExerciseProgressModalOpen && user && (
         <ExerciseProgressModal
+          userId={user.id}
           exerciseId={exerciseId}
           isOpen={isExerciseProgressModalOpen}
           closeModal={closeExerciseProgressModal}
