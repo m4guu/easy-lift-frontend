@@ -35,7 +35,7 @@ const useAuth = (): UseAuthReturnType => {
     loginMutation(credentials).then((response) => {
       const loginExpirationDate =
         response[0].expirationDate ||
-        new Date(new Date().getTime() + 1000 * 60).toISOString();
+        new Date(new Date().getTime() + 1000 * 60 * 60 * 24).toISOString();
 
       if (!response[0].expirationDate) {
         updateUserQuery({
