@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { Box, Typography, ListItem, Button } from "@mui/material";
-import { styled, useTheme } from "@mui/system";
+import { styled } from "@mui/system";
 
 import { User } from "../../shared/interfaces";
 

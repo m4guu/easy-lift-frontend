@@ -1,13 +1,6 @@
 import React from "react";
 
-import {
-  Box,
-  Typography,
-  Button,
-  Divider,
-  List,
-  ListItem,
-} from "@mui/material";
+import { Box, Typography, Divider } from "@mui/material";
 import { styled } from "@mui/system";
 
 interface ProgramDetailsProps {

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useUpdateUserMutation } from "../queryHooks/auth/useUpdateUserMutation";
 import { useLogin } from "../queryHooks/auth/useLogin";
 
 import { PATHS } from "../../pages/paths";
@@ -19,6 +20,8 @@ type UseAuthReturnType = {
 const useAuth = (): UseAuthReturnType => {
   const [user, setUser] = useState<User | undefined>(undefined);
   const navigate = useNavigate();
+
+  const { mutateAsync: updateUserQuery } = useUpdateUserMutation();
   const {
     isLoading: isLogging,
     error: loginError,
@@ -34,6 +37,12 @@ const useAuth = (): UseAuthReturnType => {
         response[0].expirationDate ||
         new Date(new Date().getTime() + 1000 * 60 * 60 * 24).toISOString();
 
+      if (!response[0].expirationDate) {
+        updateUserQuery({
+          ...response[0],
+          expirationDate: loginExpirationDate,
+        });
+      }
       setUser({ ...response[0], expirationDate: loginExpirationDate });
 
       localStorage.setItem(
@@ -46,11 +55,16 @@ const useAuth = (): UseAuthReturnType => {
     });
   };
 
-  // todo: remove expiration date form user --> update User
   const logout = () => {
-    setUser(undefined);
-    localStorage.removeItem("userData");
-    navigate(PATHS.default);
+    updateUserQuery({ ...user!, expirationDate: "" })
+      .then(() => {
+        setUser(undefined);
+        localStorage.removeItem("userData");
+        navigate(PATHS.default);
+      })
+      .catch((err) => {
+        // todo: ERROR HANDLING [when backend will be written]
+      });
   };
 
   // todo: add funcionality

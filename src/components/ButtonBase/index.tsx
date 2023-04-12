@@ -1,7 +1,6 @@
 import React, { memo } from "react";
 
 import { Box, Button, ButtonProps } from "@mui/material";
-import styled from "@mui/system/styled";
 
 interface ButtonBaseProps extends Omit<ButtonProps, "children"> {}
 
@@ -11,11 +10,9 @@ const ButtonBase: React.FCWithChildren<ButtonBaseProps> = ({
 }) => {
   return (
     <Button {...muiProps}>
-      <ButtonText>{children}</ButtonText>
+      <Box>{children}</Box>
     </Button>
   );
 };
-
-const ButtonText = styled(Box)(({ theme }) => ({}));
 
 export default memo(ButtonBase);

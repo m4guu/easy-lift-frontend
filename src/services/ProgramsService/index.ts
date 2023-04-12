@@ -13,8 +13,8 @@ export enum ProgramsMethods {
 }
 
 const ProgramsService = {
-  [ProgramsMethods.GET_ALL_PROGRAMS]: () =>
-    HttpService.get<Program[]>(ENDPOINTS.PROGRAMS),
+  [ProgramsMethods.GET_ALL_PROGRAMS]: (pageParam: number) =>
+    HttpService.get<Program[]>(`${ENDPOINTS.PROGRAMS}?_page=${pageParam}`),
 
   [ProgramsMethods.GET_10_PROGRAMS]: () =>
     HttpService.get<Program[]>(`${ENDPOINTS.PROGRAMS}?_limit=10`),

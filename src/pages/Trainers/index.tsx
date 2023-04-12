@@ -1,55 +1,88 @@
 import React from "react";
 
-import { List, Divider, Box, Typography } from "@mui/material";
-import { styled } from "@mui/system";
+import { Divider, Box, Typography, useMediaQuery } from "@mui/material";
+import { styled, useTheme } from "@mui/system";
 
 import { useTrainers } from "../../hooks/queryHooks/userHooks/useTrainers";
+import { usePaginatedResultItems } from "../../hooks";
+import { useTrainerFilter } from "../../hooks/filters/useTrainerFilter";
+
+import { InfiniteList } from "../../features";
 
 import { Status } from "../../shared/enums";
 import { FilterPanel } from "./views/FilterPanel/FilterPanel";
-import { TrainerItem, SectionHeader, SectionContainer } from "../../components";
-import { useTrainerFilter } from "../../hooks/filters/useTrainerFilter";
+import { TrainerItem, SectionHeader } from "../../components";
 
 const TrainersPage: React.FC = () => {
-  const { status, error, data: trainers } = useTrainers();
-  const { updatedList, filterPanelProps } = useTrainerFilter(trainers);
+  const theme = useTheme();
+  const isBelowSm = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const {
+    status,
+    error,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+    data: infinityTrainers,
+  } = useTrainers();
+
+  //! REFACTORY FILTERING WHEN BACKEND WILL BE WRITTEN
+  // const { updatedList, filterPanelProps } = useTrainerFilter(trainers);
+
+  const trainers = usePaginatedResultItems(
+    infinityTrainers,
+    (response) => response
+  );
+  const noTrainers = status === Status.SUCCESS && trainers.length === 0;
+  const itemSize = isBelowSm ? 58 : 78;
+
+  // Every row is loaded except for our loading indicator row.
+  const isItemLoaded = (index: number) =>
+    !hasNextPage || index < trainers.length;
+  // Render an item or a loading indicator.
+  const Item = ({ index, style }: { index: number; style: any }) => {
+    return (
+      <Box style={style}>
+        {isItemLoaded(index) ? (
+          <Box>
+            <Divider />
+            <TrainerItem trainer={trainers[index]} />
+          </Box>
+        ) : (
+          <Box>loading...</Box>
+        )}
+      </Box>
+    );
+  };
 
   return (
-    <SectionContainer>
+    <Container>
       <SectionHeader>Our Trainers</SectionHeader>
 
       {status === Status.LOADING && <div>Loading...</div>}
       {status === Status.ERROR && <div>error</div>}
+      {noTrainers && <Typography>There are no trainers yet.</Typography>}
 
-      <FilterPanel filterHandlers={filterPanelProps} />
-
-      <TrainerList disablePadding>
-        {updatedList.length === 0 ? (
-          <Typography>No search result</Typography>
-        ) : (
-          updatedList.map((trainer) => {
-            return (
-              <Box key={trainer.id}>
-                <NoPaddingDivider />
-                <TrainerItem trainer={trainer} />
-              </Box>
-            );
-          })
-        )}
-      </TrainerList>
-      <NoPaddingDivider />
-    </SectionContainer>
+      {/* <FilterPanel filterHandlers={filterPanelProps} /> */}
+      <Box sx={{ flex: 1 }}>
+        <InfiniteList
+          items={trainers}
+          Item={Item}
+          isFetchingNextPage={isFetchingNextPage}
+          hasNextPage={hasNextPage}
+          fetchNextPage={fetchNextPage}
+          itemSize={itemSize}
+        />
+      </Box>
+    </Container>
   );
 };
 
-const TrainerList = styled(List)(({ theme }) => ({
+const Container = styled("section")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
-}));
-
-const NoPaddingDivider = styled(Divider)(({ theme }) => ({
-  marginLeft: `-${theme.spacing(2)}`,
-  marginRight: `-${theme.spacing(2)}`,
+  padding: theme.spacing(2),
+  height: "100%",
 }));
 
 const Trainers = TrainersPage;

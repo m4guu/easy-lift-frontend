@@ -118,10 +118,11 @@ const ProgramTitle = styled(Typography)({
   letterSpacing: "1px",
 });
 
-const ProgramContent = styled(Box)(({ theme }) => ({
+const ProgramContent = styled(Box)({
   width: "100%",
   flex: 1,
-}));
+});
+
 const ContentWrapper = styled(Box)(({ theme }) => ({
   position: "relative",
   height: "100%",

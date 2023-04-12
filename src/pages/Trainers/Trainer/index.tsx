@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-import { Box, Alert, Typography, Divider } from "@mui/material";
+import { Box, Alert, Typography } from "@mui/material";
 import { styled, useTheme } from "@mui/system";
 
 import { useUser } from "../../../hooks/queryHooks/userHooks/useUser";

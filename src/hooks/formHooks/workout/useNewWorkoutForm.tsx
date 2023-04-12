@@ -14,7 +14,6 @@ import { useAddUserProgresMutation } from "../../queryHooks/userProgressHooks/us
 import { useUserContext } from "../../../contexts/userContext";
 
 import {
-  generateEditExercises,
   generateNewWorkout,
   generateWorkoutToEdit,
 } from "../../../utils/FormExercises";
@@ -143,6 +142,7 @@ export const useNewWorkoutForm = ({
   const onDraftSave = useCallback(async () => {
     setPending(true);
     clearErrors();
+
     const formData: AddWorkoutForm = getValues();
     try {
       // validate for draft save
@@ -158,8 +158,6 @@ export const useNewWorkoutForm = ({
           setIsDraftSubmited(true);
         });
     } catch (error: unknown) {
-      // ? question -  do i have to handle else ?
-      // ?          -  path from ValidationError is string, setError requires one of AddWorkoutFormFields enum how to resolve it ?
       if (error instanceof ValidationError) {
         error.inner?.map((inner, index) => {
           const { type, path, errors } = inner;

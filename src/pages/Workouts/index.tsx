@@ -1,56 +1,89 @@
 import React from "react";
 
-import { Divider, Box, Typography, List } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { useUserContext } from "../../contexts/userContext";
 import { useUserWorkouts } from "../../hooks/queryHooks/workoutsHooks/useUserWorkouts";
 import { useWorkoutFilter } from "../../hooks/filters/useWorkoutFilter";
+import { usePaginatedResultItems } from "../../hooks";
+
+import { InfiniteList } from "../../features";
 
 import { Status } from "../../shared/enums";
 import { FilterPanel } from "./views/FilterPanel/FilterPanel";
-import { WorkoutItem, SectionHeader, SectionContainer } from "../../components";
+import { WorkoutItem, SectionHeader } from "../../components";
 
 const WorkoutsPage: React.FC = () => {
   const { user } = useUserContext();
-  const { status, error, data: userWorkouts } = useUserWorkouts(user?.id);
+  const {
+    status,
+    error,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+    data: infinityUserWorkouts,
+  } = useUserWorkouts(user?.id);
 
-  const { updatedWorkouts, filterPanelProps } = useWorkoutFilter(userWorkouts);
+  //! REFACTORY FILTERING WHEN BACKEND WILL BE WRITTEN
+  // const { updatedWorkouts, filterPanelProps } = useWorkoutFilter(userWorkouts);
+
+  const workouts = usePaginatedResultItems(
+    infinityUserWorkouts,
+    (response) => response
+  );
+  const noWorkouts = status === Status.SUCCESS && workouts.length === 0;
+
+  // Every row is loaded except for our loading indicator row.
+  const isItemLoaded = (index: number) =>
+    !hasNextPage || index < workouts.length;
+  // Render an item or a loading indicator.
+  const Item = ({ index, style }) => {
+    return (
+      <Box style={style}>
+        {isItemLoaded(index) ? (
+          <WorkoutItem workout={workouts[index]} />
+        ) : (
+          <Box>loading...</Box>
+        )}
+      </Box>
+    );
+  };
 
   return (
-    <SectionContainer>
-      <SectionHeader>Your Workouts</SectionHeader>
+    <Container>
+      <SectionHeader>Your userWorkouts</SectionHeader>
+
       {status === Status.LOADING && <div>loading...</div>}
       {status === Status.ERROR && <div>error</div>}
+      {noWorkouts && <Typography>You dont have any workouts yet.</Typography>}
 
-      <FilterPanel filterHandlers={filterPanelProps} />
+      {/* <FilterPanel filterHandlers={filterPanelProps} /> */}
 
-      <WorkoutList disablePadding>
+      <Box sx={{ flex: 1 }}>
         <NoPaddingDivider />
-        {updatedWorkouts.length === 0 ? (
-          <Typography>No search result</Typography>
-        ) : (
-          updatedWorkouts.map((userWorkout) => {
-            return (
-              <Box key={userWorkout.id}>
-                <NoPaddingDivider />
-                <WorkoutItem workout={userWorkout} />
-              </Box>
-            );
-          })
-        )}
-      </WorkoutList>
-    </SectionContainer>
+        <InfiniteList
+          items={workouts}
+          Item={Item}
+          isFetchingNextPage={isFetchingNextPage}
+          hasNextPage={hasNextPage}
+          fetchNextPage={fetchNextPage}
+          itemSize={52}
+        />
+      </Box>
+    </Container>
   );
 };
 
-const WorkoutList = styled(List)({
+const Container = styled("section")(({ theme }) => ({
   display: "flex",
-  flexDirection: "column-reverse",
-});
+  flexDirection: "column",
+  padding: theme.spacing(2),
+  height: "100%",
+}));
 
 const NoPaddingDivider = styled(Divider)(({ theme }) => ({
-  margin: `0 -${theme.spacing(2)}`,
+  margin: `${theme.spacing(0.9)} -${theme.spacing(2)}`,
 }));
 
 const Workouts = WorkoutsPage;

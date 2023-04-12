@@ -18,12 +18,18 @@ export const YoursSection: React.FC = () => {
       <SectionHeader>
         yours {user?.role === Role.user ? "workouts" : "programs"}
       </SectionHeader>
-      {user?.role === Role.user ? <YourWorkoutList /> : <YoursProgramsList />}
+      {user?.role === Role.user ? (
+        <YourWorkoutList userId={user.id} />
+      ) : (
+        <YoursProgramsList />
+      )}
     </SectionContainer>
   );
 };
 
 const SectionContainer = styled("section")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
   padding: theme.spacing(2),
   width: "100%",
 }));

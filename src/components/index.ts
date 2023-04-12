@@ -13,7 +13,6 @@ export { default as ExerciseProgresItem } from "./ExerciseProgresItem";
 
 export { default as GymTag } from "./GymTag";
 
-export { default as MediaFooter } from "./MediaFooter";
 export { default as NavigationItem } from "./NavigationItem";
 
 export { default as ProgramItem } from "./ProgramItem";

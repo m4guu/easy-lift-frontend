@@ -1,7 +1,13 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import { Typography, Box, Button } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Button,
+  ListItem,
+  useMediaQuery,
+} from "@mui/material";
 import { styled, useTheme } from "@mui/system";
 
 import { Program } from "../../shared/interfaces";
@@ -19,38 +25,44 @@ const ProgramItem: React.FC<ProgramItemProps> = ({ program }) => {
   const { user } = useUserContext();
   const navigate = useNavigate();
   const theme = useTheme();
+  const isUpSm = useMediaQuery(theme.breakpoints.up("sm"));
+
   return (
-    <ProgramItemCard to={`${PATHS.PROGRAMS}/${program.id}`}>
-      <ImageBox>
-        <ProgramImage src={DUMMY_PROGRAM_IMG} alt="Program" />
-        <ImageOverlay />
-      </ImageBox>
+    <Item disablePadding>
+      <Container onClick={() => navigate(`${PATHS.PROGRAMS}/${program.id}`)}>
+        <ImageBox>
+          <ProgramImage src={DUMMY_PROGRAM_IMG} alt="Program" />
+          <ImageOverlay />
+        </ImageBox>
 
-      <ProgramContent>
-        <ContentContainer>
-          <ContentText
-            variant="caption"
-            color={theme.palette.custom_grey.tint_2}
-          >
-            {program.creator.name}
-            {program.creator.id === user?.id && (
-              <Typography variant="caption" color="info.main">
-                you
-              </Typography>
-            )}
-          </ContentText>
-          <ContentText variant="h3" color="primary">
-            {program.title}
-          </ContentText>
-          <ContentText
-            variant="caption"
-            color={theme.palette.custom_grey.tint_2}
-          >
-            {program.price.toFixed(2)} $
-          </ContentText>
-        </ContentContainer>
+        <ProgramContent>
+          <ContentContainer>
+            <ContentText
+              variant="caption"
+              color={theme.palette.custom_grey.tint_2}
+            >
+              {program.creator.name}
+              {program.creator.id === user?.id && (
+                <Typography variant="caption" color="info.main">
+                  you
+                </Typography>
+              )}
+            </ContentText>
+            <ContentText variant="h3" color="primary">
+              {program.title}
+            </ContentText>
+            <ContentText
+              variant="caption"
+              color={theme.palette.custom_grey.tint_2}
+            >
+              {program.price.toFixed(2)} $
+            </ContentText>
+          </ContentContainer>
+        </ProgramContent>
+      </Container>
 
-        <Box>
+      {isUpSm && (
+        <ProgramActions>
           {program.creator.id !== user?.id ? (
             <Button variant="contained" size="small" fullWidth>
               buy
@@ -66,21 +78,29 @@ const ProgramItem: React.FC<ProgramItemProps> = ({ program }) => {
               edit
             </Button>
           )}
-        </Box>
-      </ProgramContent>
-    </ProgramItemCard>
+        </ProgramActions>
+      )}
+    </Item>
   );
 };
 
-const ProgramItemCard = styled(Link)(({ theme }) => ({
+const Item = styled(ListItem)({
+  position: "relative",
+});
+
+const Container = styled(Button)(({ theme }) => ({
   display: "flex",
+  width: "100%",
   position: "relative",
   gap: theme.spacing(1),
-  margin: `${theme.spacing(1)} 0`,
   alignItems: "center",
   textDecoration: "none",
 }));
 
+const ProgramActions = styled(Box)(({ theme }) => ({
+  position: "absolute",
+  right: theme.spacing(2),
+}));
 const ProgramImage = styled("img")({
   width: "60px",
   height: "60px",
