@@ -57,7 +57,7 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
   const isItemLoaded = (index: number) =>
     !hasNextPage || index < exercises.length;
   // Render an item or a loading indicator.
-  const Item = ({ index, style }) => {
+  const Item = ({ index, style }: { index: number; style: any }) => {
     return (
       <Box style={style}>
         {isItemLoaded(index) ? (
@@ -115,6 +115,15 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
   );
 };
 
+const ExercisesMuiModal = styled(Modal)(({ theme }) => ({
+  margin: 0,
+  backgroundColor: theme.palette.background.default,
+  overflowY: "scroll",
+  "::-webkit-scrollbar": {
+    display: "none",
+  },
+}));
+
 const Container = styled("section")(({ theme }) => ({
   paddinf: theme.spacing(2),
   height: "100%",
@@ -133,15 +142,6 @@ const CloseModalButton = styled(Button)(({ theme }) => ({
   position: "absolute",
   right: theme.spacing(2),
   top: theme.spacing(2),
-}));
-
-const ExercisesMuiModal = styled(Modal)(({ theme }) => ({
-  margin: 0,
-  backgroundColor: theme.palette.background.default,
-  overflowY: "scroll",
-  "::-webkit-scrollbar": {
-    display: "none",
-  },
 }));
 
 export default ExercisesModal;

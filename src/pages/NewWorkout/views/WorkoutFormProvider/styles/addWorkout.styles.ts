@@ -1,4 +1,3 @@
-import { LoadingButton } from "@mui/lab";
 import { Box, Button } from "@mui/material";
 import { styled } from "@mui/system";
 
@@ -18,13 +17,9 @@ export const FormActionsWrapper = styled(Box)({
   justifyContent: "space-between",
 });
 
-export const Submit = styled(LoadingButton)({});
-
 export const ChooseExercise = styled(Button)({
   textDecoration: "none",
 });
-
-export const Reset = styled(Button)({});
 
 export const ExercisesWrapper = styled(Box)(({ theme }) => ({
   marginTop: theme.spacing(4),

@@ -4,13 +4,16 @@ import { useNavigate } from "react-router-dom";
 import { ListItem, Typography, Box, Button } from "@mui/material";
 import { styled, useTheme } from "@mui/system";
 
+import { useDeleteUserProgresMutation } from "../../hooks/queryHooks/userProgressHooks/useDeleteUserProgressMutation";
 import { useDeleteWorkoutMutation } from "../../hooks/queryHooks/workoutsHooks/useDeleteWorkoutMutation";
+import { useConfirmModal } from "../../hooks/modalHooks/Confirm/useConfirmModal";
+import { useSnackbar } from "../../hooks";
+
+import { Confirm } from "../../modals";
 
 import { SnackbarStatus, Status } from "../../shared/enums";
 import { Workout } from "../../shared/interfaces";
 import { PATHS } from "../../pages/paths";
-import { useDeleteUserProgresMutation } from "../../hooks/queryHooks/userProgressHooks/useDeleteUserProgressMutation";
-import { useSnackbar } from "../../hooks";
 
 type WorkoutItemProps = {
   workout: Workout;
@@ -20,6 +23,7 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
   const theme = useTheme();
   const navigate = useNavigate();
   const snackbar = useSnackbar();
+  const { open, isOpen, close } = useConfirmModal();
 
   const { status, mutate: deleteQueryWorkout } = useDeleteWorkoutMutation(
     workout.id
@@ -71,13 +75,20 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
       </ItemButton>
 
       <DeleteButton
-        onClick={deleteWorkout}
+        onClick={open}
         variant="outlined"
         size="small"
         color="error"
       >
         delete
       </DeleteButton>
+
+      <Confirm
+        onConfirm={deleteWorkout}
+        confirmTitle="delete workout"
+        isOpen={isOpen}
+        closeModal={close}
+      />
     </Item>
   );
 };

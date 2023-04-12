@@ -10,6 +10,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useDeleteWorkoutMutation } from "../../../../../../hooks/queryHooks/workoutsHooks/useDeleteWorkoutMutation";
 import { useDeleteUserProgresMutation } from "../../../../../../hooks/queryHooks/userProgressHooks/useDeleteUserProgressMutation";
 import { useSnackbar } from "../../../../../../hooks";
+import { useConfirmModal } from "../../../../../../hooks/modalHooks/Confirm/useConfirmModal";
 
 import { SnackbarStatus, Status } from "../../../../../../shared/enums";
 import { PATHS } from "../../../../../paths";
@@ -17,6 +18,7 @@ import { WorkoutActionsEnum } from "./constans";
 
 import { SettingAction } from "../../../../../../components/DotsSettings";
 import { DotsSettings } from "../../../../../../components";
+import { Confirm } from "../../../../../../modals";
 
 interface WorkoutActionsProps {
   workoutId: string;
@@ -27,6 +29,7 @@ export const WorkoutActions: React.FC<WorkoutActionsProps> = ({
 }) => {
   const navigate = useNavigate();
   const snackbar = useSnackbar();
+  const { open, isOpen, close } = useConfirmModal();
 
   const { status, mutate: deleteQueryWorkout } =
     useDeleteWorkoutMutation(workoutId);
@@ -52,7 +55,7 @@ export const WorkoutActions: React.FC<WorkoutActionsProps> = ({
       id: uuidv4(),
       name: WorkoutActionsEnum.DELETE,
       icon: <DeleteIcon fontSize="small" color="error" />,
-      onClick: deleteWorkout,
+      onClick: open,
     },
   ];
 
@@ -69,6 +72,12 @@ export const WorkoutActions: React.FC<WorkoutActionsProps> = ({
   return (
     <Container>
       <DotsSettings actions={actions} />
+      <Confirm
+        onConfirm={deleteWorkout}
+        confirmTitle="delete workout"
+        isOpen={isOpen}
+        closeModal={close}
+      />
     </Container>
   );
 };
