@@ -1,6 +1,6 @@
 import React from "react";
 
-import { MenuItem, ListItemIcon, Typography, Button } from "@mui/material";
+import { MenuItem, ListItemIcon, Typography } from "@mui/material";
 import { styled, useTheme } from "@mui/system";
 
 import { NavLink } from "react-router-dom";

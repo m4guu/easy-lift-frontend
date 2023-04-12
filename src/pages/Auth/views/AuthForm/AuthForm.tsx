@@ -3,11 +3,7 @@ import { FormProvider } from "react-hook-form";
 
 import { useAuthForm } from "../../../../hooks/formHooks/auth/useAuthForm";
 
-import {
-  FormWrapper,
-  InputWrapper,
-  FormActions,
-} from "./styles/AuthForm.styles";
+import { FormWrapper, FormActions } from "./styles/AuthForm.styles";
 import {
   AuthEmail,
   AuthPassword,

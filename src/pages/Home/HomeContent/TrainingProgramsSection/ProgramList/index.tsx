@@ -79,7 +79,7 @@ const Slide = styled(SwiperSlide)({
 });
 
 const ButtonLink = styled(Button)({});
-const LinkButton = styled(Link)(({ theme }) => ({
+const LinkButton = styled(Link)({
   textDecoration: "none",
   color: "inherit",
-}));
+});

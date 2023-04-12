@@ -1,16 +1,14 @@
 import React from "react";
 
-import { FormControlLabel, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useTheme } from "@mui/system";
 
 import {
   Form,
   PersonalTrainingSwitch,
-  Gyms,
   ControlLabel,
 } from "./styles/FilterPanel.styles";
 
-import { gyms } from "../../../Configuration/views/ConfigurationForm/views/Trainer/form/constans";
 import { SearchBar } from "../../../../components";
 
 interface FilterPanelProps {
@@ -18,13 +16,15 @@ interface FilterPanelProps {
     selectedName: string;
     selectedPersonalTraining: boolean;
     selectedGyms: string[];
-    // todo: change any
     handleSelectName: React.ChangeEventHandler<HTMLInputElement>;
     handleSelectPersonalTrening: (
       event: React.ChangeEvent<HTMLInputElement>,
       checked: boolean
     ) => void;
-    handleSelectGyms: (...event: any[]) => void;
+    handleSelectGyms: (
+      event: React.ChangeEvent<HTMLInputElement>,
+      gyms: string[]
+    ) => void;
   };
 }
 
@@ -32,10 +32,8 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
   filterHandlers: {
     selectedName,
     selectedPersonalTraining,
-    selectedGyms,
     handleSelectName,
     handleSelectPersonalTrening,
-    handleSelectGyms,
   },
 }) => {
   const theme = useTheme();
@@ -63,7 +61,6 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
           />
         }
       />
-      {/* // todo: add gyms autocomplete when leaflet-map branch will be merged */}
     </Form>
   );
 };

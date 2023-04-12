@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { UserServices, UserMethods } from "../../../services";
 import { QueryKey } from "../../../shared/enums";

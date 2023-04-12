@@ -148,7 +148,7 @@
           "weight": 90
         }
       ],
-      "expirationDate": "2023-10-03T14:03:12.384Z",
+      "expirationDate": "2023-04-12T14:17:58.310Z",
       "height": 190
     },
     {
@@ -182,12 +182,7 @@
       "bodyWeights": [],
       "expirationDate": "2023-03-03T14:05:43.387Z",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id felis rutrum, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id felis rutrum, p posuere lectus sit amet, tristique metus. Suspendisse eleifend rutrum rutrum. Morbi at lorem at orci accumsan elementum at vel libero. Maecenas a imperdiet odio. Integer iaculis sed libero dictum cursus. Phasellus vitae lectus turpis. Maecenas eleifend mauris eget.",
-      "gyms": [
-        "default",
-        "Calypsoo Morena",
-        "Husarz Gym",
-        "Multisport"
-      ]
+      "gyms": ["default", "Calypsoo Morena", "Husarz Gym", "Multisport"]
     },
     {
       "id": "e4f197f4-7168-42db-a0b9-456f8a37830a",
@@ -204,12 +199,7 @@
       "bodyWeights": [],
       "expirationDate": "2023-03-03T14:05:43.387Z",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mollis lectus iaculis laoreet luctus. Vivamus at efficitur massa, varius pharetra urna. Donec consequat pharetra accumsan. Aliquam at sapien eu leo blandit congue nec nec turpis. Fusce ac rutrum tellus. Pellentesque accumsan porta eros, eu imperdiet mi viverra in. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis nulla suscipit, consectetur mi sed, placerat nibh. Phasellus rhoncus, lacus non fermentum pretium, ex orci tincidunt sapien, ut maximus neque orci venenatis tellus. Donec et augue porta, accumsan ligula non, eleifend sapien. Integer scelerisque lobortis nunc ac vulputate. In eget turpis non.",
-      "gyms": [
-        "default",
-        "Calypsoo Morena",
-        "Husarz Gym",
-        "Multisport"
-      ]
+      "gyms": ["default", "Calypsoo Morena", "Husarz Gym", "Multisport"]
     },
     {
       "id": "e4f197f4-7d68-42db-a0a9-456f8a37830a",
@@ -226,12 +216,7 @@
       "bodyWeights": [],
       "expirationDate": "2023-03-03T14:05:43.387Z",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac urna venenatis mauris accumsan mattis. Proin vel felis quis felis.",
-      "gyms": [
-        "default",
-        "Calypsoo Morena",
-        "Husarz Gym",
-        "Multisport"
-      ]
+      "gyms": ["default", "Calypsoo Morena", "Husarz Gym", "Multisport"]
     },
     {
       "id": "77a3aa94-681d-4d2b-92c1-fc7e1ef2e2dc",
@@ -1305,57 +1290,24 @@
         {
           "name": "3/4 sit-up",
           "id": "27478547-40b3-4028-b1ee-e4ee614e2061",
-          "_id": "ce889c74-286f-4331-9892-595c754ecb75",
           "sets": [
             {
               "goal": "123 x 213",
               "tempo": "1-2-3-1",
-              "archived": "231 x 2"
+              "archived": "231 x 2",
+              "repMax": 246
             }
           ]
         },
         {
           "name": "45° side bend",
           "id": "2cfe2246-4d67-48b7-8981-10889ac45f97",
-          "_id": "f481f1ef-68ef-4d7b-b5dd-3040627a3b27",
           "sets": [
             {
               "goal": "321 x 32",
               "tempo": "1-2-3-1",
-              "archived": "123 x 23"
-            }
-          ]
-        }
-      ],
-      "isDraft": true
-    },
-    {
-      "id": "24895bbf-f435-4dac-99aa-e7c2f8384b5a",
-      "creator": "547266d5-f25c-4664-a290-b590290c06de",
-      "title": "123222",
-      "date": "2023-03-30",
-      "exercises": [
-        {
-          "name": "3/4 sit-up",
-          "id": "27478547-40b3-4028-b1ee-e4ee614e2061",
-          "_id": "ce889c74-286f-4331-9892-595c754ecb75",
-          "sets": [
-            {
-              "goal": "123 x 213",
-              "tempo": "1-2-3-1",
-              "archived": "231 x 2"
-            }
-          ]
-        },
-        {
-          "name": "45° side bend",
-          "id": "2cfe2246-4d67-48b7-8981-10889ac45f97",
-          "_id": "f481f1ef-68ef-4d7b-b5dd-3040627a3b27",
-          "sets": [
-            {
-              "goal": "321 x 32",
-              "tempo": "1-2-3-1",
-              "archived": "123 x 23"
+              "archived": "12 x 23",
+              "repMax": 21
             }
           ]
         }
@@ -1363,7 +1315,7 @@
       "isDraft": false
     },
     {
-      "id": "a4c375d0-f79d-4a90-8016-a96a08b7e915",
+      "id": "24895bbf-f435-4dac-99aa-e7c2f8384b5a",
       "creator": "547266d5-f25c-4664-a290-b590290c06de",
       "title": "123222",
       "date": "2023-03-30",
@@ -2648,9 +2600,239 @@
         }
       ],
       "isDraft": false
+    },
+    {
+      "id": "cb8f28ab-d17e-48e7-954e-4992aaaaf2fb",
+      "creator": "547266d5-f25c-4664-a290-b590290c06de",
+      "title": "123222",
+      "date": "2023-03-30",
+      "exercises": [
+        {
+          "name": "3/4 sit-up",
+          "id": "089a71bb-95c4-4c7e-9493-2fb7d6b0d709",
+          "_id": "27478547-40b3-4028-b1ee-e4ee614e2061",
+          "sets": [
+            {
+              "goal": "123 x 213",
+              "tempo": "1-2-3-1",
+              "archived": "231 x 2"
+            },
+            {
+              "goal": "",
+              "tempo": "",
+              "archived": ""
+            }
+          ]
+        },
+        {
+          "name": "45° side bend",
+          "id": "542b2643-97c3-4092-805c-eca6ffceb5db",
+          "_id": "2cfe2246-4d67-48b7-8981-10889ac45f97",
+          "sets": [
+            {
+              "goal": "321 x 32",
+              "tempo": "1-2-3-1",
+              "archived": "123 x 23"
+            }
+          ]
+        }
+      ],
+      "isDraft": true
+    },
+    {
+      "id": "0aad2aaa-8f58-4a74-b9e9-cbf676f13d4f",
+      "creator": "547266d5-f25c-4664-a290-b590290c06de",
+      "title": "trening a ",
+      "date": "2023-04-12",
+      "exercises": [],
+      "isDraft": true
+    },
+    {
+      "id": "fae088a5-ec47-4e0e-8170-fe521a3b6c16",
+      "creator": "547266d5-f25c-4664-a290-b590290c06de",
+      "title": "dddddd",
+      "date": "2023-04-12",
+      "exercises": [],
+      "isDraft": true
+    },
+    {
+      "id": "a983bbf4-46ed-4f71-aced-fef03f3a7c3e",
+      "creator": "547266d5-f25c-4664-a290-b590290c06de",
+      "title": "dsdsadasda",
+      "date": "2023-04-12",
+      "exercises": [
+        {
+          "id": "10b0cee5-c3b4-4b81-8675-2d32572962d7",
+          "_id": "0006",
+          "name": "alternate heel touchers",
+          "sets": [
+            {
+              "goal": "",
+              "tempo": "",
+              "archived": ""
+            },
+            {
+              "goal": "",
+              "tempo": "",
+              "archived": ""
+            },
+            {
+              "goal": "",
+              "tempo": "",
+              "archived": ""
+            },
+            {
+              "goal": "",
+              "tempo": "",
+              "archived": ""
+            }
+          ]
+        },
+        {
+          "id": "77ce90af-a344-42d5-a227-646d84785a70",
+          "_id": "0003",
+          "name": "air bike",
+          "sets": [
+            {
+              "goal": "",
+              "tempo": "",
+              "archived": ""
+            }
+          ]
+        }
+      ],
+      "isDraft": true
+    },
+    {
+      "id": "7ce5c1be-27c7-4a7f-8b00-14c3b3518419",
+      "creator": "547266d5-f25c-4664-a290-b590290c06de",
+      "title": "dsadsadasd",
+      "date": "2023-04-12",
+      "exercises": [
+        {
+          "id": "2d9c497c-7706-439d-a81f-84a108baf543",
+          "_id": "0003",
+          "name": "air bike",
+          "sets": [
+            {
+              "goal": "",
+              "tempo": "",
+              "archived": ""
+            }
+          ]
+        }
+      ],
+      "isDraft": true
+    },
+    {
+      "id": "8b283784-c651-4078-be57-fa041a8f6b71",
+      "creator": "547266d5-f25c-4664-a290-b590290c06de",
+      "title": "dsadsadasda",
+      "date": "2023-04-12",
+      "exercises": [
+        {
+          "name": "45° side bend",
+          "id": "0002",
+          "sets": [
+            {
+              "goal": "213 x 123",
+              "tempo": "3-2-1-3",
+              "archived": "123 x 123",
+              "repMax": 627
+            }
+          ]
+        }
+      ],
+      "isDraft": false
     }
   ],
-  "usersProgress": [],
+  "usersProgress": [
+    {
+      "id": "21f5f5df-d642-45c1-9a54-d77288fe20f4",
+      "workoutId": "2023a718-89f8-46f1-93c4-dbbb5f6225d3",
+      "userId": "547266d5-f25c-4664-a290-b590290c06de",
+      "exerciseId": "27478547-40b3-4028-b1ee-e4ee614e2061",
+      "exerciseName": "3/4 sit-up",
+      "date": "2023-04-12",
+      "repMax": 246,
+      "sets": [
+        {
+          "goal": "123 x 213",
+          "tempo": "1-2-3-1",
+          "archived": "231 x 2",
+          "repMax": 246
+        }
+      ]
+    },
+    {
+      "id": "6cd5da5f-a21b-491b-b2b5-e86fbea075b1",
+      "workoutId": "2023a718-89f8-46f1-93c4-dbbb5f6225d3",
+      "userId": "547266d5-f25c-4664-a290-b590290c06de",
+      "exerciseId": "2cfe2246-4d67-48b7-8981-10889ac45f97",
+      "exerciseName": "45° side bend",
+      "date": "2023-04-12",
+      "repMax": 217,
+      "sets": [
+        {
+          "goal": "321 x 32",
+          "tempo": "1-2-3-1",
+          "archived": "123 x 23",
+          "repMax": 217
+        }
+      ]
+    },
+    {
+      "id": "d1e9b74e-acd0-4150-85e2-a1cc696a6be9",
+      "workoutId": "2023a718-89f8-46f1-93c4-dbbb5f6225d3",
+      "userId": "547266d5-f25c-4664-a290-b590290c06de",
+      "exerciseId": "27478547-40b3-4028-b1ee-e4ee614e2061",
+      "exerciseName": "3/4 sit-up",
+      "date": "2023-04-12",
+      "repMax": 246,
+      "sets": [
+        {
+          "goal": "123 x 213",
+          "tempo": "1-2-3-1",
+          "archived": "231 x 2",
+          "repMax": 246
+        }
+      ]
+    },
+    {
+      "id": "4b4dccf7-db58-44de-a965-c0987366c77e",
+      "workoutId": "2023a718-89f8-46f1-93c4-dbbb5f6225d3",
+      "userId": "547266d5-f25c-4664-a290-b590290c06de",
+      "exerciseId": "2cfe2246-4d67-48b7-8981-10889ac45f97",
+      "exerciseName": "45° side bend",
+      "date": "2023-04-12",
+      "repMax": 21,
+      "sets": [
+        {
+          "goal": "321 x 32",
+          "tempo": "1-2-3-1",
+          "archived": "12 x 23",
+          "repMax": 21
+        }
+      ]
+    },
+    {
+      "id": "78efd3fa-5d42-4ae6-b269-81abf226946d",
+      "workoutId": "8b283784-c651-4078-be57-fa041a8f6b71",
+      "userId": "547266d5-f25c-4664-a290-b590290c06de",
+      "exerciseId": "0002",
+      "exerciseName": "45° side bend",
+      "date": "2023-04-12",
+      "repMax": 627,
+      "sets": [
+        {
+          "goal": "213 x 123",
+          "tempo": "3-2-1-3",
+          "archived": "123 x 123",
+          "repMax": 627
+        }
+      ]
+    }
+  ],
   "exercises": [
     {
       "bodyPart": "waist",

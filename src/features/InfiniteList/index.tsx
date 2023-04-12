@@ -32,10 +32,9 @@ const InfiniteList = <T,>({
   // if there are more items to be loaded then add an extra row to hold a loading indicator
   const itemCount = hasNextPage ? items.length + 1 : items.length;
   const loadMoreItems = isFetchingNextPage ? () => {} : fetchNextPage;
-  console.log(customHeight);
-
   // Every row is loaded except for our loading indicator row.
   const isItemLoaded = (index: number) => !hasNextPage || index < items.length;
+
   return (
     <AutoSizer>
       {({ height, width }) => (
@@ -77,4 +76,5 @@ const List = styled(FixedSizeList)(({ theme }) => ({
     borderRadius: "8px",
   },
 }));
+
 export default InfiniteList;

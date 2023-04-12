@@ -4,33 +4,15 @@ import { FormProvider } from "react-hook-form";
 import { Button } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
-import {
-  useNewProgramForm,
-  AddProgramFormFields,
-} from "../../../../hooks/formHooks/program/useNewProgramForm";
+import { useNewProgramForm } from "../../../../hooks/formHooks/program/useNewProgramForm";
 import { useFormSteps } from "../../../../hooks/formHooks/formStepHook/useFormSteps";
 import { useSnackbar } from "../../../../hooks";
 
 import { SnackbarStatus } from "../../../../shared/enums";
 import { Program as ProgramInterface } from "../../../../shared/interfaces";
 
-import {
-  FormWrapper,
-  FirstFormStepWrapper,
-  SecondFormStepWrapper,
-  ThirdFormStepWrapper,
-  FormActions,
-} from "./styles/ProgramForm.styles";
-import {
-  ProgramTitle,
-  ProgramLevel,
-  ProgramFrequency,
-  ProgramLength,
-  Program,
-  ProgramPrice,
-  ProgramDescription,
-  Image,
-} from "./views/ProgramForm/Program.form";
+import { FormWrapper, FormActions } from "./styles/ProgramForm.styles";
+
 import { ErrorMessage } from "../../../../components";
 import { FirstFormStep } from "./views/FormSteps/FirstFormStep";
 import { SecondFormStep } from "./views/FormSteps/SecondFormStep";

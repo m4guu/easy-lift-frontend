@@ -24,7 +24,7 @@ const WorkoutPage: React.FC = () => {
       <SectionHeader>Workout</SectionHeader>
 
       {status === Status.LOADING && <Box>loading...</Box>}
-      {status === Status.ERROR && null}
+      {status === Status.ERROR && <Box>error</Box>}
       {status === Status.SUCCESS && workout.length !== 0 && (
         <WorkoutWrapper>
           <WorkoutDetail>

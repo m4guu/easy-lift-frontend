@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Box, Tabs, Tab } from "@mui/material";
 import { styled } from "@mui/system";
 
-import { SectionContainer, MediaFooter, Logo } from "../../components";
+import { SectionContainer, Logo } from "../../components";
 import { AuthForm } from "./views/AuthForm/AuthForm";
 import { AuthTypes } from "../../shared/enums";
 

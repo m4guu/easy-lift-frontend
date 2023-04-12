@@ -22,7 +22,6 @@ export const useFormSteps = (isEdit?: boolean) => {
         break;
       case 2:
         isValid = await trigger([AddProgramFormFields.PROGRAM]);
-        console.log(await trigger([AddProgramFormFields.PROGRAM]));
         break;
     }
     if (isValid) {

@@ -22,7 +22,6 @@ interface WorkoutActionsProps {
   workoutId: string;
 }
 
-// todo: add funcionality to actions --> delete & edit
 export const WorkoutActions: React.FC<WorkoutActionsProps> = ({
   workoutId,
 }) => {

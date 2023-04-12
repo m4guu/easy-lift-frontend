@@ -6,7 +6,7 @@ import { styled } from "@mui/system";
 import { useUserContext } from "../../contexts/userContext";
 
 import { UserConfigurationForm } from "./views/ConfigurationForm/UserConfigurationForm";
-import { Logo, SectionHeader } from "../../components";
+import { Logo } from "../../components";
 import { Role } from "../../shared/enums";
 import TrainerConfigurationForm from "./views/ConfigurationForm/TrainerConfigurationForm";
 
@@ -19,7 +19,6 @@ const ConfigurationPage: React.FC = () => {
       </LogoWrapper>
 
       <SectionContent>
-        {/* <SectionHeader>configuration</SectionHeader> */}
         <NoPaddingDivider />
         {user?.role === Role.user ? (
           <UserConfigurationForm />

@@ -1,7 +1,7 @@
 import { Grid, Box } from "@mui/material";
 import { styled } from "@mui/system";
 
-export const MainGridContainer = styled(Grid)(({ theme }) => ({
+export const MainGridContainer = styled(Grid)({
   position: "absolute",
   display: "flex",
   left: "0",
@@ -9,7 +9,7 @@ export const MainGridContainer = styled(Grid)(({ theme }) => ({
   top: "0",
   bottom: "0",
   overflow: "hidden",
-}));
+});
 
 export const FirstGridItem = styled(Grid)(({ theme }) => ({
   backgroundColor: theme.palette.background.layout,

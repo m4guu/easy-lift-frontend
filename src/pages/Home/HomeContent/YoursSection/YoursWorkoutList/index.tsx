@@ -3,7 +3,6 @@ import React from "react";
 import { ListItem, Box, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/system";
 
-import { useUserContext } from "../../../../../contexts/userContext";
 import { useUserWorkouts } from "../../../../../hooks/queryHooks/workoutsHooks/useUserWorkouts";
 import { usePaginatedResultItems } from "../../../../../hooks";
 
@@ -12,11 +11,10 @@ import { InfiniteList } from "../../../../../features";
 import { Status } from "../../../../../shared/enums";
 import { WorkoutItem } from "../../../../../components";
 
-export const YourWorkoutList: React.FC = () => {
+export const YourWorkoutList: React.FC<{ userId: string }> = ({ userId }) => {
   const theme = useTheme();
   const isBelowLg = useMediaQuery(theme.breakpoints.down("lg"));
 
-  const { user } = useUserContext();
   const {
     status,
     error,
@@ -24,7 +22,7 @@ export const YourWorkoutList: React.FC = () => {
     isFetchingNextPage,
     fetchNextPage,
     data: infinityUserWorkouts,
-  } = useUserWorkouts(user?.id);
+  } = useUserWorkouts(userId);
 
   const workouts = usePaginatedResultItems(
     infinityUserWorkouts,
