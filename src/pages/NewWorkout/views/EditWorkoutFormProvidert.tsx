@@ -17,12 +17,16 @@ export const EditWorkoutFormProvider: React.FC<{
       {status === Status.LOADING && <Box>loading...</Box>}
       {status === Status.ERROR && <Box>error</Box>}
 
-      {editWorkout?.length === 0 ? (
-        <Alert variant="outlined" severity="info">
-          There are no workout with provided id. Try again later.
-        </Alert>
-      ) : (
+      {editWorkout && editWorkout.length !== 0 ? (
         <WorkoutFormProvider editWorkout={editWorkout} />
+      ) : (
+        <Box>
+          {status !== Status.LOADING && (
+            <Alert variant="outlined" severity="info">
+              There are no workout with provided id. Try again later.
+            </Alert>
+          )}
+        </Box>
       )}
     </Box>
   );

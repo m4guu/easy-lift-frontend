@@ -38,6 +38,7 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
 
   const onWorkoutChoose = () => {
     if (workout.isDraft) {
+      console.log(workout.id);
       navigate(`${PATHS.NEW_WORKOUT}/${workout.id}`);
     } else {
       navigate(`${PATHS.WORKOUTS}/${workout.id}`);

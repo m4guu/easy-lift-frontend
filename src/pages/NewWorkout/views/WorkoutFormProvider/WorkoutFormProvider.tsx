@@ -78,7 +78,10 @@ export const WorkoutFormProvider: React.FC<WorkoutFormProviderProps> = ({
 
   useEffect(() => {
     if ((isSubmitSuccessful && isUserLogin) || isDraftSubmited) {
-      snackbar("Workout added successfuly.", SnackbarStatus.SUCCESS);
+      snackbar(
+        `Workout ${isDraftSubmited ? "saved" : "added"} successfuly.`,
+        SnackbarStatus.SUCCESS
+      );
     }
   }, [snackbar, isSubmitSuccessful, user, isDraftSubmited, isUserLogin]);
 

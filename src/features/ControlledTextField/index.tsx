@@ -40,7 +40,7 @@ const ControlledTextField = <T extends FieldValues>({
     style: {
       color: textColor,
       // calendar styles
-      colorScheme: isDarkMode && "dark",
+      colorScheme: isDarkMode ? "dark" : "light",
     },
   };
 

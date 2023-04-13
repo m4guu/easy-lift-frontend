@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   useFieldArray,
   useForm,
@@ -28,6 +29,7 @@ import { FormExercise, Workout } from "../../../shared/interfaces";
 import { Role } from "../../../shared/enums";
 import { useUpdateWorkoutMutation } from "../../queryHooks/workoutsHooks/useUpdateWorkouteMutation";
 import { getDateTimeForInput } from "../../../utils/Date";
+import { PATHS } from "../../../pages/paths";
 
 export enum AddWorkoutFormFields {
   WORKOUT_TITLE = "title",
@@ -61,6 +63,7 @@ export const useNewWorkoutForm = ({
   updateWorkoutField,
   editWorkout,
 }: UseNewWorkoutFormProps) => {
+  const navigate = useNavigate();
   const [pending, setPending] = useState(false);
   const [isDraftSubmited, setIsDraftSubmited] = useState(false);
 
@@ -115,7 +118,11 @@ export const useNewWorkoutForm = ({
 
         method(newWorkout)
           .then(() => {
-            resetForm();
+            if (editWorkout) {
+              navigate(PATHS.NEW_WORKOUT);
+            } else {
+              resetForm();
+            }
 
             const newUserProgress = generateUserProgress(newWorkout);
             return newUserProgress.map((userProgres) =>
@@ -132,6 +139,7 @@ export const useNewWorkoutForm = ({
       user,
       addQueryWorkout,
       resetForm,
+      navigate,
       addQueryUserProgres,
       updateQueryWorkout,
       editWorkout,

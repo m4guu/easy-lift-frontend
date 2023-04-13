@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 import { Box } from "@mui/material";
@@ -11,6 +12,7 @@ import { useConfirmModal } from "../../../../../../hooks/modalHooks/Confirm/useC
 import { Confirm } from "../../../../../../modals";
 import { SettingAction } from "../../../../../../components/DotsSettings";
 import { DotsSettings } from "../../../../../../components";
+import { PATHS } from "../../../../../paths";
 
 enum NewWorkoutActions {
   SAVE_AS_DRAFT = "save as draft",
@@ -26,19 +28,25 @@ export const NewWorkoutSettings: React.FC<NewWorkoutSettingsProps> = ({
   saveDraft,
   resetForm,
 }) => {
-  const { open, isOpen, close } = useConfirmModal();
+  const { open: openConfirmModal, isOpen, close } = useConfirmModal();
+  const navigate = useNavigate();
+
+  const saveAsDraft = () => {
+    navigate(PATHS.NEW_WORKOUT);
+    saveDraft();
+  };
 
   const newWorkoutActions: SettingAction[] = [
     {
       id: uuidv4(),
       name: NewWorkoutActions.SAVE_AS_DRAFT,
-      onClick: saveDraft,
+      onClick: saveAsDraft,
       icon: <SaveAsSharpIcon fontSize="small" color="info" />,
     },
     {
       id: uuidv4(),
       name: NewWorkoutActions.RESET_FORM,
-      onClick: open,
+      onClick: openConfirmModal,
       icon: <RestoreFromTrashIcon fontSize="small" color="error" />,
     },
   ];
