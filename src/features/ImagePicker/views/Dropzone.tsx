@@ -15,21 +15,21 @@ import { avatarPickerOptions, sizes } from "./constans";
 interface DropzoneContentProps extends React.ComponentProps<typeof Box> {
   type: ImagePickerType;
   size: ImagePickerSize;
-  fullWidth?: boolean;
+  fullwidth?: string;
 }
 
 interface DropzoneProps {
   changeImageField: (...event: any[]) => void;
   type: ImagePickerType;
   size: ImagePickerSize;
-  fullWidth?: boolean;
+  fullwidth?: boolean;
 }
 
 export const Dropzone: React.FC<DropzoneProps> = ({
   changeImageField,
   type,
   size,
-  fullWidth,
+  fullwidth,
 }) => {
   const [imagePreview, setImage] = useState<string>("");
   const isDragging = useIsDragging();
@@ -77,7 +77,7 @@ export const Dropzone: React.FC<DropzoneProps> = ({
     <DropzoneContainer {...getRootProps()}>
       <DropzoneContent
         sx={{ borderColor: { borderColor } }}
-        fullWidth={fullWidth}
+        fullwidth={fullwidth?.toString()}
         type={type}
         size={size}
       >
@@ -129,13 +129,13 @@ const DragTitle = styled(Typography)({
 });
 
 const DropzoneContent = styled(Box)<DropzoneContentProps>(
-  ({ theme, type, size, fullWidth }) => {
+  ({ theme, type, size, fullwidth }) => {
     const { width = 0, height = 0 } =
       sizes.find(
         (sizeItem) => sizeItem.type === type && sizeItem.size === size
       ) || {};
 
-    const widthValue = fullWidth ? "100%" : width;
+    const widthValue = fullwidth ? "100%" : width;
 
     return {
       display: "flex",

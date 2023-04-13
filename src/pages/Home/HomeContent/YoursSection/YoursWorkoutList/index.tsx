@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ListItem, Box, Typography, useMediaQuery } from "@mui/material";
+import { List, Box, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/system";
 
 import { useUserWorkouts } from "../../../../../hooks/queryHooks/workoutsHooks/useUserWorkouts";
@@ -36,13 +36,13 @@ export const YourWorkoutList: React.FC<{ userId: string }> = ({ userId }) => {
   // Render an item or a loading indicator.
   const Item = ({ index, style }: { index: number; style: any }) => {
     return (
-      <ListItem disablePadding style={style}>
+      <List disablePadding style={style}>
         {isItemLoaded(index) ? (
           <WorkoutItem workout={workouts[index]} />
         ) : (
           <Box>loading...</Box>
         )}
-      </ListItem>
+      </List>
     );
   };
 

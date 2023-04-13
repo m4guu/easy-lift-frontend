@@ -18,12 +18,12 @@ export const EditProgramFormProvider: React.FC<{ programId: string }> = ({
       {status === Status.LOADING && <Box>loading...</Box>}
       {status === Status.ERROR && <Box>error</Box>}
 
-      {editProgram?.length === 0 ? (
+      {editProgram && editProgram.length !== 0 ? (
+        <ProgramFormProvider editProgram={editProgram?.at(0)} />
+      ) : (
         <Alert variant="outlined" severity="info">
           There are no program with provided id. Try again later.
         </Alert>
-      ) : (
-        <ProgramFormProvider editProgram={editProgram?.at(0)} />
       )}
     </Box>
   );

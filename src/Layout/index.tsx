@@ -24,11 +24,11 @@ const Layout: React.FCWithChildren = ({ children }) => {
 
   return (
     <MainGridContainer container>
-      <FirstGridItem item xl={2} lg={3} xs={12}>
+      <FirstGridItem item lg={3} xs={12}>
         <LeftBar />
       </FirstGridItem>
 
-      <GridWrapper item xl={10} lg={9} xs={12}>
+      <GridWrapper item lg={9} xs={12}>
         <SecondGridItem item xl={12}>
           {(currentPath === PATHS.NEW_PROGRAM ||
             currentPath === PATHS.NEW_WORKOUT) &&
