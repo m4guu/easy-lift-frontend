@@ -13,7 +13,7 @@ import { WorkoutItem } from "../../../../../components";
 
 export const YourWorkoutList: React.FC<{ userId: string }> = ({ userId }) => {
   const theme = useTheme();
-  const isBelowLg = useMediaQuery(theme.breakpoints.down("lg"));
+  const isBelowXl = useMediaQuery(theme.breakpoints.down("xl"));
 
   const {
     status,
@@ -47,7 +47,7 @@ export const YourWorkoutList: React.FC<{ userId: string }> = ({ userId }) => {
   };
 
   return (
-    <Box sx={isBelowLg ? { height: 500 } : { flex: 1 }}>
+    <Box sx={isBelowXl ? { height: 500 } : { flex: 1 }}>
       {status === Status.LOADING && <div>loading...</div>}
       {status === Status.ERROR && <div>error</div>}
       {noWorkouts && <Typography>You dont have any workouts yet.</Typography>}

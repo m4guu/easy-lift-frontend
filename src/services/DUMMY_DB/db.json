@@ -146,6 +146,14 @@
         {
           "date": "2023-04-07",
           "weight": 90
+        },
+        {
+          "date": "2023-04-13",
+          "weight": 90
+        },
+        {
+          "date": "2023-04-13",
+          "weight": 90
         }
       ],
       "expirationDate": "2023-04-13T17:35:46.607Z",
@@ -952,39 +960,6 @@
       "isDraft": false
     },
     {
-      "id": "095ef410-9c11-4d0c-aea9-6818548f03a9",
-      "creator": "547266d5-f25c-4664-a290-b590290c06de",
-      "title": "123222",
-      "date": "2023-03-30",
-      "exercises": [
-        {
-          "name": "3/4 sit-up",
-          "id": "27478547-40b3-4028-b1ee-e4ee614e2061",
-          "_id": "ce889c74-286f-4331-9892-595c754ecb75",
-          "sets": [
-            {
-              "goal": "123 x 213",
-              "tempo": "1-2-3-1",
-              "archived": "231 x 2"
-            }
-          ]
-        },
-        {
-          "name": "45° side bend",
-          "id": "2cfe2246-4d67-48b7-8981-10889ac45f97",
-          "_id": "f481f1ef-68ef-4d7b-b5dd-3040627a3b27",
-          "sets": [
-            {
-              "goal": "321 x 32",
-              "tempo": "1-2-3-1",
-              "archived": "123 x 23"
-            }
-          ]
-        }
-      ],
-      "isDraft": false
-    },
-    {
       "id": "50807980-f6fb-4bd6-b78a-6702dada22f9",
       "creator": "547266d5-f25c-4664-a290-b590290c06de",
       "title": "123222",
@@ -1316,39 +1291,6 @@
     },
     {
       "id": "4fe9d4e4-4144-476c-8f56-8749e5634e88",
-      "creator": "547266d5-f25c-4664-a290-b590290c06de",
-      "title": "123222",
-      "date": "2023-03-30",
-      "exercises": [
-        {
-          "name": "3/4 sit-up",
-          "id": "27478547-40b3-4028-b1ee-e4ee614e2061",
-          "_id": "ce889c74-286f-4331-9892-595c754ecb75",
-          "sets": [
-            {
-              "goal": "123 x 213",
-              "tempo": "1-2-3-1",
-              "archived": "231 x 2"
-            }
-          ]
-        },
-        {
-          "name": "45° side bend",
-          "id": "2cfe2246-4d67-48b7-8981-10889ac45f97",
-          "_id": "f481f1ef-68ef-4d7b-b5dd-3040627a3b27",
-          "sets": [
-            {
-              "goal": "321 x 32",
-              "tempo": "1-2-3-1",
-              "archived": "123 x 23"
-            }
-          ]
-        }
-      ],
-      "isDraft": false
-    },
-    {
-      "id": "ff047d43-5f6b-46e7-a7b0-8042682ad499",
       "creator": "547266d5-f25c-4664-a290-b590290c06de",
       "title": "123222",
       "date": "2023-03-30",
@@ -2195,9 +2137,68 @@
         }
       ],
       "isDraft": true
+    },
+    {
+      "id": "a14ffc00-eaf1-4efa-9e49-3f5821361a98",
+      "creator": "547266d5-f25c-4664-a290-b590290c06de",
+      "title": "dsadsadas",
+      "date": "2023-04-13",
+      "exercises": [
+        {
+          "name": "45° side bend",
+          "id": "0002",
+          "sets": [
+            {
+              "goal": "321 x 31",
+              "tempo": "3-2-1-3",
+              "archived": "321 x 3",
+              "repMax": 353
+            }
+          ]
+        }
+      ],
+      "isDraft": false
+    },
+    {
+      "id": "8950acd1-e490-4120-a207-8ae2ed958a3f",
+      "creator": "547266d5-f25c-4664-a290-b590290c06de",
+      "title": "fdsfsdfsd",
+      "date": "2023-04-13",
+      "exercises": [
+        {
+          "name": "45° side bend",
+          "id": "0002",
+          "sets": [
+            {
+              "goal": "321 x 31",
+              "tempo": "3-2-1-3",
+              "archived": "321 x 3"
+            }
+          ]
+        }
+      ],
+      "isDraft": true
     }
   ],
-  "usersProgress": [],
+  "usersProgress": [
+    {
+      "id": "3f32072d-3633-4da0-bf61-6dcadac00b15",
+      "workoutId": "a14ffc00-eaf1-4efa-9e49-3f5821361a98",
+      "userId": "547266d5-f25c-4664-a290-b590290c06de",
+      "exerciseId": "0002",
+      "exerciseName": "45° side bend",
+      "date": "2023-04-13",
+      "repMax": 353,
+      "sets": [
+        {
+          "goal": "321 x 31",
+          "tempo": "3-2-1-3",
+          "archived": "321 x 3",
+          "repMax": 353
+        }
+      ]
+    }
+  ],
   "exercises": [
     {
       "bodyPart": "waist",
