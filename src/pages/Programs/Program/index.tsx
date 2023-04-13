@@ -3,7 +3,6 @@ import React from "react";
 import { useParams } from "react-router-dom";
 
 import { Box, Alert } from "@mui/material";
-import { styled } from "@mui/system";
 
 import { Status } from "../../../shared/enums";
 import { useProgram } from "../../../hooks/queryHooks/programsHooks/useProgram";

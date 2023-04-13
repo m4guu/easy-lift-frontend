@@ -38,7 +38,7 @@ const HomeLink = styled(Link)(({ theme }) => ({
   },
 }));
 
-const LogoImage = styled("img")(({ theme }) => ({
+const LogoImage = styled("img")({
   width: "100%",
-}));
+});
 export default Logo;

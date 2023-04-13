@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { QueryKey, Status } from "../../../shared/enums";
+import { QueryKey } from "../../../shared/enums";
 
 import { UserProgressService, UserProgressMethods } from "../../../services";
 
