@@ -2,6 +2,7 @@ import { Controller, FieldValues, Path, useFormContext } from "react-hook-form";
 
 import { TextField, TextFieldProps } from "@mui/material";
 import TextFieldMask from "../TextFieldMask";
+import { useIsDarkMode } from "../../store/redux-store/slices/themeMode/themeMode.hooks";
 
 interface ControlledTextFieldProps<T extends FieldValues>
   extends Omit<TextFieldProps, "name" | "value" | "onChange" | "onBlur"> {
@@ -30,12 +31,17 @@ const ControlledTextField = <T extends FieldValues>({
   children,
 }: ControlledTextFieldProps<T>) => {
   const { control } = useFormContext<T>();
+  const isDarkMode = useIsDarkMode();
 
   const inputProps = {
     disableUnderline: disabledUnderline,
     inputComponent: mask && (TextFieldMask as any),
     inputProps: { mask },
-    style: { color: textColor },
+    style: {
+      color: textColor,
+      // calendar styles
+      colorScheme: isDarkMode && "dark",
+    },
   };
 
   return (

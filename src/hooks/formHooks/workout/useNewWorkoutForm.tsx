@@ -27,6 +27,7 @@ import {
 import { FormExercise, Workout } from "../../../shared/interfaces";
 import { Role } from "../../../shared/enums";
 import { useUpdateWorkoutMutation } from "../../queryHooks/workoutsHooks/useUpdateWorkouteMutation";
+import { getDateTimeForInput } from "../../../utils/Date";
 
 export enum AddWorkoutFormFields {
   WORKOUT_TITLE = "title",
@@ -36,13 +37,13 @@ export enum AddWorkoutFormFields {
 
 export interface AddWorkoutForm {
   [AddWorkoutFormFields.WORKOUT_TITLE]: string;
-  [AddWorkoutFormFields.START_TIME]: Date;
+  [AddWorkoutFormFields.START_TIME]: string;
   [AddWorkoutFormFields.EXERCISES]: FormExercise[];
 }
 
 export const defaultWorkoutValues: AddWorkoutForm = {
   [AddWorkoutFormFields.WORKOUT_TITLE]: "",
-  [AddWorkoutFormFields.START_TIME]: new Date(),
+  [AddWorkoutFormFields.START_TIME]: getDateTimeForInput(new Date()),
   [AddWorkoutFormFields.EXERCISES]: [],
 };
 

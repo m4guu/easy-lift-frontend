@@ -795,72 +795,6 @@
   ],
   "workouts": [
     {
-      "id": "2023a718-89f8-46f1-93c4-dbbb5f6225d3",
-      "creator": "547266d5-f25c-4664-a290-b590290c06de",
-      "title": "123222",
-      "date": "2023-03-30",
-      "exercises": [
-        {
-          "name": "3/4 sit-up",
-          "id": "27478547-40b3-4028-b1ee-e4ee614e2061",
-          "sets": [
-            {
-              "goal": "123 x 213",
-              "tempo": "1-2-3-1",
-              "archived": "231 x 2",
-              "repMax": 246
-            }
-          ]
-        },
-        {
-          "name": "45° side bend",
-          "id": "2cfe2246-4d67-48b7-8981-10889ac45f97",
-          "sets": [
-            {
-              "goal": "321 x 32",
-              "tempo": "1-2-3-1",
-              "archived": "12 x 23",
-              "repMax": 21
-            }
-          ]
-        }
-      ],
-      "isDraft": false
-    },
-    {
-      "id": "99744b79-6c73-42b9-b111-0f2da1162fdc",
-      "creator": "547266d5-f25c-4664-a290-b590290c06de",
-      "title": "123222",
-      "date": "2023-03-30",
-      "exercises": [
-        {
-          "name": "3/4 sit-up",
-          "id": "27478547-40b3-4028-b1ee-e4ee614e2061",
-          "_id": "ce889c74-286f-4331-9892-595c754ecb75",
-          "sets": [
-            {
-              "goal": "123 x 213",
-              "tempo": "1-2-3-1",
-              "archived": "231 x 2"
-            }
-          ]
-        },
-        {
-          "name": "45° side bend",
-          "id": "2cfe2246-4d67-48b7-8981-10889ac45f97",
-          "_id": "f481f1ef-68ef-4d7b-b5dd-3040627a3b27",
-          "sets": [
-            {
-              "goal": "321 x 32",
-              "tempo": "1-2-3-1",
-              "archived": "123 x 23"
-            }
-          ]
-        }
-      ],
-      "isDraft": false
-    },
-    {
       "id": "08644418-a174-4aa3-99f8-3c31d49ff7bb",
       "creator": "547266d5-f25c-4664-a290-b590290c06de",
       "title": "123222",
@@ -2142,7 +2076,7 @@
       "id": "a14ffc00-eaf1-4efa-9e49-3f5821361a98",
       "creator": "547266d5-f25c-4664-a290-b590290c06de",
       "title": "dsadsadas",
-      "date": "2023-04-13",
+      "date": "2023-04-30",
       "exercises": [
         {
           "name": "45° side bend",
@@ -2178,6 +2112,35 @@
         }
       ],
       "isDraft": true
+    },
+    {
+      "id": "ba36bf55-0d64-44e5-af9b-977efdf9b0e3",
+      "creator": "547266d5-f25c-4664-a290-b590290c06de",
+      "title": "dsadasdasdasdasda",
+      "date": "2023-04-30",
+      "exercises": [],
+      "isDraft": true
+    },
+    {
+      "id": "5fda2246-a553-442e-afa0-0d197d410581",
+      "creator": "547266d5-f25c-4664-a290-b590290c06de",
+      "title": "nowy workout",
+      "date": "2023-04-30",
+      "exercises": [
+        {
+          "name": "3/4 sit-up",
+          "id": "0001",
+          "sets": [
+            {
+              "goal": "100 x 5",
+              "tempo": "2-2-2-1",
+              "archived": "100 x 6",
+              "repMax": 120
+            }
+          ]
+        }
+      ],
+      "isDraft": false
     }
   ],
   "usersProgress": [
@@ -2195,6 +2158,57 @@
           "tempo": "3-2-1-3",
           "archived": "321 x 3",
           "repMax": 353
+        }
+      ]
+    },
+    {
+      "id": "8fbe9cf0-7287-4e79-ac87-bf8c6376ff11",
+      "workoutId": "5fda2246-a553-442e-afa0-0d197d410581",
+      "userId": "547266d5-f25c-4664-a290-b590290c06de",
+      "exerciseId": "0001",
+      "exerciseName": "3/4 sit-up",
+      "date": "2023-04-13",
+      "repMax": 120,
+      "sets": [
+        {
+          "goal": "100 x 5",
+          "tempo": "2-2-2-1",
+          "archived": "100 x 6",
+          "repMax": 120
+        }
+      ]
+    },
+    {
+      "id": "8d273c13-8c6e-43c8-8534-7460c842f3e5",
+      "workoutId": "a14ffc00-eaf1-4efa-9e49-3f5821361a98",
+      "userId": "547266d5-f25c-4664-a290-b590290c06de",
+      "exerciseId": "0002",
+      "exerciseName": "45° side bend",
+      "date": "2023-04-13",
+      "repMax": 353,
+      "sets": [
+        {
+          "goal": "321 x 31",
+          "tempo": "3-2-1-3",
+          "archived": "321 x 3",
+          "repMax": 353
+        }
+      ]
+    },
+    {
+      "id": "438b0ea0-0d0f-4e7e-9313-0f38fa18050d",
+      "workoutId": "5fda2246-a553-442e-afa0-0d197d410581",
+      "userId": "547266d5-f25c-4664-a290-b590290c06de",
+      "exerciseId": "0001",
+      "exerciseName": "3/4 sit-up",
+      "date": "2023-04-13",
+      "repMax": 120,
+      "sets": [
+        {
+          "goal": "100 x 5",
+          "tempo": "2-2-2-1",
+          "archived": "100 x 6",
+          "repMax": 120
         }
       ]
     }

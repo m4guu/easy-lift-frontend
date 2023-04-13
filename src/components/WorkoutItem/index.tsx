@@ -56,8 +56,8 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
   return (
     <Item disablePadding>
       <ItemButton onClick={onWorkoutChoose}>
-        <Box>
-          <Container>
+        <Container>
+          <Content>
             <Typography variant="h3" color="primary">
               {workout.title}
             </Typography>
@@ -66,12 +66,12 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
                 DRAFT
               </Typography>
             )}
-          </Container>
+          </Content>
 
           <Typography variant="caption" color={theme.palette.text.secondary}>
             {workout.date}
           </Typography>
-        </Box>
+        </Container>
       </ItemButton>
 
       <DeleteButton
@@ -104,7 +104,13 @@ const ItemButton = styled(Button)(({ theme }) => ({
   justifyContent: "flex-start",
 }));
 
-const Container = styled(Box)(({ theme }) => ({
+const Container = styled(Box)({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+});
+
+const Content = styled(Box)(({ theme }) => ({
   display: "flex",
   gap: theme.spacing(1),
 }));
