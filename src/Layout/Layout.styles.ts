@@ -15,7 +15,7 @@ export const FirstGridItem = styled(Grid)(({ theme }) => ({
   backgroundColor: theme.palette.background.layout,
   [theme.breakpoints.up("lg")]: {
     height: "100%",
-    maxWidth: "400px",
+    // maxWidth: "400px",
   },
 }));
 

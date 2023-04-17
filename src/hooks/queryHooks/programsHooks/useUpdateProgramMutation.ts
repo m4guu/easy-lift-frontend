@@ -6,7 +6,7 @@ import { useInvalidateQueries } from "../useInvalidateQuries";
 
 import { QueryKey } from "../../../shared/enums";
 
-export const useUpdateProgramMutation = (programId?: string) => {
+export const useUpdateProgramMutation = (programId: string) => {
   const { invalidateQueries } = useInvalidateQueries([
     [QueryKey.TRAINER_PROGRAMS],
     [QueryKey.PROGRAMS],

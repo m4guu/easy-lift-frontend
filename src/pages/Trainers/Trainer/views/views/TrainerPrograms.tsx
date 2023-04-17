@@ -28,13 +28,13 @@ export const TrainerPrograms: React.FC<{ trainerId: string }> = ({
         trainer programs
       </SegmentTitle>
       <NoPaddingDivider />
-      {status === Status.LOADING && <div>loading...</div>}
-      {status === Status.ERROR && <div>error</div>}
+      {status === Status.LOADING && <Typography>loading...</Typography>}
+      {status === Status.ERROR && <Typography>error</Typography>}
       {status === Status.SUCCESS && trainerPrograms.length !== 0 ? (
         <ProgramList disablePadding>
           {trainerPrograms.map((program) => {
             return (
-              <Box>
+              <Box key={program.id}>
                 <NoPaddingDivider />
                 <ProgramItem program={program} />
               </Box>

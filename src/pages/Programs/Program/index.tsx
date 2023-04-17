@@ -2,7 +2,7 @@ import React from "react";
 
 import { useParams } from "react-router-dom";
 
-import { Box, Alert } from "@mui/material";
+import { Box, Alert, Typography } from "@mui/material";
 
 import { Status } from "../../../shared/enums";
 import { useProgram } from "../../../hooks/queryHooks/programsHooks/useProgram";
@@ -21,8 +21,8 @@ const Program: React.FC = () => {
   const { status, error, data: program } = useProgram(programId);
   return (
     <Box>
-      {status === Status.LOADING && <Box>loading...</Box>}
-      {status === Status.ERROR && <Box>error</Box>}
+      {status === Status.LOADING && <Typography>loading...</Typography>}
+      {status === Status.ERROR && <Typography>error</Typography>}
 
       {status === Status.SUCCESS && program?.at(0) && (
         <Box>

@@ -6,13 +6,12 @@ import { styled } from "@mui/system";
 
 import { useUserContext } from "../../../../../contexts/userContext";
 import { useDeleteProgramMutation } from "../../../../../hooks/queryHooks/programsHooks/useDeleteProgramMutation";
-import { useConfirmModal } from "../../../../../hooks/modalHooks/Confirm/useConfirmModal";
 import { useSnackbar } from "../../../../../hooks";
 
 import { PATHS } from "../../../../paths";
 import { Program } from "../../../../../shared/interfaces";
 import { SnackbarStatus, Status } from "../../../../../shared/enums";
-import { Confirm } from "../../../../../modals";
+import { ButtonWithConfirmation } from "../../../../../components";
 
 interface ProgramActionsProps {
   // todo: change  program[0] ---> program [when backend will be written]
@@ -23,7 +22,6 @@ export const ProgramActions: React.FC<ProgramActionsProps> = ({ program }) => {
   const { user } = useUserContext();
   const navigate = useNavigate();
   const snackbar = useSnackbar();
-  const { open, isOpen, close } = useConfirmModal();
 
   const { status, mutate: deleteQueryProgram } = useDeleteProgramMutation(
     program[0].id
@@ -57,18 +55,16 @@ export const ProgramActions: React.FC<ProgramActionsProps> = ({ program }) => {
           >
             edit
           </Button>
-          <Button onClick={open} variant="contained" size="small" color="error">
+          <ButtonWithConfirmation
+            onConfirm={deleteProgram}
+            variant="contained"
+            size="small"
+            color="error"
+          >
             delete
-          </Button>
+          </ButtonWithConfirmation>
         </TrainerProgramActions>
       )}
-
-      <Confirm
-        onConfirm={deleteProgram}
-        confirmTitle="delete program"
-        isOpen={isOpen}
-        closeModal={close}
-      />
     </PorgramActions>
   );
 };

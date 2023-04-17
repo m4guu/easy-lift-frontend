@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Alert, Divider, Button, Modal, Box } from "@mui/material";
+import { Alert, Divider, Button, Modal, Box, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { useUserExerciseProgress } from "../../hooks/queryHooks/userProgressHooks/useUserExerciseProgress";
@@ -43,7 +43,7 @@ const ExerciseProgressModal: React.FC<{
         <SectionContainer>
           <SectionHeader>your {name} progress</SectionHeader>
 
-          {status === Status.LOADING && <div>loading...</div>}
+          {status === Status.LOADING && <Typography>loading...</Typography>}
 
           {!!userExerciseProgress && userExerciseProgress?.length !== 0 ? (
             <>

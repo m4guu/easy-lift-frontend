@@ -40,7 +40,13 @@ const TrainersPage: React.FC = () => {
   const isItemLoaded = (index: number) =>
     !hasNextPage || index < trainers.length;
   // Render an item or a loading indicator.
-  const Item = ({ index, style }: { index: number; style: any }) => {
+  const Item = ({
+    index,
+    style,
+  }: {
+    index: number;
+    style: React.CSSProperties;
+  }) => {
     return (
       <Box style={style}>
         {isItemLoaded(index) ? (
@@ -59,8 +65,8 @@ const TrainersPage: React.FC = () => {
     <Container>
       <SectionHeader>Our Trainers</SectionHeader>
 
-      {status === Status.LOADING && <div>Loading...</div>}
-      {status === Status.ERROR && <div>error</div>}
+      {status === Status.LOADING && <Typography>Loading...</Typography>}
+      {status === Status.ERROR && <Typography>error</Typography>}
       {noTrainers && <Typography>There are no trainers yet.</Typography>}
 
       {/* <FilterPanel filterHandlers={filterPanelProps} /> */}

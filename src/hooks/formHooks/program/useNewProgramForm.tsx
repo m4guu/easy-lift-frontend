@@ -106,7 +106,9 @@ export const useNewProgramForm = ({ editProgram }: UseProgramFormProps) => {
 
   const [pending, setPending] = useState(false);
   const { mutateAsync: addQueryProgram } = useAddProgramMutation();
-  const { mutateAsync: updateQueryProgram } = useUpdateProgramMutation();
+  const { mutateAsync: updateQueryProgram } = useUpdateProgramMutation(
+    editProgram ? editProgram.id : ""
+  );
 
   const defaultValues = editProgram
     ? {

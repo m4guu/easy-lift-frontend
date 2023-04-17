@@ -5,14 +5,13 @@ import { styled } from "@mui/system";
 
 interface ConfirmProps {
   onConfirm: (...event: any) => void;
-  confirmTitle: string;
   isOpen: boolean;
   closeModal: () => void;
 }
 
-const Confirm: React.FC<ConfirmProps> = ({
+const Confirm: React.FCWithChildren<ConfirmProps> = ({
+  children,
   onConfirm,
-  confirmTitle,
   isOpen,
   closeModal,
 }) => {
@@ -21,7 +20,7 @@ const Confirm: React.FC<ConfirmProps> = ({
       <ModalContainer>
         <Header color="primary">are you sure ?</Header>
         <ModalMessage>
-          Do you really want to {confirmTitle}? This process cannot be undone.
+          Do you really want to {children}? This process cannot be undone.
         </ModalMessage>
 
         <ModalAction>
@@ -31,7 +30,7 @@ const Confirm: React.FC<ConfirmProps> = ({
             color="error"
             onClick={onConfirm}
           >
-            {confirmTitle}
+            {children}
           </Button>
 
           <Button

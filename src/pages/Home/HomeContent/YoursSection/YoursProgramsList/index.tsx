@@ -1,6 +1,6 @@
 import React from "react";
 
-import { List, Alert } from "@mui/material";
+import { List, Alert, Typography } from "@mui/material";
 
 import { useTrainerPrograms } from "../../../../../hooks/queryHooks/programsHooks/useTrainerPrograms";
 
@@ -13,8 +13,8 @@ export const YoursProgramsList: React.FC<{ userId: string }> = ({ userId }) => {
 
   return (
     <List disablePadding>
-      {status === Status.LOADING && <div>loading...</div>}
-      {status === Status.ERROR && <div>error</div>}
+      {status === Status.LOADING && <Typography>loading...</Typography>}
+      {status === Status.ERROR && <Typography>error</Typography>}
 
       {userPrograms?.map((program: Program) => {
         return <ProgramItem key={program.id} program={program} />;

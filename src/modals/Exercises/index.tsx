@@ -57,7 +57,13 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
   const isItemLoaded = (index: number) =>
     !hasNextPage || index < exercises.length;
   // Render an item or a loading indicator.
-  const Item = ({ index, style }: { index: number; style: any }) => {
+  const Item = ({
+    index,
+    style,
+  }: {
+    index: number;
+    style: React.CSSProperties;
+  }) => {
     return (
       <Box style={style}>
         {isItemLoaded(index) ? (
@@ -84,7 +90,7 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
       <Container>
         <Header>Exercise list</Header>
 
-        {status === Status.LOADING && <Box>loading...</Box>}
+        {status === Status.LOADING && <Typography>loading...</Typography>}
         {noExercises && (
           <Typography>Somethings goes wrong. Please try later.</Typography>
         )}

@@ -34,7 +34,13 @@ export const YourWorkoutList: React.FC<{ userId: string }> = ({ userId }) => {
   const isItemLoaded = (index: number) =>
     !hasNextPage || index < workouts.length;
   // Render an item or a loading indicator.
-  const Item = ({ index, style }: { index: number; style: any }) => {
+  const Item = ({
+    index,
+    style,
+  }: {
+    index: number;
+    style: React.CSSProperties;
+  }) => {
     return (
       <List disablePadding style={style}>
         {isItemLoaded(index) ? (
@@ -48,8 +54,8 @@ export const YourWorkoutList: React.FC<{ userId: string }> = ({ userId }) => {
 
   return (
     <Box sx={isBelowXl ? { height: 500 } : { flex: 1 }}>
-      {status === Status.LOADING && <div>loading...</div>}
-      {status === Status.ERROR && <div>error</div>}
+      {status === Status.LOADING && <Typography>loading...</Typography>}
+      {status === Status.ERROR && <Typography>error</Typography>}
       {noWorkouts && <Typography>You dont have any workouts yet.</Typography>}
 
       <InfiniteList

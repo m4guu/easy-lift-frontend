@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { Alert, Box, Button } from "@mui/material";
+import { Alert, Box, Button, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -32,8 +32,8 @@ export const ProgramList: React.FC = () => {
       </ProgramSwiperHeader>
 
       <ProgramsSwiper breakpoints={swiperBreakPoints} className="mySwiper">
-        {status === Status.LOADING && <div>loading...</div>}
-        {status === Status.ERROR && <div>error</div>}
+        {status === Status.LOADING && <Typography>loading...</Typography>}
+        {status === Status.ERROR && <Typography>error</Typography>}
 
         <SlideContainer>
           {programs?.map((program: Program) => (

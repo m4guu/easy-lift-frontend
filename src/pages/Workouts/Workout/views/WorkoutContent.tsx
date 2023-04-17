@@ -15,8 +15,8 @@ const WorkoutContent: React.FC<{ workoutId: string }> = ({ workoutId }) => {
 
   return (
     <Box>
-      {status === Status.LOADING && <Box>loading...</Box>}
-      {status === Status.ERROR && <Box>error</Box>}
+      {status === Status.LOADING && <Typography>loading...</Typography>}
+      {status === Status.ERROR && <Typography>error</Typography>}
       {status === Status.SUCCESS && workout && workout.length !== 0 && (
         <WorkoutWrapper>
           <WorkoutDetail>

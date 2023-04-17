@@ -6,14 +6,12 @@ import { styled, useTheme } from "@mui/system";
 
 import { useDeleteUserProgresMutation } from "../../hooks/queryHooks/userProgressHooks/useDeleteUserProgressMutation";
 import { useDeleteWorkoutMutation } from "../../hooks/queryHooks/workoutsHooks/useDeleteWorkoutMutation";
-import { useConfirmModal } from "../../hooks/modalHooks/Confirm/useConfirmModal";
 import { useSnackbar } from "../../hooks";
-
-import { Confirm } from "../../modals";
 
 import { SnackbarStatus, Status } from "../../shared/enums";
 import { Workout } from "../../shared/interfaces";
 import { PATHS } from "../../pages/paths";
+import ButtonWithConfirmation from "../ButtonWithConfirmation";
 
 type WorkoutItemProps = {
   workout: Workout;
@@ -23,7 +21,6 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
   const theme = useTheme();
   const navigate = useNavigate();
   const snackbar = useSnackbar();
-  const { open, isOpen, close } = useConfirmModal();
 
   const { status, mutate: deleteQueryWorkout } = useDeleteWorkoutMutation(
     workout.id
@@ -75,20 +72,13 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
       </ItemButton>
 
       <DeleteButton
-        onClick={open}
+        onConfirm={deleteWorkout}
         variant="outlined"
         size="small"
         color="error"
       >
         delete
       </DeleteButton>
-
-      <Confirm
-        onConfirm={deleteWorkout}
-        confirmTitle="delete workout"
-        isOpen={isOpen}
-        closeModal={close}
-      />
     </Item>
   );
 };
@@ -115,9 +105,11 @@ const Content = styled(Box)(({ theme }) => ({
   gap: theme.spacing(1),
 }));
 
-const DeleteButton = styled(Button)(({ theme }) => ({
+const DeleteButton = styled(ButtonWithConfirmation)(({ theme }) => ({
   position: "absolute",
+  top: "50%",
   right: theme.spacing(1),
+  transform: "translate(0, -50%)",
 }));
 
 export default WorkoutItem;

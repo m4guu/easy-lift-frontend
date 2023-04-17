@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box, Alert } from "@mui/material";
+import { Box, Alert, Typography } from "@mui/material";
 
 import { useProgram } from "../../../../hooks/queryHooks/programsHooks/useProgram";
 
@@ -15,8 +15,8 @@ export const EditProgramFormProvider: React.FC<{ programId: string }> = ({
 
   return (
     <Box>
-      {status === Status.LOADING && <Box>loading...</Box>}
-      {status === Status.ERROR && <Box>error</Box>}
+      {status === Status.LOADING && <Typography>loading...</Typography>}
+      {status === Status.ERROR && <Typography>error</Typography>}
 
       {editProgram && editProgram.length !== 0 ? (
         <ProgramFormProvider editProgram={editProgram?.at(0)} />

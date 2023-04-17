@@ -19,8 +19,8 @@ export const TrainerContent: React.FC<{ trainerId: string }> = ({
 
   return (
     <Box>
-      {status === Status.LOADING && <div>loading...</div>}
-      {status === Status.ERROR && <div>error</div>}
+      {status === Status.LOADING && <Typography>loading...</Typography>}
+      {status === Status.ERROR && <Typography>error</Typography>}
       {status === Status.SUCCESS && trainer.length !== 0 ? (
         <Box>
           <BasicInformation>

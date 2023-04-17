@@ -18,8 +18,9 @@ export const AuthorDetails: React.FC<AuthorDetailsProps> = ({ authorId }) => {
 
   return (
     <Box>
-      {status === Status.LOADING && null}
-      {status === Status.ERROR && null}
+      {status === Status.LOADING && <Typography>loading...</Typography>}
+      {status === Status.ERROR && <Typography>error</Typography>}
+
       {status === Status.SUCCESS && (
         <DetailsWrapper>
           <AuthorAvatar src={DUMMY_AVATAR} alt="avatar" />
