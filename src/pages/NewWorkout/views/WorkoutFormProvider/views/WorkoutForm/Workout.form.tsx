@@ -2,7 +2,10 @@ import { UseFieldArrayReturn, useFormContext } from "react-hook-form";
 
 import { Divider, styled, TextField, useTheme } from "@mui/material";
 
-import { ControlledTextField } from "../../../../../../features";
+import {
+  ControlledDatePicker,
+  ControlledTextField,
+} from "../../../../../../features";
 import { AddWorkoutFormFields } from "../../../../../../hooks/formHooks/workout/useNewWorkoutForm";
 
 import { FieldWrapper, SetsContainer } from "./styles/addWorkoutForm.styles";
@@ -23,12 +26,9 @@ export const WorkoutTitle = styled(() => (
 
 // Start time //
 export const StartTime = styled(() => (
-  <ControlledTextField
-    variant="standard"
-    size="small"
-    label="Start Time"
-    type="datetime-local"
+  <ControlledDatePicker
     fieldName={AddWorkoutFormFields.START_TIME}
+    label="Start Time"
   />
 ))``;
 //

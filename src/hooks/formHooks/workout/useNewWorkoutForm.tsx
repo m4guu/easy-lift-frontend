@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import dayjs, { Dayjs } from "dayjs";
 import {
   useFieldArray,
   useForm,
@@ -28,7 +29,6 @@ import {
 import { FormExercise, Workout } from "../../../shared/interfaces";
 import { Role } from "../../../shared/enums";
 import { useUpdateWorkoutMutation } from "../../queryHooks/workoutsHooks/useUpdateWorkouteMutation";
-import { getDateTimeForInput } from "../../../utils/Date";
 import { PATHS } from "../../../pages/paths";
 
 export enum AddWorkoutFormFields {
@@ -39,13 +39,13 @@ export enum AddWorkoutFormFields {
 
 export interface AddWorkoutForm {
   [AddWorkoutFormFields.WORKOUT_TITLE]: string;
-  [AddWorkoutFormFields.START_TIME]: string;
+  [AddWorkoutFormFields.START_TIME]: Dayjs;
   [AddWorkoutFormFields.EXERCISES]: FormExercise[];
 }
 
 export const defaultWorkoutValues: AddWorkoutForm = {
   [AddWorkoutFormFields.WORKOUT_TITLE]: "",
-  [AddWorkoutFormFields.START_TIME]: getDateTimeForInput(new Date()),
+  [AddWorkoutFormFields.START_TIME]: dayjs(new Date()),
   [AddWorkoutFormFields.EXERCISES]: [],
 };
 
@@ -104,6 +104,7 @@ export const useNewWorkoutForm = ({
   const onSubmit = useCallback(
     (formValues: AddWorkoutForm) => {
       setPending(true);
+
       const newWorkout = generateNewWorkout(
         formValues,
         user!,

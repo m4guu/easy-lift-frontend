@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { format } from "date-fns";
 
 import { ListItem, Typography, Box, Button } from "@mui/material";
 import { styled, useTheme } from "@mui/system";
@@ -66,7 +67,7 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
           </Content>
 
           <Typography variant="caption" color={theme.palette.text.secondary}>
-            {workout.date}
+            {format(new Date(workout.date), "yyyy-MM-dd")}
           </Typography>
         </Container>
       </ItemButton>

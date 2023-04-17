@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { format } from "date-fns";
+import dayjs from "dayjs";
 
 import {
   AddWorkoutForm,
@@ -13,7 +13,6 @@ import {
   User,
   Workout,
 } from "../../shared/interfaces";
-import { getDateTimeForInput } from "../Date";
 
 export const generateWorkoutExercises = (
   formExercises: FormExercise[],
@@ -78,7 +77,7 @@ export const generateNewWorkout = (
     id: id || uuidv4(),
     creator: user.id,
     title: data.title,
-    date: format(new Date(data.startTime), "yyyy-MM-dd"),
+    date: data.startTime.toString(),
     exercises: isDraft
       ? data.exercises
       : generateWorkoutExercises(data.exercises, user.role),
@@ -89,9 +88,7 @@ export const generateNewWorkout = (
 export const generateWorkoutToEdit = (workout: Workout): AddWorkoutForm => {
   return {
     [AddWorkoutFormFields.WORKOUT_TITLE]: workout.title,
-    [AddWorkoutFormFields.START_TIME]: getDateTimeForInput(
-      new Date(workout.date)
-    ),
+    [AddWorkoutFormFields.START_TIME]: dayjs(workout.date),
     [AddWorkoutFormFields.EXERCISES]: generateEditExercises(workout.exercises),
   };
 };
