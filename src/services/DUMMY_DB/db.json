@@ -166,6 +166,10 @@
         {
           "date": "2023-04-13",
           "weight": 90
+        },
+        {
+          "date": "2023-04-19",
+          "weight": 90
         }
       ],
       "expirationDate": "2023-04-18T07:55:03.900Z",
@@ -2539,6 +2543,37 @@
         }
       ],
       "isDraft": false
+    },
+    {
+      "id": "4ee97962-515d-432c-824d-ca4ecb4f2ede",
+      "creator": "547266d5-f25c-4664-a290-b590290c06de",
+      "title": "sdsadsadasdasdadsasdasdasdasdasd",
+      "date": "Sat, 29 Apr 2023 09:10:00 GMT",
+      "exercises": [
+        {
+          "name": "45° side bend",
+          "id": "2d3ab18b-3dd7-40ca-82ee-fd4c285b1bf2",
+          "_id": "ce79b158-58f7-48b2-9c8f-1f063ea42e2b",
+          "sets": [
+            {
+              "goal": "",
+              "tempo": "",
+              "archived": ""
+            },
+            {
+              "goal": "",
+              "tempo": "",
+              "archived": ""
+            },
+            {
+              "goal": "",
+              "tempo": "",
+              "archived": ""
+            }
+          ]
+        }
+      ],
+      "isDraft": true
     }
   ],
   "usersProgress": [

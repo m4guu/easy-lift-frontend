@@ -15,4 +15,5 @@ interface User {
   height?: number;
   expirationDate: string;
 }
+
 export default User;

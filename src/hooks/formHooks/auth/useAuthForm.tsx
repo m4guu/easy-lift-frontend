@@ -6,9 +6,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useCreateUserMutation } from "../../queryHooks/auth/useCreateUserMutation";
 
-import { defaultUser } from "./constans";
 import { AuthTypes, Role } from "../../../shared/enums";
-import { LoginCredentials, User } from "../../../shared/interfaces";
+import { LoginCredentials, CreateUser } from "../../../shared/interfaces";
 import { useUserContext } from "../../../contexts/userContext";
 
 export enum AuthFormFields {
@@ -49,7 +48,8 @@ const authSignUpSchema = yup.object().shape({
 
 export const useAuthForm = (authType: AuthTypes) => {
   const [pending, setPending] = useState(false);
-  const { mutateAsync: createQueryUser } = useCreateUserMutation();
+  const { mutateAsync: createQueryUser, error: registerError } =
+    useCreateUserMutation();
   const { login } = useUserContext();
 
   const schema =
@@ -77,8 +77,7 @@ export const useAuthForm = (authType: AuthTypes) => {
         login(credentials);
       } else if (formValues.password === formValues.confirmPassword) {
         // create new user
-        const newUser: User = {
-          ...defaultUser,
+        const newUser: CreateUser = {
           email: formValues.email,
           password: formValues.password,
           role: formValues.role!,
@@ -100,5 +99,6 @@ export const useAuthForm = (authType: AuthTypes) => {
     onSubmit,
     canSubmit,
     resetForm,
+    registerError,
   };
 };

@@ -1,6 +1,6 @@
 import { ENDPOINTS, HttpService } from "../api";
 
-import { User, LoginCredentials } from "../../shared/interfaces";
+import { User, CreateUser, LoginCredentials } from "../../shared/interfaces";
 
 export enum AuthMethods {
   LOGIN = "login",
@@ -12,16 +12,18 @@ export enum AuthMethods {
 
 const AuthService = {
   [AuthMethods.LOGIN]: (credentials: LoginCredentials) =>
-    // ! dummy login with json server [change when the backend will be ready] get -> post
-    HttpService.get<User[]>(`${ENDPOINTS.USERS}?email=${credentials.email}`),
+    HttpService.post<{ user: User; token: string }>(
+      ENDPOINTS.LOGIN,
+      credentials
+    ),
 
   [AuthMethods.LOGOUT]: () => HttpService.post<void>(ENDPOINTS.LOGOUT),
 
   [AuthMethods.RESET_PASSWORD]: (password: string) =>
     HttpService.post<User>(ENDPOINTS.RESET_PASSWORD, password),
 
-  [AuthMethods.CREATE]: (newUser: User) =>
-    HttpService.post<void>(ENDPOINTS.USERS, newUser),
+  [AuthMethods.CREATE]: (newUser: CreateUser) =>
+    HttpService.post<void>(ENDPOINTS.REGISTER, newUser),
 
   [AuthMethods.UPDATE]: (updatedUser: User) =>
     HttpService.put<void>(`${ENDPOINTS.USERS}/${updatedUser.id}`, updatedUser),
