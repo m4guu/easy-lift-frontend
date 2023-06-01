@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { styled } from "@mui/system";
 
@@ -6,20 +7,25 @@ import { useIsDarkMode } from "../../store/redux-store/slices/themeMode/themeMod
 
 import logoDarkMode from "../../assets/images/logo/logo-dark-mode.svg";
 import logoLightMode from "../../assets/images/logo/logo-light-mode.svg";
+import { PATHS } from "../../pages/paths";
 
 const Logo: React.FC = () => {
   const isDarkMode = useIsDarkMode();
 
   const logo = isDarkMode ? logoDarkMode : logoLightMode;
 
-  return <LogoImage src={logo} alt="EasyLift" />;
+  return (
+    <HomeLink to={PATHS.default}>
+      <LogoImage src={logo} alt="EasyLift" />
+    </HomeLink>
+  );
 };
 
-const LogoImage = styled("img")(({ theme }) => ({
+const HomeLink = styled(Link)(({ theme }) => ({
   width: "175.8px",
   marginLeft: "auto",
   marginRight: "auto",
-  paddingBottom: theme.spacing(2.5),
+  paddingBottom: theme.spacing(1.6),
   [theme.breakpoints.down("lg")]: {
     width: "19% ",
     padding: 0,
@@ -31,4 +37,8 @@ const LogoImage = styled("img")(({ theme }) => ({
     width: "32% ",
   },
 }));
+
+const LogoImage = styled("img")({
+  width: "100%",
+});
 export default Logo;

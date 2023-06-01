@@ -1,16 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { UseMutateAsyncFunction } from "@tanstack/react-query";
 
 import { useUpdateUserMutation } from "../queryHooks/auth/useUpdateUserMutation";
+import { useCreateUserMutation } from "../queryHooks/auth/useCreateUserMutation";
 import { useLogin } from "../queryHooks/auth/useLogin";
+import useSnackbar from "../useSnackbar";
 
 import { PATHS } from "../../pages/paths";
-import { User, LoginCredentials } from "../../shared/interfaces";
+import { SnackbarStatus, Status } from "../../shared/enums";
+import { User, LoginCredentials, CreateUser } from "../../shared/interfaces";
 
 type UseAuthReturnType = {
-  isLoading: boolean;
+  isLogging: boolean;
+  isRegistering: boolean;
+  registerStatus: "error" | "loading" | "idle" | "success";
   user?: User;
   login: (credentials: LoginCredentials) => void;
+  registerUser: UseMutateAsyncFunction<void, unknown, CreateUser, unknown>;
   logout: () => void;
   autoLogin: () => void;
   autoLogout: () => void;
@@ -20,35 +27,43 @@ type UseAuthReturnType = {
 const useAuth = (): UseAuthReturnType => {
   const [user, setUser] = useState<User | undefined>(undefined);
   const navigate = useNavigate();
+  const snackbar = useSnackbar();
 
-  const { mutateAsync: updateUserQuery } = useUpdateUserMutation();
+  const { mutateAsync: updateUserQuery, error: updateUserError } =
+    useUpdateUserMutation();
   const {
     isLoading: isLogging,
     error: loginError,
     mutateAsync: loginMutation,
   } = useLogin();
+  const {
+    isLoading: isRegistering,
+    status: registerStatus,
+    error: registerError,
+    mutateAsync: registerUser,
+  } = useCreateUserMutation();
 
   let logOutTimer: number | NodeJS.Timeout | undefined;
 
-  // todo: change response[0] -> response (when backend will be written)
   const login = (credentials: LoginCredentials) => {
     loginMutation(credentials).then((response) => {
       const loginExpirationDate =
-        response[0].expirationDate ||
+        response.user.expirationDate ||
         new Date(new Date().getTime() + 1000 * 60 * 60 * 24).toISOString();
 
-      if (!response[0].expirationDate) {
+      if (!response.user.expirationDate) {
         updateUserQuery({
-          ...response[0],
+          ...response.user,
           expirationDate: loginExpirationDate,
         });
       }
-      setUser({ ...response[0], expirationDate: loginExpirationDate });
+      setUser({ ...response.user, expirationDate: loginExpirationDate });
 
+      // Set user to local storage
       localStorage.setItem(
         "userData",
         JSON.stringify({
-          ...response[0],
+          ...response.user,
           expirationDate: loginExpirationDate,
         })
       );
@@ -56,32 +71,26 @@ const useAuth = (): UseAuthReturnType => {
   };
 
   const logout = () => {
-    updateUserQuery({ ...user!, expirationDate: "" })
-      .then(() => {
-        setUser(undefined);
-        localStorage.removeItem("userData");
-        navigate(PATHS.default);
-      })
-      .catch((err) => {
-        // todo: ERROR HANDLING [when backend will be written]
-      });
+    updateUserQuery({ ...user!, expirationDate: "" }).then(() => {
+      setUser(undefined);
+      localStorage.removeItem("userData");
+      navigate(PATHS.default);
+    });
   };
 
   // todo: add funcionality
   const resetPassword = (password: string) => {};
 
   const autoLogin = () => {
-    const storedData = JSON.parse(localStorage.getItem("userData")!);
+    const storedData: User | undefined = JSON.parse(
+      localStorage.getItem("userData")!
+    );
     if (
       storedData &&
       storedData.id &&
       new Date(storedData.expirationDate) > new Date()
     ) {
-      const credentials: LoginCredentials = {
-        email: storedData.email,
-        password: storedData.password,
-      };
-      login(credentials);
+      setUser(storedData);
     }
   };
 
@@ -95,10 +104,35 @@ const useAuth = (): UseAuthReturnType => {
     }
   };
 
+  useEffect(() => {
+    if (updateUserError || loginError || registerError) {
+      snackbar(
+        `We're sorry! The server encountered an internal error. Please try later.`,
+        SnackbarStatus.ERROR
+      );
+    }
+    if (registerStatus === Status.SUCCESS && !isRegistering) {
+      snackbar(
+        `You have been thoughtfully registered. You can now log in.`,
+        SnackbarStatus.SUCCESS
+      );
+    }
+  }, [
+    snackbar,
+    updateUserError,
+    loginError,
+    registerError,
+    registerStatus,
+    isRegistering,
+  ]);
+
   return {
     user,
-    isLoading: isLogging,
+    isLogging,
+    isRegistering,
+    registerStatus,
     login,
+    registerUser,
     logout,
     resetPassword,
     autoLogin,

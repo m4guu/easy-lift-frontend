@@ -3,11 +3,11 @@ import React from "react";
 import { Box, Avatar, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
-import { useUser } from "../../../../../hooks/queryHooks/userHooks/useUser";
+import { useUser } from "../../../../../../hooks/queryHooks/userHooks/useUser";
 
-import { Status } from "../../../../../shared/enums";
+import { Status } from "../../../../../../shared/enums";
 
-import DUMMY_AVATAR from "../../../../../assets/images/DUMMY_PROFILE_IMG/profile-img-id.jpeg";
+import DUMMY_AVATAR from "../../../../../../assets/images/DUMMY_PROFILE_IMG/profile-img-id.jpeg";
 
 interface AuthorDetailsProps {
   authorId: string;
@@ -18,8 +18,9 @@ export const AuthorDetails: React.FC<AuthorDetailsProps> = ({ authorId }) => {
 
   return (
     <Box>
-      {status === Status.LOADING && null}
-      {status === Status.ERROR && null}
+      {status === Status.LOADING && <Typography>loading...</Typography>}
+      {status === Status.ERROR && <Typography>error</Typography>}
+
       {status === Status.SUCCESS && (
         <DetailsWrapper>
           <AuthorAvatar src={DUMMY_AVATAR} alt="avatar" />

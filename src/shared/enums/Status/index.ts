@@ -1,6 +1,6 @@
 enum Status {
-  LOADING = "loading",
   ERROR = "error",
+  LOADING = "loading",
   IDLE = "idle",
   SUCCESS = "success",
 }

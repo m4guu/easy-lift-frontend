@@ -11,7 +11,7 @@ import { IconButton } from "@mui/material";
 import { styled } from "@mui/system";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
-import InfoIcon from "@mui/icons-material/Info";
+import QueryStatsIcon from "@mui/icons-material/QueryStats";
 import DoneIcon from "@mui/icons-material/Done";
 
 import { ExerciseFormActions } from "../../../../../../../../../shared/enums";
@@ -44,7 +44,7 @@ export const DeleteExercise: React.FC<DeleteExerciseProps> = ({
 export const Details: React.FC<{ openModal: () => void }> = ({ openModal }) => {
   return (
     <IconBtn onClick={openModal} size="small">
-      <InfoIcon />
+      <QueryStatsIcon color="info" />
     </IconBtn>
   );
 };

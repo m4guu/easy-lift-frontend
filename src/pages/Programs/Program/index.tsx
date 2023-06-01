@@ -2,8 +2,7 @@ import React from "react";
 
 import { useParams } from "react-router-dom";
 
-import { Box, Alert } from "@mui/material";
-import { styled } from "@mui/system";
+import { Box, Alert, Typography } from "@mui/material";
 
 import { Status } from "../../../shared/enums";
 import { useProgram } from "../../../hooks/queryHooks/programsHooks/useProgram";
@@ -16,17 +15,17 @@ import DUMMY_PROGRAM_IMAGE from "../../../assets/images/programs/dummy-program-i
 import { ProgramActions } from "./views/ProgramActions/ProgramActions";
 
 // todo: change  program[0] ---> program [when backend will be written]
-const ProgramPage: React.FC = () => {
+const Program: React.FC = () => {
   const { programId } = useParams();
 
   const { status, error, data: program } = useProgram(programId);
   return (
-    <SectionContainer>
-      {status === Status.LOADING && <div>loading...</div>}
-      {status === Status.ERROR && <div>error!</div>}
+    <Box>
+      {status === Status.LOADING && <Typography>loading...</Typography>}
+      {status === Status.ERROR && <Typography>error</Typography>}
 
       {status === Status.SUCCESS && program?.at(0) && (
-        <SectionWrapper>
+        <Box>
           <Header
             title={program[0].title}
             price={program[0].price}
@@ -39,20 +38,16 @@ const ProgramPage: React.FC = () => {
             programLength={program[0].programLength}
           />
           <ProgramActions program={program} />
-        </SectionWrapper>
+        </Box>
       )}
 
-      {status === "success" && program?.length === 0 && (
+      {status === Status.SUCCESS && program?.length === 0 && (
         <Alert variant="outlined" severity="info">
           There is no program with provided ID.
         </Alert>
       )}
-    </SectionContainer>
+    </Box>
   );
 };
 
-const SectionContainer = styled(Box)({});
-const SectionWrapper = styled(Box)({});
-
-const Program = ProgramPage;
 export default Program;

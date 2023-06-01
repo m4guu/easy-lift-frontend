@@ -2,30 +2,14 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Box, Typography, Button } from "@mui/material";
-import { LoadingButton } from "@mui/lab";
 import { styled } from "@mui/system";
-
-import { useUserContext } from "../../contexts/userContext";
+import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 
 import { PATHS } from "../paths";
 import logo from "../../assets/images/logo/mini_logo_yellow.svg";
 
 const WelcomePage: React.FC = () => {
-  const { login, isLoading } = useUserContext();
   const navigate = useNavigate();
-
-  const loginHandle = () => {
-    const DUMMY_CREDENTIALS = {
-      email: "krystian.domza@gmail.pl",
-      password: "dummy_password",
-    };
-
-    login(DUMMY_CREDENTIALS);
-  };
-
-  const signUpHangle = () => {
-    navigate(PATHS.AUTH);
-  };
 
   return (
     <WelcomePageContainer>
@@ -34,23 +18,15 @@ const WelcomePage: React.FC = () => {
       <Typography variant="h3">
         Log in with your EasyLift account to continue
       </Typography>
-      <ButtonBox>
-        <LoadingButton
-          onClick={() => loginHandle()}
-          loading={isLoading}
-          variant="outlined"
-          size="small"
-        >
-          Log in
-        </LoadingButton>
-        <Button
-          onClick={() => navigate(PATHS.AUTH)}
-          variant="contained"
-          size="small"
-        >
-          Sign up
-        </Button>
-      </ButtonBox>
+
+      <StartButton
+        onClick={() => navigate(PATHS.AUTH)}
+        variant="contained"
+        size="small"
+        endIcon={<PlayCircleOutlineIcon />}
+      >
+        Start
+      </StartButton>
     </WelcomePageContainer>
   );
 };
@@ -62,14 +38,13 @@ const WelcomePageContainer = styled(Box)({
   transform: "translate(-50%, -60%)",
   textAlign: "center",
   display: "flex",
+  alignItems: "center",
   flexDirection: "column",
   gap: "1rem",
 });
 
-const ButtonBox = styled(Box)({
-  display: "flex",
-  gap: "1rem",
-  justifyContent: "center",
+const StartButton = styled(Button)({
+  width: "60%",
 });
 
 const LogoImage = styled("img")({

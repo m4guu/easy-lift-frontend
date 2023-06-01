@@ -1,22 +1,20 @@
 import React from "react";
 
-import { List, Alert } from "@mui/material";
+import { List, Alert, Typography } from "@mui/material";
 
-import { useUserContext } from "../../../../../contexts/userContext";
 import { useTrainerPrograms } from "../../../../../hooks/queryHooks/programsHooks/useTrainerPrograms";
 
 import { Status } from "../../../../../shared/enums";
 import { Program } from "../../../../../shared/interfaces";
 import { ProgramItem } from "../../../../../components";
 
-export const YoursProgramsList: React.FC = () => {
-  const { user } = useUserContext();
-  const { status, error, data: userPrograms } = useTrainerPrograms(user?.id);
+export const YoursProgramsList: React.FC<{ userId: string }> = ({ userId }) => {
+  const { status, error, data: userPrograms } = useTrainerPrograms(userId);
 
   return (
     <List disablePadding>
-      {status === Status.LOADING && <div>loading...</div>}
-      {status === Status.ERROR && <div>error</div>}
+      {status === Status.LOADING && <Typography>loading...</Typography>}
+      {status === Status.ERROR && <Typography>error</Typography>}
 
       {userPrograms?.map((program: Program) => {
         return <ProgramItem key={program.id} program={program} />;

@@ -1,61 +1,23 @@
 import { useParams } from "react-router-dom";
 
-import { Step, StepLabel, Alert, Box } from "@mui/material";
-
-import { useFormSteps } from "../../hooks/formHooks/formStepHook/useFormSteps";
-import { useProgram } from "../../hooks/queryHooks/programsHooks/useProgram";
-
-import { steps } from "./views/ProgramFormProvider/constans";
-import { FormStepper } from "./views/ProgramFormProvider/styles/ProgramForm.styles";
-
-import { Status } from "../../shared/enums";
 import { ProgramFormProvider } from "./views/ProgramFormProvider/ProgramFormProvider";
 import { SectionHeader, SectionContainer } from "../../components";
+import { EditProgramFormProvider } from "./views/EditProgramFormProvider/EditProgramFormProvider";
 
-const NewProgramPage: React.FC = () => {
+const NewProgram: React.FC = () => {
   const { programId: editProgramId } = useParams();
-  const { status, error, data: editProgram } = useProgram(editProgramId);
-
-  const { currentStep } = useFormSteps();
-
-  const isEditProgram = status !== Status.LOADING && !editProgram;
 
   return (
     <SectionContainer>
-      <SectionHeader>
-        {isEditProgram ? "New" : "update"} Training Program
-      </SectionHeader>
+      <SectionHeader>Training Program</SectionHeader>
 
-      {isEditProgram && (
-        <FormStepper activeStep={currentStep - 1} alternativeLabel>
-          {steps.map((step) => {
-            return (
-              <Step key={step}>
-                <StepLabel>{step}</StepLabel>
-              </Step>
-            );
-          })}
-        </FormStepper>
-      )}
-
-      {editProgramId &&
-      status === Status.SUCCESS &&
-      editProgram?.length === 0 ? (
-        <Alert variant="outlined" severity="info">
-          There are no program with provided id. Try again later.
-        </Alert>
+      {editProgramId ? (
+        <EditProgramFormProvider programId={editProgramId} />
       ) : (
-        <Box>
-          {status !== Status.LOADING && (
-            <ProgramFormProvider editProgram={editProgram?.at(0)} />
-          )}
-        </Box>
+        <ProgramFormProvider />
       )}
-
-      {status === Status.LOADING && <Box>loading...</Box>}
     </SectionContainer>
   );
 };
 
-const NewProgram = NewProgramPage;
 export default NewProgram;

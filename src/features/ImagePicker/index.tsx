@@ -36,7 +36,7 @@ const ImagePicker: React.FC<ImagePickerProps> = ({
             changeImageField={onChange}
             type={type}
             size={size}
-            fullWidth={fullWidth}
+            fullwidth={fullWidth}
           />
         )}
       />

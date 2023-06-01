@@ -1,14 +1,11 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { useCreateUserMutation } from "../../queryHooks/auth/useCreateUserMutation";
-
-import { defaultUser } from "./constans";
 import { AuthTypes, Role } from "../../../shared/enums";
-import { LoginCredentials, User } from "../../../shared/interfaces";
+import { LoginCredentials, CreateUser } from "../../../shared/interfaces";
 import { useUserContext } from "../../../contexts/userContext";
 
 export enum AuthFormFields {
@@ -48,10 +45,7 @@ const authSignUpSchema = yup.object().shape({
 });
 
 export const useAuthForm = (authType: AuthTypes) => {
-  const [pending, setPending] = useState(false);
-  const { mutateAsync: createQueryUser } = useCreateUserMutation();
-  const { login } = useUserContext();
-
+  const { login, registerUser } = useUserContext();
   const schema =
     authType === AuthTypes.LOGIN ? authLoginSchema : authSignUpSchema;
 
@@ -68,7 +62,6 @@ export const useAuthForm = (authType: AuthTypes) => {
 
   const onSubmit = useCallback(
     async (formValues: AuthForm) => {
-      setPending(true);
       if (authType === AuthTypes.LOGIN) {
         const credentials: LoginCredentials = {
           email: formValues.email,
@@ -77,25 +70,21 @@ export const useAuthForm = (authType: AuthTypes) => {
         login(credentials);
       } else if (formValues.password === formValues.confirmPassword) {
         // create new user
-        const newUser: User = {
-          ...defaultUser,
+        const newUser: CreateUser = {
           email: formValues.email,
           password: formValues.password,
           role: formValues.role!,
         };
-        createQueryUser(newUser)
-          .then(resetForm)
-          .finally(() => setPending(false));
+        registerUser(newUser);
       } else {
         // todo: throw error when passwords doesnt match
+        alert("password doesnt match");
       }
-      setPending(false);
     },
-    [authType, createQueryUser, resetForm, login]
+    [authType, login, registerUser]
   );
 
   return {
-    pending,
     methods,
     onSubmit,
     canSubmit,

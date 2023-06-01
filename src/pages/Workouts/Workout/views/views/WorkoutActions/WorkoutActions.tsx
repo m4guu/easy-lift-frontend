@@ -1,22 +1,17 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { styled } from "@mui/system";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
 
-import { useDeleteWorkoutMutation } from "../../../../../hooks/queryHooks/workoutsHooks/useDeleteWorkoutMutation";
-import { useDeleteUserProgresMutation } from "../../../../../hooks/queryHooks/userProgressHooks/useDeleteUserProgressMutation";
-import { useSnackbar } from "../../../../../hooks";
+import { useDeleteWorkoutMutation } from "../../../../../../hooks/queryHooks/workoutsHooks/useDeleteWorkoutMutation";
+import { useDeleteUserProgresMutation } from "../../../../../../hooks/queryHooks/userProgressHooks/useDeleteUserProgressMutation";
+import { useSnackbar } from "../../../../../../hooks";
 
-import { SnackbarStatus, Status } from "../../../../../shared/enums";
-import { PATHS } from "../../../../paths";
-import { WorkoutActionsEnum } from "./constans";
+import { SnackbarStatus, Status } from "../../../../../../shared/enums";
+import { PATHS } from "../../../../../paths";
 
-import { SettingAction } from "../../../../../components/DotsSettings";
-import { DotsSettings } from "../../../../../components";
+import { ButtonWithConfirmation } from "../../../../../../components";
 
 interface WorkoutActionsProps {
   workoutId: string;
@@ -41,21 +36,6 @@ export const WorkoutActions: React.FC<WorkoutActionsProps> = ({
     navigate(`${PATHS.NEW_WORKOUT}/${workoutId}`);
   };
 
-  const actions: SettingAction[] = [
-    {
-      id: uuidv4(),
-      name: WorkoutActionsEnum.EDIT,
-      icon: <EditIcon fontSize="small" color="info" />,
-      onClick: editWorkout,
-    },
-    {
-      id: uuidv4(),
-      name: WorkoutActionsEnum.DELETE,
-      icon: <DeleteIcon fontSize="small" color="error" />,
-      onClick: deleteWorkout,
-    },
-  ];
-
   useEffect(() => {
     if (status === Status.SUCCESS) {
       navigate(PATHS.WORKOUTS);
@@ -68,13 +48,30 @@ export const WorkoutActions: React.FC<WorkoutActionsProps> = ({
 
   return (
     <Container>
-      <DotsSettings actions={actions} />
+      <Button
+        onClick={editWorkout}
+        variant="outlined"
+        size="small"
+        color="info"
+      >
+        edit
+      </Button>
+      <ButtonWithConfirmation
+        onConfirm={deleteWorkout}
+        variant="outlined"
+        size="small"
+        color="error"
+      >
+        delete
+      </ButtonWithConfirmation>
     </Container>
   );
 };
 
 const Container = styled(Box)(({ theme }) => ({
   position: "absolute",
+  display: "flex",
+  gap: theme.spacing(1),
   top: theme.spacing(2),
   right: theme.spacing(2),
 }));

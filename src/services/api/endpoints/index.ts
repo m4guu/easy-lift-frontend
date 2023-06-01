@@ -7,7 +7,8 @@ enum ENDPOINTS {
   USERS = "users",
 
   // auth
-  LOGIN = "login",
+  LOGIN = "auth/login",
+  REGISTER = "auth/register",
   LOGOUT = "logout",
   RESET_PASSWORD = "resetPassword",
 

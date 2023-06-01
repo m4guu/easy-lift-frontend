@@ -10,7 +10,13 @@ import { styled } from "@mui/system";
 
 interface InfiniteListProps<T> {
   items: T[];
-  Item: ({ index, style }: { index: number; style: any }) => JSX.Element;
+  Item: ({
+    index,
+    style,
+  }: {
+    index: number;
+    style: React.CSSProperties;
+  }) => JSX.Element;
   isFetchingNextPage: boolean | undefined;
   fetchNextPage: (
     options?: FetchNextPageOptions

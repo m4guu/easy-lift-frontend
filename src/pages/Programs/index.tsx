@@ -34,7 +34,13 @@ const ProgramsPage: React.FC = () => {
   const isItemLoaded = (index: number) =>
     !hasNextPage || index < programs.length;
   // Render an item or a loading indicator.
-  const Item = ({ index, style }: { index: number; style: any }) => {
+  const Item = ({
+    index,
+    style,
+  }: {
+    index: number;
+    style: React.CSSProperties;
+  }) => {
     return (
       <Box style={style}>
         {isItemLoaded(index) ? (

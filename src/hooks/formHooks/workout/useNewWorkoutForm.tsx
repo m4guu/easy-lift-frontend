@@ -1,4 +1,6 @@
 import { useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import dayjs, { Dayjs } from "dayjs";
 import {
   useFieldArray,
   useForm,
@@ -27,6 +29,7 @@ import {
 import { FormExercise, Workout } from "../../../shared/interfaces";
 import { Role } from "../../../shared/enums";
 import { useUpdateWorkoutMutation } from "../../queryHooks/workoutsHooks/useUpdateWorkouteMutation";
+import { PATHS } from "../../../pages/paths";
 
 export enum AddWorkoutFormFields {
   WORKOUT_TITLE = "title",
@@ -36,13 +39,13 @@ export enum AddWorkoutFormFields {
 
 export interface AddWorkoutForm {
   [AddWorkoutFormFields.WORKOUT_TITLE]: string;
-  [AddWorkoutFormFields.START_TIME]: Date;
+  [AddWorkoutFormFields.START_TIME]: Dayjs;
   [AddWorkoutFormFields.EXERCISES]: FormExercise[];
 }
 
 export const defaultWorkoutValues: AddWorkoutForm = {
   [AddWorkoutFormFields.WORKOUT_TITLE]: "",
-  [AddWorkoutFormFields.START_TIME]: new Date(),
+  [AddWorkoutFormFields.START_TIME]: dayjs(new Date()),
   [AddWorkoutFormFields.EXERCISES]: [],
 };
 
@@ -60,6 +63,7 @@ export const useNewWorkoutForm = ({
   updateWorkoutField,
   editWorkout,
 }: UseNewWorkoutFormProps) => {
+  const navigate = useNavigate();
   const [pending, setPending] = useState(false);
   const [isDraftSubmited, setIsDraftSubmited] = useState(false);
 
@@ -71,7 +75,7 @@ export const useNewWorkoutForm = ({
   const { user } = useUserContext();
   const { mutateAsync: addQueryWorkout } = useAddWorkoutMutation();
   const { mutateAsync: addQueryUserProgres } = useAddUserProgresMutation();
-  const { mutateAsync: updateQueryWorkout } = useUpdateWorkoutMutation("s");
+  const { mutateAsync: updateQueryWorkout } = useUpdateWorkoutMutation();
 
   const schema =
     user?.role === Role.trainer ? workoutTrainerSchema : workoutUserSchema;
@@ -100,6 +104,7 @@ export const useNewWorkoutForm = ({
   const onSubmit = useCallback(
     (formValues: AddWorkoutForm) => {
       setPending(true);
+
       const newWorkout = generateNewWorkout(
         formValues,
         user!,
@@ -114,7 +119,11 @@ export const useNewWorkoutForm = ({
 
         method(newWorkout)
           .then(() => {
-            resetForm();
+            if (editWorkout) {
+              navigate(PATHS.NEW_WORKOUT);
+            } else {
+              resetForm();
+            }
 
             const newUserProgress = generateUserProgress(newWorkout);
             return newUserProgress.map((userProgres) =>
@@ -131,6 +140,7 @@ export const useNewWorkoutForm = ({
       user,
       addQueryWorkout,
       resetForm,
+      navigate,
       addQueryUserProgres,
       updateQueryWorkout,
       editWorkout,

@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 
 import { Box, Divider, List, ListItem } from "@mui/material";
 import { styled } from "@mui/system";
@@ -17,7 +18,7 @@ export const WeightHistory: React.FC = () => {
       <HistoryList disablePadding>
         {user?.bodyWeights?.map((weight) => {
           return (
-            <Item disablePadding>
+            <Item key={uuidv4()} disablePadding>
               <Container>
                 <BodyWeightItem weight={weight} />
                 <Divider />

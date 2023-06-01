@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useFieldArray, useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 
@@ -22,6 +23,7 @@ import {
 } from "./constans";
 import { useUpdateProgramMutation } from "../../queryHooks/programsHooks/useUpdateProgramMutation";
 import { workoutTrainerSchema } from "../workout/constans";
+import { PATHS } from "../../../pages/paths";
 
 export enum AddProgramFormFields {
   // form step 1
@@ -99,10 +101,14 @@ type UseProgramFormProps = {
 };
 
 export const useNewProgramForm = ({ editProgram }: UseProgramFormProps) => {
+  const { user } = useUserContext();
+  const navigate = useNavigate();
+
   const [pending, setPending] = useState(false);
   const { mutateAsync: addQueryProgram } = useAddProgramMutation();
-  const { mutateAsync: updateQueryProgram } = useUpdateProgramMutation("s");
-  const { user } = useUserContext();
+  const { mutateAsync: updateQueryProgram } = useUpdateProgramMutation(
+    editProgram ? editProgram.id : ""
+  );
 
   const defaultValues = editProgram
     ? {
@@ -182,11 +188,26 @@ export const useNewProgramForm = ({ editProgram }: UseProgramFormProps) => {
         ? updateQueryProgram(updatedProgram)
         : addQueryProgram(newProgram);
 
-      method.then(resetForm).finally(() => {
-        setPending(false);
-      });
+      method
+        .then(() => {
+          if (editProgram) {
+            navigate(PATHS.NEW_PROGRAM);
+          } else {
+            resetForm();
+          }
+        })
+        .finally(() => {
+          setPending(false);
+        });
     },
-    [user, addQueryProgram, resetForm, updateQueryProgram, editProgram]
+    [
+      user,
+      addQueryProgram,
+      resetForm,
+      updateQueryProgram,
+      editProgram,
+      navigate,
+    ]
   );
 
   return {

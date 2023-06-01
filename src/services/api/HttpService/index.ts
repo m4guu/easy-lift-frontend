@@ -8,6 +8,7 @@ const throwError = (e: Error) => {
 };
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_INTERNAL_API_URL,
+  withCredentials: true,
 });
 const axiosInstanceExerciseApi = axios.create({
   baseURL: import.meta.env.VITE_EXERCISE_DB_API_URL,

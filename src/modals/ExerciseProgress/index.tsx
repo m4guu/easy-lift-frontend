@@ -1,9 +1,8 @@
 import React from "react";
 
-import { Alert, Divider, Button, Modal, Box } from "@mui/material";
+import { Alert, Divider, Button, Modal, Box, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
-import { useUserContext } from "../../contexts/userContext";
 import { useUserExerciseProgress } from "../../hooks/queryHooks/userProgressHooks/useUserExerciseProgress";
 
 import { Chart } from "../../utils/LineChart";
@@ -16,16 +15,15 @@ import { SectionContainer, SectionHeader } from "../../components";
 
 const ExerciseProgressModal: React.FC<{
   exerciseId: string;
+  userId: string;
   isOpen: boolean;
   closeModal: () => void;
-}> = ({ exerciseId, closeModal, isOpen }) => {
-  const { user } = useUserContext();
-
+}> = ({ exerciseId, userId, closeModal, isOpen }) => {
   const {
     status,
     error,
     data: userExerciseProgress,
-  } = useUserExerciseProgress(user?.id, exerciseId);
+  } = useUserExerciseProgress(exerciseId, userId);
 
   const labels: string[] = userExerciseProgress
     ? userExerciseProgress.map((exerciseProgress) => exerciseProgress.date)
@@ -45,7 +43,7 @@ const ExerciseProgressModal: React.FC<{
         <SectionContainer>
           <SectionHeader>your {name} progress</SectionHeader>
 
-          {status === Status.LOADING && <div>loading...</div>}
+          {status === Status.LOADING && <Typography>loading...</Typography>}
 
           {!!userExerciseProgress && userExerciseProgress?.length !== 0 ? (
             <>

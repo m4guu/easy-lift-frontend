@@ -3,12 +3,16 @@ import React, { useState } from "react";
 import { Box } from "@mui/material";
 import { styled } from "@mui/system";
 
+import { useUserContext } from "../../../../../contexts/userContext";
+
 import { Chart } from "../../../../../utils/LineChart";
 import { ChartMenu } from "./ChartMenu";
 
 import { ChartMenuData } from "../../../../../shared/interfaces";
 
 export const ExercisesProgress: React.FC = () => {
+  const { user } = useUserContext();
+
   const [labels, setLabels] = useState<string[]>([]);
   const [data, setData] = useState<number[]>([]);
   const [dateRange, setDateRange] = useState<string>("");
@@ -37,7 +41,7 @@ export const ExercisesProgress: React.FC = () => {
   return (
     <ExercisesProgressContainer>
       <Chart labels={labels} data={data} options={chartOptions} />
-      <ChartMenu sendData={getChildData} />
+      {user && <ChartMenu userId={user.id} sendData={getChildData} />}
     </ExercisesProgressContainer>
   );
 };

@@ -133,8 +133,9 @@ const ExerciseItem: React.FC<ExerciseItemProps> = ({
         )}
       </ExerciseListItem>
       <Divider />
-      {isExerciseProgressModalOpen && (
+      {user && isExerciseProgressModalOpen && (
         <ExerciseProgressModal
+          userId={user.id}
           exerciseId={exercise.id}
           isOpen={isExerciseProgressModalOpen}
           closeModal={closeExerciseProgressModal}

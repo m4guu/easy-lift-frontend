@@ -1,6 +1,7 @@
 export { default as BodyWeightItem } from "./BodyWeightItem";
 
 export { default as ButtonBase } from "./ButtonBase";
+export { default as ButtonWithConfirmation } from "./ButtonWithConfirmation";
 
 export { default as DotsSettings } from "./DotsSettings";
 

@@ -1,11 +1,10 @@
 import React from "react";
 
 import { List } from "@mui/material";
-import { styled } from "@mui/system";
 
-import { WorkoutExercise } from "../../../../../shared/interfaces";
+import { WorkoutExercise } from "../../../../../../shared/interfaces";
 
-import { ExerciseItemWorkout } from "../../../../../components";
+import { ExerciseItemWorkout } from "../../../../../../components";
 
 interface WorkoutDetailsProps {
   exercises: WorkoutExercise[];
@@ -15,7 +14,7 @@ export const WorkoutDetails: React.FC<WorkoutDetailsProps> = ({
   exercises,
 }) => {
   return (
-    <ExercisesList disablePadding>
+    <List disablePadding>
       {exercises.map((exercise, i) => (
         <ExerciseItemWorkout
           key={exercise.id}
@@ -24,8 +23,6 @@ export const WorkoutDetails: React.FC<WorkoutDetailsProps> = ({
           sets={exercise.sets}
         />
       ))}
-    </ExercisesList>
+    </List>
   );
 };
-
-const ExercisesList = styled(List)({});

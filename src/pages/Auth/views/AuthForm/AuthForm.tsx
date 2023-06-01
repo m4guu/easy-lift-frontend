@@ -11,7 +11,8 @@ import {
   AuthRole,
 } from "./views/Auth.form/Auth.form";
 import { Submit } from "../../../../components";
-import { AuthTypes } from "../../../../shared/enums";
+import { AuthTypes, Status } from "../../../../shared/enums";
+import { useUserContext } from "../../../../contexts/userContext";
 
 type AuthFormProps = {
   authType: AuthTypes;
@@ -19,9 +20,12 @@ type AuthFormProps = {
 };
 
 export const AuthForm: React.FC<AuthFormProps> = ({ authType, setTab }) => {
-  const { methods, onSubmit, pending } = useAuthForm(authType);
-
+  const { methods, onSubmit } = useAuthForm(authType);
   const { handleSubmit } = methods;
+  const { isLogging, isRegistering, registerStatus } = useUserContext();
+
+  const isSuccessfullyRegistered =
+    !isRegistering && registerStatus === Status.SUCCESS;
 
   return (
     <FormProvider {...methods}>
@@ -41,10 +45,14 @@ export const AuthForm: React.FC<AuthFormProps> = ({ authType, setTab }) => {
         <Submit
           label={authType === AuthTypes.LOGIN ? "Login" : "Create Account"}
           variant="outlined"
-          onClick={handleSubmit((data) => {
-            onSubmit(data).then(() => setTab(0));
-          })}
-          loading={pending}
+          onClick={handleSubmit((data) =>
+            onSubmit(data).then(() => {
+              if (isSuccessfullyRegistered) {
+                setTab(0);
+              }
+            })
+          )}
+          loading={isRegistering || isLogging}
         />
       </FormActions>
     </FormProvider>

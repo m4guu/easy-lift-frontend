@@ -1,16 +1,18 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { format } from "date-fns";
 
 import { ListItem, Typography, Box, Button } from "@mui/material";
 import { styled, useTheme } from "@mui/system";
 
+import { useDeleteUserProgresMutation } from "../../hooks/queryHooks/userProgressHooks/useDeleteUserProgressMutation";
 import { useDeleteWorkoutMutation } from "../../hooks/queryHooks/workoutsHooks/useDeleteWorkoutMutation";
+import { useSnackbar } from "../../hooks";
 
 import { SnackbarStatus, Status } from "../../shared/enums";
 import { Workout } from "../../shared/interfaces";
 import { PATHS } from "../../pages/paths";
-import { useDeleteUserProgresMutation } from "../../hooks/queryHooks/userProgressHooks/useDeleteUserProgressMutation";
-import { useSnackbar } from "../../hooks";
+import ButtonWithConfirmation from "../ButtonWithConfirmation";
 
 type WorkoutItemProps = {
   workout: Workout;
@@ -52,8 +54,8 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
   return (
     <Item disablePadding>
       <ItemButton onClick={onWorkoutChoose}>
-        <Box>
-          <Container>
+        <Container>
+          <Content>
             <Typography variant="h3" color="primary">
               {workout.title}
             </Typography>
@@ -62,16 +64,16 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
                 DRAFT
               </Typography>
             )}
-          </Container>
+          </Content>
 
           <Typography variant="caption" color={theme.palette.text.secondary}>
-            {workout.date}
+            {format(new Date(workout.date), "yyyy-MM-dd")}
           </Typography>
-        </Box>
+        </Container>
       </ItemButton>
 
       <DeleteButton
-        onClick={deleteWorkout}
+        onConfirm={deleteWorkout}
         variant="outlined"
         size="small"
         color="error"
@@ -93,14 +95,22 @@ const ItemButton = styled(Button)(({ theme }) => ({
   justifyContent: "flex-start",
 }));
 
-const Container = styled(Box)(({ theme }) => ({
+const Container = styled(Box)({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+});
+
+const Content = styled(Box)(({ theme }) => ({
   display: "flex",
   gap: theme.spacing(1),
 }));
 
-const DeleteButton = styled(Button)(({ theme }) => ({
+const DeleteButton = styled(ButtonWithConfirmation)(({ theme }) => ({
   position: "absolute",
+  top: "50%",
   right: theme.spacing(1),
+  transform: "translate(0, -50%)",
 }));
 
 export default WorkoutItem;

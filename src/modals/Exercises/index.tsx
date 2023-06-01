@@ -57,7 +57,13 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
   const isItemLoaded = (index: number) =>
     !hasNextPage || index < exercises.length;
   // Render an item or a loading indicator.
-  const Item = ({ index, style }) => {
+  const Item = ({
+    index,
+    style,
+  }: {
+    index: number;
+    style: React.CSSProperties;
+  }) => {
     return (
       <Box style={style}>
         {isItemLoaded(index) ? (
@@ -84,7 +90,7 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
       <Container>
         <Header>Exercise list</Header>
 
-        {status === Status.LOADING && <Box>loading...</Box>}
+        {status === Status.LOADING && <Typography>loading...</Typography>}
         {noExercises && (
           <Typography>Somethings goes wrong. Please try later.</Typography>
         )}
@@ -115,6 +121,15 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
   );
 };
 
+const ExercisesMuiModal = styled(Modal)(({ theme }) => ({
+  margin: 0,
+  backgroundColor: theme.palette.background.default,
+  overflowY: "scroll",
+  "::-webkit-scrollbar": {
+    display: "none",
+  },
+}));
+
 const Container = styled("section")(({ theme }) => ({
   paddinf: theme.spacing(2),
   height: "100%",
@@ -133,15 +148,6 @@ const CloseModalButton = styled(Button)(({ theme }) => ({
   position: "absolute",
   right: theme.spacing(2),
   top: theme.spacing(2),
-}));
-
-const ExercisesMuiModal = styled(Modal)(({ theme }) => ({
-  margin: 0,
-  backgroundColor: theme.palette.background.default,
-  overflowY: "scroll",
-  "::-webkit-scrollbar": {
-    display: "none",
-  },
 }));
 
 export default ExercisesModal;

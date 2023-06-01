@@ -1,23 +1,19 @@
 import React from "react";
 
-import { Box, Alert } from "@mui/material";
+import { Box, Alert, Typography } from "@mui/material";
 
-import { useTrainerPrograms } from "../../../../hooks/queryHooks/programsHooks/useTrainerPrograms";
+import { useTrainerPrograms } from "../../../../../hooks/queryHooks/programsHooks/useTrainerPrograms";
 
-import { Status } from "../../../../shared/enums";
+import { Status } from "../../../../../shared/enums";
 import {
   SegmentTitle,
   NoPaddingDivider,
   ProgramsContainer,
   ProgramList,
 } from "./styles/TrainerViews.styles";
-import { ProgramItem } from "../../../../components";
+import { ProgramItem } from "../../../../../components";
 
-interface TrainerProgramsProps {
-  trainerId: string | undefined;
-}
-
-export const TrainerPrograms: React.FC<TrainerProgramsProps> = ({
+export const TrainerPrograms: React.FC<{ trainerId: string }> = ({
   trainerId,
 }) => {
   const {
@@ -32,13 +28,13 @@ export const TrainerPrograms: React.FC<TrainerProgramsProps> = ({
         trainer programs
       </SegmentTitle>
       <NoPaddingDivider />
-      {status === Status.LOADING && <div>loading...</div>}
-      {status === Status.ERROR && <div>error</div>}
+      {status === Status.LOADING && <Typography>loading...</Typography>}
+      {status === Status.ERROR && <Typography>error</Typography>}
       {status === Status.SUCCESS && trainerPrograms.length !== 0 ? (
         <ProgramList disablePadding>
           {trainerPrograms.map((program) => {
             return (
-              <Box>
+              <Box key={program.id}>
                 <NoPaddingDivider />
                 <ProgramItem program={program} />
               </Box>

@@ -5,16 +5,12 @@ import { Exercise } from "../../shared/interfaces";
 
 export enum ExerciseDBMethods {
   GET_ALL_EXERCISES = "getAllExercises",
-  GET_EXERCISE_BY_ID = "getExerciseById",
   GET_BODY_PARTS = "getBodyParts",
 }
 
 const ExerciseDBService = {
   [ExerciseDBMethods.GET_ALL_EXERCISES]: (pageParam: number) =>
     HttpService.get<Exercise[]>(`${ENDPOINTS.EXERCISES}?_page=${pageParam}`),
-
-  [ExerciseDBMethods.GET_EXERCISE_BY_ID]: (exerciseId: string) =>
-    HttpService.get<Exercise[]>(`${ENDPOINTS.EXERCISES}?id=${exerciseId}`),
 
   [ExerciseDBMethods.GET_BODY_PARTS]: () =>
     ExerciseDBHttpService.get<string[]>(

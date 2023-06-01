@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 
 import { ListItem, Box, Typography } from "@mui/material";
 import { styled } from "@mui/system";
@@ -22,7 +23,9 @@ const ExerciseItemWorkout: React.FC<ExerciseItemWorkoutProps> = ({
         <ExerciseName variant="caption">{name}</ExerciseName>
         <SetsArchived>
           {sets.map((set) => (
-            <SetArchived variant="caption">{set.archived} |</SetArchived>
+            <SetArchived key={uuidv4()} variant="caption">
+              {set.archived} |
+            </SetArchived>
           ))}
         </SetsArchived>
       </Content>

@@ -5,6 +5,7 @@ import {
   UseFieldArrayUpdate,
 } from "react-hook-form";
 
+import { LoadingButton } from "@mui/lab";
 import { Box } from "@mui/material";
 
 import { useUserContext } from "../../../../contexts/userContext";
@@ -18,8 +19,6 @@ import {
   FormActionsWrapper,
   FormWrapper,
   HeaderInputsWrapper,
-  Reset,
-  Submit,
 } from "./styles/addWorkout.styles";
 import {
   Exercise,
@@ -79,7 +78,10 @@ export const WorkoutFormProvider: React.FC<WorkoutFormProviderProps> = ({
 
   useEffect(() => {
     if ((isSubmitSuccessful && isUserLogin) || isDraftSubmited) {
-      snackbar("Workout added successfuly.", SnackbarStatus.SUCCESS);
+      snackbar(
+        `Workout ${isDraftSubmited ? "saved" : "added"} successfuly.`,
+        SnackbarStatus.SUCCESS
+      );
     }
   }, [snackbar, isSubmitSuccessful, user, isDraftSubmited, isUserLogin]);
 
@@ -114,11 +116,7 @@ export const WorkoutFormProvider: React.FC<WorkoutFormProviderProps> = ({
           + exercise
         </ChooseExercise>
 
-        <Reset onClick={resetForm} size="small" color="error">
-          reset
-        </Reset>
-
-        <Submit
+        <LoadingButton
           onClick={handleSubmit(onSubmit)}
           size="small"
           loading={pending}
@@ -128,7 +126,7 @@ export const WorkoutFormProvider: React.FC<WorkoutFormProviderProps> = ({
         >
           {isUserLogin ? <Box>{editWorkout ? "update" : "finish"}</Box> : "add"}
           &nbsp;workout
-        </Submit>
+        </LoadingButton>
       </FormActionsWrapper>
       {isExerciseModalOpen && (
         <ExercisesModal
@@ -138,7 +136,9 @@ export const WorkoutFormProvider: React.FC<WorkoutFormProviderProps> = ({
         />
       )}
 
-      {isUserLogin && <NewWorkoutSettings saveDraft={onDraftSave} />}
+      {isUserLogin && (
+        <NewWorkoutSettings resetForm={resetForm} saveDraft={onDraftSave} />
+      )}
     </FormProvider>
   );
 };

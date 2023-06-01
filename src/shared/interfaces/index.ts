@@ -3,6 +3,7 @@ export type { default as Exercise } from "./Exercise";
 export type { default as Gym } from "./Gym";
 export type { default as LoginCredentials } from "./LoginCredentials";
 export type { default as ChartMenuData } from "./ChartMenuData";
+export type { default as CreateUser } from "./CreateUser";
 export type { default as WorkoutExercise } from "./WorkoutExercise";
 export type { default as UserProgres } from "./UserProgres";
 export type { default as NavigationItem } from "./NavigationItem";

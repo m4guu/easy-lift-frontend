@@ -5,12 +5,13 @@ import { Box, Button } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { useUserContext } from "../../../../../contexts/userContext";
+import { useDeleteProgramMutation } from "../../../../../hooks/queryHooks/programsHooks/useDeleteProgramMutation";
+import { useSnackbar } from "../../../../../hooks";
 
 import { PATHS } from "../../../../paths";
 import { Program } from "../../../../../shared/interfaces";
-import { useDeleteProgramMutation } from "../../../../../hooks/queryHooks/programsHooks/useDeleteProgramMutation";
 import { SnackbarStatus, Status } from "../../../../../shared/enums";
-import { useSnackbar } from "../../../../../hooks";
+import { ButtonWithConfirmation } from "../../../../../components";
 
 interface ProgramActionsProps {
   // todo: change  program[0] ---> program [when backend will be written]
@@ -25,6 +26,8 @@ export const ProgramActions: React.FC<ProgramActionsProps> = ({ program }) => {
   const { status, mutate: deleteQueryProgram } = useDeleteProgramMutation(
     program[0].id
   );
+
+  const deleteProgram = () => deleteQueryProgram(program[0].id);
 
   useEffect(() => {
     if (status === Status.SUCCESS) {
@@ -52,14 +55,14 @@ export const ProgramActions: React.FC<ProgramActionsProps> = ({ program }) => {
           >
             edit
           </Button>
-          <Button
-            onClick={() => deleteQueryProgram(program[0].id)}
+          <ButtonWithConfirmation
+            onConfirm={deleteProgram}
             variant="contained"
             size="small"
             color="error"
           >
             delete
-          </Button>
+          </ButtonWithConfirmation>
         </TrainerProgramActions>
       )}
     </PorgramActions>
