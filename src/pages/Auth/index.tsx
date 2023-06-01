@@ -19,11 +19,12 @@ const AuthPage: React.FC = () => {
       <LogoWrapper>
         <Logo />
       </LogoWrapper>
+
       <SectionContent>
-        <Tabs value={tab} onChange={handleChange}>
+        <StyledTabs value={tab} onChange={handleChange} sx={{ width: "100%" }}>
           <StyledTab label="login" />
           <StyledTab label="signup" />
-        </Tabs>
+        </StyledTabs>
 
         <AuthForm authType={authType} setTab={setTab} />
       </SectionContent>
@@ -43,24 +44,19 @@ const SectionContent = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
 }));
 
-const LogoWrapper = styled(Box)(({ theme }) => ({
+const LogoWrapper = styled(Box)({
   textAlign: "center",
-  width: "10%",
+  width: "12rem",
   marginLeft: "auto",
   marginRight: "auto",
-  [theme.breakpoints.down("xl")]: {
-    width: "20%",
-  },
-  [theme.breakpoints.down("lg")]: {
-    width: "55%",
-  },
+});
 
-  [theme.breakpoints.down("sm")]: {
-    width: "100%",
-  },
-}));
+const StyledTabs = styled(Tabs)({
+  width: "100%",
+});
+
 const StyledTab = styled(Tab)({
-  // width: "50%",
+  width: "50%",
 });
 
 const Auth = AuthPage;

@@ -12,10 +12,7 @@ export enum AuthMethods {
 
 const AuthService = {
   [AuthMethods.LOGIN]: (credentials: LoginCredentials) =>
-    HttpService.post<{ user: User; token: string }>(
-      ENDPOINTS.LOGIN,
-      credentials
-    ),
+    HttpService.post<{ user: User }>(ENDPOINTS.LOGIN, credentials),
 
   [AuthMethods.LOGOUT]: () => HttpService.post<void>(ENDPOINTS.LOGOUT),
 
@@ -25,8 +22,7 @@ const AuthService = {
   [AuthMethods.CREATE]: (newUser: CreateUser) =>
     HttpService.post<void>(ENDPOINTS.REGISTER, newUser),
 
-  [AuthMethods.UPDATE]: (updatedUser: User) =>
-    HttpService.put<void>(`${ENDPOINTS.USERS}/${updatedUser.id}`, updatedUser),
+  [AuthMethods.UPDATE]: (updatedUser: User) => HttpService.get<void>(`profile`),
 };
 
 export default AuthService;

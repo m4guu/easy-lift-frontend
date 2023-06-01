@@ -6,8 +6,9 @@ const pluckData = <T>(wrapper: { data: T }) => wrapper.data;
 const throwError = (e: Error) => {
   throw e;
 };
-export const axiosInstance = axios.create({
+const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_INTERNAL_API_URL,
+  withCredentials: true,
 });
 const axiosInstanceExerciseApi = axios.create({
   baseURL: import.meta.env.VITE_EXERCISE_DB_API_URL,

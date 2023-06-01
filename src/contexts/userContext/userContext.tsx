@@ -1,15 +1,17 @@
 import { createContext, useContext, useMemo, useEffect } from "react";
+import { UseMutateAsyncFunction } from "@tanstack/react-query";
 
 import { useAuth } from "../../hooks";
 
-import { User, LoginCredentials } from "../../shared/interfaces";
-import { axiosInstance } from "../../services/api/HttpService";
-import { ApiHeaders } from "../../shared/enums";
+import { User, LoginCredentials, CreateUser } from "../../shared/interfaces";
 
 interface UserContextType {
-  isLoading: boolean;
+  isLogging: boolean;
+  isRegistering: boolean;
+  registerStatus: "error" | "loading" | "idle" | "success";
   user?: User;
   login: (credentials: LoginCredentials) => void;
+  registerUser: UseMutateAsyncFunction<void, unknown, CreateUser, unknown>;
   logout: () => void;
   resetPassword: (password: string) => void;
 }
@@ -18,14 +20,16 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 
 const UserProvider: React.FCWithChildren = ({ children }) => {
   const {
-    isLoading,
+    isLogging,
+    isRegistering,
+    registerStatus,
     user,
     login,
+    registerUser,
     logout,
     resetPassword,
     autoLogin,
     autoLogout,
-    getAccessToken,
   } = useAuth();
 
   useEffect(() => {
@@ -36,26 +40,26 @@ const UserProvider: React.FCWithChildren = ({ children }) => {
 
   const value = useMemo(
     () => ({
-      isLoading,
+      isLogging,
+      isRegistering,
+      registerStatus,
       user,
       login,
+      registerUser,
       logout,
       resetPassword,
     }),
-    [user, login, logout, resetPassword, isLoading]
+    [
+      user,
+      login,
+      registerUser,
+      logout,
+      resetPassword,
+      isLogging,
+      isRegistering,
+      registerStatus,
+    ]
   );
-
-  useEffect(() => {
-    if (user) {
-      axiosInstance.interceptors.request.use((config) => {
-        const token = getAccessToken();
-        if (config.headers && token) {
-          config.headers[ApiHeaders.AUTHORIZATION] = `Bearer ${token}`;
-        }
-        return config;
-      });
-    }
-  }, [user]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

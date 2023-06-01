@@ -1,10 +1,8 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
-import { useCreateUserMutation } from "../../queryHooks/auth/useCreateUserMutation";
 
 import { AuthTypes, Role } from "../../../shared/enums";
 import { LoginCredentials, CreateUser } from "../../../shared/interfaces";
@@ -47,11 +45,7 @@ const authSignUpSchema = yup.object().shape({
 });
 
 export const useAuthForm = (authType: AuthTypes) => {
-  const [pending, setPending] = useState(false);
-  const { mutateAsync: createQueryUser, error: registerError } =
-    useCreateUserMutation();
-  const { login } = useUserContext();
-
+  const { login, registerUser } = useUserContext();
   const schema =
     authType === AuthTypes.LOGIN ? authLoginSchema : authSignUpSchema;
 
@@ -68,7 +62,6 @@ export const useAuthForm = (authType: AuthTypes) => {
 
   const onSubmit = useCallback(
     async (formValues: AuthForm) => {
-      setPending(true);
       if (authType === AuthTypes.LOGIN) {
         const credentials: LoginCredentials = {
           email: formValues.email,
@@ -82,23 +75,19 @@ export const useAuthForm = (authType: AuthTypes) => {
           password: formValues.password,
           role: formValues.role!,
         };
-        createQueryUser(newUser)
-          .then(resetForm)
-          .finally(() => setPending(false));
+        registerUser(newUser);
       } else {
         // todo: throw error when passwords doesnt match
+        alert("password doesnt match");
       }
-      setPending(false);
     },
-    [authType, createQueryUser, resetForm, login]
+    [authType, login, registerUser]
   );
 
   return {
-    pending,
     methods,
     onSubmit,
     canSubmit,
     resetForm,
-    registerError,
   };
 };

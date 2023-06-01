@@ -5,10 +5,10 @@ import { styled } from "@mui/system";
 
 import { useUserContext } from "../../contexts/userContext";
 
-import { UserConfigurationForm } from "./views/ConfigurationForm/UserConfigurationForm";
 import { Logo } from "../../components";
 import { Role } from "../../shared/enums";
-import TrainerConfigurationForm from "./views/ConfigurationForm/TrainerConfigurationForm";
+import { TrainerConfigurationForm } from "./views/ConfigurationForm/TrainerConfigurationForm";
+import { UserConfigurationForm } from "./views/ConfigurationForm/UserConfigurationForm";
 
 const ConfigurationPage: React.FC = () => {
   const { user } = useUserContext();
@@ -44,22 +44,12 @@ const SectionContent = styled(Box)({
   textAlign: "center",
 });
 
-const LogoWrapper = styled(Box)(({ theme }) => ({
+const LogoWrapper = styled(Box)({
   textAlign: "center",
-  width: "10%",
+  width: "12rem",
   marginLeft: "auto",
   marginRight: "auto",
-  [theme.breakpoints.down("xl")]: {
-    width: "20%",
-  },
-  [theme.breakpoints.down("lg")]: {
-    width: "55%",
-  },
-
-  [theme.breakpoints.down("sm")]: {
-    width: "100%",
-  },
-}));
+});
 
 const NoPaddingDivider = styled(Divider)(({ theme }) => ({
   margin: `0 -${theme.spacing(2)} ${theme.spacing(2)} -${theme.spacing(2)}`,

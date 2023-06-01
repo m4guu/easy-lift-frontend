@@ -1,23 +1,27 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { UseMutateAsyncFunction } from "@tanstack/react-query";
 
 import { useUpdateUserMutation } from "../queryHooks/auth/useUpdateUserMutation";
+import { useCreateUserMutation } from "../queryHooks/auth/useCreateUserMutation";
 import { useLogin } from "../queryHooks/auth/useLogin";
 import useSnackbar from "../useSnackbar";
 
 import { PATHS } from "../../pages/paths";
-import { SnackbarStatus } from "../../shared/enums";
-import { User, LoginCredentials } from "../../shared/interfaces";
+import { SnackbarStatus, Status } from "../../shared/enums";
+import { User, LoginCredentials, CreateUser } from "../../shared/interfaces";
 
 type UseAuthReturnType = {
-  isLoading: boolean;
+  isLogging: boolean;
+  isRegistering: boolean;
+  registerStatus: "error" | "loading" | "idle" | "success";
   user?: User;
   login: (credentials: LoginCredentials) => void;
+  registerUser: UseMutateAsyncFunction<void, unknown, CreateUser, unknown>;
   logout: () => void;
   autoLogin: () => void;
   autoLogout: () => void;
   resetPassword: (password: string) => void;
-  getAccessToken: () => string | undefined;
 };
 
 const useAuth = (): UseAuthReturnType => {
@@ -32,6 +36,12 @@ const useAuth = (): UseAuthReturnType => {
     error: loginError,
     mutateAsync: loginMutation,
   } = useLogin();
+  const {
+    isLoading: isRegistering,
+    status: registerStatus,
+    error: registerError,
+    mutateAsync: registerUser,
+  } = useCreateUserMutation();
 
   let logOutTimer: number | NodeJS.Timeout | undefined;
 
@@ -49,8 +59,6 @@ const useAuth = (): UseAuthReturnType => {
       }
       setUser({ ...response.user, expirationDate: loginExpirationDate });
 
-      // ? question 1: can i store acces token in local storage in this demo ?
-      localStorage.setItem("access_token", JSON.stringify(response.token));
       // Set user to local storage
       localStorage.setItem(
         "userData",
@@ -66,7 +74,6 @@ const useAuth = (): UseAuthReturnType => {
     updateUserQuery({ ...user!, expirationDate: "" }).then(() => {
       setUser(undefined);
       localStorage.removeItem("userData");
-      localStorage.removeItem("access_token");
       navigate(PATHS.default);
     });
   };
@@ -74,7 +81,6 @@ const useAuth = (): UseAuthReturnType => {
   // todo: add funcionality
   const resetPassword = (password: string) => {};
 
-  // ? question: can i manage autoLogin in this way ?
   const autoLogin = () => {
     const storedData: User | undefined = JSON.parse(
       localStorage.getItem("userData")!
@@ -98,28 +104,39 @@ const useAuth = (): UseAuthReturnType => {
     }
   };
 
-  const getAccessToken = () => {
-    return JSON.parse(localStorage.getItem("access_token")!);
-  };
-
   useEffect(() => {
-    if (updateUserError || loginError) {
+    if (updateUserError || loginError || registerError) {
       snackbar(
         `We're sorry! The server encountered an internal error. Please try later.`,
         SnackbarStatus.ERROR
       );
     }
-  }, [snackbar, updateUserError, loginError]);
+    if (registerStatus === Status.SUCCESS && !isRegistering) {
+      snackbar(
+        `You have been thoughtfully registered. You can now log in.`,
+        SnackbarStatus.SUCCESS
+      );
+    }
+  }, [
+    snackbar,
+    updateUserError,
+    loginError,
+    registerError,
+    registerStatus,
+    isRegistering,
+  ]);
 
   return {
     user,
-    isLoading: isLogging,
+    isLogging,
+    isRegistering,
+    registerStatus,
     login,
+    registerUser,
     logout,
     resetPassword,
     autoLogin,
     autoLogout,
-    getAccessToken,
   };
 };
 
