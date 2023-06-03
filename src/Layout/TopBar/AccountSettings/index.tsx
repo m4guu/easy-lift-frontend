@@ -72,10 +72,14 @@ const AccountSettings: React.FC<AccountSettingsProps> = ({ image }) => {
   );
 };
 
-const UserAvatar = styled(Avatar)({
+const UserAvatar = styled(Avatar)(({ theme }) => ({
   width: 56,
   height: 56,
-});
+  [theme.breakpoints.down("sm")]: {
+    width: 46,
+    height: 46,
+  },
+}));
 
 const AccImgIconButton = styled(IconButton)({
   padding: 0,

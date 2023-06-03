@@ -75,13 +75,13 @@ export const useAuthForm = (authType: AuthTypes) => {
           password: formValues.password,
           role: formValues.role!,
         };
-        registerUser(newUser);
+        registerUser(newUser).then(resetForm);
       } else {
         // todo: throw error when passwords doesnt match
         alert("password doesnt match");
       }
     },
-    [authType, login, registerUser]
+    [authType, login, registerUser, resetForm]
   );
 
   return {

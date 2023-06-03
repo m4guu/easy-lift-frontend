@@ -83,10 +83,10 @@ export const TrainerConfigurationForm: React.FC = () => {
         </FormBox>
 
         <FormMapBox>
-          {/* <LeafletMap
+          <LeafletMap
             selectedGyms={selectedGyms}
             gymsChangeHandler={gymsChangeHandler}
-          /> */}
+          />
         </FormMapBox>
       </FormWrapper>
     </FormProvider>

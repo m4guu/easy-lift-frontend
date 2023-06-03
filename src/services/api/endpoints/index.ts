@@ -8,8 +8,11 @@ enum ENDPOINTS {
 
   // auth
   LOGIN = "auth/login",
+  LOGOUT = "auth/logout",
+  AUTO_LOGIN = "auth/loginWithToken",
   REGISTER = "auth/register",
-  LOGOUT = "logout",
+  CONFIG_USER = "configure/user",
+  CONFIG_TRAINER = "configure/trainer",
   RESET_PASSWORD = "resetPassword",
 
   // exerciseDB API

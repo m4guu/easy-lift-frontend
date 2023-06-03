@@ -5,7 +5,6 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useUserContext } from "../../../contexts/userContext";
-import { useUpdateUserMutation } from "../../queryHooks/auth/useUpdateUserMutation";
 
 import { getTodayDate } from "../../../utils/Date";
 
@@ -30,7 +29,6 @@ const schema = yup.object().shape({
 export const useBodyWeightUpdate = () => {
   const [pending, setPending] = useState(false);
   const { user } = useUserContext();
-  const { mutateAsync: updateUserQuery } = useUpdateUserMutation();
 
   const methods = useForm<BodyWeightUpdate>({
     defaultValues: {
@@ -59,14 +57,17 @@ export const useBodyWeightUpdate = () => {
           },
         ],
       };
-      updateUserQuery(updatedUser)
-        .then(() => {
-          resetForm();
-        })
-        .finally(() => setPending(false));
+
+      // todo: add update user body weight method or update user method
+      alert("this form doesnt work");
+      // updateUserQuery(updatedUser)
+      //   .then(() => {
+      //     resetForm();
+      //   })
+      //   .finally(() => setPending(false));
       setPending(false);
     },
-    [user, updateUserQuery, resetForm]
+    [user]
   );
 
   return {

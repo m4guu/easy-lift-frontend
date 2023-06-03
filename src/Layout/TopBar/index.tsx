@@ -12,8 +12,6 @@ import { Role } from "../../shared/enums";
 
 import AccountSettings from "./AccountSettings";
 
-import DUMMY_USER_IMG from "../../assets/images/DUMMY_PROFILE_IMG/profile-img-id.jpeg";
-
 const TopBar: React.FC = () => {
   const { user } = useUserContext();
   const navigate = useNavigate();
@@ -34,7 +32,9 @@ const TopBar: React.FC = () => {
           {buttonText}
         </Button>
         <AccountSettingsBox>
-          <AccountSettings image={DUMMY_USER_IMG} />
+          <AccountSettings
+            image={`${import.meta.env.VITE_INTERNAL_API_URL}${user!.image}`}
+          />
         </AccountSettingsBox>
       </Content>
     </TopBarSectionContainer>

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { useUpdateUserMutation } from "../../queryHooks/auth/useUpdateUserMutation";
+import { useConfigureUserMutation } from "../../queryHooks/auth/useConfigureUserMutation";
 import { useUserContext } from "../../../contexts/userContext";
 
 import { User } from "../../../shared/interfaces";
@@ -21,14 +21,14 @@ export interface UserConfig {
   [UserConfigFields.NAME]: string;
   [UserConfigFields.HEIGHT]: number;
   [UserConfigFields.WEIGHT]: number;
-  [UserConfigFields.IMAGE]: File | null;
+  [UserConfigFields.IMAGE]: File[];
 }
 
 export const defaultValues = {
   [UserConfigFields.NAME]: "",
   [UserConfigFields.HEIGHT]: 60,
   [UserConfigFields.WEIGHT]: 30,
-  [UserConfigFields.IMAGE]: null,
+  [UserConfigFields.IMAGE]: undefined as unknown as File[],
 };
 
 const schema = yup.object().shape({
@@ -40,8 +40,8 @@ const schema = yup.object().shape({
 
 export const useUserConfigForm = () => {
   const [pending, setPending] = useState(false);
-  const { mutateAsync: updateUserQuery } = useUpdateUserMutation();
-  const { user } = useUserContext();
+  const { mutateAsync: configureUserQuery } = useConfigureUserMutation();
+  const { user, autoLogin } = useUserContext();
   const navigate = useNavigate();
 
   const methods = useForm<UserConfig>({
@@ -59,22 +59,34 @@ export const useUserConfigForm = () => {
   const onSubmit = useCallback(
     (formValues: UserConfig) => {
       setPending(true);
-      const updatedUser: User = {
-        ...user!,
+
+      const updatedUser: Partial<User> = {
         name: formValues.name,
-        image: formValues.image,
+        image: formValues.image[0],
         height: formValues.height,
         bodyWeights: [{ weight: formValues.weight, date: getTodayDate() }],
-        isConfigured: true,
       };
-      updateUserQuery(updatedUser)
+
+      const formData = new FormData();
+      Object.entries(updatedUser).forEach(([fieldName, fieldValue]) => {
+        if (fieldValue instanceof File) {
+          formData.append(fieldName, fieldValue);
+        } else if (Array.isArray(fieldValue)) {
+          formData.append(fieldName, JSON.stringify(fieldValue));
+        } else {
+          formData.append(fieldName, fieldValue.toString());
+        }
+      });
+
+      configureUserQuery({ updatedUser: formData, userId: user!.id })
         .then(() => {
+          autoLogin();
           resetForm();
           navigate(0);
         })
         .finally(() => setPending(false));
     },
-    [updateUserQuery, resetForm, user, navigate]
+    [configureUserQuery, resetForm, user, navigate, autoLogin]
   );
 
   return {

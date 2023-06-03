@@ -2,14 +2,16 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UseMutateAsyncFunction } from "@tanstack/react-query";
 
-import { useUpdateUserMutation } from "../queryHooks/auth/useUpdateUserMutation";
 import { useCreateUserMutation } from "../queryHooks/auth/useCreateUserMutation";
 import { useLogin } from "../queryHooks/auth/useLogin";
+import { useLogout } from "../queryHooks/auth/useLogout";
+import { useAutoLogin } from "../queryHooks/auth/useAutoLogin";
+
 import useSnackbar from "../useSnackbar";
 
-import { PATHS } from "../../pages/paths";
 import { SnackbarStatus, Status } from "../../shared/enums";
 import { User, LoginCredentials, CreateUser } from "../../shared/interfaces";
+import { PATHS } from "../../pages/paths";
 
 type UseAuthReturnType = {
   isLogging: boolean;
@@ -20,22 +22,23 @@ type UseAuthReturnType = {
   registerUser: UseMutateAsyncFunction<void, unknown, CreateUser, unknown>;
   logout: () => void;
   autoLogin: () => void;
-  autoLogout: () => void;
   resetPassword: (password: string) => void;
 };
 
 const useAuth = (): UseAuthReturnType => {
   const [user, setUser] = useState<User | undefined>(undefined);
-  const navigate = useNavigate();
   const snackbar = useSnackbar();
+  const navigate = useNavigate();
 
-  const { mutateAsync: updateUserQuery, error: updateUserError } =
-    useUpdateUserMutation();
   const {
     isLoading: isLogging,
     error: loginError,
     mutateAsync: loginMutation,
   } = useLogin();
+
+  const { mutateAsync: autoLoginMutation } = useAutoLogin();
+  const { mutateAsync: logoutMutation } = useLogout();
+
   const {
     isLoading: isRegistering,
     status: registerStatus,
@@ -43,38 +46,19 @@ const useAuth = (): UseAuthReturnType => {
     mutateAsync: registerUser,
   } = useCreateUserMutation();
 
-  let logOutTimer: number | NodeJS.Timeout | undefined;
-
   const login = (credentials: LoginCredentials) => {
     loginMutation(credentials).then((response) => {
-      const loginExpirationDate =
-        response.user.expirationDate ||
-        new Date(new Date().getTime() + 1000 * 60 * 60 * 24).toISOString();
-
-      if (!response.user.expirationDate) {
-        updateUserQuery({
-          ...response.user,
-          expirationDate: loginExpirationDate,
-        });
-      }
-      setUser({ ...response.user, expirationDate: loginExpirationDate });
-
+      setUser(response.user);
       // Set user to local storage
-      localStorage.setItem(
-        "userData",
-        JSON.stringify({
-          ...response.user,
-          expirationDate: loginExpirationDate,
-        })
-      );
+      localStorage.setItem("userData", JSON.stringify(response.user));
     });
   };
 
   const logout = () => {
-    updateUserQuery({ ...user!, expirationDate: "" }).then(() => {
-      setUser(undefined);
+    logoutMutation().then(() => {
       localStorage.removeItem("userData");
-      navigate(PATHS.default);
+      // Refresh the current page
+      navigate(0);
     });
   };
 
@@ -82,49 +66,29 @@ const useAuth = (): UseAuthReturnType => {
   const resetPassword = (password: string) => {};
 
   const autoLogin = () => {
-    const storedData: User | undefined = JSON.parse(
-      localStorage.getItem("userData")!
-    );
-    if (
-      storedData &&
-      storedData.id &&
-      new Date(storedData.expirationDate) > new Date()
-    ) {
-      setUser(storedData);
-    }
-  };
-
-  const autoLogout = () => {
-    if (user?.id && user.expirationDate) {
-      const remainingTime =
-        new Date(user.expirationDate).getTime() - new Date().getTime();
-      logOutTimer = setTimeout(logout, remainingTime);
-    } else {
-      clearTimeout(logOutTimer);
-    }
+    autoLoginMutation().then((response) => {
+      setUser(response.user);
+      // Set user to local storage
+      localStorage.setItem("userData", JSON.stringify(response.user));
+    });
   };
 
   useEffect(() => {
-    if (updateUserError || loginError || registerError) {
+    if (loginError || registerError) {
       snackbar(
         `We're sorry! The server encountered an internal error. Please try later.`,
         SnackbarStatus.ERROR
       );
     }
+  }, [snackbar, loginError, registerError]);
+  useEffect(() => {
     if (registerStatus === Status.SUCCESS && !isRegistering) {
       snackbar(
         `You have been thoughtfully registered. You can now log in.`,
         SnackbarStatus.SUCCESS
       );
     }
-  }, [
-    snackbar,
-    updateUserError,
-    loginError,
-    registerError,
-    registerStatus,
-    isRegistering,
-  ]);
+  }, [registerStatus, isRegistering, snackbar]);
 
   return {
     user,
@@ -136,7 +100,6 @@ const useAuth = (): UseAuthReturnType => {
     logout,
     resetPassword,
     autoLogin,
-    autoLogout,
   };
 };
 
