@@ -8,7 +8,7 @@ interface User {
   password: string;
   role: Role;
   isConfigured: boolean;
-  image: File;
+  image: string | File;
   description?: string;
   gyms?: string[];
   bodyWeights?: BodyWeight[];

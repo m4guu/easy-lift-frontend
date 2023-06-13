@@ -13,11 +13,13 @@ import {
   Workouts,
   Workout,
   BodyWeight,
+  Profile,
 } from "../../pages";
 
 export const trainerRoutes = (
   <>
     <Route path={PATHS.default} element={<Home />} />
+    <Route path={PATHS.PROFILE} element={<Profile />} />
     <Route path={PATHS.NEW_PROGRAM} element={<NewProgram />} />
     <Route path={NESTED_PATHS.EDIT_PROGRAM} element={<NewProgram />} />
 
@@ -38,7 +40,7 @@ export const trainerRoutes = (
 export const userRoutes = (
   <>
     <Route path={PATHS.default} element={<Home />} />
-
+    <Route path={PATHS.PROFILE} element={<Profile />} />
     <Route path={PATHS.NEW_WORKOUT} element={<NewWorkout />} />
     <Route path={NESTED_PATHS.EDIT_WORKOUT} element={<NewWorkout />} />
 
