@@ -1,14 +1,13 @@
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 
 import { Box, Avatar, Typography, Button, List, ListItem } from "@mui/material";
 import { styled } from "@mui/system";
 
-import { Gym } from "../../../../../../shared/interfaces";
-
 type UserInfo = {
   image: string;
   basicInfo: { name: string; value: string | number }[];
-  gyms?: Gym[];
+  gyms?: string[];
 };
 
 export const UserBasicInfo: React.FC<UserInfo> = ({
@@ -23,7 +22,8 @@ export const UserBasicInfo: React.FC<UserInfo> = ({
         <List disablePadding>
           {basicInfo.map((info) => {
             return (
-              <Item disablePadding>
+              // todo: change dummy key
+              <Item key={uuidv4()} disablePadding>
                 <Caption variant="caption" color="primary">
                   {info.name}
                 </Caption>
@@ -31,6 +31,24 @@ export const UserBasicInfo: React.FC<UserInfo> = ({
               </Item>
             );
           })}
+          {gyms && (
+            // todo: find gyms by id when gyms will be added on backend
+            <Box>
+              <Caption variant="caption" color="primary">
+                gyms
+              </Caption>
+              <List disablePadding>
+                {gyms.map((gym, i) => {
+                  return (
+                    // todo: change dummy key
+                    <Item key={uuidv4()} disablePadding>
+                      gym number {i + 1}
+                    </Item>
+                  );
+                })}
+              </List>
+            </Box>
+          )}
         </List>
       </Content>
       <Button variant="outlined">edit</Button>
