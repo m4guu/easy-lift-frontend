@@ -3,7 +3,7 @@ import React from "react";
 import { useUserContext } from "../../contexts/userContext";
 
 import { Role } from "../../shared/enums";
-import { VITE_INTERNAL_API_URL } from "../../config/env.config";
+import { API_URL } from "../../config/env.config";
 
 import {
   SectionContainer,
@@ -35,7 +35,7 @@ const LeftBar: React.FC = () => {
         </LogoWrapper>
 
         <AccountSettingsBox>
-          <AccountSettings image={`${VITE_INTERNAL_API_URL}${user!.image}`} />
+          <AccountSettings image={`${API_URL}${user!.image}`} />
         </AccountSettingsBox>
 
         {user?.role === Role.user && <TrainingCalendar />}

@@ -10,6 +10,7 @@ import { useUserContext } from "../../../contexts/userContext";
 
 import { User } from "../../../shared/interfaces";
 import { getTodayDate } from "../../../utils/Date";
+import { PATHS } from "../../../pages/paths";
 
 export enum UserConfigFields {
   NAME = "name",
@@ -82,7 +83,7 @@ export const useUserConfigForm = () => {
         .then(() => {
           autoLogin();
           resetForm();
-          navigate(0);
+          navigate(PATHS.default);
         })
         .finally(() => setPending(false));
     },

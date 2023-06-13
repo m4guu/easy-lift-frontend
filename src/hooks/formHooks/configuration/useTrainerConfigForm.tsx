@@ -9,6 +9,7 @@ import { useConfigureTrainerMutation } from "../../queryHooks/auth/useConfigureT
 import { useUserContext } from "../../../contexts/userContext";
 
 import { User } from "../../../shared/interfaces";
+import { PATHS } from "../../../pages/paths";
 
 export enum TrainerConfigFields {
   NAME = "name",
@@ -83,7 +84,7 @@ export const useTrainerConfigForm = () => {
         .then(() => {
           autoLogin();
           resetForm();
-          navigate(0);
+          navigate(PATHS.default);
         })
         .finally(() => setPending(false));
     },

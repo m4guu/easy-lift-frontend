@@ -12,6 +12,7 @@ import {
   greenMarkerIcon,
 } from "./constans";
 import { gyms } from "../form/constans";
+import { MAP_BOX_URL } from "../../../../../../../config/env.config";
 
 interface LeafletMapProps {
   selectedGyms: Gym[];
@@ -27,7 +28,7 @@ export const LeafletMap: React.FC<LeafletMapProps> = ({
       center={[latLngPositions.warsaw.x, latLngPositions.warsaw.y]}
       zoom={5.5}
     >
-      <TileLayer url={import.meta.env.VITE_MAP_BOX_URL} />
+      <TileLayer url={MAP_BOX_URL} />
 
       <MarkerClusterGroup>
         {gyms.map((gym) => {
