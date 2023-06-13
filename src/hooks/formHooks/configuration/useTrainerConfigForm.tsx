@@ -5,10 +5,11 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { useUpdateUserMutation } from "../../queryHooks/auth/useUpdateUserMutation";
+import { useConfigureTrainerMutation } from "../../queryHooks/auth/useConfigureTrainerMutation";
 import { useUserContext } from "../../../contexts/userContext";
 
 import { User } from "../../../shared/interfaces";
+import { PATHS } from "../../../pages/paths";
 
 export enum TrainerConfigFields {
   NAME = "name",
@@ -20,7 +21,7 @@ export enum TrainerConfigFields {
 export interface TrainerConfig {
   [TrainerConfigFields.NAME]: string;
   [TrainerConfigFields.DESCRIPTION]: string;
-  [TrainerConfigFields.IMAGE]: File | null;
+  [TrainerConfigFields.IMAGE]: File[];
   [TrainerConfigFields.GYMS]: string[];
 }
 
@@ -28,7 +29,7 @@ export const defaultValues = {
   [TrainerConfigFields.NAME]: "",
   [TrainerConfigFields.DESCRIPTION]: "",
   [TrainerConfigFields.GYMS]: [],
-  [TrainerConfigFields.IMAGE]: null,
+  [TrainerConfigFields.IMAGE]: undefined as unknown as File[],
 };
 
 const schema = yup.object().shape({
@@ -40,8 +41,8 @@ const schema = yup.object().shape({
 
 export const useTrainerConfigForm = () => {
   const [pending, setPending] = useState(false);
-  const { mutateAsync: updateUserQuery } = useUpdateUserMutation();
-  const { user } = useUserContext();
+  const { mutateAsync: configureTrainerQuery } = useConfigureTrainerMutation();
+  const { user, autoLogin } = useUserContext();
   const navigate = useNavigate();
 
   const methods = useForm<TrainerConfig>({
@@ -60,23 +61,34 @@ export const useTrainerConfigForm = () => {
   const onSubmit = useCallback(
     (formValues: TrainerConfig) => {
       setPending(true);
-      const updatedTrainer: User = {
-        ...user!,
+
+      const updatedTrainer: Partial<User> = {
         name: formValues.name,
-        image: formValues.image,
+        image: formValues.image[0],
         description: formValues.description,
         gyms: formValues.gyms,
-        isConfigured: true,
       };
 
-      updateUserQuery(updatedTrainer)
+      const formData = new FormData();
+      Object.entries(updatedTrainer).forEach(([fieldName, fieldValue]) => {
+        if (fieldValue instanceof File) {
+          formData.append(fieldName, fieldValue);
+        } else if (Array.isArray(fieldValue)) {
+          formData.append(fieldName, JSON.stringify(fieldValue));
+        } else {
+          formData.append(fieldName, fieldValue.toString());
+        }
+      });
+
+      configureTrainerQuery({ updatedTrainer: formData, userId: user!.id })
         .then(() => {
+          autoLogin();
           resetForm();
-          navigate(0);
+          navigate(PATHS.default);
         })
         .finally(() => setPending(false));
     },
-    [updateUserQuery, resetForm, user, navigate]
+    [configureTrainerQuery, resetForm, user, navigate, autoLogin]
   );
 
   return {

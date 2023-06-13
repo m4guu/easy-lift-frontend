@@ -3,6 +3,7 @@ import React from "react";
 import { useUserContext } from "../../contexts/userContext";
 
 import { Role } from "../../shared/enums";
+import { API_URL } from "../../config/env.config";
 
 import {
   SectionContainer,
@@ -11,14 +12,13 @@ import {
   AccountSettingsBox,
   NavigationContainer,
   ThemeSwitchContainer,
+  LogoWrapper,
 } from "./LeftBar.styles";
 import Navigation from "./Navigation";
 import AccountSettings from "../TopBar/AccountSettings";
 import TemporaryDrawer from "./MenuDrawer";
 import { TrainingCalendar } from "./TrainingCalendar/TrainingCalendar";
 import { Logo, ThemeModeSwitch } from "../../components";
-
-import DUMMY_USER_IMG from "../../assets/images/DUMMY_PROFILE_IMG/profile-img-id.jpeg";
 
 const LeftBar: React.FC = () => {
   const { user } = useUserContext();
@@ -30,10 +30,12 @@ const LeftBar: React.FC = () => {
           <TemporaryDrawer />
         </MenuDrawerBox>
 
-        <Logo />
+        <LogoWrapper>
+          <Logo />
+        </LogoWrapper>
 
         <AccountSettingsBox>
-          <AccountSettings image={DUMMY_USER_IMG} />
+          <AccountSettings image={`${API_URL}${user!.image}`} />
         </AccountSettingsBox>
 
         {user?.role === Role.user && <TrainingCalendar />}

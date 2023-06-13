@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider } from "react-hook-form";
 
 import { useAuthForm } from "../../../../hooks/formHooks/auth/useAuthForm";
@@ -26,6 +26,11 @@ export const AuthForm: React.FC<AuthFormProps> = ({ authType, setTab }) => {
 
   const isSuccessfullyRegistered =
     !isRegistering && registerStatus === Status.SUCCESS;
+  useEffect(() => {
+    if (isSuccessfullyRegistered) {
+      setTab(0);
+    }
+  }, [isSuccessfullyRegistered, setTab]);
 
   return (
     <FormProvider {...methods}>
@@ -45,13 +50,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ authType, setTab }) => {
         <Submit
           label={authType === AuthTypes.LOGIN ? "Login" : "Create Account"}
           variant="outlined"
-          onClick={handleSubmit((data) =>
-            onSubmit(data).then(() => {
-              if (isSuccessfullyRegistered) {
-                setTab(0);
-              }
-            })
-          )}
+          onClick={handleSubmit((data) => onSubmit(data))}
           loading={isRegistering || isLogging}
         />
       </FormActions>

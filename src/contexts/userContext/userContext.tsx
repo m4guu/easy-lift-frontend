@@ -11,6 +11,7 @@ interface UserContextType {
   registerStatus: "error" | "loading" | "idle" | "success";
   user?: User;
   login: (credentials: LoginCredentials) => void;
+  autoLogin: () => void;
   registerUser: UseMutateAsyncFunction<void, unknown, CreateUser, unknown>;
   logout: () => void;
   resetPassword: (password: string) => void;
@@ -29,12 +30,10 @@ const UserProvider: React.FCWithChildren = ({ children }) => {
     logout,
     resetPassword,
     autoLogin,
-    autoLogout,
   } = useAuth();
 
   useEffect(() => {
     autoLogin();
-    autoLogout();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -45,6 +44,7 @@ const UserProvider: React.FCWithChildren = ({ children }) => {
       registerStatus,
       user,
       login,
+      autoLogin,
       registerUser,
       logout,
       resetPassword,
@@ -52,6 +52,7 @@ const UserProvider: React.FCWithChildren = ({ children }) => {
     [
       user,
       login,
+      autoLogin,
       registerUser,
       logout,
       resetPassword,

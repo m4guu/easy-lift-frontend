@@ -8,12 +8,11 @@ interface User {
   password: string;
   role: Role;
   isConfigured: boolean;
-  image: File | null; // DUMMY DATA
+  image: File;
   description?: string;
   gyms?: string[];
   bodyWeights?: BodyWeight[];
   height?: number;
-  expirationDate: string;
 }
 
 export default User;

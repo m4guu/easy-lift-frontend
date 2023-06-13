@@ -9,10 +9,9 @@ import { useUserContext } from "../../contexts/userContext";
 
 import { PATHS } from "../../pages/paths";
 import { Role } from "../../shared/enums";
+import { API_URL } from "../../config/env.config";
 
 import AccountSettings from "./AccountSettings";
-
-import DUMMY_USER_IMG from "../../assets/images/DUMMY_PROFILE_IMG/profile-img-id.jpeg";
 
 const TopBar: React.FC = () => {
   const { user } = useUserContext();
@@ -34,7 +33,7 @@ const TopBar: React.FC = () => {
           {buttonText}
         </Button>
         <AccountSettingsBox>
-          <AccountSettings image={DUMMY_USER_IMG} />
+          <AccountSettings image={`${API_URL}${user!.image}`} />
         </AccountSettingsBox>
       </Content>
     </TopBarSectionContainer>
