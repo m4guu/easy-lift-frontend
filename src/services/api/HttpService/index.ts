@@ -1,5 +1,8 @@
 import axios from "axios";
-
+import {
+  VITE_EXERCISE_DB_API_URL,
+  VITE_INTERNAL_API_URL,
+} from "../../../config/env.config";
 import { config } from "./constans";
 
 const pluckData = <T>(wrapper: { data: T }) => wrapper.data;
@@ -7,11 +10,11 @@ const throwError = (e: Error) => {
   throw e;
 };
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_INTERNAL_API_URL,
+  baseURL: VITE_INTERNAL_API_URL,
   withCredentials: true,
 });
 const axiosInstanceExerciseApi = axios.create({
-  baseURL: import.meta.env.VITE_EXERCISE_DB_API_URL,
+  baseURL: VITE_EXERCISE_DB_API_URL,
 });
 
 const HttpService = {

@@ -9,6 +9,7 @@ import { useUserContext } from "../../contexts/userContext";
 
 import { PATHS } from "../../pages/paths";
 import { Role } from "../../shared/enums";
+import { VITE_INTERNAL_API_URL } from "../../config/env.config";
 
 import AccountSettings from "./AccountSettings";
 
@@ -32,9 +33,7 @@ const TopBar: React.FC = () => {
           {buttonText}
         </Button>
         <AccountSettingsBox>
-          <AccountSettings
-            image={`${import.meta.env.VITE_INTERNAL_API_URL}${user!.image}`}
-          />
+          <AccountSettings image={`${VITE_INTERNAL_API_URL}${user!.image}`} />
         </AccountSettingsBox>
       </Content>
     </TopBarSectionContainer>
