@@ -5,6 +5,7 @@ import {
   CreateUser,
   LoginCredentials,
   UpdateEmailData,
+  UpdatePasswordData,
 } from "../../shared/interfaces";
 
 export enum AuthMethods {
@@ -13,7 +14,7 @@ export enum AuthMethods {
   LOGOUT = "logout",
   CONFIGURATE_USER = "configUser",
   CONFIGURATE_TRAINER = "configTrainer",
-  UPDATE_EMAIL = "updatePassword",
+  UPDATE_EMAIL = "updateEmail",
   UPDATE_PASSWORD = "updatePassword",
   CREATE = "create",
   UPDATE = "update",
@@ -65,6 +66,9 @@ const AuthService = {
 
   [AuthMethods.UPDATE_EMAIL]: (updateEmailData: UpdateEmailData) =>
     HttpService.patch<User>(ENDPOINTS.UPDATE_EMAIL, updateEmailData),
+
+  [AuthMethods.UPDATE_PASSWORD]: (updatePasswordData: UpdatePasswordData) =>
+    HttpService.patch<User>(ENDPOINTS.UPDATE_PASSWORD, updatePasswordData),
 };
 
 export default AuthService;

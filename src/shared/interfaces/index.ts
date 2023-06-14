@@ -16,6 +16,7 @@ export type { default as Workout } from "./Workout";
 export type { default as Trainer } from "./Trainer";
 export type { default as User } from "./User";
 export type { default as UpdateEmailData } from "./UpdateEmailData";
+export type { default as UpdatePasswordData } from "./UpdatePasswordData";
 
 export type { default as FormExercise } from "./WorkoutForm/FormExercise";
 export type { default as FormSet } from "./WorkoutForm/FormSet";

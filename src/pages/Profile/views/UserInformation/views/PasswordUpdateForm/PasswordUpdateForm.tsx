@@ -1,23 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider } from "react-hook-form";
 
-import { Typography } from "@mui/material";
-import { styled } from "@mui/system";
-
 import { usePasswordUpdateForm } from "../../../../../../hooks/formHooks/update/usePasswordUpdateForm";
+
+import { useSnackbar } from "../../../../../../hooks";
 
 import {
   NewPassword,
   ConfirmPassword,
   Password,
 } from "./views/passwordUpdate.form";
-import { FormWrapper } from "../../../../../Auth/views/AuthForm/styles/AuthForm.styles";
-
 import { Submit } from "../../../../../../components";
 
+import { FormWrapper } from "../../../../../Auth/views/AuthForm/styles/AuthForm.styles";
+
+import { SnackbarStatus } from "../../../../../../shared/enums";
+
 export const PasswordUpdateForm: React.FC = () => {
-  const { methods, onSubmit } = usePasswordUpdateForm();
+  const { methods, onSubmit, updatePasswordError, isUpdatingPassword } =
+    usePasswordUpdateForm();
   const { handleSubmit } = methods;
+
+  const snackbar = useSnackbar();
+
+  useEffect(() => {
+    if (updatePasswordError) {
+      snackbar(updatePasswordError.message, SnackbarStatus.ERROR);
+    }
+  }, [snackbar, updatePasswordError]);
 
   return (
     <FormProvider {...methods}>
@@ -31,8 +41,7 @@ export const PasswordUpdateForm: React.FC = () => {
         label="update password"
         variant="outlined"
         onClick={handleSubmit((data) => onSubmit(data))}
-        // todo: handle loading when query will be added
-        loading={false}
+        loading={isUpdatingPassword}
         sx={{ mt: "1rem" }}
         fullWidth
       />

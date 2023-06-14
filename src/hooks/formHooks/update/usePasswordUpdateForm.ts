@@ -4,6 +4,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useUserContext } from "../../../contexts/userContext";
+import { useUpdatePasswordMutation } from "../../queryHooks/auth/useUpdatePasswordMutation";
+import { UpdatePasswordData } from "../../../shared/interfaces";
 
 export enum PasswordUpdateFields {
   NEW_PASSWORD = "newPassword",
@@ -35,6 +37,11 @@ const schema = yup.object().shape({
 
 export const usePasswordUpdateForm = () => {
   const { user } = useUserContext();
+  const {
+    isLoading: isUpdatingPassword,
+    error: updatePasswordError,
+    mutateAsync: updatePasswordQuery,
+  } = useUpdatePasswordMutation();
 
   const methods = useForm<PasswordUpdate>({
     defaultValues,
@@ -48,20 +55,31 @@ export const usePasswordUpdateForm = () => {
   const { newPassword, confirmPassword, password } = watch();
   const canSubmit = newPassword && confirmPassword && password;
 
-  const onSubmit = useCallback((formValues: PasswordUpdate) => {
-    if (formValues.newPassword === formValues.confirmPassword) {
-      // try update password
-      console.log(formValues);
-    } else {
-      // todo: handle error
-      alert("confirm password doesnt match");
-    }
-  }, []);
+  const onSubmit = useCallback(
+    (formValues: PasswordUpdate) => {
+      if (formValues.newPassword === formValues.confirmPassword) {
+        const updatePasswordData: UpdatePasswordData = {
+          userId: user?.id!,
+          newPassword: formValues.newPassword,
+          password: formValues.password,
+        };
+        updatePasswordQuery(updatePasswordData);
+      } else {
+        methods.setError(PasswordUpdateFields.CONFIRM_PASSWORD, {
+          type: "manual",
+          message: "Password must match.",
+        });
+      }
+    },
+    [methods, updatePasswordQuery, user]
+  );
 
   return {
     methods,
     canSubmit,
     onSubmit,
     resetForm,
+    isUpdatingPassword,
+    updatePasswordError,
   };
 };

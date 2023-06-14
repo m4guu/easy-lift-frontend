@@ -63,7 +63,7 @@ export const useEmailUpdateForm = () => {
       } else {
         methods.setError(EmailUpdateFields.CONFIRM_EMAIL, {
           type: "manual",
-          message: "Emails must match",
+          message: "Emails must match.",
         });
       }
     },

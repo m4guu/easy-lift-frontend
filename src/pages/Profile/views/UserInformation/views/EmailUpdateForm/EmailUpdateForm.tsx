@@ -5,12 +5,12 @@ import { Box, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { useEmailUpdateForm } from "../../../../../../hooks/formHooks/update/useEmailUpdateForm";
+import { useSnackbar } from "../../../../../../hooks";
 
+import { Submit } from "../../../../../../components";
 import { ConfirmEmail, Password, UpdateEmail } from "./views/emailUpdate.form";
 import { FormWrapper } from "../../../../../Auth/views/AuthForm/styles/AuthForm.styles";
 
-import { Submit } from "../../../../../../components";
-import { useSnackbar } from "../../../../../../hooks";
 import { SnackbarStatus } from "../../../../../../shared/enums";
 
 export const EmailUpdateForm: React.FC<{ currentEmail: string }> = ({
