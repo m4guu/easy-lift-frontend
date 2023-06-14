@@ -4,6 +4,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useUserContext } from "../../../contexts/userContext";
+import { useUpdateEmailMutation } from "../../queryHooks/auth/useUpdateEmailMutation";
+import { UpdateEmailData } from "../../../shared/interfaces";
 
 export enum EmailUpdateFields {
   EMAIL = "email",
@@ -31,6 +33,11 @@ const schema = yup.object().shape({
 
 export const useEmailUpdateForm = () => {
   const { user } = useUserContext();
+  const {
+    isLoading: isUpdatingEmail,
+    error: updateEmailError,
+    mutateAsync: updateEmailQuery,
+  } = useUpdateEmailMutation();
 
   const methods = useForm<EmailUpdate>({
     defaultValues,
@@ -44,20 +51,31 @@ export const useEmailUpdateForm = () => {
   const { email, confirmEmail, password } = watch();
   const canSubmit = email && confirmEmail && password;
 
-  const onSubmit = useCallback((formValues: EmailUpdate) => {
-    if (formValues.email === formValues.confirmEmail) {
-      // try update emial
-      console.log(formValues);
-    } else {
-      // todo: handle error
-      alert("confirm email doesnt match");
-    }
-  }, []);
+  const onSubmit = useCallback(
+    (formValues: EmailUpdate) => {
+      if (formValues.email === formValues.confirmEmail) {
+        const updateEmailData: UpdateEmailData = {
+          userId: user?.id!,
+          newEmail: formValues.email,
+          password: formValues.password,
+        };
+        updateEmailQuery(updateEmailData);
+      } else {
+        methods.setError(EmailUpdateFields.CONFIRM_EMAIL, {
+          type: "manual",
+          message: "Emails must match",
+        });
+      }
+    },
+    [methods, updateEmailQuery, user]
+  );
 
   return {
     methods,
     canSubmit,
     onSubmit,
     resetForm,
+    isUpdatingEmail,
+    updateEmailError,
   };
 };

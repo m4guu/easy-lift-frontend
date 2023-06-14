@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider } from "react-hook-form";
 
 import { Box, Typography } from "@mui/material";
@@ -10,12 +10,23 @@ import { ConfirmEmail, Password, UpdateEmail } from "./views/emailUpdate.form";
 import { FormWrapper } from "../../../../../Auth/views/AuthForm/styles/AuthForm.styles";
 
 import { Submit } from "../../../../../../components";
+import { useSnackbar } from "../../../../../../hooks";
+import { SnackbarStatus } from "../../../../../../shared/enums";
 
 export const EmailUpdateForm: React.FC<{ currentEmail: string }> = ({
   currentEmail,
 }) => {
-  const { methods, onSubmit } = useEmailUpdateForm();
+  const { methods, onSubmit, isUpdatingEmail, updateEmailError } =
+    useEmailUpdateForm();
   const { handleSubmit } = methods;
+
+  const snackbar = useSnackbar();
+
+  useEffect(() => {
+    if (updateEmailError) {
+      snackbar(updateEmailError.message, SnackbarStatus.ERROR);
+    }
+  }, [snackbar, updateEmailError]);
 
   return (
     <FormProvider {...methods}>
@@ -34,8 +45,7 @@ export const EmailUpdateForm: React.FC<{ currentEmail: string }> = ({
         label="update email"
         variant="outlined"
         onClick={handleSubmit((data) => onSubmit(data))}
-        // todo: handle loading when query will be added
-        loading={false}
+        loading={isUpdatingEmail}
         sx={{ mt: "1rem" }}
         fullWidth
       />

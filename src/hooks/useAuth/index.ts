@@ -22,7 +22,6 @@ type UseAuthReturnType = {
   registerUser: UseMutateAsyncFunction<void, unknown, CreateUser, unknown>;
   logout: () => void;
   autoLogin: () => void;
-  resetPassword: (password: string) => void;
 };
 
 const useAuth = (): UseAuthReturnType => {
@@ -62,9 +61,6 @@ const useAuth = (): UseAuthReturnType => {
     });
   };
 
-  // todo: add funcionality
-  const resetPassword = (password: string) => {};
-
   const autoLogin = () => {
     autoLoginMutation().then((response) => {
       setUser(response.user);
@@ -98,7 +94,6 @@ const useAuth = (): UseAuthReturnType => {
     login,
     registerUser,
     logout,
-    resetPassword,
     autoLogin,
   };
 };
