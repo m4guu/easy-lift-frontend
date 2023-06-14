@@ -1,24 +1,48 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 
-import { Box, Avatar, Typography, Button, List, ListItem } from "@mui/material";
+import { Box, Avatar, Typography, List, ListItem } from "@mui/material";
 import { styled } from "@mui/system";
 
-type UserInfo = {
-  image: string;
-  basicInfo: { name: string; value: string | number }[];
-  gyms?: string[];
-};
+import { UseUpdateUserModalArgs } from "../../../../../../hooks/modalHooks/UpdateUser/useUpdateUserModal";
 
-export const UserBasicInfo: React.FC<UserInfo> = ({
-  image,
-  basicInfo,
-  gyms,
-}) => {
+import {
+  generateUserBasicInfo,
+  generateDefaultUserConfigFormValues,
+  generateDefaultTrainerConfigFormValues,
+} from "../../../../../../utils/UserInformation";
+
+import { UserConfigurationForm } from "../../../../../Configuration/views/ConfigurationForm/UserConfigurationForm";
+import { TrainerConfigurationForm } from "../../../../../Configuration/views/ConfigurationForm/TrainerConfigurationForm";
+import { EditButtonWithUpdateModal } from "../../../../../../components/EditButtonWithUpdateModal";
+
+import { Role } from "../../../../../../shared/enums";
+import { User } from "../../../../../../shared/interfaces";
+import { API_URL } from "../../../../../../config/env.config";
+
+export const UserBasicInfo: React.FC<{ user: User }> = ({ user }) => {
+  const userImage = `${API_URL}${user?.image}`;
+  const basicInfo = generateUserBasicInfo(user);
+  const tForm =
+    user.role === Role.user ? (
+      <UserConfigurationForm
+        defaultValues={generateDefaultUserConfigFormValues(user)}
+      />
+    ) : (
+      <TrainerConfigurationForm
+        defaultValues={generateDefaultTrainerConfigFormValues(user)}
+      />
+    );
+
+  const updateBasicInfoButtonProps: UseUpdateUserModalArgs = {
+    tHeader: "Update my data",
+    tForm,
+  };
+
   return (
     <Container>
       <Content>
-        <UserAvatar variant="circular" src={image} sizes="50" alt="user" />
+        <UserAvatar variant="circular" src={userImage} sizes="50" alt="user" />
         <List disablePadding>
           {basicInfo.map((info) => {
             return (
@@ -31,14 +55,14 @@ export const UserBasicInfo: React.FC<UserInfo> = ({
               </Item>
             );
           })}
-          {gyms && (
+          {user && user.gyms && (
             // todo: find gyms by id when gyms will be added on backend
             <Box>
               <Caption variant="caption" color="primary">
                 gyms
               </Caption>
               <List disablePadding>
-                {gyms.map((gym, i) => {
+                {user.gyms.map((gym, i) => {
                   return (
                     // todo: change dummy key
                     <Item key={uuidv4()} disablePadding>
@@ -51,7 +75,11 @@ export const UserBasicInfo: React.FC<UserInfo> = ({
           )}
         </List>
       </Content>
-      <Button variant="outlined">edit</Button>
+
+      <EditButtonWithUpdateModal
+        updateProps={updateBasicInfoButtonProps}
+        variant="outlined"
+      />
     </Container>
   );
 };

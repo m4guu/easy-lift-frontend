@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FormProvider } from "react-hook-form";
 
 import {
+  TrainerConfig,
   TrainerConfigFields,
   useTrainerConfigForm,
 } from "../../../../hooks/formHooks/configuration/useTrainerConfigForm";
@@ -25,10 +26,14 @@ import { LeafletMap } from "./views/Trainer/map/LeafletMap";
 import { Gym } from "../../../../shared/interfaces";
 
 // ! comment leafletmap to dont up unnessesery database requests
-export const TrainerConfigurationForm: React.FC = () => {
+export const TrainerConfigurationForm: React.FC<{
+  defaultValues?: TrainerConfig;
+}> = ({ defaultValues }) => {
   const [selectedGyms, setSelectedGyms] = useState<Gym[]>([]);
 
-  const { methods, canSubmit, onSubmit, pending } = useTrainerConfigForm();
+  const { methods, canSubmit, onSubmit, pending } = useTrainerConfigForm({
+    defaultUpdateValues: defaultValues,
+  });
   const { handleSubmit, setValue } = methods;
 
   const removeGym = (gym: Gym) => {
@@ -83,10 +88,10 @@ export const TrainerConfigurationForm: React.FC = () => {
         </FormBox>
 
         <FormMapBox>
-          <LeafletMap
+          {/* <LeafletMap
             selectedGyms={selectedGyms}
             gymsChangeHandler={gymsChangeHandler}
-          />
+          /> */}
         </FormMapBox>
       </FormWrapper>
     </FormProvider>

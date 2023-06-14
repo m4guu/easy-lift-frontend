@@ -2,10 +2,11 @@ import { Box } from "@mui/material";
 import { styled } from "@mui/system";
 
 export const FormContainer = styled(Box)(({ theme }) => ({
-  width: "20%",
+  // width: "20%",
   marginLeft: "auto",
   marginRight: "auto",
   marginTop: theme.spacing(2),
+  textAlign: "center",
   [theme.breakpoints.down("lg")]: {
     width: "30%",
   },

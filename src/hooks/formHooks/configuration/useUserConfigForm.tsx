@@ -25,7 +25,7 @@ export interface UserConfig {
   [UserConfigFields.IMAGE]: File[];
 }
 
-export const defaultValues = {
+export const defaultValues: UserConfig = {
   [UserConfigFields.NAME]: "",
   [UserConfigFields.HEIGHT]: 60,
   [UserConfigFields.WEIGHT]: 30,
@@ -39,14 +39,18 @@ const schema = yup.object().shape({
   [UserConfigFields.IMAGE]: yup.mixed().required(),
 });
 
-export const useUserConfigForm = () => {
+export const useUserConfigForm = ({
+  defaultUpdateValues,
+}: {
+  defaultUpdateValues?: UserConfig;
+}) => {
   const [pending, setPending] = useState(false);
   const { mutateAsync: configureUserQuery } = useConfigureUserMutation();
   const { user, autoLogin } = useUserContext();
   const navigate = useNavigate();
 
   const methods = useForm<UserConfig>({
-    defaultValues,
+    defaultValues: defaultUpdateValues || defaultValues,
     resolver: yupResolver(schema),
   });
 

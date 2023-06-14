@@ -39,14 +39,18 @@ const schema = yup.object().shape({
   [TrainerConfigFields.IMAGE]: yup.mixed().required(),
 });
 
-export const useTrainerConfigForm = () => {
+export const useTrainerConfigForm = ({
+  defaultUpdateValues,
+}: {
+  defaultUpdateValues?: TrainerConfig;
+}) => {
   const [pending, setPending] = useState(false);
   const { mutateAsync: configureTrainerQuery } = useConfigureTrainerMutation();
   const { user, autoLogin } = useUserContext();
   const navigate = useNavigate();
 
   const methods = useForm<TrainerConfig>({
-    defaultValues,
+    defaultValues: defaultUpdateValues || defaultValues,
     resolver: yupResolver(schema),
   });
 

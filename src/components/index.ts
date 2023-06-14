@@ -32,3 +32,4 @@ export { default as TrainerItem } from "./TrainerItem";
 
 export { default as Logo } from "./Logo";
 export { default as ThemeModeSwitch } from "./ThemeModeSwitch";
+export { default as UserFieldInfo } from "./UserFieldInfo";

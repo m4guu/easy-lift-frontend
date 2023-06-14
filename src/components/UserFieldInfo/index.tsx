@@ -1,17 +1,17 @@
 import React from "react";
 
-import { Box, Avatar, Typography, Button } from "@mui/material";
+import { Box, Avatar, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
+import { EditButtonWithUpdateModal } from "../EditButtonWithUpdateModal";
+
+import { FieldUserInformation } from "../../shared/interfaces";
+
 type UserFieldInfoProps = {
-  field: {
-    name: string;
-    value: string;
-    icon: JSX.Element;
-  };
+  field: FieldUserInformation;
 };
 
-export const UserFieldInfo: React.FC<UserFieldInfoProps> = ({ field }) => {
+const UserFieldInfo: React.FC<UserFieldInfoProps> = ({ field }) => {
   return (
     <Container>
       <Container>
@@ -24,7 +24,11 @@ export const UserFieldInfo: React.FC<UserFieldInfoProps> = ({ field }) => {
           <Typography>{field.value}</Typography>
         </Box>
       </Container>
-      <Button variant="outlined">edit</Button>
+
+      <EditButtonWithUpdateModal
+        variant="outlined"
+        updateProps={field.updateButtonProps}
+      />
     </Container>
   );
 };
@@ -45,3 +49,5 @@ const EmailAvatar = styled(Avatar)(({ theme }) => ({
 const Caption = styled(Typography)({
   textTransform: "capitalize",
 });
+
+export default UserFieldInfo;

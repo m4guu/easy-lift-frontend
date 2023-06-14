@@ -1,7 +1,10 @@
 import React from "react";
 import { FormProvider } from "react-hook-form";
 
-import { useUserConfigForm } from "../../../../hooks/formHooks/configuration/useUserConfigForm";
+import {
+  UserConfig,
+  useUserConfigForm,
+} from "../../../../hooks/formHooks/configuration/useUserConfigForm";
 
 import {
   Name,
@@ -16,13 +19,17 @@ import {
 } from "./styles/User/ConfigurationForm.styles";
 import { SectionHeader, Submit } from "../../../../components";
 
-export const UserConfigurationForm: React.FC = () => {
-  const { methods, canSubmit, onSubmit, pending } = useUserConfigForm();
+export const UserConfigurationForm: React.FC<{
+  defaultValues?: UserConfig;
+}> = ({ defaultValues }) => {
+  const { methods, canSubmit, onSubmit, pending } = useUserConfigForm({
+    defaultUpdateValues: defaultValues,
+  });
   const { handleSubmit } = methods;
 
   return (
     <FormProvider {...methods}>
-      <SectionHeader>configuration</SectionHeader>
+      {!defaultValues && <SectionHeader>configuration</SectionHeader>}
       <FormContainer>
         <FormWrapper>
           <Name />
@@ -33,7 +40,7 @@ export const UserConfigurationForm: React.FC = () => {
 
         <FormActions>
           <Submit
-            label="configurate"
+            label={defaultValues ? "update" : "configurate"}
             variant="contained"
             onClick={handleSubmit((data) => onSubmit(data))}
             loading={pending}

@@ -1,29 +1,46 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 
-import { Box, Divider, List, ListItem } from "@mui/material";
+import { Box, Divider, List } from "@mui/material";
 import { styled } from "@mui/system";
 
+import { UserFieldInfo } from "../../../../components";
 import { UserBasicInfo } from "./views/UserBasicInfo/UserBasicInfo";
-import { UserFieldInfo } from "./views/UserBasicInfo/UserFieldInfo";
+
+import { FieldUserInformation, User } from "../../../../shared/interfaces";
+import {
+  partialEmailField,
+  partialPasswordField,
+  partialUpdateEmailButtonProps,
+  partialUpdatePasswordButtonProps,
+} from "./constans";
 
 type UserInformationProps = {
-  userImage: string;
-  basicInfo: { name: string; value: string | number }[];
-  fields: { name: string; value: string; icon: JSX.Element }[];
-  gyms?: string[];
+  user: User;
 };
 
-export const UserInformation: React.FC<UserInformationProps> = ({
-  userImage,
-  basicInfo,
-  fields,
-  gyms,
-}) => {
+export const UserInformation: React.FC<UserInformationProps> = ({ user }) => {
+  const emailField: FieldUserInformation = {
+    ...partialEmailField,
+    value: user.email,
+    updateButtonProps: {
+      ...partialUpdateEmailButtonProps,
+      tForm: <Box>COMMING SOON</Box>,
+    },
+  };
+  const passwordField: FieldUserInformation = {
+    ...partialPasswordField,
+    updateButtonProps: {
+      ...partialUpdatePasswordButtonProps,
+      tForm: <Box>COMMING SOON</Box>,
+    },
+  };
+
+  const fields = [emailField, passwordField];
   return (
     <Box>
       <NoPaddingDivider />
-      <UserBasicInfo image={userImage} basicInfo={basicInfo} gyms={gyms} />
+      <UserBasicInfo user={user} />
       <NoPaddingDivider />
 
       <List disablePadding>
