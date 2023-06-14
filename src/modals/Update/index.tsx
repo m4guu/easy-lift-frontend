@@ -1,6 +1,7 @@
 import React from "react";
 
-import { Modal, Box, Typography } from "@mui/material";
+import { Modal, Box, Typography, IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/system";
 
 export interface UpdateUserModalProps {
@@ -24,6 +25,10 @@ const UpdateUserModal: React.FC<UpdateUserModalProps> = ({
         <Header color="primary">{tHeader}</Header>
         {tDescription && <ModalDescription>{tDescription}</ModalDescription>}
         {tForm}
+
+        <CloseButton onClick={onClose}>
+          <CloseIcon />
+        </CloseButton>
       </ModalContainer>
     </Modal>
   );
@@ -37,14 +42,19 @@ const ModalContainer = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
   borderRadius: theme.spacing(0.5),
   backgroundColor: theme.palette.background.layout,
-  width: "40% ",
-  [theme.breakpoints.down("md")]: {},
+  width: "30rem",
 }));
 
 const Header = styled(Typography)({
   fontSize: "1.2rem",
   textTransform: "uppercase",
 });
+
+const CloseButton = styled(IconButton)(({ theme }) => ({
+  position: "absolute",
+  top: theme.spacing(1),
+  right: theme.spacing(1),
+}));
 
 const ModalDescription = styled(Typography)(({ theme }) => ({
   padding: `${theme.spacing(1)} 0`,

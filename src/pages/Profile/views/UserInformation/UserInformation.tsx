@@ -6,6 +6,7 @@ import { styled } from "@mui/system";
 
 import { UserFieldInfo } from "../../../../components";
 import { UserBasicInfo } from "./views/UserBasicInfo/UserBasicInfo";
+import { EmailUpdateForm } from "./views/EmailUpdateForm/EmailUpdateForm";
 
 import { FieldUserInformation, User } from "../../../../shared/interfaces";
 import {
@@ -25,7 +26,7 @@ export const UserInformation: React.FC<UserInformationProps> = ({ user }) => {
     value: user.email,
     updateButtonProps: {
       ...partialUpdateEmailButtonProps,
-      tForm: <Box>COMMING SOON</Box>,
+      tForm: <EmailUpdateForm currentEmail={user.email} />,
     },
   };
   const passwordField: FieldUserInformation = {
