@@ -43,7 +43,7 @@ export const EmailUpdateForm: React.FC<{ currentEmail: string }> = ({
   );
 };
 
-const Header = styled(Typography)(({ theme }) => ({
-  padding: `${theme.spacing(2)} 0`,
+const Header = styled(Box)(({ theme }) => ({
+  paddingBottom: theme.spacing(2.5),
   fontWeight: "bold",
 }));

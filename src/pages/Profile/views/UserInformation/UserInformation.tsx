@@ -7,6 +7,7 @@ import { styled } from "@mui/system";
 import { UserFieldInfo } from "../../../../components";
 import { UserBasicInfo } from "./views/UserBasicInfo/UserBasicInfo";
 import { EmailUpdateForm } from "./views/EmailUpdateForm/EmailUpdateForm";
+import { PasswordUpdateForm } from "./views/PasswordUpdateForm/PasswordUpdateForm";
 
 import { FieldUserInformation, User } from "../../../../shared/interfaces";
 import {
@@ -33,7 +34,7 @@ export const UserInformation: React.FC<UserInformationProps> = ({ user }) => {
     ...partialPasswordField,
     updateButtonProps: {
       ...partialUpdatePasswordButtonProps,
-      tForm: <Box>COMMING SOON</Box>,
+      tForm: <PasswordUpdateForm />,
     },
   };
 

@@ -67,8 +67,12 @@ export const TrainerConfigurationForm: React.FC<{
     <FormProvider {...methods}>
       <FormWrapper>
         <FormBox>
-          <SectionHeader>configuration</SectionHeader>
-          <Title variant="caption">Basin Information</Title>
+          {!defaultValues && (
+            <>
+              <SectionHeader>configuration</SectionHeader>
+              <Title variant="caption">Basin Information</Title>
+            </>
+          )}
           <Name />
           <Image />
           <Description />
@@ -79,7 +83,7 @@ export const TrainerConfigurationForm: React.FC<{
           />
 
           <Submit
-            label="finish"
+            label={defaultValues ? "update" : "finish"}
             variant="contained"
             onClick={handleSubmit((data) => onSubmit(data))}
             loading={pending}
@@ -87,12 +91,12 @@ export const TrainerConfigurationForm: React.FC<{
           />
         </FormBox>
 
-        <FormMapBox>
-          {/* <LeafletMap
+        {/* <FormMapBox> */}
+        {/* <LeafletMap
             selectedGyms={selectedGyms}
             gymsChangeHandler={gymsChangeHandler}
           /> */}
-        </FormMapBox>
+        {/* </FormMapBox> */}
       </FormWrapper>
     </FormProvider>
   );

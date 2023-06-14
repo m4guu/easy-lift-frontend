@@ -1,8 +1,15 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 
-import { Box, Avatar, Typography, List, ListItem } from "@mui/material";
-import { styled } from "@mui/system";
+import {
+  Box,
+  Avatar,
+  Typography,
+  List,
+  ListItem,
+  useMediaQuery,
+} from "@mui/material";
+import { styled, Theme } from "@mui/system";
 
 import { UseUpdateUserModalArgs } from "../../../../../../hooks/modalHooks/UpdateUser/useUpdateUserModal";
 
@@ -21,6 +28,10 @@ import { User } from "../../../../../../shared/interfaces";
 import { API_URL } from "../../../../../../config/env.config";
 
 export const UserBasicInfo: React.FC<{ user: User }> = ({ user }) => {
+  const isBeloweSmBreakpoint = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("sm")
+  );
+
   const userImage = `${API_URL}${user?.image}`;
   const basicInfo = generateUserBasicInfo(user);
   const tForm =
@@ -42,7 +53,7 @@ export const UserBasicInfo: React.FC<{ user: User }> = ({ user }) => {
   return (
     <Container>
       <Content>
-        <UserAvatar variant="circular" src={userImage} sizes="50" alt="user" />
+        <UserAvatar variant="circular" src={userImage} alt="user" />
         <List disablePadding>
           {basicInfo.map((info) => {
             return (
@@ -51,13 +62,13 @@ export const UserBasicInfo: React.FC<{ user: User }> = ({ user }) => {
                 <Caption variant="caption" color="primary">
                   {info.name}
                 </Caption>
-                <Typography>{info.value}</Typography>
+                <InfoValue>{info.value}</InfoValue>
               </Item>
             );
           })}
           {user && user.gyms && (
             // todo: find gyms by id when gyms will be added on backend
-            <Box>
+            <GymsContainer>
               <Caption variant="caption" color="primary">
                 gyms
               </Caption>
@@ -71,7 +82,7 @@ export const UserBasicInfo: React.FC<{ user: User }> = ({ user }) => {
                   );
                 })}
               </List>
-            </Box>
+            </GymsContainer>
           )}
         </List>
       </Content>
@@ -79,16 +90,26 @@ export const UserBasicInfo: React.FC<{ user: User }> = ({ user }) => {
       <EditButtonWithUpdateModal
         updateProps={updateBasicInfoButtonProps}
         variant="outlined"
+        size="small"
+        fullWidth={isBeloweSmBreakpoint}
       />
     </Container>
   );
 };
 
-const Container = styled(Box)({
+const Container = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-});
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column",
+    alignItems: "flex-start",
+  },
+}));
+
+const GymsContainer = styled(Box)(({ theme }) => ({
+  marginBottom: theme.spacing(1),
+}));
 
 const Content = styled(Box)({
   display: "flex",
@@ -102,7 +123,18 @@ const Item = styled(ListItem)({
   alignItems: "flex-start",
 });
 
-const UserAvatar = styled(Avatar)({
+const InfoValue = styled(Typography)(({ theme }) => ({
+  [theme.breakpoints.down("sm")]: {
+    maxWidth: "100%",
+    wordWrap: "break-word",
+  },
+}));
+
+const UserAvatar = styled(Avatar)(({ theme }) => ({
   width: "4rem",
   height: "4rem",
-});
+  [theme.breakpoints.down("sm")]: {
+    width: "3rem",
+    height: "3rem",
+  },
+}));
