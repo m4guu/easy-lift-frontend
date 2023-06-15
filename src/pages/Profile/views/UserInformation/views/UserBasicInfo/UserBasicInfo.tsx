@@ -22,15 +22,18 @@ import {
 import { UserConfigurationForm } from "../../../../../Configuration/views/ConfigurationForm/UserConfigurationForm";
 import { TrainerConfigurationForm } from "../../../../../Configuration/views/ConfigurationForm/TrainerConfigurationForm";
 import { EditButtonWithUpdateModal } from "../../../../../../components/EditButtonWithUpdateModal";
+import { GymItem } from "../../../../../../components";
 
 import { Role } from "../../../../../../shared/enums";
 import { User } from "../../../../../../shared/interfaces";
+import { gyms } from "../../../../../Configuration/views/ConfigurationForm/views/Trainer/form/constans";
 import { API_URL } from "../../../../../../config/env.config";
 
 export const UserBasicInfo: React.FC<{ user: User }> = ({ user }) => {
   const isBeloweSmBreakpoint = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("sm")
   );
+  const trainersGyms = gyms.filter((gym) => user.gyms?.includes(gym.id));
 
   const userImage = `${API_URL}${user?.image}`;
   const basicInfo = generateUserBasicInfo(user);
@@ -57,8 +60,7 @@ export const UserBasicInfo: React.FC<{ user: User }> = ({ user }) => {
         <List disablePadding>
           {basicInfo.map((info) => {
             return (
-              // todo: change dummy key
-              <Item key={uuidv4()} disablePadding>
+              <Item key={info.id} disablePadding>
                 <Caption variant="caption" color="primary">
                   {info.name}
                 </Caption>
@@ -66,20 +68,14 @@ export const UserBasicInfo: React.FC<{ user: User }> = ({ user }) => {
               </Item>
             );
           })}
-          {user && user.gyms && (
-            // todo: find gyms by id when gyms will be added on backend
+          {trainersGyms && (
             <GymsContainer>
               <Caption variant="caption" color="primary">
                 gyms
               </Caption>
               <List disablePadding>
-                {user.gyms.map((gym, i) => {
-                  return (
-                    // todo: change dummy key
-                    <Item key={uuidv4()} disablePadding>
-                      gym number {i + 1}
-                    </Item>
-                  );
+                {trainersGyms.map((gym) => {
+                  return <GymItem key={gym.id} gym={gym} />;
                 })}
               </List>
             </GymsContainer>
@@ -115,9 +111,11 @@ const Content = styled(Box)({
   display: "flex",
   gap: "1rem",
 });
+
 const Caption = styled(Typography)({
   textTransform: "capitalize",
 });
+
 const Item = styled(ListItem)({
   flexDirection: "column",
   alignItems: "flex-start",

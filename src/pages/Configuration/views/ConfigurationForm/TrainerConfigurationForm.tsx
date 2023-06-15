@@ -1,18 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { FormProvider } from "react-hook-form";
 
 import {
   TrainerConfig,
-  TrainerConfigFields,
   useTrainerConfigForm,
 } from "../../../../hooks/formHooks/configuration/useTrainerConfigForm";
+import { useSnackbar } from "../../../../hooks";
 
-import {
-  FormWrapper,
-  FormBox,
-  FormMapBox,
-  Title,
-} from "./styles/Trainer/ConfigurationForm.styles";
 import {
   Name,
   Description,
@@ -20,19 +14,21 @@ import {
   Image,
 } from "./views/Trainer/form/TrainerConfiguration.form";
 import { SectionHeader, Submit } from "../../../../components";
+import {
+  FormWrapper,
+  FormBox,
+  FormMapBox,
+  Title,
+} from "./styles/Trainer/ConfigurationForm.styles";
 
 import { LeafletMap } from "./views/Trainer/map/LeafletMap";
 
-import { Gym } from "../../../../shared/interfaces";
-import { useSnackbar } from "../../../../hooks";
 import { SnackbarStatus, Status } from "../../../../shared/enums";
 
 // ! comment leafletmap to dont up unnessesery database requests
 export const TrainerConfigurationForm: React.FC<{
   defaultValues?: TrainerConfig;
 }> = ({ defaultValues }) => {
-  const [selectedGyms, setSelectedGyms] = useState<Gym[]>([]);
-
   const {
     methods,
     canSubmit,
@@ -40,38 +36,13 @@ export const TrainerConfigurationForm: React.FC<{
     updateTrainerStatus,
     updateTrainerError,
     isUpdatingTrainer,
+    selectedGyms,
+    gymsChangeHandler,
   } = useTrainerConfigForm({
     defaultUpdateValues: defaultValues,
   });
-  const { handleSubmit, setValue } = methods;
+  const { handleSubmit } = methods;
   const snackbar = useSnackbar();
-
-  const removeGym = (gym: Gym) => {
-    const updatedGyms = selectedGyms.filter(
-      (selectedGym) => selectedGym.id !== gym.id
-    );
-    const updatedGymsIds = updatedGyms.map((updatedGym) => updatedGym.id);
-    // remove existing gym
-    setSelectedGyms(updatedGyms);
-    // remove form field existing gym
-    setValue(TrainerConfigFields.GYMS, updatedGymsIds);
-  };
-
-  const gymsChangeHandler = (selectedGym: Gym) => {
-    const isSelected = !!selectedGyms.filter((gym) => gym.id === selectedGym.id)
-      .length;
-
-    if (isSelected) {
-      removeGym(selectedGym);
-    } else {
-      const updatedGyms = [...selectedGyms, selectedGym];
-      const updatedGymsIds = updatedGyms.map((updatedGym) => updatedGym.id);
-      // change existing gyms
-      setSelectedGyms(updatedGyms);
-      // update form field gyms
-      setValue(TrainerConfigFields.GYMS, updatedGymsIds);
-    }
-  };
 
   useEffect(() => {
     if (updateTrainerError) {
@@ -95,9 +66,11 @@ export const TrainerConfigurationForm: React.FC<{
               <Title variant="caption">Basin Information</Title>
             </>
           )}
+
           <Name />
           <Image />
           <Description />
+
           <Title variant="caption">Personal Traning</Title>
           <Gyms
             selectedGyms={selectedGyms}

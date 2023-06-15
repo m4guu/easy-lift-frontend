@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "uuid";
+
 import {
   TrainerConfig,
   TrainerConfigFields,
@@ -6,6 +8,7 @@ import {
   UserConfig,
   UserConfigFields,
 } from "../../hooks/formHooks/configuration/useUserConfigForm";
+
 import { Role } from "../../shared/enums";
 import { User } from "../../shared/interfaces";
 
@@ -31,17 +34,21 @@ export const generateDefaultTrainerConfigFormValues = (
 
 export const generateUserBasicInfo = (
   user: User
-): { name: string; value: string | number }[] => {
+): { id: string; name: string; value: string | number }[] => {
   const basicInfo =
     user.role === Role.user
       ? [
-          { name: "name", value: user.name },
-          { name: "height", value: user.height! },
-          { name: "weight", value: user.bodyWeights?.at(-1)?.weight! },
+          { id: uuidv4(), name: "name", value: user.name },
+          { id: uuidv4(), name: "height", value: user.height! },
+          {
+            id: uuidv4(),
+            name: "weight",
+            value: user.bodyWeights?.at(-1)?.weight!,
+          },
         ]
       : [
-          { name: "name", value: user.name },
-          { name: "description", value: user.description! },
+          { id: uuidv4(), name: "name", value: user.name },
+          { id: uuidv4(), name: "description", value: user.description! },
         ];
   return basicInfo;
 };

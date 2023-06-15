@@ -1,7 +1,6 @@
 import React from "react";
 
-import { Typography } from "@mui/material";
-import { useTheme } from "@mui/system";
+import { Typography, List } from "@mui/material";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
@@ -10,11 +9,10 @@ import {
   SegmentTitle,
   NoPaddingDivider,
   Header,
-  GymList,
-  Gym,
 } from "./styles/TrainerViews.styles";
 
 import { gyms } from "../../../../Configuration/views/ConfigurationForm/views/Trainer/form/constans";
+import { GymItem } from "../../../../../components";
 
 interface PersonalTrainingInfoProps {
   trainerGymsIds: string[] | undefined;
@@ -23,10 +21,7 @@ interface PersonalTrainingInfoProps {
 export const PersonalTrainingInfo: React.FC<PersonalTrainingInfoProps> = ({
   trainerGymsIds,
 }) => {
-  const theme = useTheme();
-  const trainerGyms = gyms.filter((gym) =>
-    trainerGymsIds?.map((trainerGymId) => trainerGymId === gym.id)
-  );
+  const trainerGyms = gyms.filter((gym) => trainerGymsIds?.includes(gym.id));
 
   return (
     <PersonalTrainingContainer>
@@ -47,21 +42,11 @@ export const PersonalTrainingInfo: React.FC<PersonalTrainingInfoProps> = ({
           trainer does not have the possibility to perform personal training
         </Typography>
       ) : (
-        <GymList>
+        <List>
           {trainerGyms.map((trainerGym) => {
-            return (
-              <Gym key={trainerGym.id} disablePadding>
-                <Typography>{trainerGym.name}</Typography>
-                <Typography
-                  variant="caption"
-                  color={theme.palette.text.secondary}
-                >
-                  {trainerGym.location.city}
-                </Typography>
-              </Gym>
-            );
+            return <GymItem key={trainerGym.id} gym={trainerGym} />;
           })}
-        </GymList>
+        </List>
       )}
     </PersonalTrainingContainer>
   );

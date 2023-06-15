@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
@@ -8,8 +8,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useConfigureTrainerMutation } from "../../queryHooks/auth/useConfigureTrainerMutation";
 import { useUserContext } from "../../../contexts/userContext";
 
-import { User } from "../../../shared/interfaces";
+import { Gym, User } from "../../../shared/interfaces";
 import { PATHS } from "../../../pages/paths";
+import { gyms as allGyms } from "../../../pages/Configuration/views/ConfigurationForm/views/Trainer/form/constans";
 
 export enum TrainerConfigFields {
   NAME = "name",
@@ -44,6 +45,11 @@ export const useTrainerConfigForm = ({
 }: {
   defaultUpdateValues?: TrainerConfig;
 }) => {
+  const initSelectedGyms = defaultUpdateValues?.gyms
+    ? allGyms.filter((gym) => defaultUpdateValues?.gyms?.includes(gym.id))
+    : [];
+
+  const [selectedGyms, setSelectedGyms] = useState<Gym[]>(initSelectedGyms);
   const {
     status: updateTrainerStatus,
     error: updateTrainerError,
@@ -58,7 +64,7 @@ export const useTrainerConfigForm = ({
     resolver: yupResolver(schema),
   });
 
-  const { watch, reset } = methods;
+  const { watch, reset, setValue } = methods;
 
   const resetForm = useCallback(() => reset(), [reset]);
 
@@ -98,6 +104,33 @@ export const useTrainerConfigForm = ({
     [configureTrainerQuery, resetForm, user, navigate, autoLogin]
   );
 
+  const removeGym = (gym: Gym) => {
+    const updatedGyms = selectedGyms.filter(
+      (selectedGym) => selectedGym.id !== gym.id
+    );
+    const updatedGymsIds = updatedGyms.map((updatedGym) => updatedGym.id);
+    // remove existing gym
+    setSelectedGyms(updatedGyms);
+    // remove form field existing gym
+    setValue(TrainerConfigFields.GYMS, updatedGymsIds);
+  };
+
+  const gymsChangeHandler = (selectedGym: Gym) => {
+    const isSelected = !!selectedGyms.filter((gym) => gym.id === selectedGym.id)
+      .length;
+
+    if (isSelected) {
+      removeGym(selectedGym);
+    } else {
+      const updatedGyms = [...selectedGyms, selectedGym];
+      const updatedGymsIds = updatedGyms.map((updatedGym) => updatedGym.id);
+      // change existing gyms
+      setSelectedGyms(updatedGyms);
+      // update form field gyms
+      setValue(TrainerConfigFields.GYMS, updatedGymsIds);
+    }
+  };
+
   return {
     methods,
     canSubmit,
@@ -106,5 +139,8 @@ export const useTrainerConfigForm = ({
     updateTrainerStatus,
     updateTrainerError,
     isUpdatingTrainer,
+    removeGym,
+    gymsChangeHandler,
+    selectedGyms,
   };
 };

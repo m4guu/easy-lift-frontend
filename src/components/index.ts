@@ -12,6 +12,7 @@ export { default as ExerciseItemWorkout } from "./ExerciseItemWorkout";
 
 export { default as ExerciseProgresItem } from "./ExerciseProgresItem";
 
+export { default as GymItem } from "./GymItem";
 export { default as GymTag } from "./GymTag";
 
 export { default as NavigationItem } from "./NavigationItem";

@@ -1,4 +1,4 @@
-import { List, Typography, Box, Divider, ListItem } from "@mui/material";
+import { List, Typography, Box, Divider } from "@mui/material";
 import { styled } from "@mui/system";
 
 export const SegmentTitle = styled(Typography)(({ theme }) => ({
@@ -25,10 +25,3 @@ export const Header = styled(Box)(({ theme }) => ({
   alignItems: "center",
   gap: theme.spacing(1),
 }));
-
-export const GymList = styled(List)({});
-export const Gym = styled(ListItem)({
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "flex-start",
-});

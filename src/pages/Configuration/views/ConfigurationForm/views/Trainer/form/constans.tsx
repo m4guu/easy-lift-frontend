@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
-
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
@@ -7,7 +5,7 @@ import { Gym } from "../../../../../../../shared/interfaces";
 
 export const gyms: Gym[] = [
   {
-    id: uuidv4(),
+    id: "7e4b9580-0b5c-11ee-be56-0242ac120002",
     name: "Calypsoo Morena",
     image:
       "https://www.calypso.com.pl/wp-content/uploads/2018/02/gdansk-morena-strefa-cross-training-strefa-cardio.jpg",
@@ -18,7 +16,7 @@ export const gyms: Gym[] = [
     },
   },
   {
-    id: uuidv4(),
+    id: "7e4b9cba-0b5c-11ee-be56-0242ac120002",
     name: "Husarz Gym",
     image:
       "https://cdn-az.allevents.in/events9/banners/da1a39df5e25c7ba1ab041739c6bc921b1453f843eb22cc14c9853aa39a5e317-rimg-w526-h526-gmir?v=1594452407",
@@ -30,7 +28,7 @@ export const gyms: Gym[] = [
   },
 
   {
-    id: uuidv4(),
+    id: "7e4b9e36-0b5c-11ee-be56-0242ac120002",
     name: "Random Gym #1",
     image:
       "https://www.calypso.com.pl/wp-content/uploads/2018/02/gdansk-morena-strefa-cross-training-strefa-cardio.jpg",
@@ -40,9 +38,8 @@ export const gyms: Gym[] = [
       position: { x: 52.43777387235252, y: 21.0096956871598 },
     },
   },
-
   {
-    id: uuidv4(),
+    id: "7e4b9f6c-0b5c-11ee-be56-0242ac120002",
     name: "Random Gym #2",
     image:
       "https://cdn-az.allevents.in/events9/banners/da1a39df5e25c7ba1ab041739c6bc921b1453f843eb22cc14c9853aa39a5e317-rimg-w526-h526-gmir?v=1594452407",
@@ -53,7 +50,7 @@ export const gyms: Gym[] = [
     },
   },
   {
-    id: uuidv4(),
+    id: "7e4ba0a2-0b5c-11ee-be56-0242ac120002",
     name: "Random Gym #3",
     image:
       "https://cityfit.pl/wp-content/uploads/2019/08/WC-700x740-4-700x440.jpg",
