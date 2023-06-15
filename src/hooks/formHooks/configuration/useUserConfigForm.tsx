@@ -32,11 +32,10 @@ export const defaultValues: UserConfig = {
   [UserConfigFields.IMAGE]: undefined as unknown as File[],
 };
 
-const schema = yup.object().shape({
+const defaultSchema = yup.object().shape({
   [UserConfigFields.NAME]: yup.string().required().min(4).max(15),
   [UserConfigFields.HEIGHT]: yup.number().required().min(60).max(260),
   [UserConfigFields.WEIGHT]: yup.number().required().min(30).max(610),
-  [UserConfigFields.IMAGE]: yup.mixed().required(),
 });
 
 export const useUserConfigForm = ({
@@ -53,6 +52,12 @@ export const useUserConfigForm = ({
   const { user, autoLogin } = useUserContext();
   const navigate = useNavigate();
 
+  const schema = defaultUpdateValues
+    ? defaultSchema
+    : defaultSchema.shape({
+        [UserConfigFields.IMAGE]: yup.mixed().required(),
+      });
+
   const methods = useForm<UserConfig>({
     defaultValues: defaultUpdateValues || defaultValues,
     resolver: yupResolver(schema),
@@ -62,16 +67,16 @@ export const useUserConfigForm = ({
 
   const resetForm = useCallback(() => reset(), [reset]);
 
-  const { name, height, weight, image } = watch();
-  const canSubmit = name && height && weight && image;
+  const { name, height, weight } = watch();
+  const canSubmit = name && height && weight;
 
   const onSubmit = useCallback(
     (formValues: UserConfig) => {
       const updatedUser: Partial<User> = {
         name: formValues.name,
-        image: formValues.image[0],
         height: formValues.height,
         bodyWeights: [{ weight: formValues.weight, date: getTodayDate() }],
+        image: formValues.image ? formValues.image[0] : "",
       };
 
       const formData = new FormData();

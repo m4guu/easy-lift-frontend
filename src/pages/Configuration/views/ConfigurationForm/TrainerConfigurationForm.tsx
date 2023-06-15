@@ -14,14 +14,13 @@ import {
   Image,
 } from "./views/Trainer/form/TrainerConfiguration.form";
 import { SectionHeader, Submit } from "../../../../components";
+import { LeafletMap } from "./views/Trainer/map/LeafletMap";
 import {
   FormWrapper,
   FormBox,
   FormMapBox,
   Title,
 } from "./styles/Trainer/ConfigurationForm.styles";
-
-import { LeafletMap } from "./views/Trainer/map/LeafletMap";
 
 import { SnackbarStatus, Status } from "../../../../shared/enums";
 
@@ -66,7 +65,6 @@ export const TrainerConfigurationForm: React.FC<{
               <Title variant="caption">Basin Information</Title>
             </>
           )}
-
           <Name />
           <Image />
           <Description />

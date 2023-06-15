@@ -68,7 +68,7 @@ export const UserBasicInfo: React.FC<{ user: User }> = ({ user }) => {
               </Item>
             );
           })}
-          {trainersGyms && (
+          {trainersGyms && trainersGyms.length !== 0 && (
             <GymsContainer>
               <Caption variant="caption" color="primary">
                 gyms

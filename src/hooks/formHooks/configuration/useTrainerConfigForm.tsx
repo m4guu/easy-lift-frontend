@@ -33,11 +33,10 @@ export const defaultValues = {
   [TrainerConfigFields.IMAGE]: undefined as unknown as File[],
 };
 
-const schema = yup.object().shape({
+const defaultSchema = yup.object().shape({
   [TrainerConfigFields.NAME]: yup.string().required().min(4).max(15),
   [TrainerConfigFields.DESCRIPTION]: yup.string().required().min(20).max(100),
   [TrainerConfigFields.GYMS]: yup.array().of(yup.string()),
-  [TrainerConfigFields.IMAGE]: yup.mixed().required(),
 });
 
 export const useTrainerConfigForm = ({
@@ -45,19 +44,25 @@ export const useTrainerConfigForm = ({
 }: {
   defaultUpdateValues?: TrainerConfig;
 }) => {
-  const initSelectedGyms = defaultUpdateValues?.gyms
-    ? allGyms.filter((gym) => defaultUpdateValues?.gyms?.includes(gym.id))
-    : [];
-
-  const [selectedGyms, setSelectedGyms] = useState<Gym[]>(initSelectedGyms);
   const {
     status: updateTrainerStatus,
     error: updateTrainerError,
     isLoading: isUpdatingTrainer,
     mutateAsync: configureTrainerQuery,
   } = useConfigureTrainerMutation();
+
   const { user, autoLogin } = useUserContext();
   const navigate = useNavigate();
+  const initSelectedGyms = defaultUpdateValues?.gyms
+    ? allGyms.filter((gym) => defaultUpdateValues?.gyms?.includes(gym.id))
+    : [];
+  const [selectedGyms, setSelectedGyms] = useState<Gym[]>(initSelectedGyms);
+
+  const schema = defaultUpdateValues
+    ? defaultSchema
+    : defaultSchema.shape({
+        [TrainerConfigFields.IMAGE]: yup.mixed().required(),
+      });
 
   const methods = useForm<TrainerConfig>({
     defaultValues: defaultUpdateValues || defaultValues,
@@ -68,17 +73,17 @@ export const useTrainerConfigForm = ({
 
   const resetForm = useCallback(() => reset(), [reset]);
 
-  const { name, description, gyms, image } = watch();
+  const { name, description, gyms } = watch();
 
-  const canSubmit = name && description && gyms && image;
+  const canSubmit = name && description && gyms;
 
   const onSubmit = useCallback(
     (formValues: TrainerConfig) => {
       const updatedTrainer: Partial<User> = {
         name: formValues.name,
-        image: formValues.image[0],
         description: formValues.description,
         gyms: formValues.gyms,
+        image: formValues.image ? formValues.image[0] : "",
       };
 
       const formData = new FormData();

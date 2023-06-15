@@ -42,23 +42,13 @@ export const UserConfigurationForm: React.FC<{
     if (updateUserError) {
       snackbar("Something goes wrong. Please try later.", SnackbarStatus.ERROR);
     }
-    if (
-      !isUpdatingUser &&
-      updateUserStatus === Status.SUCCESS &&
-      defaultValues
-    ) {
+    if (!isUpdatingUser && updateUserStatus === Status.SUCCESS) {
       snackbar(
         "Saved! Thank you for keeping us up to date.",
         SnackbarStatus.SUCCESS
       );
     }
-  }, [
-    snackbar,
-    updateUserError,
-    isUpdatingUser,
-    updateUserStatus,
-    defaultValues,
-  ]);
+  }, [snackbar, updateUserError, isUpdatingUser, updateUserStatus]);
 
   return (
     <FormProvider {...methods}>
