@@ -14,20 +14,28 @@ import { Submit } from "../../../../../../components";
 
 import { FormWrapper } from "../../../../../Auth/views/AuthForm/styles/AuthForm.styles";
 
-import { SnackbarStatus } from "../../../../../../shared/enums";
+import { SnackbarStatus, Status } from "../../../../../../shared/enums";
 
 export const PasswordUpdateForm: React.FC = () => {
-  const { methods, onSubmit, updatePasswordError, isUpdatingPassword } =
-    usePasswordUpdateForm();
+  const {
+    methods,
+    onSubmit,
+    updatePasswordError,
+    isUpdatingPassword,
+    updatePasswordStatus,
+  } = usePasswordUpdateForm();
   const { handleSubmit } = methods;
 
   const snackbar = useSnackbar();
 
   useEffect(() => {
     if (updatePasswordError) {
-      snackbar(updatePasswordError.message, SnackbarStatus.ERROR);
+      snackbar("Something goes wrong. Please try later.", SnackbarStatus.ERROR);
     }
-  }, [snackbar, updatePasswordError]);
+    if (!isUpdatingPassword && updatePasswordStatus === Status.SUCCESS) {
+      snackbar("Password saved successfully!.", SnackbarStatus.SUCCESS);
+    }
+  }, [snackbar, updatePasswordError, isUpdatingPassword, updatePasswordStatus]);
 
   return (
     <FormProvider {...methods}>

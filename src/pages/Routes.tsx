@@ -8,7 +8,7 @@ import { getRoutes } from "../utils/Routes";
 import { PATHS } from "./paths";
 import { Role } from "../shared/enums";
 
-import { Welcome, Auth, Configuration, NotFound } from "./index";
+import { Welcome, Auth, Configuration } from "./index";
 import Layout from "../Layout";
 
 const Routing: React.FC = () => {
@@ -37,7 +37,7 @@ const Routing: React.FC = () => {
       <>
         <Route path={PATHS.default} element={<Welcome />} />
         <Route path={PATHS.AUTH} element={<Auth />} />
-        <Route path={PATHS.notFound} element={<NotFound />} />
+        <Route path={PATHS.notFound} element={<Auth />} />
       </>
     );
   }

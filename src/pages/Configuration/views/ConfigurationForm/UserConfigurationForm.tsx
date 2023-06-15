@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider } from "react-hook-form";
 
 import {
@@ -18,14 +18,47 @@ import {
   FormActions,
 } from "./styles/User/ConfigurationForm.styles";
 import { SectionHeader, Submit } from "../../../../components";
+import { useSnackbar } from "../../../../hooks";
+import { SnackbarStatus, Status } from "../../../../shared/enums";
 
 export const UserConfigurationForm: React.FC<{
   defaultValues?: UserConfig;
 }> = ({ defaultValues }) => {
-  const { methods, canSubmit, onSubmit, pending } = useUserConfigForm({
+  const {
+    methods,
+    canSubmit,
+    onSubmit,
+    updateUserStatus,
+    isUpdatingUser,
+    updateUserError,
+  } = useUserConfigForm({
     defaultUpdateValues: defaultValues,
   });
   const { handleSubmit } = methods;
+
+  const snackbar = useSnackbar();
+
+  useEffect(() => {
+    if (updateUserError) {
+      snackbar("Something goes wrong. Please try later.", SnackbarStatus.ERROR);
+    }
+    if (
+      !isUpdatingUser &&
+      updateUserStatus === Status.SUCCESS &&
+      defaultValues
+    ) {
+      snackbar(
+        "Saved! Thank you for keeping us up to date.",
+        SnackbarStatus.SUCCESS
+      );
+    }
+  }, [
+    snackbar,
+    updateUserError,
+    isUpdatingUser,
+    updateUserStatus,
+    defaultValues,
+  ]);
 
   return (
     <FormProvider {...methods}>
@@ -43,7 +76,7 @@ export const UserConfigurationForm: React.FC<{
             label={defaultValues ? "update" : "configurate"}
             variant="contained"
             onClick={handleSubmit((data) => onSubmit(data))}
-            loading={pending}
+            loading={isUpdatingUser}
             disabled={!canSubmit}
           />
         </FormActions>

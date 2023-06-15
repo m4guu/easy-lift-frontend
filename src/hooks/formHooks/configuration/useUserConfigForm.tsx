@@ -1,15 +1,15 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useConfigureUserMutation } from "../../queryHooks/auth/useConfigureUserMutation";
 import { useUserContext } from "../../../contexts/userContext";
 
-import { User } from "../../../shared/interfaces";
 import { getTodayDate } from "../../../utils/Date";
+
+import { User } from "../../../shared/interfaces";
 import { PATHS } from "../../../pages/paths";
 
 export enum UserConfigFields {
@@ -44,8 +44,12 @@ export const useUserConfigForm = ({
 }: {
   defaultUpdateValues?: UserConfig;
 }) => {
-  const [pending, setPending] = useState(false);
-  const { mutateAsync: configureUserQuery } = useConfigureUserMutation();
+  const {
+    status: updateUserStatus,
+    error: updateUserError,
+    isLoading: isUpdatingUser,
+    mutateAsync: configureUserQuery,
+  } = useConfigureUserMutation();
   const { user, autoLogin } = useUserContext();
   const navigate = useNavigate();
 
@@ -63,8 +67,6 @@ export const useUserConfigForm = ({
 
   const onSubmit = useCallback(
     (formValues: UserConfig) => {
-      setPending(true);
-
       const updatedUser: Partial<User> = {
         name: formValues.name,
         image: formValues.image[0],
@@ -83,22 +85,24 @@ export const useUserConfigForm = ({
         }
       });
 
-      configureUserQuery({ updatedUser: formData, userId: user!.id })
-        .then(() => {
+      configureUserQuery({ updatedUser: formData, userId: user!.id }).then(
+        () => {
           autoLogin();
           resetForm();
           navigate(PATHS.default);
-        })
-        .finally(() => setPending(false));
+        }
+      );
     },
     [configureUserQuery, resetForm, user, navigate, autoLogin]
   );
 
   return {
-    pending,
     methods,
     canSubmit,
     onSubmit,
     resetForm,
+    updateUserStatus,
+    updateUserError,
+    isUpdatingUser,
   };
 };

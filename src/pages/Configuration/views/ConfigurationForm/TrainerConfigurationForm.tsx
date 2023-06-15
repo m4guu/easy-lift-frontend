@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FormProvider } from "react-hook-form";
 
 import {
@@ -24,6 +24,8 @@ import { SectionHeader, Submit } from "../../../../components";
 import { LeafletMap } from "./views/Trainer/map/LeafletMap";
 
 import { Gym } from "../../../../shared/interfaces";
+import { useSnackbar } from "../../../../hooks";
+import { SnackbarStatus, Status } from "../../../../shared/enums";
 
 // ! comment leafletmap to dont up unnessesery database requests
 export const TrainerConfigurationForm: React.FC<{
@@ -31,10 +33,18 @@ export const TrainerConfigurationForm: React.FC<{
 }> = ({ defaultValues }) => {
   const [selectedGyms, setSelectedGyms] = useState<Gym[]>([]);
 
-  const { methods, canSubmit, onSubmit, pending } = useTrainerConfigForm({
+  const {
+    methods,
+    canSubmit,
+    onSubmit,
+    updateTrainerStatus,
+    updateTrainerError,
+    isUpdatingTrainer,
+  } = useTrainerConfigForm({
     defaultUpdateValues: defaultValues,
   });
   const { handleSubmit, setValue } = methods;
+  const snackbar = useSnackbar();
 
   const removeGym = (gym: Gym) => {
     const updatedGyms = selectedGyms.filter(
@@ -63,6 +73,18 @@ export const TrainerConfigurationForm: React.FC<{
     }
   };
 
+  useEffect(() => {
+    if (updateTrainerError) {
+      snackbar("Something goes wrong. Please try later.", SnackbarStatus.ERROR);
+    }
+    if (!isUpdatingTrainer && updateTrainerStatus === Status.SUCCESS) {
+      snackbar(
+        "Saved! Thank you for keeping us up to date.",
+        SnackbarStatus.SUCCESS
+      );
+    }
+  }, [snackbar, updateTrainerError, isUpdatingTrainer, updateTrainerStatus]);
+
   return (
     <FormProvider {...methods}>
       <FormWrapper>
@@ -86,17 +108,17 @@ export const TrainerConfigurationForm: React.FC<{
             label={defaultValues ? "update" : "finish"}
             variant="contained"
             onClick={handleSubmit((data) => onSubmit(data))}
-            loading={pending}
+            loading={isUpdatingTrainer}
             disabled={!canSubmit}
           />
         </FormBox>
 
-        {/* <FormMapBox> */}
-        {/* <LeafletMap
+        <FormMapBox>
+          <LeafletMap
             selectedGyms={selectedGyms}
             gymsChangeHandler={gymsChangeHandler}
-          /> */}
-        {/* </FormMapBox> */}
+          />
+        </FormMapBox>
       </FormWrapper>
     </FormProvider>
   );

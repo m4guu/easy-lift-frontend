@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -6,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useUserContext } from "../../../contexts/userContext";
 import { useUpdateEmailMutation } from "../../queryHooks/auth/useUpdateEmailMutation";
 import { UpdateEmailData } from "../../../shared/interfaces";
+import { PATHS } from "../../../pages/paths";
 
 export enum EmailUpdateFields {
   EMAIL = "email",
@@ -32,10 +34,12 @@ const schema = yup.object().shape({
 });
 
 export const useEmailUpdateForm = () => {
-  const { user } = useUserContext();
+  const { user, login } = useUserContext();
+  const navigate = useNavigate();
   const {
     isLoading: isUpdatingEmail,
     error: updateEmailError,
+    status: updateEmailStatus,
     mutateAsync: updateEmailQuery,
   } = useUpdateEmailMutation();
 
@@ -59,7 +63,11 @@ export const useEmailUpdateForm = () => {
           newEmail: formValues.email,
           password: formValues.password,
         };
-        updateEmailQuery(updateEmailData);
+        updateEmailQuery(updateEmailData).then(() => {
+          login({ email: formValues.email, password: formValues.password });
+          resetForm();
+          navigate(PATHS.PROFILE);
+        });
       } else {
         methods.setError(EmailUpdateFields.CONFIRM_EMAIL, {
           type: "manual",
@@ -67,7 +75,7 @@ export const useEmailUpdateForm = () => {
         });
       }
     },
-    [methods, updateEmailQuery, user]
+    [methods, updateEmailQuery, user, resetForm, navigate, login]
   );
 
   return {
@@ -77,5 +85,6 @@ export const useEmailUpdateForm = () => {
     resetForm,
     isUpdatingEmail,
     updateEmailError,
+    updateEmailStatus,
   };
 };

@@ -43,6 +43,7 @@ const ModalContainer = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
   borderRadius: theme.spacing(0.5),
   backgroundColor: theme.palette.background.layout,
+  minWidth: "25rem",
   [theme.breakpoints.down("sm")]: {
     width: "95%",
   },

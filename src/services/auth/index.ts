@@ -65,10 +65,16 @@ const AuthService = {
   [AuthMethods.LOGOUT]: () => HttpService.post<void>(ENDPOINTS.LOGOUT),
 
   [AuthMethods.UPDATE_EMAIL]: (updateEmailData: UpdateEmailData) =>
-    HttpService.patch<User>(ENDPOINTS.UPDATE_EMAIL, updateEmailData),
+    HttpService.patch<User>(
+      `${ENDPOINTS.USERS}/${ENDPOINTS.UPDATE_EMAIL}`,
+      updateEmailData
+    ),
 
   [AuthMethods.UPDATE_PASSWORD]: (updatePasswordData: UpdatePasswordData) =>
-    HttpService.patch<User>(ENDPOINTS.UPDATE_PASSWORD, updatePasswordData),
+    HttpService.patch<User>(
+      `${ENDPOINTS.USERS}/${ENDPOINTS.UPDATE_PASSWORD}`,
+      updatePasswordData
+    ),
 };
 
 export default AuthService;

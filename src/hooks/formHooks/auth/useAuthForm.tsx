@@ -55,7 +55,11 @@ export const useAuthForm = (authType: AuthTypes) => {
   });
   const { watch, reset } = methods;
 
-  const resetForm = useCallback(() => reset(), [reset]);
+  // reset form expect email
+  const resetForm = useCallback(() => {
+    const emailValue = watch(AuthFormFields.E_MAIL);
+    reset({ [AuthFormFields.E_MAIL]: emailValue });
+  }, [reset, watch]);
 
   const { email, password, confirmPassword } = watch();
   const canSubmit = email && password && confirmPassword;
@@ -77,11 +81,13 @@ export const useAuthForm = (authType: AuthTypes) => {
         };
         registerUser(newUser).then(resetForm);
       } else {
-        // todo: throw error when passwords doesnt match
-        alert("password doesnt match");
+        methods.setError(AuthFormFields.CONFIRM_PASSWORD, {
+          type: "manual",
+          message: "Password must match.",
+        });
       }
     },
-    [authType, login, registerUser, resetForm]
+    [authType, login, registerUser, resetForm, methods]
   );
 
   return {

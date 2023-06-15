@@ -11,22 +11,33 @@ import { Submit } from "../../../../../../components";
 import { ConfirmEmail, Password, UpdateEmail } from "./views/emailUpdate.form";
 import { FormWrapper } from "../../../../../Auth/views/AuthForm/styles/AuthForm.styles";
 
-import { SnackbarStatus } from "../../../../../../shared/enums";
+import { SnackbarStatus, Status } from "../../../../../../shared/enums";
 
 export const EmailUpdateForm: React.FC<{ currentEmail: string }> = ({
   currentEmail,
 }) => {
-  const { methods, onSubmit, isUpdatingEmail, updateEmailError } =
-    useEmailUpdateForm();
+  const {
+    methods,
+    onSubmit,
+    isUpdatingEmail,
+    updateEmailError,
+    updateEmailStatus,
+  } = useEmailUpdateForm();
   const { handleSubmit } = methods;
 
   const snackbar = useSnackbar();
 
   useEffect(() => {
     if (updateEmailError) {
-      snackbar(updateEmailError.message, SnackbarStatus.ERROR);
+      snackbar("Something goes wrong. Please try later.", SnackbarStatus.ERROR);
     }
-  }, [snackbar, updateEmailError]);
+    if (!isUpdatingEmail && updateEmailStatus === Status.SUCCESS) {
+      snackbar(
+        "Saved! Thank you for keeping us up to date.",
+        SnackbarStatus.SUCCESS
+      );
+    }
+  }, [snackbar, updateEmailError, isUpdatingEmail, updateEmailStatus]);
 
   return (
     <FormProvider {...methods}>

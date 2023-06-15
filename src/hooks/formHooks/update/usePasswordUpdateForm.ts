@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -6,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useUserContext } from "../../../contexts/userContext";
 import { useUpdatePasswordMutation } from "../../queryHooks/auth/useUpdatePasswordMutation";
 import { UpdatePasswordData } from "../../../shared/interfaces";
+import { PATHS } from "../../../pages/paths";
 
 export enum PasswordUpdateFields {
   NEW_PASSWORD = "newPassword",
@@ -36,9 +38,11 @@ const schema = yup.object().shape({
 });
 
 export const usePasswordUpdateForm = () => {
-  const { user } = useUserContext();
+  const { user, login } = useUserContext();
+  const navigate = useNavigate();
   const {
     isLoading: isUpdatingPassword,
+    status: updatePasswordStatus,
     error: updatePasswordError,
     mutateAsync: updatePasswordQuery,
   } = useUpdatePasswordMutation();
@@ -63,7 +67,12 @@ export const usePasswordUpdateForm = () => {
           newPassword: formValues.newPassword,
           password: formValues.password,
         };
-        updatePasswordQuery(updatePasswordData);
+
+        updatePasswordQuery(updatePasswordData).then(() => {
+          login({ email: user?.email!, password: formValues.newPassword });
+          resetForm();
+          navigate(PATHS.PROFILE);
+        });
       } else {
         methods.setError(PasswordUpdateFields.CONFIRM_PASSWORD, {
           type: "manual",
@@ -71,7 +80,7 @@ export const usePasswordUpdateForm = () => {
         });
       }
     },
-    [methods, updatePasswordQuery, user]
+    [methods, updatePasswordQuery, user, login, navigate, resetForm]
   );
 
   return {
@@ -81,5 +90,6 @@ export const usePasswordUpdateForm = () => {
     resetForm,
     isUpdatingPassword,
     updatePasswordError,
+    updatePasswordStatus,
   };
 };

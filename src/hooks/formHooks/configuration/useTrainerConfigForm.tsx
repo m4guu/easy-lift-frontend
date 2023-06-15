@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
@@ -44,8 +44,12 @@ export const useTrainerConfigForm = ({
 }: {
   defaultUpdateValues?: TrainerConfig;
 }) => {
-  const [pending, setPending] = useState(false);
-  const { mutateAsync: configureTrainerQuery } = useConfigureTrainerMutation();
+  const {
+    status: updateTrainerStatus,
+    error: updateTrainerError,
+    isLoading: isUpdatingTrainer,
+    mutateAsync: configureTrainerQuery,
+  } = useConfigureTrainerMutation();
   const { user, autoLogin } = useUserContext();
   const navigate = useNavigate();
 
@@ -64,8 +68,6 @@ export const useTrainerConfigForm = ({
 
   const onSubmit = useCallback(
     (formValues: TrainerConfig) => {
-      setPending(true);
-
       const updatedTrainer: Partial<User> = {
         name: formValues.name,
         image: formValues.image[0],
@@ -84,22 +86,25 @@ export const useTrainerConfigForm = ({
         }
       });
 
-      configureTrainerQuery({ updatedTrainer: formData, userId: user!.id })
-        .then(() => {
-          autoLogin();
-          resetForm();
-          navigate(PATHS.default);
-        })
-        .finally(() => setPending(false));
+      configureTrainerQuery({
+        updatedTrainer: formData,
+        userId: user!.id,
+      }).then(() => {
+        autoLogin();
+        resetForm();
+        navigate(PATHS.default);
+      });
     },
     [configureTrainerQuery, resetForm, user, navigate, autoLogin]
   );
 
   return {
-    pending,
     methods,
     canSubmit,
     onSubmit,
     resetForm,
+    updateTrainerStatus,
+    updateTrainerError,
+    isUpdatingTrainer,
   };
 };
