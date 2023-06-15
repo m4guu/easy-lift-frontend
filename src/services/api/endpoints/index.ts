@@ -15,6 +15,8 @@ enum ENDPOINTS {
   CONFIG_TRAINER = "configure/trainer",
   UPDATE_EMAIL = "updateEmail",
   UPDATE_PASSWORD = "updatePassword",
+  WEIGHT_HISTORY = "weight-history",
+  UPDATE_WEIGHT_HISTORY = "weight-history/update",
 
   // exerciseDB API
   EXERCISES = "exercises",

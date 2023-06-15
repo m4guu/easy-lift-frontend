@@ -15,6 +15,7 @@ export type { default as Set } from "./Set";
 export type { default as Workout } from "./Workout";
 export type { default as Trainer } from "./Trainer";
 export type { default as User } from "./User";
+export type { default as WeightHistory } from "./WeightHistory";
 export type { default as UpdateEmailData } from "./UpdateEmailData";
 export type { default as UpdatePasswordData } from "./UpdatePasswordData";
 

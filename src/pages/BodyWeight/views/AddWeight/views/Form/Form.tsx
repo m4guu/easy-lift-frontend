@@ -8,22 +8,29 @@ import { useSnackbar } from "../../../../../../hooks";
 
 import { BodyWeight } from "./views/BodyWeightUpdate.form";
 import { Submit } from "../../../../../../components";
-import { SnackbarStatus } from "../../../../../../shared/enums";
+import { SnackbarStatus, Status } from "../../../../../../shared/enums";
 
 export const Form: React.FC = () => {
-  const { methods, canSubmit, onSubmit, pending } = useBodyWeightUpdate();
   const {
-    handleSubmit,
-    formState: { isSubmitSuccessful },
-  } = methods;
+    methods,
+    canSubmit,
+    onSubmit,
+    isUpdatingWeight,
+    updateWeightError,
+    updateWeightStatus,
+  } = useBodyWeightUpdate();
+  const { handleSubmit } = methods;
 
   const snackbar = useSnackbar();
 
   useEffect(() => {
-    if (isSubmitSuccessful) {
-      snackbar("Body weight updated successfuly !", SnackbarStatus.SUCCESS);
+    if (updateWeightError) {
+      snackbar("Something goes wrong. Please try later.", SnackbarStatus.ERROR);
     }
-  }, [snackbar, isSubmitSuccessful]);
+    if (!isUpdatingWeight && updateWeightStatus === Status.SUCCESS) {
+      snackbar("Weight saved successfully!.", SnackbarStatus.SUCCESS);
+    }
+  }, [snackbar, updateWeightError, isUpdatingWeight, updateWeightStatus]);
 
   return (
     <FormProvider {...methods}>
@@ -36,7 +43,7 @@ export const Form: React.FC = () => {
         variant="outlined"
         size="small"
         onClick={handleSubmit((data) => onSubmit(data))}
-        loading={pending}
+        loading={isUpdatingWeight}
         disabled={!canSubmit}
         color="info"
       />

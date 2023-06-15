@@ -15,7 +15,7 @@ import { User } from "../../shared/interfaces";
 export const generateDefaultUserConfigFormValues = (user: User): UserConfig => {
   return {
     [UserConfigFields.NAME]: user.name,
-    [UserConfigFields.WEIGHT]: user.bodyWeights?.at(-1)?.weight!,
+    [UserConfigFields.WEIGHT]: user.currentWeight!,
     [UserConfigFields.HEIGHT]: user.height!,
     [UserConfigFields.IMAGE]: undefined as unknown as File[],
   };
@@ -43,7 +43,7 @@ export const generateUserBasicInfo = (
           {
             id: uuidv4(),
             name: "weight",
-            value: user.bodyWeights?.at(-1)?.weight!,
+            value: user.currentWeight!,
           },
         ]
       : [

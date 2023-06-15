@@ -11,7 +11,6 @@ import useSnackbar from "../useSnackbar";
 
 import { SnackbarStatus, Status } from "../../shared/enums";
 import { User, LoginCredentials, CreateUser } from "../../shared/interfaces";
-import { PATHS } from "../../pages/paths";
 
 type UseAuthReturnType = {
   isLogging: boolean;

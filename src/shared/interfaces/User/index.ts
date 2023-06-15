@@ -1,4 +1,3 @@
-import BodyWeight from "../BodyWeight";
 import { Role } from "../../enums";
 
 interface User {
@@ -9,9 +8,9 @@ interface User {
   role: Role;
   isConfigured: boolean;
   image: string | File;
+  currentWeight?: number;
   description?: string;
   gyms?: string[];
-  bodyWeights?: BodyWeight[];
   height?: number;
 }
 

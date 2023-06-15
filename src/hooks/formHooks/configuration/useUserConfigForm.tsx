@@ -75,7 +75,7 @@ export const useUserConfigForm = ({
       const updatedUser: Partial<User> = {
         name: formValues.name,
         height: formValues.height,
-        bodyWeights: [{ weight: formValues.weight, date: getTodayDate() }],
+        currentWeight: formValues.weight,
         image: formValues.image ? formValues.image[0] : "",
       };
 

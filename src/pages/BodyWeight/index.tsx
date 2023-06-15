@@ -6,15 +6,17 @@ import { SectionHeader } from "../../components";
 import { AddWeight } from "./views/AddWeight/AddWeight";
 import { WeightChart } from "./views/WeightChart/WeightChart";
 import { WeightHistory } from "./views/WeightHistory/WeightHistory";
+import { useUserContext } from "../../contexts/userContext";
 
 const BodyWeight: React.FC = () => {
+  const { user } = useUserContext();
   return (
     <SectionContainer>
       <SectionHeader>body weight</SectionHeader>
 
-      <WeightChart />
+      {user && <WeightChart userId={user.id} />}
       <AddWeight />
-      <WeightHistory />
+      {user && <WeightHistory userId={user.id} />}
     </SectionContainer>
   );
 };
