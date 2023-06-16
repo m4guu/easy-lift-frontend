@@ -16,16 +16,17 @@ export const WeightHistory: React.FC<{ userId: string }> = ({ userId }) => {
       <NoPaddingDivider />
 
       <HistoryList disablePadding>
-        {weightHistory?.bodyWeights?.map((weight) => {
-          return (
-            <Item key={uuidv4()} disablePadding>
-              <Container>
-                <BodyWeightItem weight={weight} />
-                <Divider />
-              </Container>
-            </Item>
-          );
-        })}
+        {weightHistory &&
+          weightHistory.bodyWeights.map((weight) => {
+            return (
+              <Item key={uuidv4()} disablePadding>
+                <Container>
+                  <BodyWeightItem weight={weight} />
+                  <Divider />
+                </Container>
+              </Item>
+            );
+          })}
       </HistoryList>
     </SectionContainer>
   );

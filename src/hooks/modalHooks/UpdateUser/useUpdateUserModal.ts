@@ -2,9 +2,9 @@ import { useState } from "react";
 import { UpdateUserModalProps } from "../../../modals/Update";
 
 export interface UseUpdateUserModalArgs {
-  tHeader: string;
-  tForm: JSX.Element;
-  tDescription?: string;
+  header: string;
+  form: JSX.Element;
+  description?: string;
 }
 
 interface UseUpdateUserModalReturn {
@@ -13,9 +13,9 @@ interface UseUpdateUserModalReturn {
 }
 
 export const useUpdateUserModal = ({
-  tForm,
-  tHeader,
-  tDescription,
+  form,
+  header,
+  description,
 }: UseUpdateUserModalArgs): UseUpdateUserModalReturn => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -29,9 +29,9 @@ export const useUpdateUserModal = ({
   const modalProps: UpdateUserModalProps = {
     isOpen: isModalOpen,
     onClose: closeModal,
-    tForm,
-    tHeader,
-    tDescription,
+    form,
+    header,
+    description,
   };
 
   return {

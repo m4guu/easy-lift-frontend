@@ -36,7 +36,7 @@ export const UserBasicInfo: React.FC<{ user: User }> = ({ user }) => {
 
   const userImage = `${API_URL}${user?.image}`;
   const basicInfo = generateUserBasicInfo(user);
-  const tForm =
+  const form =
     user.role === Role.user ? (
       <UserConfigurationForm
         defaultValues={generateDefaultUserConfigFormValues(user)}
@@ -48,8 +48,8 @@ export const UserBasicInfo: React.FC<{ user: User }> = ({ user }) => {
     );
 
   const updateBasicInfoButtonProps: UseUpdateUserModalArgs = {
-    tHeader: "Update my data",
-    tForm,
+    header: "Update my data",
+    form,
   };
 
   return (

@@ -14,10 +14,10 @@ export const partialEmailField: Omit<
 
 export const partialUpdateEmailButtonProps: Omit<
   UseUpdateUserModalArgs,
-  "tForm"
+  "form"
 > = {
-  tHeader: "change e-mail address",
-  tDescription:
+  header: "change e-mail address",
+  description:
     "We will make sure that all important messages from EasyLift are sent to your new e-mail address.",
 };
 
@@ -32,9 +32,9 @@ export const partialPasswordField: Omit<
 
 export const partialUpdatePasswordButtonProps: Omit<
   UseUpdateUserModalArgs,
-  "tForm"
+  "form"
 > = {
-  tHeader: "change password",
-  tDescription:
+  header: "change password",
+  description:
     "You can update your password at any time to keep your EasyLift account secure.",
 };

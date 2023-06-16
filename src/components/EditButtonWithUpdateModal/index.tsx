@@ -15,9 +15,9 @@ const EditButtonWithUpdateModalComponent: React.FC<
   EditButtonWithUpdateModalProps
 > = ({ updateProps, ...other }) => {
   const { openModal, modalProps } = useUpdateUserModal({
-    tHeader: updateProps.tHeader,
-    tDescription: updateProps.tDescription,
-    tForm: updateProps.tForm,
+    header: updateProps.header,
+    description: updateProps.description,
+    form: updateProps.form,
   });
   return (
     <>

@@ -7,25 +7,25 @@ import { styled } from "@mui/system";
 export interface UpdateUserModalProps {
   isOpen: boolean;
   onClose: () => void;
-  tForm: JSX.Element;
-  tHeader: string;
-  tDescription?: string;
+  form: JSX.Element;
+  header: string;
+  description?: string;
 }
 
 const UpdateUserModal: React.FC<UpdateUserModalProps> = ({
   isOpen,
   onClose,
-  tForm,
-  tHeader,
-  tDescription,
+  form,
+  header,
+  description,
 }) => {
   return (
     <Modal open={isOpen} onClose={onClose}>
       <ModalContainer>
-        <Header color="primary">{tHeader}</Header>
-        {tDescription && <ModalDescription>{tDescription}</ModalDescription>}
+        <Header color="primary">{header}</Header>
+        {description && <ModalDescription>{description}</ModalDescription>}
         <NoPaddingDivider />
-        {tForm}
+        {form}
 
         <CloseButton onClick={onClose}>
           <CloseIcon />

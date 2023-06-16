@@ -27,14 +27,14 @@ export const UserInformation: React.FC<UserInformationProps> = ({ user }) => {
     value: user.email,
     updateButtonProps: {
       ...partialUpdateEmailButtonProps,
-      tForm: <EmailUpdateForm currentEmail={user.email} />,
+      form: <EmailUpdateForm currentEmail={user.email} />,
     },
   };
   const passwordField: FieldUserInformation = {
     ...partialPasswordField,
     updateButtonProps: {
       ...partialUpdatePasswordButtonProps,
-      tForm: <PasswordUpdateForm />,
+      form: <PasswordUpdateForm />,
     },
   };
 

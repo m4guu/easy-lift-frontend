@@ -12,7 +12,7 @@ type UserFieldInfoProps = {
 };
 
 const UserFieldInfo: React.FC<UserFieldInfoProps> = ({ field }) => {
-  const isBelowSmBreakpoint = useMediaQuery((theme: Theme) =>
+  const isMobile = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("sm")
   );
 
@@ -33,7 +33,7 @@ const UserFieldInfo: React.FC<UserFieldInfoProps> = ({ field }) => {
         variant="outlined"
         updateProps={field.updateButtonProps}
         size="small"
-        fullWidth={isBelowSmBreakpoint}
+        fullWidth={isMobile}
       />
     </Container>
   );
