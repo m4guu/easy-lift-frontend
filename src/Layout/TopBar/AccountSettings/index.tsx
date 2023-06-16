@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import { styled } from "@mui/system";
 import {
@@ -12,10 +13,12 @@ import {
   Button,
 } from "@mui/material";
 import Logout from "@mui/icons-material/Logout";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import { useUserContext } from "../../../contexts/userContext";
 
 import { ThemeModeSwitch } from "../../../components";
+import { PATHS } from "../../../pages/paths";
 
 type AccountSettingsProps = {
   image?: string;
@@ -23,6 +26,7 @@ type AccountSettingsProps = {
 
 const AccountSettings: React.FC<AccountSettingsProps> = ({ image }) => {
   const { logout } = useUserContext();
+  const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -57,13 +61,23 @@ const AccountSettings: React.FC<AccountSettingsProps> = ({ image }) => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <SettingsMenuItem>
-          <LogoutButton onClick={logout}>
+          <ListItemButton onClick={() => navigate(PATHS.PROFILE)}>
+            <ListItemIcon>
+              <AccountCircleIcon fontSize="medium" />
+            </ListItemIcon>
+            profile
+          </ListItemButton>
+        </SettingsMenuItem>
+
+        <SettingsMenuItem>
+          <ListItemButton onClick={logout}>
             <ListItemIcon>
               <Logout fontSize="small" />
             </ListItemIcon>
-            Logout
-          </LogoutButton>
+            logout
+          </ListItemButton>
         </SettingsMenuItem>
+
         <ThemeModeSwitchBox>
           <ThemeModeSwitch />
         </ThemeModeSwitchBox>
@@ -89,7 +103,7 @@ const SettingsMenuItem = styled(MenuItem)({
   padding: 0,
 });
 
-const LogoutButton = styled(Button)(({ theme }) => ({
+const ListItemButton = styled(Button)(({ theme }) => ({
   minWidth: 0,
   borderRadius: 0,
   "&:hover": {

@@ -4,28 +4,29 @@ import { v4 as uuidv4 } from "uuid";
 import { Box, Divider, List, ListItem } from "@mui/material";
 import { styled } from "@mui/system";
 
-import { useUserContext } from "../../../../contexts/userContext";
-
 import { SectionHeader, BodyWeightItem } from "../../../../components";
+import { useWeightHistory } from "../../../../hooks/queryHooks/weightHistory/useWeightHistory";
 
-export const WeightHistory: React.FC = () => {
-  const { user } = useUserContext();
+export const WeightHistory: React.FC<{ userId: string }> = ({ userId }) => {
+  const { error, data: weightHistory } = useWeightHistory(userId);
+
   return (
     <SectionContainer>
       <SectionHeader>history</SectionHeader>
       <NoPaddingDivider />
 
       <HistoryList disablePadding>
-        {user?.bodyWeights?.map((weight) => {
-          return (
-            <Item key={uuidv4()} disablePadding>
-              <Container>
-                <BodyWeightItem weight={weight} />
-                <Divider />
-              </Container>
-            </Item>
-          );
-        })}
+        {weightHistory &&
+          weightHistory.bodyWeights.map((weight) => {
+            return (
+              <Item key={uuidv4()} disablePadding>
+                <Container>
+                  <BodyWeightItem weight={weight} />
+                  <Divider />
+                </Container>
+              </Item>
+            );
+          })}
       </HistoryList>
     </SectionContainer>
   );

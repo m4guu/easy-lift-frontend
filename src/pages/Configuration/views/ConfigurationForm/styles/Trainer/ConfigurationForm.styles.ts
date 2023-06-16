@@ -6,10 +6,19 @@ export const FormWrapper = styled("form")(({ theme }) => ({
   flex: 1,
   margin: `${theme.spacing(2)} 0`,
   justifyContent: "space-between",
+  minWidth: "70rem",
   [theme.breakpoints.down("lg")]: {
     flexDirection: "column",
     alignItems: "center",
+    minWidth: "40rem",
+    margin: 0,
     width: "100%",
+  },
+  [theme.breakpoints.down("md")]: {
+    minWidth: "20rem",
+  },
+  [theme.breakpoints.down("sm")]: {
+    minWidth: "15rem",
   },
 }));
 
@@ -22,7 +31,7 @@ export const FormBox = styled(Box)(({ theme }) => ({
   marginRight: "auto",
   gap: theme.spacing(2),
   [theme.breakpoints.down("lg")]: {
-    width: "50%",
+    width: "80%",
   },
   [theme.breakpoints.down("md")]: {
     width: "100%",
@@ -30,10 +39,8 @@ export const FormBox = styled(Box)(({ theme }) => ({
 }));
 export const FormMapBox = styled(Box)(({ theme }) => ({
   minWidth: "50%",
-  margin: ` -${theme.spacing(4)} -${theme.spacing(2)} -${theme.spacing(4)} 0`,
-  [theme.breakpoints.down("md")]: {
-    margin: `${theme.spacing(2)} 0`,
-    minWidth: "100%",
+  [theme.breakpoints.down("lg")]: {
+    display: "none",
   },
 }));
 export const Title = styled(Typography)(({ theme }) => ({

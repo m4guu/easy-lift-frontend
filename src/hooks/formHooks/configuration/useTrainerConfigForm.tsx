@@ -8,8 +8,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useConfigureTrainerMutation } from "../../queryHooks/auth/useConfigureTrainerMutation";
 import { useUserContext } from "../../../contexts/userContext";
 
-import { User } from "../../../shared/interfaces";
+import { Gym, User } from "../../../shared/interfaces";
 import { PATHS } from "../../../pages/paths";
+import { gyms as allGyms } from "../../../pages/Configuration/views/ConfigurationForm/views/Trainer/form/constans";
 
 export enum TrainerConfigFields {
   NAME = "name",
@@ -32,41 +33,57 @@ export const defaultValues = {
   [TrainerConfigFields.IMAGE]: undefined as unknown as File[],
 };
 
-const schema = yup.object().shape({
+const defaultSchema = yup.object().shape({
   [TrainerConfigFields.NAME]: yup.string().required().min(4).max(15),
   [TrainerConfigFields.DESCRIPTION]: yup.string().required().min(20).max(100),
   [TrainerConfigFields.GYMS]: yup.array().of(yup.string()),
-  [TrainerConfigFields.IMAGE]: yup.mixed().required(),
 });
 
-export const useTrainerConfigForm = () => {
-  const [pending, setPending] = useState(false);
-  const { mutateAsync: configureTrainerQuery } = useConfigureTrainerMutation();
+export const useTrainerConfigForm = ({
+  defaultUpdateValues,
+}: {
+  defaultUpdateValues?: TrainerConfig;
+}) => {
+  const {
+    status: updateTrainerStatus,
+    error: updateTrainerError,
+    isLoading: isUpdatingTrainer,
+    mutateAsync: configureTrainerQuery,
+  } = useConfigureTrainerMutation();
+
   const { user, autoLogin } = useUserContext();
   const navigate = useNavigate();
+  const initSelectedGyms = defaultUpdateValues?.gyms
+    ? allGyms.filter((gym) => defaultUpdateValues?.gyms?.includes(gym.id))
+    : [];
+  const [selectedGyms, setSelectedGyms] = useState<Gym[]>(initSelectedGyms);
+
+  const schema = defaultUpdateValues
+    ? defaultSchema
+    : defaultSchema.shape({
+        [TrainerConfigFields.IMAGE]: yup.mixed().required(),
+      });
 
   const methods = useForm<TrainerConfig>({
-    defaultValues,
+    defaultValues: defaultUpdateValues || defaultValues,
     resolver: yupResolver(schema),
   });
 
-  const { watch, reset } = methods;
+  const { watch, reset, setValue } = methods;
 
   const resetForm = useCallback(() => reset(), [reset]);
 
-  const { name, description, gyms, image } = watch();
+  const { name, description, gyms } = watch();
 
-  const canSubmit = name && description && gyms && image;
+  const canSubmit = name && description && gyms;
 
   const onSubmit = useCallback(
     (formValues: TrainerConfig) => {
-      setPending(true);
-
       const updatedTrainer: Partial<User> = {
         name: formValues.name,
-        image: formValues.image[0],
         description: formValues.description,
         gyms: formValues.gyms,
+        image: formValues.image ? formValues.image[0] : "",
       };
 
       const formData = new FormData();
@@ -80,22 +97,55 @@ export const useTrainerConfigForm = () => {
         }
       });
 
-      configureTrainerQuery({ updatedTrainer: formData, userId: user!.id })
-        .then(() => {
-          autoLogin();
-          resetForm();
-          navigate(PATHS.default);
-        })
-        .finally(() => setPending(false));
+      configureTrainerQuery({
+        updatedTrainer: formData,
+        userId: user!.id,
+      }).then(() => {
+        autoLogin();
+        resetForm();
+        navigate(PATHS.default);
+      });
     },
     [configureTrainerQuery, resetForm, user, navigate, autoLogin]
   );
 
+  const removeGym = (gym: Gym) => {
+    const updatedGyms = selectedGyms.filter(
+      (selectedGym) => selectedGym.id !== gym.id
+    );
+    const updatedGymsIds = updatedGyms.map((updatedGym) => updatedGym.id);
+    // remove existing gym
+    setSelectedGyms(updatedGyms);
+    // remove form field existing gym
+    setValue(TrainerConfigFields.GYMS, updatedGymsIds);
+  };
+
+  const gymsChangeHandler = (selectedGym: Gym) => {
+    const isSelected = !!selectedGyms.filter((gym) => gym.id === selectedGym.id)
+      .length;
+
+    if (isSelected) {
+      removeGym(selectedGym);
+    } else {
+      const updatedGyms = [...selectedGyms, selectedGym];
+      const updatedGymsIds = updatedGyms.map((updatedGym) => updatedGym.id);
+      // change existing gyms
+      setSelectedGyms(updatedGyms);
+      // update form field gyms
+      setValue(TrainerConfigFields.GYMS, updatedGymsIds);
+    }
+  };
+
   return {
-    pending,
     methods,
     canSubmit,
     onSubmit,
     resetForm,
+    updateTrainerStatus,
+    updateTrainerError,
+    isUpdatingTrainer,
+    removeGym,
+    gymsChangeHandler,
+    selectedGyms,
   };
 };

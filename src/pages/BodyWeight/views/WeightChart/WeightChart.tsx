@@ -5,15 +5,15 @@ import { styled, useTheme } from "@mui/system";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 
-import { useUserContext } from "../../../../contexts/userContext";
+import { useWeightHistory } from "../../../../hooks/queryHooks/weightHistory/useWeightHistory";
 
 import { generateChartData } from "../../../../utils/ChartData";
 import { Chart } from "../../../../utils/LineChart";
 
 import { ChartType } from "../../../../shared/enums";
 
-export const WeightChart: React.FC = () => {
-  const { user } = useUserContext();
+export const WeightChart: React.FC<{ userId: string }> = ({ userId }) => {
+  const { error, data: weightHistory } = useWeightHistory(userId);
   const theme = useTheme();
   const isDownSm = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -31,7 +31,7 @@ export const WeightChart: React.FC = () => {
 
   const { labels, data } = generateChartData(
     ChartType.weight,
-    user!.bodyWeights!
+    weightHistory?.bodyWeights || []
   );
 
   const isLosingWeight = data[data.length - 1] < data[data.length - 2];

@@ -1,5 +1,6 @@
 export type { default as BodyWeight } from "./BodyWeight";
 export type { default as Exercise } from "./Exercise";
+export type { default as FieldUserInformation } from "./FieldUserInformation";
 export type { default as Gym } from "./Gym";
 export type { default as LoginCredentials } from "./LoginCredentials";
 export type { default as ChartMenuData } from "./ChartMenuData";
@@ -14,6 +15,9 @@ export type { default as Set } from "./Set";
 export type { default as Workout } from "./Workout";
 export type { default as Trainer } from "./Trainer";
 export type { default as User } from "./User";
+export type { default as WeightHistory } from "./WeightHistory";
+export type { default as UpdateEmailData } from "./UpdateEmailData";
+export type { default as UpdatePasswordData } from "./UpdatePasswordData";
 
 export type { default as FormExercise } from "./WorkoutForm/FormExercise";
 export type { default as FormSet } from "./WorkoutForm/FormSet";

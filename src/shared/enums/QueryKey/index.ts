@@ -3,6 +3,8 @@ enum QueryKey {
   WORKOUT = "workout",
   USER_WORKOUTS = "userWorkouts",
 
+  USER_WEIGHT_HISTORY = "userWeightHistory",
+
   PROGRAMS = "programs",
   PROGRAM = "program",
   TEN_PROGRAMS = "10programs",

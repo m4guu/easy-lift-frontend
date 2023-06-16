@@ -18,10 +18,12 @@ const ConfigurationPage: React.FC = () => {
         <Logo />
       </LogoWrapper>
 
+      <NoPaddingDivider />
       <SectionContent>
-        <NoPaddingDivider />
         {user?.role === Role.user ? (
-          <UserConfigurationForm />
+          <UserConfigFormContainer>
+            <UserConfigurationForm />
+          </UserConfigFormContainer>
         ) : (
           <TrainerConfigurationForm />
         )}
@@ -42,6 +44,12 @@ const SectionContent = styled(Box)({
   flexDirection: "column",
   flex: 1,
   textAlign: "center",
+});
+
+const UserConfigFormContainer = styled(Box)({
+  minWidth: "25rem",
+  marginLeft: "auto",
+  marginRight: "auto",
 });
 
 const LogoWrapper = styled(Box)({

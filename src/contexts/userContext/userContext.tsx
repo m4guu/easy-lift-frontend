@@ -14,7 +14,6 @@ interface UserContextType {
   autoLogin: () => void;
   registerUser: UseMutateAsyncFunction<void, unknown, CreateUser, unknown>;
   logout: () => void;
-  resetPassword: (password: string) => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -28,7 +27,6 @@ const UserProvider: React.FCWithChildren = ({ children }) => {
     login,
     registerUser,
     logout,
-    resetPassword,
     autoLogin,
   } = useAuth();
 
@@ -47,7 +45,6 @@ const UserProvider: React.FCWithChildren = ({ children }) => {
       autoLogin,
       registerUser,
       logout,
-      resetPassword,
     }),
     [
       user,
@@ -55,7 +52,6 @@ const UserProvider: React.FCWithChildren = ({ children }) => {
       autoLogin,
       registerUser,
       logout,
-      resetPassword,
       isLogging,
       isRegistering,
       registerStatus,

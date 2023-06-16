@@ -1,15 +1,15 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useConfigureUserMutation } from "../../queryHooks/auth/useConfigureUserMutation";
 import { useUserContext } from "../../../contexts/userContext";
 
-import { User } from "../../../shared/interfaces";
 import { getTodayDate } from "../../../utils/Date";
+
+import { User } from "../../../shared/interfaces";
 import { PATHS } from "../../../pages/paths";
 
 export enum UserConfigFields {
@@ -25,28 +25,41 @@ export interface UserConfig {
   [UserConfigFields.IMAGE]: File[];
 }
 
-export const defaultValues = {
+export const defaultValues: UserConfig = {
   [UserConfigFields.NAME]: "",
   [UserConfigFields.HEIGHT]: 60,
   [UserConfigFields.WEIGHT]: 30,
   [UserConfigFields.IMAGE]: undefined as unknown as File[],
 };
 
-const schema = yup.object().shape({
+const defaultSchema = yup.object().shape({
   [UserConfigFields.NAME]: yup.string().required().min(4).max(15),
   [UserConfigFields.HEIGHT]: yup.number().required().min(60).max(260),
   [UserConfigFields.WEIGHT]: yup.number().required().min(30).max(610),
-  [UserConfigFields.IMAGE]: yup.mixed().required(),
 });
 
-export const useUserConfigForm = () => {
-  const [pending, setPending] = useState(false);
-  const { mutateAsync: configureUserQuery } = useConfigureUserMutation();
+export const useUserConfigForm = ({
+  defaultUpdateValues,
+}: {
+  defaultUpdateValues?: UserConfig;
+}) => {
+  const {
+    status: updateUserStatus,
+    error: updateUserError,
+    isLoading: isUpdatingUser,
+    mutateAsync: configureUserQuery,
+  } = useConfigureUserMutation();
   const { user, autoLogin } = useUserContext();
   const navigate = useNavigate();
 
+  const schema = defaultUpdateValues
+    ? defaultSchema
+    : defaultSchema.shape({
+        [UserConfigFields.IMAGE]: yup.mixed().required(),
+      });
+
   const methods = useForm<UserConfig>({
-    defaultValues,
+    defaultValues: defaultUpdateValues || defaultValues,
     resolver: yupResolver(schema),
   });
 
@@ -54,18 +67,16 @@ export const useUserConfigForm = () => {
 
   const resetForm = useCallback(() => reset(), [reset]);
 
-  const { name, height, weight, image } = watch();
-  const canSubmit = name && height && weight && image;
+  const { name, height, weight } = watch();
+  const canSubmit = name && height && weight;
 
   const onSubmit = useCallback(
     (formValues: UserConfig) => {
-      setPending(true);
-
       const updatedUser: Partial<User> = {
         name: formValues.name,
-        image: formValues.image[0],
         height: formValues.height,
-        bodyWeights: [{ weight: formValues.weight, date: getTodayDate() }],
+        currentWeight: formValues.weight,
+        image: formValues.image ? formValues.image[0] : "",
       };
 
       const formData = new FormData();
@@ -79,22 +90,24 @@ export const useUserConfigForm = () => {
         }
       });
 
-      configureUserQuery({ updatedUser: formData, userId: user!.id })
-        .then(() => {
+      configureUserQuery({ updatedUser: formData, userId: user!.id }).then(
+        () => {
           autoLogin();
           resetForm();
           navigate(PATHS.default);
-        })
-        .finally(() => setPending(false));
+        }
+      );
     },
     [configureUserQuery, resetForm, user, navigate, autoLogin]
   );
 
   return {
-    pending,
     methods,
     canSubmit,
     onSubmit,
     resetForm,
+    updateUserStatus,
+    updateUserError,
+    isUpdatingUser,
   };
 };

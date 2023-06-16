@@ -13,7 +13,10 @@ enum ENDPOINTS {
   REGISTER = "auth/register",
   CONFIG_USER = "configure/user",
   CONFIG_TRAINER = "configure/trainer",
-  RESET_PASSWORD = "resetPassword",
+  UPDATE_EMAIL = "updateEmail",
+  UPDATE_PASSWORD = "updatePassword",
+  WEIGHT_HISTORY = "weight-history",
+  UPDATE_WEIGHT_HISTORY = "weight-history/update",
 
   // exerciseDB API
   EXERCISES = "exercises",

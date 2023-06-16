@@ -21,4 +21,6 @@ export { default as Program } from "./Programs/Program";
 
 export { default as BodyWeight } from "./BodyWeight";
 
+export { default as Profile } from "./Profile";
+
 export { default as NotFound } from "./NotFound";

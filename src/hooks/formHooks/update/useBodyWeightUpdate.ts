@@ -1,14 +1,11 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useUserContext } from "../../../contexts/userContext";
-
-import { getTodayDate } from "../../../utils/Date";
-
-import { User } from "../../../shared/interfaces";
+import { useUpdateWeightMutation } from "../../queryHooks/weightHistory/useUpdateWeightMutation";
 
 export enum BodyWeightUpdateFields {
   BODY_WEIGHT = "bodyWeight",
@@ -27,13 +24,17 @@ const schema = yup.object().shape({
 });
 
 export const useBodyWeightUpdate = () => {
-  const [pending, setPending] = useState(false);
   const { user } = useUserContext();
+  const {
+    isLoading: isUpdatingWeight,
+    error: updateWeightError,
+    status: updateWeightStatus,
+    mutateAsync: updateWeightQuery,
+  } = useUpdateWeightMutation();
 
   const methods = useForm<BodyWeightUpdate>({
     defaultValues: {
-      [BodyWeightUpdateFields.BODY_WEIGHT]:
-        user?.bodyWeights?.at(-1)?.weight || 100,
+      [BodyWeightUpdateFields.BODY_WEIGHT]: user?.currentWeight,
     },
     resolver: yupResolver(schema),
   });
@@ -46,35 +47,21 @@ export const useBodyWeightUpdate = () => {
 
   const onSubmit = useCallback(
     (formValues: BodyWeightUpdate) => {
-      setPending(true);
-      const updatedUser: User = {
-        ...user!,
-        bodyWeights: [
-          ...user!.bodyWeights!,
-          {
-            date: getTodayDate(),
-            weight: formValues[BodyWeightUpdateFields.BODY_WEIGHT],
-          },
-        ],
-      };
-
-      // todo: add update user body weight method or update user method
-      alert("this form doesnt work");
-      // updateUserQuery(updatedUser)
-      //   .then(() => {
-      //     resetForm();
-      //   })
-      //   .finally(() => setPending(false));
-      setPending(false);
+      updateWeightQuery({
+        userId: user?.id!,
+        weight: formValues.bodyWeight,
+      });
     },
-    [user]
+    [updateWeightQuery, user]
   );
 
   return {
-    pending,
     methods,
     canSubmit,
     onSubmit,
     resetForm,
+    isUpdatingWeight,
+    updateWeightError,
+    updateWeightStatus,
   };
 };

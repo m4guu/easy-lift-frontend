@@ -12,6 +12,7 @@ export { default as ExerciseItemWorkout } from "./ExerciseItemWorkout";
 
 export { default as ExerciseProgresItem } from "./ExerciseProgresItem";
 
+export { default as GymItem } from "./GymItem";
 export { default as GymTag } from "./GymTag";
 
 export { default as NavigationItem } from "./NavigationItem";
@@ -32,3 +33,4 @@ export { default as TrainerItem } from "./TrainerItem";
 
 export { default as Logo } from "./Logo";
 export { default as ThemeModeSwitch } from "./ThemeModeSwitch";
+export { default as UserFieldInfo } from "./UserFieldInfo";

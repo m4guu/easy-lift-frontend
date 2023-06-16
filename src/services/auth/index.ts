@@ -1,6 +1,12 @@
 import { ENDPOINTS, HttpService } from "../api";
 
-import { User, CreateUser, LoginCredentials } from "../../shared/interfaces";
+import {
+  User,
+  CreateUser,
+  LoginCredentials,
+  UpdateEmailData,
+  UpdatePasswordData,
+} from "../../shared/interfaces";
 
 export enum AuthMethods {
   LOGIN = "login",
@@ -8,7 +14,8 @@ export enum AuthMethods {
   LOGOUT = "logout",
   CONFIGURATE_USER = "configUser",
   CONFIGURATE_TRAINER = "configTrainer",
-  RESET_PASSWORD = "resetPassword",
+  UPDATE_EMAIL = "updateEmail",
+  UPDATE_PASSWORD = "updatePassword",
   CREATE = "create",
   UPDATE = "update",
 }
@@ -57,8 +64,17 @@ const AuthService = {
 
   [AuthMethods.LOGOUT]: () => HttpService.post<void>(ENDPOINTS.LOGOUT),
 
-  [AuthMethods.RESET_PASSWORD]: (password: string) =>
-    HttpService.post<User>(ENDPOINTS.RESET_PASSWORD, password),
+  [AuthMethods.UPDATE_EMAIL]: (updateEmailData: UpdateEmailData) =>
+    HttpService.patch<User>(
+      `${ENDPOINTS.USERS}/${ENDPOINTS.UPDATE_EMAIL}`,
+      updateEmailData
+    ),
+
+  [AuthMethods.UPDATE_PASSWORD]: (updatePasswordData: UpdatePasswordData) =>
+    HttpService.patch<User>(
+      `${ENDPOINTS.USERS}/${ENDPOINTS.UPDATE_PASSWORD}`,
+      updatePasswordData
+    ),
 };
 
 export default AuthService;

@@ -15,3 +15,8 @@ export {
   default as UserProgressService,
   UserProgressMethods,
 } from "./UserProgressService";
+
+export {
+  default as WeightHistoryService,
+  WeightHistoryMethods,
+} from "./WeightHistory";

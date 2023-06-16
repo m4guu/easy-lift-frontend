@@ -4,6 +4,7 @@ export enum PATHS {
 
   AUTH = "/auth",
   CONFIGURATION = "/configuration",
+  PROFILE = "/profile",
 
   TRAINERS = "/trainers",
   PROGRAMS = "/programs",
