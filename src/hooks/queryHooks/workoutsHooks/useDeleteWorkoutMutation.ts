@@ -11,6 +11,7 @@ export const useDeleteWorkoutMutation = (workoutId: string) => {
     [QueryKey.USER_WORKOUTS],
     [QueryKey.WORKOUT, workoutId],
     [QueryKey.USER_PROGRESS],
+    [QueryKey.USER_WORKOUTS_BY_MONTH],
   ]);
 
   return useMutation(WorkoutsService[WorkoutsMethods.DELETE], {

@@ -55,7 +55,7 @@ type UseNewWorkoutFormProps = {
     FieldValues,
     `program.${number}.weekWorkouts`
   >;
-  editWorkout?: Workout[];
+  editWorkout?: Workout;
 };
 
 export const useNewWorkoutForm = ({
@@ -67,9 +67,8 @@ export const useNewWorkoutForm = ({
   const [pending, setPending] = useState(false);
   const [isDraftSubmited, setIsDraftSubmited] = useState(false);
 
-  // todo: refactory editWorkout[0] --> editWorkout when backend will be written
   const editWorkoutValues = editWorkout
-    ? generateWorkoutToEdit(editWorkout[0])
+    ? generateWorkoutToEdit(editWorkout)
     : undefined;
 
   const { user } = useUserContext();
@@ -105,32 +104,25 @@ export const useNewWorkoutForm = ({
     (formValues: AddWorkoutForm) => {
       setPending(true);
 
-      const newWorkout = generateNewWorkout(
-        formValues,
-        user!,
-        false,
-        // todo: refactory editWorkout?.at(0)?.id --> editWorkout?.id when backend will be written
-        editWorkout?.at(0)?.id
-      );
+      const newWorkout = generateNewWorkout(formValues, user!, false);
 
       // todo: refactory when backend will be written. Delete addQueryUserProgress because it will be done in backend in addNewWorkout route
       if (user?.role === Role.user) {
-        const method = editWorkout ? updateQueryWorkout : addQueryWorkout;
+        if (editWorkout) {
+          updateQueryWorkout({
+            workoutId: editWorkout.id,
+            updatedWorkout: newWorkout,
+          }).then(() => navigate(PATHS.NEW_WORKOUT));
+        } else {
+          addQueryWorkout(newWorkout).then(resetForm);
+        }
 
-        method(newWorkout)
-          .then(() => {
-            if (editWorkout) {
-              navigate(PATHS.NEW_WORKOUT);
-            } else {
-              resetForm();
-            }
+        // const newUserProgress = generateUserProgress(newWorkout);
+        // return newUserProgress.map((userProgres) =>
+        //   addQueryUserProgres(userProgres)
+        // );
 
-            const newUserProgress = generateUserProgress(newWorkout);
-            return newUserProgress.map((userProgres) =>
-              addQueryUserProgres(userProgres)
-            );
-          })
-          .finally(() => setPending(false));
+        setPending(false);
       } else {
         updateWorkoutField!(workoutIndex!, newWorkout);
         setPending(false);
@@ -141,7 +133,7 @@ export const useNewWorkoutForm = ({
       addQueryWorkout,
       resetForm,
       navigate,
-      addQueryUserProgres,
+      // addQueryUserProgres,
       updateQueryWorkout,
       editWorkout,
       updateWorkoutField,

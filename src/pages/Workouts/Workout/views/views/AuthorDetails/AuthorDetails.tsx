@@ -7,7 +7,7 @@ import { useUser } from "../../../../../../hooks/queryHooks/userHooks/useUser";
 
 import { Status } from "../../../../../../shared/enums";
 
-import DUMMY_AVATAR from "../../../../../../assets/images/DUMMY_PROFILE_IMG/profile-img-id.jpeg";
+import { API_URL } from "../../../../../../config/env.config";
 
 interface AuthorDetailsProps {
   authorId: string;
@@ -23,8 +23,8 @@ export const AuthorDetails: React.FC<AuthorDetailsProps> = ({ authorId }) => {
 
       {status === Status.SUCCESS && (
         <DetailsWrapper>
-          <AuthorAvatar src={DUMMY_AVATAR} alt="avatar" />
-          <AuthorName variant="caption">{author[0].name}</AuthorName>
+          <AuthorAvatar src={`${API_URL}${author.image}`} alt="avatar" />
+          <AuthorName variant="caption">{author.name}</AuthorName>
         </DetailsWrapper>
       )}
     </Box>

@@ -6,7 +6,6 @@ import { styled } from "@mui/system";
 import { SectionHeader } from "../../../components";
 import WorkoutContent from "./views/WorkoutContent";
 
-// todo: change workout[0] --> workout [when backend will be written]
 const Workout: React.FC = () => {
   const { workoutId } = useParams();
 

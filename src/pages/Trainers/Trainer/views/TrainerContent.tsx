@@ -6,10 +6,9 @@ import { useUser } from "../../../../hooks/queryHooks/userHooks/useUser";
 import { Status } from "../../../../shared/enums";
 import { UserAvatar } from "../../../../components/ExerciseProgresItem/ExerciseProgresItem.styles";
 
-// todo: change dummy-user-image
-import DUMMY_USER_IMG from "../../../../assets/images/DUMMY_PROFILE_IMG/profile-img-id.jpeg";
 import { TrainerPrograms } from "./views/TrainerPrograms";
 import { PersonalTrainingInfo } from "./views/PersonalTrainingInfo";
+import { API_URL } from "../../../../config/env.config";
 
 export const TrainerContent: React.FC<{ trainerId: string }> = ({
   trainerId,
@@ -21,17 +20,17 @@ export const TrainerContent: React.FC<{ trainerId: string }> = ({
     <Box>
       {status === Status.LOADING && <Typography>loading...</Typography>}
       {status === Status.ERROR && <Typography>error</Typography>}
-      {status === Status.SUCCESS && trainer.length !== 0 ? (
+      {status === Status.SUCCESS && trainer ? (
         <Box>
           <BasicInformation>
-            <UserAvatar src={DUMMY_USER_IMG} alt="User Avatar" />
-            <Typography>{trainer[0].name}</Typography>
+            <UserAvatar src={`${API_URL}${trainer.image}`} alt="User Avatar" />
+            <Typography>{trainer.name}</Typography>
             <Typography variant="caption" color={theme.palette.text.secondary}>
-              {trainer[0].email}
+              {trainer.email}
             </Typography>
           </BasicInformation>
-          <PersonalTrainingInfo trainerGymsIds={trainer[0].gyms} />
-          {trainerId && <TrainerPrograms trainerId={trainerId} />}
+          <PersonalTrainingInfo trainerGymsIds={trainer.gyms} />
+          <TrainerPrograms trainerId={trainerId} />
         </Box>
       ) : (
         <Alert variant="outlined" severity="info">

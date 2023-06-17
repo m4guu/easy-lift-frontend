@@ -17,7 +17,7 @@ export const EditWorkoutFormProvider: React.FC<{
       {status === Status.LOADING && <Typography>loading...</Typography>}
       {status === Status.ERROR && <Typography>error</Typography>}
 
-      {editWorkout && editWorkout.length !== 0 ? (
+      {editWorkout && editWorkout ? (
         <WorkoutFormProvider editWorkout={editWorkout} />
       ) : (
         <Box>

@@ -17,14 +17,14 @@ const WorkoutContent: React.FC<{ workoutId: string }> = ({ workoutId }) => {
     <Box>
       {status === Status.LOADING && <Typography>loading...</Typography>}
       {status === Status.ERROR && <Typography>error</Typography>}
-      {status === Status.SUCCESS && workout && workout.length !== 0 && (
+      {status === Status.SUCCESS && workout && (
         <WorkoutWrapper>
           <WorkoutDetail>
             <SegmentCaption variant="caption" color="primary">
               Author
             </SegmentCaption>
             <NoPaddingDivider />
-            <AuthorDetails authorId={workout[0].creator} />
+            <AuthorDetails authorId={workout.creator} />
           </WorkoutDetail>
 
           <WorkoutDetail>
@@ -32,7 +32,7 @@ const WorkoutContent: React.FC<{ workoutId: string }> = ({ workoutId }) => {
               Title
             </SegmentCaption>
             <NoPaddingDivider />
-            <Typography>{workout[0].title}</Typography>
+            <Typography>{workout.title}</Typography>
           </WorkoutDetail>
 
           <WorkoutDetail>
@@ -40,13 +40,13 @@ const WorkoutContent: React.FC<{ workoutId: string }> = ({ workoutId }) => {
               Workout
             </SegmentCaption>
             <NoPaddingDivider />
-            <WorkoutDetails exercises={workout[0].exercises} />
+            <WorkoutDetails exercises={workout.exercises} />
           </WorkoutDetail>
 
-          <WorkoutActions workoutId={workout[0].id} />
+          <WorkoutActions workoutId={workout.id} />
         </WorkoutWrapper>
       )}
-      {status === Status.SUCCESS && workout?.length === 0 && (
+      {status === Status.SUCCESS && !workout && (
         <Alert variant="outlined" severity="info">
           There is no workout with provided ID.
         </Alert>

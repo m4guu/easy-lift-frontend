@@ -38,7 +38,9 @@ const LeftBar: React.FC = () => {
           <AccountSettings image={`${API_URL}${user!.image}`} />
         </AccountSettingsBox>
 
-        {user?.role === Role.user && <TrainingCalendar />}
+        {user && user.role === Role.user && (
+          <TrainingCalendar userId={user.id} />
+        )}
 
         <NavigationContainer>
           <Navigation />

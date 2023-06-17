@@ -1,23 +1,48 @@
-import React, { useState } from "react";
-import { Dayjs } from "dayjs";
+import React, { useState, useEffect } from "react";
 
 import { Box } from "@mui/material";
 import { DateCalendar } from "@mui/x-date-pickers";
 import { styled } from "@mui/system";
 
-import { initialHighlightedDays } from "./views/constans";
 import { DaySlot } from "./views/DaySlot";
+import { useUserWorkoutsByMonth } from "../../../hooks/queryHooks/workoutsHooks/useUserWorkoutsByMonth";
+import { Workout } from "../../../pages";
 
-interface TrainingCalendarProps {}
+interface TrainingCalendarProps {
+  userId: string;
+}
 
-export const TrainingCalendar: React.FC<TrainingCalendarProps> = () => {
-  const [highlightedDays, setHighlightedDays] = useState(
-    initialHighlightedDays
+export const TrainingCalendar: React.FC<TrainingCalendarProps> = ({
+  userId,
+}) => {
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth() + 1;
+
+  const [monthNumber, setMonthNumber] = useState<number>(currentMonth);
+  const [highlightedDays, setHighlightedDays] = useState<number[]>([]);
+
+  const { data: monthWorkouts, refetch } = useUserWorkoutsByMonth(
+    userId,
+    monthNumber
   );
 
-  const onMonthChange = (date: Dayjs) => {
-    // todo: add functionality when backend will be written! --> GET_USER_WORKOUTS_BY_MONTH....
+  const onMonthChange = (month: any) => {
+    setMonthNumber(month.$d.getMonth() + 1);
   };
+
+  useEffect(() => {
+    const monthHighlightedDays = monthWorkouts
+      ? monthWorkouts.map((monthWorkout) =>
+          new Date(monthWorkout.date).getDate()
+        )
+      : [];
+
+    setHighlightedDays(monthHighlightedDays);
+  }, [monthWorkouts, monthNumber]);
+
+  useEffect(() => {
+    refetch();
+  }, [refetch, monthNumber]);
 
   return (
     <Container>
@@ -27,6 +52,7 @@ export const TrainingCalendar: React.FC<TrainingCalendarProps> = () => {
           day: DaySlot as any,
         }}
         slotProps={{ day: { highlightedDays } as any }}
+        onMonthChange={onMonthChange}
       />
     </Container>
   );

@@ -6,11 +6,11 @@ import { useInvalidateQueries } from "../useInvalidateQuries";
 
 import { QueryKey } from "../../../shared/enums";
 
-export const useUpdateWorkoutMutation = (workoutId?: string) => {
+export const useUpdateWorkoutMutation = () => {
   const { invalidateQueries } = useInvalidateQueries([
     [QueryKey.USER_WORKOUTS],
-    [QueryKey.WORKOUT, workoutId],
     [QueryKey.USER_PROGRESS],
+    [QueryKey.USER_WORKOUTS_BY_MONTH],
   ]);
 
   return useMutation(WorkoutsService[WorkoutsMethods.UPDATE], {

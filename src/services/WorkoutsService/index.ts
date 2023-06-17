@@ -15,23 +15,34 @@ export enum WorkoutsMethods {
 const WorkoutsService = {
   [WorkoutsMethods.GET_USER_WORKOUTS]: (userId: string, pageParam: number) =>
     HttpService.get<Workout[]>(
-      `${ENDPOINTS.WORKOUTS}?creator=${userId}&_page=${pageParam}`
+      `${ENDPOINTS.USER_WORKOUTS}?creator=${userId}&page=${pageParam}`
     ),
 
   [WorkoutsMethods.GET_WORKOUT_BY_ID]: (workoutuId: string) =>
-    HttpService.get<Workout[]>(`${ENDPOINTS.WORKOUTS}?id=${workoutuId}`),
+    HttpService.get<Workout>(`${ENDPOINTS.WORKOUTS}/${workoutuId}`),
 
-  [WorkoutsMethods.CREATE]: (newWorkout: Workout) =>
+  [WorkoutsMethods.GET_USER_WORKOUTS_BY_MONTH]: (
+    userId: string,
+    monthNumber: number
+  ) =>
+    HttpService.get<Workout[]>(
+      `${ENDPOINTS.USER_WORKOUTS_BY_MONTH}?userId=${userId}&monthNumber=${monthNumber}`
+    ),
+
+  [WorkoutsMethods.CREATE]: (newWorkout: Omit<Workout, "id">) =>
     HttpService.post<void>(ENDPOINTS.WORKOUTS, newWorkout),
 
   [WorkoutsMethods.DELETE]: (workoutId: string) =>
     HttpService.delete<void>(`${ENDPOINTS.WORKOUTS}/${workoutId}`),
 
-  [WorkoutsMethods.UPDATE]: (updatedWorkout: Workout) =>
-    HttpService.put<void>(
-      `${ENDPOINTS.WORKOUTS}/${updatedWorkout.id}`,
-      updatedWorkout
-    ),
+  [WorkoutsMethods.UPDATE]: ({
+    workoutId,
+    updatedWorkout,
+  }: {
+    workoutId: string;
+    updatedWorkout: Omit<Workout, "id">;
+  }) =>
+    HttpService.put<void>(`${ENDPOINTS.WORKOUTS}/${workoutId}`, updatedWorkout),
 };
 
 export default WorkoutsService;

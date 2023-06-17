@@ -70,14 +70,12 @@ export const generateEditExercises = (
 export const generateNewWorkout = (
   data: AddWorkoutForm,
   user: User,
-  isDraft: boolean,
-  id?: string
-): Workout => {
+  isDraft: boolean
+): Omit<Workout, "id"> => {
   return {
-    id: id || uuidv4(),
     creator: user.id,
     title: data.title,
-    date: data.startTime.toString(),
+    date: data.startTime.toISOString(),
     exercises: isDraft
       ? data.exercises
       : generateWorkoutExercises(data.exercises, user.role),
