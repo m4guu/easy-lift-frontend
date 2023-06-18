@@ -37,7 +37,7 @@ export const ProgramList: React.FC = () => {
 
         <SlideContainer>
           {programs?.map((program: Program) => (
-            <Slide key={program.id}>
+            <Slide key={program._id}>
               <ProgramItemHome program={program} />
             </Slide>
           ))}

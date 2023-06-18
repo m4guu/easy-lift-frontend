@@ -8,9 +8,7 @@ import { useUserContext } from "../../contexts/userContext";
 
 import { Program } from "../../shared/interfaces";
 import { PATHS } from "../../pages/paths";
-
-// todo: change dummy img into real Program Image -> change program FORM !
-import DUMMY_PROGRAM_IMG from "../../assets/images/programs/dummy-program-image.jpg";
+import { API_URL } from "../../config/env.config";
 
 type ProgramItemHomeProps = {
   program: Program;
@@ -19,10 +17,11 @@ type ProgramItemHomeProps = {
 const ProgramItemHome: React.FC<ProgramItemHomeProps> = ({ program }) => {
   const { user } = useUserContext();
   const theme = useTheme();
+
   return (
-    <ProgramItemCard to={`${PATHS.PROGRAMS}/${program.id}`}>
+    <ProgramItemCard to={`${PATHS.PROGRAMS}/${program._id}`}>
       <HeaderContainer>
-        <ProgramImage src={DUMMY_PROGRAM_IMG} alt="program" />
+        <ProgramImage src={`${API_URL}${program.image}`} alt="program" />
         <Overlay />
         <ProgramTitle variant="subtitle1" color="primary">
           {program.title}
@@ -40,7 +39,6 @@ const ProgramItemHome: React.FC<ProgramItemHomeProps> = ({ program }) => {
               color={theme.palette.custom_grey.tint_2}
             >
               {program.creator.name}
-              {"  "}
               {program.creator.id === user?.id && (
                 <Typography variant="caption" color="info.main">
                   you
@@ -90,16 +88,15 @@ const HeaderContainer = styled("header")({
   position: "relative",
   display: "flex",
   justifyContent: "center",
+  width: "100%",
 });
 
-const ProgramImage = styled("img")(({ theme }) => ({
+const ProgramImage = styled("img")({
   width: "100%",
-  maxHeight: "20rem",
+  height: "12rem",
   objectFit: "cover",
-  [theme.breakpoints.up("md")]: {
-    maxHeight: "30rem",
-  },
-}));
+});
+
 const Overlay = styled(Box)({
   position: "absolute",
   left: 0,

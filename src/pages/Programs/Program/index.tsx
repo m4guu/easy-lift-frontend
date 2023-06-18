@@ -10,11 +10,9 @@ import { useProgram } from "../../../hooks/queryHooks/programsHooks/useProgram";
 import { Header } from "./views/Header/Header";
 import { ProgramDetails } from "./views/ProgramDetails/ProgramDetails";
 
-// todo: change dummy img into real Program Image -> change program FORM !
-import DUMMY_PROGRAM_IMAGE from "../../../assets/images/programs/dummy-program-image.jpg";
 import { ProgramActions } from "./views/ProgramActions/ProgramActions";
+import { API_URL } from "../../../config/env.config";
 
-// todo: change  program[0] ---> program [when backend will be written]
 const Program: React.FC = () => {
   const { programId } = useParams();
 
@@ -24,24 +22,22 @@ const Program: React.FC = () => {
       {status === Status.LOADING && <Typography>loading...</Typography>}
       {status === Status.ERROR && <Typography>error</Typography>}
 
-      {status === Status.SUCCESS && program?.at(0) && (
+      {status === Status.SUCCESS && program ? (
         <Box>
           <Header
-            title={program[0].title}
-            price={program[0].price}
-            image={DUMMY_PROGRAM_IMAGE}
+            title={program.title}
+            price={program.price}
+            image={`${API_URL}${program.image}`}
           />
           <ProgramDetails
-            description={program[0].description}
-            level={program[0].level}
-            frequency={program[0].frequencyPerWeek}
-            programLength={program[0].programLength}
+            description={program.description}
+            level={program.level}
+            frequency={program.frequencyPerWeek}
+            programLength={program.programLength}
           />
           <ProgramActions program={program} />
         </Box>
-      )}
-
-      {status === Status.SUCCESS && program?.length === 0 && (
+      ) : (
         <Alert variant="outlined" severity="info">
           There is no program with provided ID.
         </Alert>

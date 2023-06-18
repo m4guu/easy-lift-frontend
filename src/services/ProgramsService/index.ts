@@ -14,26 +14,37 @@ export enum ProgramsMethods {
 
 const ProgramsService = {
   [ProgramsMethods.GET_ALL_PROGRAMS]: (pageParam: number) =>
-    HttpService.get<Program[]>(`${ENDPOINTS.PROGRAMS}?_page=${pageParam}`),
+    HttpService.get<Program[]>(`${ENDPOINTS.PROGRAMS}?page=${pageParam}`),
 
   [ProgramsMethods.GET_10_PROGRAMS]: () =>
-    HttpService.get<Program[]>(`${ENDPOINTS.PROGRAMS}?_limit=10`),
+    HttpService.get<Program[]>(ENDPOINTS.TEN_PROGRAMS),
 
-  [ProgramsMethods.GET_TRAINER_PROGRAMS]: (trainerId: string) =>
-    HttpService.get<Program[]>(`${ENDPOINTS.PROGRAMS}?creator.id=${trainerId}`),
+  [ProgramsMethods.GET_TRAINER_PROGRAMS]: (
+    trainerId: string,
+    pageParam: number
+  ) =>
+    HttpService.get<Program[]>(
+      `${ENDPOINTS.TRAIENR_PROGRAMS}/${trainerId}?page=${pageParam}`
+    ),
 
   [ProgramsMethods.GET_PROGRAM_BY_ID]: (programId: string) =>
-    HttpService.get<Program[]>(`${ENDPOINTS.PROGRAMS}?id=${programId}`),
+    HttpService.get<Program>(`${ENDPOINTS.PROGRAMS}/${programId}`),
 
-  [ProgramsMethods.CREATE]: (newProgram: Program): Promise<void> =>
+  [ProgramsMethods.CREATE]: (newProgram: FormData): Promise<void> =>
     HttpService.post<void>(ENDPOINTS.PROGRAMS, newProgram),
 
   [ProgramsMethods.DELETE]: (programId: string): Promise<void> =>
     HttpService.delete<void>(`${ENDPOINTS.PROGRAMS}/${programId}`),
 
-  [ProgramsMethods.UPDATE]: (updatedProgram: ProgramUpdates): Promise<void> =>
+  [ProgramsMethods.UPDATE]: ({
+    updatedProgram,
+    programId,
+  }: {
+    updatedProgram: FormData;
+    programId: string;
+  }): Promise<void> =>
     HttpService.patch<void>(
-      `${ENDPOINTS.PROGRAMS}/${updatedProgram.id}`,
+      `${ENDPOINTS.PROGRAMS}/${programId}`,
       updatedProgram
     ),
 };

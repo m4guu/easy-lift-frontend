@@ -9,8 +9,9 @@ interface Program {
   frequencyPerWeek: number;
   programLength: number;
   program: ProgramItem[];
-  image: File | null; // DUMMY DATA
+  image: File | string;
   price: number;
   description: string;
+  _id?: string;
 }
 export default Program;

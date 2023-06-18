@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import dayjs, { Dayjs } from "dayjs";
+import { v4 as uuidv4 } from "uuid";
 import {
   useFieldArray,
   useForm,
@@ -124,7 +125,7 @@ export const useNewWorkoutForm = ({
 
         setPending(false);
       } else {
-        updateWorkoutField!(workoutIndex!, newWorkout);
+        updateWorkoutField!(workoutIndex!, { id: uuidv4(), ...newWorkout });
         setPending(false);
       }
     },

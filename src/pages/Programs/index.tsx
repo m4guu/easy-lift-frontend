@@ -28,6 +28,8 @@ const ProgramsPage: React.FC = () => {
     infinityPrograms,
     (response) => response
   );
+  console.log(programs);
+
   const noPrograms = status === Status.SUCCESS && programs.length === 0;
 
   // Every row is loaded except for our loading indicator row.

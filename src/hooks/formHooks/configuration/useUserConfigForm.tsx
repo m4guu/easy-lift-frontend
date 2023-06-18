@@ -7,8 +7,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useConfigureUserMutation } from "../../queryHooks/auth/useConfigureUserMutation";
 import { useUserContext } from "../../../contexts/userContext";
 
-import { getTodayDate } from "../../../utils/Date";
-
 import { User } from "../../../shared/interfaces";
 import { PATHS } from "../../../pages/paths";
 

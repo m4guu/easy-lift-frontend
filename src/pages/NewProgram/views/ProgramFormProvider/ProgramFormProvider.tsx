@@ -21,6 +21,7 @@ import { ErrorMessage } from "../../../../components";
 import { FirstFormStep } from "./views/FormSteps/FirstFormStep";
 import { SecondFormStep } from "./views/FormSteps/SecondFormStep";
 import { ThirdFormStep } from "./views/FormSteps/ThirdFormStep";
+import { API_URL } from "../../../../config/env.config";
 
 export const ProgramFormProvider: React.FC<{
   editProgram?: ProgramInterface;
@@ -41,6 +42,8 @@ export const ProgramFormProvider: React.FC<{
     handleSubmit,
     formState: { errors, isSubmitSuccessful },
   } = methods;
+
+  const initImagePreview = `${API_URL}${editProgram?.image}`;
 
   useEffect(() => {
     if (isSubmitSuccessful) {
@@ -71,7 +74,9 @@ export const ProgramFormProvider: React.FC<{
             removeProgram={removeProgramField}
           />
         )}
-        {currentStep === 3 && <ThirdFormStep />}
+        {currentStep === 3 && (
+          <ThirdFormStep initImagePreview={initImagePreview} />
+        )}
 
         {errors?.program && currentStep === 2 && (
           <ErrorMessage>

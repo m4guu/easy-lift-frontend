@@ -7,6 +7,8 @@ import {
   ImagePickerSize,
   ImagePickerType,
 } from "../../../../../../shared/enums";
+import { useUserContext } from "../../../../../../contexts/userContext";
+import { API_URL } from "../../../../../../config/env.config";
 
 // Name //
 export const Name = styled(() => (
@@ -48,11 +50,16 @@ export const Weight = styled(() => (
 //
 
 // Image //
-export const Image = styled(() => (
-  <ImagePicker
-    fieldName={UserConfigFields.IMAGE}
-    type={ImagePickerType.CIRCLE}
-    size={ImagePickerSize.MEDIUM}
-  />
-))``;
+export const Image = () => {
+  const { user } = useUserContext();
+  const initImagePreview = `${API_URL}${user?.image}`;
+  return (
+    <ImagePicker
+      fieldName={UserConfigFields.IMAGE}
+      type={ImagePickerType.CIRCLE}
+      size={ImagePickerSize.MEDIUM}
+      initImagePreview={initImagePreview}
+    />
+  );
+};
 //

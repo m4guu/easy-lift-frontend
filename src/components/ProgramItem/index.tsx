@@ -13,9 +13,8 @@ import { styled, useTheme } from "@mui/system";
 import { Program } from "../../shared/interfaces";
 import { PATHS } from "../../pages/paths";
 
-// todo: change dummy img into real Program Image -> change program FORM !
-import DUMMY_PROGRAM_IMG from "../../assets/images/programs/dummy-program-image.jpg";
 import { useUserContext } from "../../contexts/userContext";
+import { API_URL } from "../../config/env.config";
 
 type ProgramItemProps = {
   program: Program;
@@ -31,7 +30,7 @@ const ProgramItem: React.FC<ProgramItemProps> = ({ program }) => {
     <Item disablePadding>
       <Container onClick={() => navigate(`${PATHS.PROGRAMS}/${program.id}`)}>
         <ImageBox>
-          <ProgramImage src={DUMMY_PROGRAM_IMG} alt="Program" />
+          <ProgramImage src={`${API_URL}${program.image}`} alt="Program" />
           <ImageOverlay />
         </ImageBox>
 

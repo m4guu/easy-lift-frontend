@@ -3,14 +3,15 @@ import React from "react";
 import { Box, Alert, Typography } from "@mui/material";
 
 import { useTrainerPrograms } from "../../../../../hooks/queryHooks/programsHooks/useTrainerPrograms";
+import { usePaginatedResultItems } from "../../../../../hooks";
 
 import { Status } from "../../../../../shared/enums";
 import {
   SegmentTitle,
   NoPaddingDivider,
   ProgramsContainer,
-  ProgramList,
 } from "./styles/TrainerViews.styles";
+import { InfiniteList } from "../../../../../features";
 import { ProgramItem } from "../../../../../components";
 
 export const TrainerPrograms: React.FC<{ trainerId: string }> = ({
@@ -19,8 +20,39 @@ export const TrainerPrograms: React.FC<{ trainerId: string }> = ({
   const {
     status,
     error,
-    data: trainerPrograms,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+    data: infinityTrainerPrograms,
   } = useTrainerPrograms(trainerId);
+
+  const programs = usePaginatedResultItems(
+    infinityTrainerPrograms,
+    (response) => response
+  );
+  const noPrograms = status === Status.SUCCESS && programs.length === 0;
+
+  // Every row is loaded except for our loading indicator row.
+  const isItemLoaded = (index: number) =>
+    !hasNextPage || index < programs.length;
+  // Render an item or a loading indicator.
+  const Item = ({
+    index,
+    style,
+  }: {
+    index: number;
+    style: React.CSSProperties;
+  }) => {
+    return (
+      <Box style={style}>
+        {isItemLoaded(index) ? (
+          <ProgramItem program={programs[index]} />
+        ) : (
+          <Box>loading...</Box>
+        )}
+      </Box>
+    );
+  };
 
   return (
     <ProgramsContainer>
@@ -30,22 +62,19 @@ export const TrainerPrograms: React.FC<{ trainerId: string }> = ({
       <NoPaddingDivider />
       {status === Status.LOADING && <Typography>loading...</Typography>}
       {status === Status.ERROR && <Typography>error</Typography>}
-      {status === Status.SUCCESS && trainerPrograms.length !== 0 ? (
-        <ProgramList disablePadding>
-          {trainerPrograms.map((program) => {
-            return (
-              <Box key={program.id}>
-                <NoPaddingDivider />
-                <ProgramItem program={program} />
-              </Box>
-            );
-          })}
-        </ProgramList>
-      ) : (
-        <Alert variant="outlined" severity="info">
-          Trainer dont have programs yet.
-        </Alert>
-      )}
+      {noPrograms && <Typography>There are no programs yet.</Typography>}
+
+      <Box sx={{ flex: 1 }}>
+        <InfiniteList
+          items={programs}
+          Item={Item}
+          isFetchingNextPage={isFetchingNextPage}
+          hasNextPage={hasNextPage}
+          fetchNextPage={fetchNextPage}
+          itemSize={85}
+        />
+      </Box>
+
       <NoPaddingDivider />
     </ProgramsContainer>
   );

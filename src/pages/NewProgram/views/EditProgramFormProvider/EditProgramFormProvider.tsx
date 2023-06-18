@@ -18,8 +18,8 @@ export const EditProgramFormProvider: React.FC<{ programId: string }> = ({
       {status === Status.LOADING && <Typography>loading...</Typography>}
       {status === Status.ERROR && <Typography>error</Typography>}
 
-      {editProgram && editProgram.length !== 0 ? (
-        <ProgramFormProvider editProgram={editProgram?.at(0)} />
+      {editProgram && editProgram ? (
+        <ProgramFormProvider editProgram={editProgram} />
       ) : (
         <Alert variant="outlined" severity="info">
           There are no program with provided id. Try again later.
