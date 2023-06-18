@@ -6,7 +6,6 @@ import { styled } from "@mui/system";
 
 import { DaySlot } from "./views/DaySlot";
 import { useUserWorkoutsByMonth } from "../../../hooks/queryHooks/workoutsHooks/useUserWorkoutsByMonth";
-import { Workout } from "../../../pages";
 
 interface TrainingCalendarProps {
   userId: string;

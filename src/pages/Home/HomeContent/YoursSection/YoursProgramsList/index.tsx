@@ -1,6 +1,6 @@
 import React from "react";
 
-import { List, Box, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import { useTrainerPrograms } from "../../../../../hooks/queryHooks/programsHooks/useTrainerPrograms";
 

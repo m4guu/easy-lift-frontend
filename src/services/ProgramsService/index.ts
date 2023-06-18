@@ -1,6 +1,6 @@
 import { ENDPOINTS, HttpService } from "../api";
 
-import { Program, ProgramUpdates } from "../../shared/interfaces";
+import { Program } from "../../shared/interfaces";
 
 export enum ProgramsMethods {
   GET_ALL_PROGRAMS = "getAllPrograms",

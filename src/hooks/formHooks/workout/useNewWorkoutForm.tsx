@@ -20,7 +20,6 @@ import {
   generateNewWorkout,
   generateWorkoutToEdit,
 } from "../../../utils/FormExercises";
-import { generateUserProgress } from "../../../utils/UserProgress";
 
 import {
   draftSchema,

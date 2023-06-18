@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFieldArray, useForm } from "react-hook-form";
-import { v4 as uuidv4 } from "uuid";
 
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
