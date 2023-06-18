@@ -15,7 +15,7 @@ import { TrainerItem, SectionHeader } from "../../components";
 
 const TrainersPage: React.FC = () => {
   const theme = useTheme();
-  const isBelowSm = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const {
     status,
@@ -34,7 +34,7 @@ const TrainersPage: React.FC = () => {
     (response) => response
   );
   const noTrainers = status === Status.SUCCESS && trainers.length === 0;
-  const itemSize = isBelowSm ? 58 : 78;
+  const itemSize = isMobile ? 58 : 78;
 
   // Every row is loaded except for our loading indicator row.
   const isItemLoaded = (index: number) =>

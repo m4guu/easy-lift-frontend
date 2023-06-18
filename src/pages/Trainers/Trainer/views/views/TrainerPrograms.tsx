@@ -64,7 +64,7 @@ export const TrainerPrograms: React.FC<{ trainerId: string }> = ({
       {status === Status.ERROR && <Typography>error</Typography>}
       {noPrograms && <Typography>There are no programs yet.</Typography>}
 
-      <Box sx={{ flex: 1 }}>
+      <Box sx={{ height: 600 }}>
         <InfiniteList
           items={programs}
           Item={Item}

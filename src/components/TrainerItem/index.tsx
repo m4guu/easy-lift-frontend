@@ -9,8 +9,7 @@ import { User } from "../../shared/interfaces";
 
 import { PATHS } from "../../pages/paths";
 import { UserAvatar } from "../ExerciseProgresItem/ExerciseProgresItem.styles";
-
-import DUMMY_TRAINER_IMAGE from "../../assets/images/DUMMY_PROFILE_IMG/profile-img-id.jpeg";
+import { API_URL } from "../../config/env.config";
 
 type TrainerItemProps = {
   trainer: User;
@@ -21,7 +20,7 @@ const TrainerItem: React.FC<TrainerItemProps> = ({ trainer }) => {
     <TrainerListItem disablePadding>
       <UserInfo>
         <UserAvatar
-          src={DUMMY_TRAINER_IMAGE}
+          src={`${API_URL}${trainer.image}`}
           variant="square"
           sx={{ width: 60, height: 60 }}
           alt="Avatar"
