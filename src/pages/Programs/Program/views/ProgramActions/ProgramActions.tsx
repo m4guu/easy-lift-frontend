@@ -40,7 +40,7 @@ export const ProgramActions: React.FC<ProgramActionsProps> = ({ program }) => {
 
   return (
     <PorgramActions>
-      {program.creator.id !== user?.id ? (
+      {program.creator !== user?.id ? (
         <Button variant="contained" size="small">
           buy
         </Button>

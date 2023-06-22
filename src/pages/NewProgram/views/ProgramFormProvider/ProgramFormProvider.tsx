@@ -43,7 +43,10 @@ export const ProgramFormProvider: React.FC<{
     formState: { errors, isSubmitSuccessful },
   } = methods;
 
-  const initImagePreview = `${API_URL}${editProgram?.image}`;
+  const initImagePreview =
+    editProgram && editProgram.image
+      ? `${API_URL}${editProgram?.image}`
+      : undefined;
 
   useEffect(() => {
     if (isSubmitSuccessful) {

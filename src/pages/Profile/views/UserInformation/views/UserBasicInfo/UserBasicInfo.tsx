@@ -29,7 +29,7 @@ import { gyms } from "../../../../../Configuration/views/ConfigurationForm/views
 import { API_URL } from "../../../../../../config/env.config";
 
 export const UserBasicInfo: React.FC<{ user: User }> = ({ user }) => {
-  const isBeloweSmBreakpoint = useMediaQuery((theme: Theme) =>
+  const isMobile = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("sm")
   );
   const trainersGyms = gyms.filter((gym) => user.gyms?.includes(gym.id));
@@ -86,7 +86,7 @@ export const UserBasicInfo: React.FC<{ user: User }> = ({ user }) => {
         updateProps={updateBasicInfoButtonProps}
         variant="outlined"
         size="small"
-        fullWidth={isBeloweSmBreakpoint}
+        fullWidth={isMobile}
       />
     </Container>
   );

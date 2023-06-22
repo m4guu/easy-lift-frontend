@@ -33,7 +33,9 @@ export const Dropzone: React.FC<DropzoneProps> = ({
   fullwidth,
   initImagePreview,
 }) => {
-  const [imagePreview, setImage] = useState<string>(initImagePreview || "");
+  const [imagePreview, setImage] = useState<string | undefined>(
+    initImagePreview
+  );
   const isDragging = useIsDragging();
   const theme = useTheme();
 

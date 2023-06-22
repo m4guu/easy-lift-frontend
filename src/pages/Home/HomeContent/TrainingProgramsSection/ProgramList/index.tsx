@@ -12,15 +12,29 @@ import { ProgramsNav } from "./ProgramsNav";
 import "swiper/css";
 import "swiper/css/pagination";
 
-import { use10Programs } from "../../../../../hooks/queryHooks/programsHooks/use10Programs";
+import { usePrograms } from "../../../../../hooks/queryHooks/programsHooks/usePrograms";
 
 import { PATHS } from "../../../../paths";
-import { swiperBreakPoints } from "./constatns";
-import { Status } from "../../../../../shared/enums";
+import { queries, swiperBreakPoints } from "./constatns";
+import { QueryKey, Status } from "../../../../../shared/enums";
 import { Program } from "../../../../../shared/interfaces";
+import { usePaginatedResultItems } from "../../../../../hooks";
+import { generateProgramQueriesPath } from "../../../../../utils/Queries";
 
 export const ProgramList: React.FC = () => {
-  const { status, error, data: programs } = use10Programs();
+  const queryPath = generateProgramQueriesPath(queries);
+
+  const {
+    status,
+    error,
+    data: infinityPrograms,
+  } = usePrograms(queryPath, QueryKey.TEN_PROGRAMS);
+
+  const programs = usePaginatedResultItems(
+    infinityPrograms,
+    (response) => response
+  );
+  const noPrograms = status === Status.SUCCESS && programs.length === 0;
 
   return (
     <Box>
@@ -34,22 +48,20 @@ export const ProgramList: React.FC = () => {
       <ProgramsSwiper breakpoints={swiperBreakPoints} className="mySwiper">
         {status === Status.LOADING && <Typography>loading...</Typography>}
         {status === Status.ERROR && <Typography>error</Typography>}
-
-        <SlideContainer>
-          {programs?.map((program: Program) => (
-            <Slide key={program._id}>
-              <ProgramItemHome program={program} />
-            </Slide>
-          ))}
-        </SlideContainer>
-
-        {programs?.length === 0 && (
-          <Alert variant="outlined" severity="info">
-            There are no training programs yet.
-          </Alert>
+        {noPrograms ? (
+          <Typography>There are no programs yet.</Typography>
+        ) : (
+          <ProgramsNav />
         )}
 
-        {programs?.length ? <ProgramsNav /> : null}
+        <SlideContainer>
+          {programs &&
+            programs.map((program: Program) => (
+              <Slide key={program.id}>
+                <ProgramItemHome program={program} />
+              </Slide>
+            ))}
+        </SlideContainer>
       </ProgramsSwiper>
     </Box>
   );

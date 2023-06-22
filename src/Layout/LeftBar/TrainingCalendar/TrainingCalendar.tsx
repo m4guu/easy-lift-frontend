@@ -5,7 +5,11 @@ import { DateCalendar } from "@mui/x-date-pickers";
 import { styled } from "@mui/system";
 
 import { DaySlot } from "./views/DaySlot";
-import { useUserWorkoutsByMonth } from "../../../hooks/queryHooks/workoutsHooks/useUserWorkoutsByMonth";
+import { useWorkouts } from "../../../hooks/queryHooks/workoutsHooks/useWorkouts";
+import { getCurrentMonth } from "../../../utils/Date";
+import { generateWorkoutQueriesPath } from "../../../utils/Queries";
+import { QueryKey } from "../../../shared/enums";
+import { usePaginatedResultItems } from "../../../hooks";
 
 interface TrainingCalendarProps {
   userId: string;
@@ -14,30 +18,35 @@ interface TrainingCalendarProps {
 export const TrainingCalendar: React.FC<TrainingCalendarProps> = ({
   userId,
 }) => {
-  const currentDate = new Date();
-  const currentMonth = currentDate.getMonth() + 1;
-
-  const [monthNumber, setMonthNumber] = useState<number>(currentMonth);
+  const [monthNumber, setMonthNumber] = useState<number>(getCurrentMonth);
   const [highlightedDays, setHighlightedDays] = useState<number[]>([]);
+  const queryPath = generateWorkoutQueriesPath({
+    creator: userId,
+    monthNumber,
+  });
+  const { data: infinityUserWorkouts, refetch } = useWorkouts(
+    queryPath,
+    QueryKey.USER_WORKOUTS_BY_MONTH
+  );
 
-  const { data: monthWorkouts, refetch } = useUserWorkoutsByMonth(
-    userId,
-    monthNumber
+  const monthWorkouts = usePaginatedResultItems(
+    infinityUserWorkouts,
+    (response) => response
   );
 
   const onMonthChange = (month: any) => {
     setMonthNumber(month.$d.getMonth() + 1);
   };
 
+  // todo: refactory when fix finding workouts by month number
   useEffect(() => {
-    const monthHighlightedDays = monthWorkouts
-      ? monthWorkouts.map((monthWorkout) =>
-          new Date(monthWorkout.date).getDate()
-        )
-      : [];
-
-    setHighlightedDays(monthHighlightedDays);
-  }, [monthWorkouts, monthNumber]);
+    if (monthWorkouts) {
+      const monthHighlightedDays = monthWorkouts.map((monthWorkout) =>
+        new Date(monthWorkout.date).getDate()
+      );
+      setHighlightedDays(monthHighlightedDays);
+    }
+  }, []);
 
   useEffect(() => {
     refetch();

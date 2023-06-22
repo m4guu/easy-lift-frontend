@@ -104,7 +104,8 @@ export const Gyms: React.FC<GymsProps> = ({
 // Image //
 export const Image = () => {
   const { user } = useUserContext();
-  const initImagePreview = `${API_URL}${user?.image}`;
+  const initImagePreview =
+    user && user.image ? `${API_URL}${user.image}` : undefined;
   return (
     <ImagePicker
       fieldName={TrainerConfigFields.IMAGE}

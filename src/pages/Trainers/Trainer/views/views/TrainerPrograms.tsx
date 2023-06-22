@@ -2,17 +2,19 @@ import React from "react";
 
 import { Box, Alert, Typography } from "@mui/material";
 
-import { useTrainerPrograms } from "../../../../../hooks/queryHooks/programsHooks/useTrainerPrograms";
 import { usePaginatedResultItems } from "../../../../../hooks";
+import { usePrograms } from "../../../../../hooks/queryHooks/programsHooks/usePrograms";
 
-import { Status } from "../../../../../shared/enums";
+import { InfiniteList } from "../../../../../features";
+import { ProgramItem } from "../../../../../components";
+
 import {
   SegmentTitle,
   NoPaddingDivider,
   ProgramsContainer,
 } from "./styles/TrainerViews.styles";
-import { InfiniteList } from "../../../../../features";
-import { ProgramItem } from "../../../../../components";
+import { Status } from "../../../../../shared/enums";
+import { generateProgramQueriesPath } from "../../../../../utils/Queries";
 
 export const TrainerPrograms: React.FC<{ trainerId: string }> = ({
   trainerId,
@@ -24,7 +26,7 @@ export const TrainerPrograms: React.FC<{ trainerId: string }> = ({
     isFetchingNextPage,
     fetchNextPage,
     data: infinityTrainerPrograms,
-  } = useTrainerPrograms(trainerId);
+  } = usePrograms(generateProgramQueriesPath({ creator: trainerId }));
 
   const programs = usePaginatedResultItems(
     infinityTrainerPrograms,

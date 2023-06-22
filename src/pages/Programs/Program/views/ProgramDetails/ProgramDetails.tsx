@@ -2,11 +2,17 @@ import React from "react";
 
 import { Box, Typography, Divider } from "@mui/material";
 import { styled } from "@mui/system";
+import { UserAvatar } from "../../../../../components/ExerciseProgresItem/ExerciseProgresItem.styles";
+import { useUser } from "../../../../../hooks/queryHooks/userHooks/useUser";
+import { API_URL } from "../../../../../config/env.config";
+import { Link } from "react-router-dom";
+import { PATHS } from "../../../../paths";
 
 interface ProgramDetailsProps {
   description: string;
   level: string;
   frequency: number;
+  creatorId: string;
   programLength: number;
 }
 
@@ -14,10 +20,23 @@ export const ProgramDetails: React.FC<ProgramDetailsProps> = ({
   description,
   level,
   frequency,
+  creatorId,
   programLength,
 }) => {
+  const { data: creator } = useUser(creatorId);
+
   return (
     <Details>
+      <ProgramDetail>
+        <SegmentCaption variant="caption">author</SegmentCaption>
+        <NoPaddingDivider />
+        {creator && (
+          <UserLink to={`${PATHS.TRAINERS}/${creator.id}`}>
+            <UserAvatar src={`${API_URL}${creator.image}`} />
+            <Typography>{creator.name}</Typography>
+          </UserLink>
+        )}
+      </ProgramDetail>
       <ProgramDetail>
         <SegmentCaption variant="caption">description</SegmentCaption>
         <NoPaddingDivider />
@@ -61,10 +80,19 @@ const Detail = styled(Typography)(({ theme }) => ({
 
 const SegmentCaption = styled(Typography)(({ theme }) => ({
   textTransform: "uppercase",
-  color: theme.palette.custom_grey.tint_2,
+  color: theme.palette.primary.main,
   [theme.breakpoints.up("lg")]: {
     fontSize: "0.9rem",
   },
+}));
+
+const UserLink = styled(Link)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  gap: theme.spacing(1),
+  margin: `${theme.spacing(0.5)} 0`,
+  textDecoration: "none",
+  color: "inherit",
 }));
 
 const NoPaddingDivider = styled(Divider)(({ theme }) => ({

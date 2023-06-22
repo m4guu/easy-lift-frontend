@@ -3,18 +3,19 @@ import React from "react";
 import { List, Box, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/system";
 
-import { useUserWorkouts } from "../../../../../hooks/queryHooks/workoutsHooks/useUserWorkouts";
+import { useWorkouts } from "../../../../../hooks/queryHooks/workoutsHooks/useWorkouts";
 import { usePaginatedResultItems } from "../../../../../hooks";
 
 import { InfiniteList } from "../../../../../features";
 
-import { Status } from "../../../../../shared/enums";
+import { QueryKey, Status } from "../../../../../shared/enums";
 import { WorkoutItem } from "../../../../../components";
+import { generateWorkoutQueriesPath } from "../../../../../utils/Queries";
 
 export const YourWorkoutList: React.FC<{ userId: string }> = ({ userId }) => {
   const theme = useTheme();
   const isBelowXl = useMediaQuery(theme.breakpoints.down("xl"));
-
+  const queryPath = generateWorkoutQueriesPath({ creator: userId });
   const {
     status,
     error,
@@ -22,7 +23,7 @@ export const YourWorkoutList: React.FC<{ userId: string }> = ({ userId }) => {
     isFetchingNextPage,
     fetchNextPage,
     data: infinityUserWorkouts,
-  } = useUserWorkouts(userId);
+  } = useWorkouts(queryPath, QueryKey.USER_WORKOUTS);
 
   const workouts = usePaginatedResultItems(
     infinityUserWorkouts,

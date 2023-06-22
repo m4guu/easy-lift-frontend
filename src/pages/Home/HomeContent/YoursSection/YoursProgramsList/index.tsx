@@ -2,16 +2,19 @@ import React from "react";
 
 import { Box, Typography } from "@mui/material";
 
-import { useTrainerPrograms } from "../../../../../hooks/queryHooks/programsHooks/useTrainerPrograms";
+import { usePrograms } from "../../../../../hooks/queryHooks/programsHooks/usePrograms";
 
 import { usePaginatedResultItems } from "../../../../../hooks";
 
 import { ProgramItem } from "../../../../../components";
 import { InfiniteList } from "../../../../../features";
 
-import { Status } from "../../../../../shared/enums";
+import { QueryKey, Status } from "../../../../../shared/enums";
+import { generateProgramQueriesPath } from "../../../../../utils/Queries";
 
 export const YoursProgramsList: React.FC<{ userId: string }> = ({ userId }) => {
+  const queryPath = generateProgramQueriesPath({ creator: userId });
+
   const {
     status,
     error,
@@ -19,12 +22,13 @@ export const YoursProgramsList: React.FC<{ userId: string }> = ({ userId }) => {
     isFetchingNextPage,
     fetchNextPage,
     data: infinityTrainerPrograms,
-  } = useTrainerPrograms(userId);
+  } = usePrograms(queryPath, QueryKey.TRAINER_PROGRAMS);
 
   const programs = usePaginatedResultItems(
     infinityTrainerPrograms,
     (response) => response
   );
+
   const noPrograms = status === Status.SUCCESS && programs.length === 0;
 
   // Every row is loaded except for our loading indicator row.

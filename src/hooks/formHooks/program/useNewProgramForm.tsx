@@ -167,7 +167,7 @@ export const useNewProgramForm = ({ editProgram }: UseProgramFormProps) => {
       setPending(true);
 
       const newProgram: Omit<Program, "id"> = {
-        creator: { id: user!.id, name: user!.name },
+        creator: user!.id,
         title: formValues.programTitle,
         level: formValues.programLevel,
         frequencyPerWeek: formValues.frequency,
@@ -181,10 +181,7 @@ export const useNewProgramForm = ({ editProgram }: UseProgramFormProps) => {
       Object.entries(newProgram).forEach(([fieldName, fieldValue]) => {
         if (fieldValue instanceof File) {
           newProgramFormData.append(fieldName, fieldValue);
-        } else if (
-          Array.isArray(fieldValue) ||
-          typeof fieldValue === "object"
-        ) {
+        } else if (Array.isArray(fieldValue)) {
           newProgramFormData.append(fieldName, JSON.stringify(fieldValue));
         } else {
           newProgramFormData.append(fieldName, fieldValue.toString());

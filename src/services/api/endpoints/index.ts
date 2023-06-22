@@ -1,8 +1,6 @@
 enum ENDPOINTS {
   // internal API
   PROGRAMS = "programs",
-  TRAIENR_PROGRAMS = "programs/trainer-programs",
-  TEN_PROGRAMS = "programs/10-programs",
   WORKOUTS = "workouts",
   USER_WORKOUTS = "workouts/userWorkouts",
   USER_WORKOUTS_BY_MONTH = "workouts/userWorkoutsByMonth",

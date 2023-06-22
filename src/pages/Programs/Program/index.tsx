@@ -15,8 +15,8 @@ import { API_URL } from "../../../config/env.config";
 
 const Program: React.FC = () => {
   const { programId } = useParams();
+  const { status, error, data: program } = useProgram(programId!);
 
-  const { status, error, data: program } = useProgram(programId);
   return (
     <Box>
       {status === Status.LOADING && <Typography>loading...</Typography>}
@@ -33,6 +33,7 @@ const Program: React.FC = () => {
             description={program.description}
             level={program.level}
             frequency={program.frequencyPerWeek}
+            creatorId={program.creator}
             programLength={program.programLength}
           />
           <ProgramActions program={program} />

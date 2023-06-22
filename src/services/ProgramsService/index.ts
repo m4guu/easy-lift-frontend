@@ -4,8 +4,6 @@ import { Program } from "../../shared/interfaces";
 
 export enum ProgramsMethods {
   GET_ALL_PROGRAMS = "getAllPrograms",
-  GET_10_PROGRAMS = "get10Programs",
-  GET_TRAINER_PROGRAMS = "getTrainerPrograms",
   GET_PROGRAM_BY_ID = "getProgramById",
   CREATE = "create",
   DELETE = "delete",
@@ -13,18 +11,9 @@ export enum ProgramsMethods {
 }
 
 const ProgramsService = {
-  [ProgramsMethods.GET_ALL_PROGRAMS]: (pageParam: number) =>
-    HttpService.get<Program[]>(`${ENDPOINTS.PROGRAMS}?page=${pageParam}`),
-
-  [ProgramsMethods.GET_10_PROGRAMS]: () =>
-    HttpService.get<Program[]>(ENDPOINTS.TEN_PROGRAMS),
-
-  [ProgramsMethods.GET_TRAINER_PROGRAMS]: (
-    trainerId: string,
-    pageParam: number
-  ) =>
+  [ProgramsMethods.GET_ALL_PROGRAMS]: (pageParam: number, queries?: string) =>
     HttpService.get<Program[]>(
-      `${ENDPOINTS.TRAIENR_PROGRAMS}/${trainerId}?page=${pageParam}`
+      `${ENDPOINTS.PROGRAMS}?page=${pageParam}${queries}`
     ),
 
   [ProgramsMethods.GET_PROGRAM_BY_ID]: (programId: string) =>
