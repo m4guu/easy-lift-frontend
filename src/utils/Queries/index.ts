@@ -1,4 +1,8 @@
-import { ProgramQueries, WorkoutsQueries } from "../../shared/interfaces";
+import {
+  ProgramQueries,
+  TrainerQueries,
+  WorkoutsQueries,
+} from "../../shared/interfaces";
 
 export const generateProgramQueriesPath = (queries: ProgramQueries) => {
   let queryString = ``;
@@ -19,6 +23,19 @@ export const generateWorkoutQueriesPath = (queries: WorkoutsQueries) => {
     const { creator, monthNumber } = queries;
     if (creator) queryString += `&creator=${creator}`;
     if (monthNumber) queryString += `&monthNumber=${monthNumber}`;
+  }
+
+  return queryString;
+};
+
+export const generateTrainerQueriesPath = (queries: TrainerQueries) => {
+  let queryString = ``;
+
+  if (queries) {
+    const { name, personalTraining } = queries;
+    if (name) queryString += `&name=${name}`;
+    if (personalTraining)
+      queryString += `&personalTraining=${personalTraining}`;
   }
 
   return queryString;

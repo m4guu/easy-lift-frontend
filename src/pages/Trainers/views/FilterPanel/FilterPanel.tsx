@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Typography } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 import { useTheme } from "@mui/system";
 
 import {
@@ -15,17 +15,13 @@ interface FilterPanelProps {
   filterHandlers: {
     selectedName: string;
     selectedPersonalTraining: boolean;
-    selectedGyms: string[];
     handleSelectName: React.ChangeEventHandler<HTMLInputElement>;
     handleSelectPersonalTrening: (
       event: React.ChangeEvent<HTMLInputElement>,
       checked: boolean
     ) => void;
-    handleSelectGyms: (
-      event: React.ChangeEvent<HTMLInputElement>,
-      gyms: string[]
-    ) => void;
   };
+  refetchTrainers: any;
 }
 
 export const FilterPanel: React.FC<FilterPanelProps> = ({
@@ -35,6 +31,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
     handleSelectName,
     handleSelectPersonalTrening,
   },
+  refetchTrainers,
 }) => {
   const theme = useTheme();
   return (
@@ -61,6 +58,9 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
           />
         }
       />
+      <Button variant="outlined" size="small" onClick={refetchTrainers}>
+        search
+      </Button>
     </Form>
   );
 };

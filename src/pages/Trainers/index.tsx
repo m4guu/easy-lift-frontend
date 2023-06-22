@@ -12,10 +12,16 @@ import { InfiniteList } from "../../features";
 import { Status } from "../../shared/enums";
 import { FilterPanel } from "./views/FilterPanel/FilterPanel";
 import { TrainerItem, SectionHeader } from "../../components";
+import { generateTrainerQueriesPath } from "../../utils/Queries";
 
 const TrainersPage: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const { filterPanelProps } = useTrainerFilter();
+  const queryPath = generateTrainerQueriesPath({
+    name: filterPanelProps.selectedName,
+    personalTraining: filterPanelProps.selectedPersonalTraining,
+  });
 
   const {
     status,
@@ -23,11 +29,9 @@ const TrainersPage: React.FC = () => {
     hasNextPage,
     isFetchingNextPage,
     fetchNextPage,
+    refetch: refetchTrainers,
     data: infinityTrainers,
-  } = useTrainers();
-
-  //! REFACTORY FILTERING WHEN BACKEND WILL BE WRITTEN
-  // const { updatedList, filterPanelProps } = useTrainerFilter(trainers);
+  } = useTrainers(queryPath);
 
   const trainers = usePaginatedResultItems(
     infinityTrainers,
@@ -65,11 +69,11 @@ const TrainersPage: React.FC = () => {
     <Container>
       <SectionHeader>Our Trainers</SectionHeader>
 
-      {status === Status.LOADING && <Typography>Loading...</Typography>}
-      {status === Status.ERROR && <Typography>error</Typography>}
-      {noTrainers && <Typography>There are no trainers yet.</Typography>}
+      <FilterPanel
+        refetchTrainers={refetchTrainers}
+        filterHandlers={filterPanelProps}
+      />
 
-      {/* <FilterPanel filterHandlers={filterPanelProps} /> */}
       <Box sx={{ flex: 1 }}>
         <InfiniteList
           items={trainers}
@@ -80,6 +84,9 @@ const TrainersPage: React.FC = () => {
           itemSize={itemSize}
         />
       </Box>
+      {status === Status.LOADING && <Typography>Loading...</Typography>}
+      {status === Status.ERROR && <Typography>error</Typography>}
+      {noTrainers && <Typography>There are no trainers yet.</Typography>}
     </Container>
   );
 };

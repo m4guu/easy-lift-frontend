@@ -9,6 +9,8 @@ import { styled } from "@mui/system";
 export const Form = styled(FormControl)(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
+  alignItems: "center",
+  gap: theme.spacing(1),
   margin: `${theme.spacing(2)} 0`,
 }));
 
