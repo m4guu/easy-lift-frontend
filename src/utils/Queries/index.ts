@@ -42,9 +42,10 @@ export const generateWorkoutQueriesPath = (queries: WorkoutsQueries) => {
   let queryString = ``;
 
   if (queries) {
-    const { creator, monthNumber } = queries;
+    const { creator, monthNumber, name } = queries;
     if (creator) queryString += `&creator=${creator}`;
     if (monthNumber) queryString += `&monthNumber=${monthNumber}`;
+    if (name) queryString += `&name=${name}`;
   }
 
   return queryString;

@@ -1,33 +1,13 @@
-import { useState, useEffect, useCallback } from "react";
-import { Workout } from "../../shared/interfaces";
+import { useState } from "react";
 
-export const useWorkoutFilter = (workouts: Workout[] | undefined) => {
-  const [updatedWorkouts, setUpdatedWorkouts] = useState<Workout[]>([]);
+export const useWorkoutFilter = () => {
   const [selectedTitle, setSelectedTitle] = useState("");
 
   const handleSelectTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedTitle(event.target.value);
   };
 
-  const applyFilters = useCallback(() => {
-    let filteredWorkouts = workouts || [];
-
-    // name filter
-    if (selectedTitle) {
-      filteredWorkouts = filteredWorkouts.filter((workout) =>
-        workout.title.toLowerCase().includes(selectedTitle.toLowerCase())
-      );
-    }
-
-    setUpdatedWorkouts(filteredWorkouts);
-  }, [selectedTitle, workouts]);
-
-  useEffect(() => {
-    applyFilters();
-  }, [applyFilters]);
-
   return {
-    updatedWorkouts,
     filterPanelProps: { selectedTitle, handleSelectTitle },
   };
 };

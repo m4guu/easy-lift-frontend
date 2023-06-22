@@ -15,7 +15,11 @@ import { WorkoutItem } from "../../../components";
 import { generateWorkoutQueriesPath } from "../../../utils/Queries";
 
 export const WorkoutsContent: React.FC<{ userId: string }> = ({ userId }) => {
-  const queryPath = generateWorkoutQueriesPath({ creator: userId });
+  const { filterPanelProps } = useWorkoutFilter();
+  const queryPath = generateWorkoutQueriesPath({
+    creator: userId,
+    name: filterPanelProps.selectedTitle,
+  });
 
   const {
     status,
@@ -23,11 +27,9 @@ export const WorkoutsContent: React.FC<{ userId: string }> = ({ userId }) => {
     hasNextPage,
     isFetchingNextPage,
     fetchNextPage,
+    refetch: refetchWorkouts,
     data: infinityUserWorkouts,
   } = useWorkouts(queryPath, QueryKey.USER_WORKOUTS);
-
-  // ! REFACTORY FILTERING WHEN BACKEND WILL BE WRITTEN
-  // const { updatedWorkouts, filterPanelProps } = useWorkoutFilter(userWorkouts);
 
   const workouts = usePaginatedResultItems(
     infinityUserWorkouts,
@@ -58,11 +60,10 @@ export const WorkoutsContent: React.FC<{ userId: string }> = ({ userId }) => {
   };
   return (
     <Box sx={{ flex: 1 }}>
-      {status === Status.LOADING && <Typography>loading...</Typography>}
-      {status === Status.ERROR && <Typography>error</Typography>}
-      {noWorkouts && <Typography>You dont have any workouts yet.</Typography>}
-
-      {/* <FilterPanel filterHandlers={filterPanelProps} /> */}
+      <FilterPanel
+        refetchWorkouts={refetchWorkouts}
+        filterHandlers={filterPanelProps}
+      />
 
       <NoPaddingDivider />
       <InfiniteList
@@ -73,6 +74,10 @@ export const WorkoutsContent: React.FC<{ userId: string }> = ({ userId }) => {
         fetchNextPage={fetchNextPage}
         itemSize={52}
       />
+
+      {status === Status.LOADING && <Typography>loading...</Typography>}
+      {status === Status.ERROR && <Typography>error</Typography>}
+      {noWorkouts && <Typography>You dont have any workouts yet.</Typography>}
     </Box>
   );
 };
