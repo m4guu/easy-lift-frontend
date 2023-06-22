@@ -8,9 +8,31 @@ export const generateProgramQueriesPath = (queries: ProgramQueries) => {
   let queryString = ``;
 
   if (queries) {
-    const { limit, creator } = queries;
+    const {
+      limit,
+      creator,
+      name,
+      maxPrice,
+      minPrice,
+      minFreqTraining,
+      maxFreqTraining,
+      minProgramLength,
+      maxProgramLength,
+      programLevel,
+    } = queries;
+
     if (limit) queryString += `&limit=${limit}`;
     if (creator) queryString += `&creator=${creator}`;
+    if (name) queryString += `&name=${name}`;
+    if (programLevel) queryString += `&programLevel=${programLevel}`;
+    if (maxPrice) queryString += `&maxPrice=${maxPrice}`;
+    if (minPrice) queryString += `&minPrice=${minPrice}`;
+    if (minFreqTraining) queryString += `&minFreqTraining=${minFreqTraining}`;
+    if (maxFreqTraining) queryString += `&maxFreqTraining=${maxFreqTraining}`;
+    if (minProgramLength)
+      queryString += `&minProgramLength=${minProgramLength}`;
+    if (maxProgramLength)
+      queryString += `&maxProgramLength=${maxProgramLength}`;
   }
 
   return queryString;

@@ -5,24 +5,36 @@ import { styled } from "@mui/system";
 
 import { usePrograms } from "../../hooks/queryHooks/programsHooks/usePrograms";
 import { usePaginatedResultItems } from "../../hooks";
+import { useProgramFilter } from "../../hooks/filters/useProgramFilter";
 
+import { FilterPanel } from "./views/FilterPanel/FilterPanel";
 import { InfiniteList } from "../../features";
 
 import { Status } from "../../shared/enums";
 import { SectionHeader, ProgramItem } from "../../components";
+import { generateProgramQueriesPath } from "../../utils/Queries";
 
 const ProgramsPage: React.FC = () => {
+  const { filterProgramProps } = useProgramFilter();
+  const queryPath = generateProgramQueriesPath({
+    name: filterProgramProps.selectedTitle,
+    programLevel: filterProgramProps.selectedLevel,
+    minPrice: filterProgramProps.selectedPrice[0],
+    maxPrice: filterProgramProps.selectedPrice[1],
+    minFreqTraining: filterProgramProps.selectedFrequency[0],
+    maxFreqTraining: filterProgramProps.selectedFrequency[1],
+    minProgramLength: filterProgramProps.selectedLength[0],
+    maxProgramLength: filterProgramProps.selectedLength[1],
+  });
   const {
     status,
     error,
     hasNextPage,
     isFetchingNextPage,
     fetchNextPage,
+    refetch: refetchPrograms,
     data: infinityPrograms,
-  } = usePrograms();
-
-  //! REFACTORY FILTERING WHEN BACKEND WILL BE WRITTEN
-  // const { updatedPrograms, filterProgramProps } = useProgramFilter(programs);
+  } = usePrograms(queryPath);
 
   const programs = usePaginatedResultItems(
     infinityPrograms,
@@ -60,7 +72,10 @@ const ProgramsPage: React.FC = () => {
       {status === Status.ERROR && <Typography>error!</Typography>}
       {noPrograms && <Typography>There are no programs yet.</Typography>}
 
-      {/* <FilterPanel filterHandlers={filterProgramProps} /> */}
+      <FilterPanel
+        refetchPrograms={refetchPrograms}
+        filterHandlers={filterProgramProps}
+      />
 
       <Box sx={{ flex: 1 }}>
         <InfiniteList

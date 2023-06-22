@@ -18,6 +18,7 @@ import { LevelFilter } from "./views/LevelFilter/LevelFilter";
 import { SearchBar, SliderBase, SectionHeader } from "../../../../components";
 
 interface FilterPanelProps {
+  refetchPrograms: any;
   filterHandlers: {
     selectedTitle: string;
     selectedLevel: ProgramLevels;
@@ -35,6 +36,7 @@ interface FilterPanelProps {
 }
 
 export const FilterPanel: React.FC<FilterPanelProps> = ({
+  refetchPrograms,
   filterHandlers: {
     selectedTitle,
     selectedLevel,
@@ -117,6 +119,10 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
           </Filters>
         </FilterSection>
       )}
+
+      <Button variant="outlined" onClick={refetchPrograms}>
+        search
+      </Button>
     </Form>
   );
 };

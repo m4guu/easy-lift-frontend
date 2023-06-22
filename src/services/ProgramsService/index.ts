@@ -13,7 +13,9 @@ export enum ProgramsMethods {
 const ProgramsService = {
   [ProgramsMethods.GET_ALL_PROGRAMS]: (pageParam: number, queries?: string) =>
     HttpService.get<Program[]>(
-      `${ENDPOINTS.PROGRAMS}?page=${pageParam}${queries}`
+      queries
+        ? `${ENDPOINTS.PROGRAMS}?page=${pageParam}${queries}`
+        : `${ENDPOINTS.PROGRAMS}?page=${pageParam}`
     ),
 
   [ProgramsMethods.GET_PROGRAM_BY_ID]: (programId: string) =>
