@@ -2,6 +2,7 @@ enum QueryKey {
   // internal API
   WORKOUT = "workout",
   USER_WORKOUTS = "userWorkouts",
+  USER_WORKOUTS_BY_MONTH = "userWorkoutsByMonth",
 
   USER_WEIGHT_HISTORY = "userWeightHistory",
 

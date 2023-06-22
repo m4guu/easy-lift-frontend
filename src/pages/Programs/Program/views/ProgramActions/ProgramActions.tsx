@@ -14,8 +14,7 @@ import { SnackbarStatus, Status } from "../../../../../shared/enums";
 import { ButtonWithConfirmation } from "../../../../../components";
 
 interface ProgramActionsProps {
-  // todo: change  program[0] ---> program [when backend will be written]
-  program: Program[];
+  program: Program;
 }
 
 export const ProgramActions: React.FC<ProgramActionsProps> = ({ program }) => {
@@ -24,10 +23,10 @@ export const ProgramActions: React.FC<ProgramActionsProps> = ({ program }) => {
   const snackbar = useSnackbar();
 
   const { status, mutate: deleteQueryProgram } = useDeleteProgramMutation(
-    program[0].id
+    program.id
   );
 
-  const deleteProgram = () => deleteQueryProgram(program[0].id);
+  const deleteProgram = () => deleteQueryProgram(program.id);
 
   useEffect(() => {
     if (status === Status.SUCCESS) {
@@ -41,14 +40,14 @@ export const ProgramActions: React.FC<ProgramActionsProps> = ({ program }) => {
 
   return (
     <PorgramActions>
-      {program[0].creator.id !== user?.id ? (
+      {program.creator !== user?.id ? (
         <Button variant="contained" size="small">
           buy
         </Button>
       ) : (
         <TrainerProgramActions>
           <Button
-            onClick={() => navigate(`${PATHS.NEW_PROGRAM}/${program[0].id}`)}
+            onClick={() => navigate(`${PATHS.NEW_PROGRAM}/${program.id}`)}
             variant="contained"
             size="small"
             color="info"

@@ -1,7 +1,6 @@
 interface ProgramUpdates {
-  id: string;
   title: string;
-  image: File | null; // DUMMY DATA
+  image: File | string;
   price: number;
   description: string;
 }

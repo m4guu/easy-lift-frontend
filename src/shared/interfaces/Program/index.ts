@@ -3,14 +3,15 @@ import ProgramItem from "../ProgramItem";
 
 interface Program {
   id: string;
-  creator: { id: string; name: string };
+  creator: string;
   title: string;
   level: ProgramLevels;
   frequencyPerWeek: number;
   programLength: number;
   program: ProgramItem[];
-  image: File | null; // DUMMY DATA
+  image: File | string;
   price: number;
   description: string;
+  _id?: string;
 }
 export default Program;

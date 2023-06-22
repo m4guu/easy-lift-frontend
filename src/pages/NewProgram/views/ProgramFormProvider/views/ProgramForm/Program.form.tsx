@@ -140,14 +140,20 @@ export const Program: React.FC<ProgramProps> = ({
 
 //
 // Program Image //
-export const Image = styled(() => (
-  <ImagePicker
-    fieldName={AddProgramFormFields.IMAGE}
-    type={ImagePickerType.SQUARE}
-    size={ImagePickerSize.LARGE}
-    fullWidth
-  />
-))``; //
+export const Image: React.FC<{ initImagePreview: string | undefined }> = ({
+  initImagePreview,
+}) => {
+  return (
+    <ImagePicker
+      fieldName={AddProgramFormFields.IMAGE}
+      type={ImagePickerType.SQUARE}
+      size={ImagePickerSize.LARGE}
+      fullWidth
+      initImagePreview={initImagePreview}
+    />
+  );
+};
+//
 
 // Program Price //
 export const ProgramPrice = styled(() => (

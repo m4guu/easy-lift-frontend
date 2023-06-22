@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFieldArray, useForm } from "react-hook-form";
-import { v4 as uuidv4 } from "uuid";
 
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -45,7 +44,7 @@ export interface AddProgramForm {
   [AddProgramFormFields.FREQUENCY_PER_WEEK]: number;
   [AddProgramFormFields.PROGRAM_LENGTH]: number;
   [AddProgramFormFields.PROGRAM]: ProgramItem[];
-  [AddProgramFormFields.IMAGE]: File | null;
+  [AddProgramFormFields.IMAGE]: File[];
   [AddProgramFormFields.PROGRAM_PRICE]: number;
   [AddProgramFormFields.PROGRAM_DESCRIPTION]: string;
 }
@@ -56,13 +55,13 @@ const defaultProgramValues: AddProgramForm = {
   [AddProgramFormFields.FREQUENCY_PER_WEEK]: minFreqTraining,
   [AddProgramFormFields.PROGRAM_LENGTH]: minProgramLength,
   [AddProgramFormFields.PROGRAM]: [],
-  [AddProgramFormFields.IMAGE]: null,
+  [AddProgramFormFields.IMAGE]: undefined as unknown as File[],
   [AddProgramFormFields.PROGRAM_PRICE]: 0,
   [AddProgramFormFields.PROGRAM_DESCRIPTION]: "",
 };
 
-const programSchema = yup.object().shape({
-  [AddProgramFormFields.PROGRAM_TITLE]: yup.string().required().min(5),
+const programUpdateSchema = yup.object().shape({
+  [AddProgramFormFields.PROGRAM_TITLE]: yup.string().required().min(5).max(20),
   [AddProgramFormFields.PROGRAM_LEVEL]: yup
     .mixed<ProgramLevels>()
     .oneOf(Object.values(ProgramLevels)),
@@ -92,7 +91,6 @@ const programSchema = yup.object().shape({
     .required()
     .min(minProgramLength)
     .max(maxProgramLength),
-  [AddProgramFormFields.IMAGE]: yup.mixed().required(),
   [AddProgramFormFields.PROGRAM_PRICE]: yup.number().required().min(0),
   [AddProgramFormFields.PROGRAM_DESCRIPTION]: yup.string().min(20).max(150),
 });
@@ -115,15 +113,21 @@ export const useNewProgramForm = ({ editProgram }: UseProgramFormProps) => {
         ...defaultProgramValues,
         [AddProgramFormFields.PROGRAM]: editProgram.program,
         [AddProgramFormFields.PROGRAM_TITLE]: editProgram.title,
-        [AddProgramFormFields.IMAGE]: editProgram.image,
+        [AddProgramFormFields.IMAGE]: undefined as unknown as File[],
         [AddProgramFormFields.PROGRAM_PRICE]: editProgram.price,
         [AddProgramFormFields.PROGRAM_DESCRIPTION]: editProgram.description,
       }
     : defaultProgramValues;
 
+  const schema = editProgram
+    ? programUpdateSchema
+    : programUpdateSchema.shape({
+        [AddProgramFormFields.IMAGE]: yup.mixed().required(),
+      });
+
   const methods = useForm<AddProgramForm>({
     defaultValues,
-    resolver: yupResolver(programSchema),
+    resolver: yupResolver(schema),
   });
 
   const { watch, control, reset } = methods;
@@ -136,7 +140,6 @@ export const useNewProgramForm = ({ editProgram }: UseProgramFormProps) => {
     frequency,
     programLength,
     program,
-    image,
     programPrice,
     programDescription,
   } = watch();
@@ -147,7 +150,6 @@ export const useNewProgramForm = ({ editProgram }: UseProgramFormProps) => {
     frequency &&
     programLength &&
     program &&
-    image &&
     programPrice &&
     programDescription;
 
@@ -163,42 +165,56 @@ export const useNewProgramForm = ({ editProgram }: UseProgramFormProps) => {
   const onSubmit = useCallback(
     (formValues: AddProgramForm) => {
       setPending(true);
-      const newProgram: Program = {
-        id: uuidv4(),
-        creator: { id: user!.id, name: user!.name },
+
+      const newProgram: Omit<Program, "id"> = {
+        creator: user!.id,
         title: formValues.programTitle,
         level: formValues.programLevel,
         frequencyPerWeek: formValues.frequency,
         programLength: formValues.programLength,
         program: formValues.program,
-        image: formValues.image,
+        image: formValues.image ? formValues.image[0] : "",
         price: formValues.programPrice,
         description: formValues.programDescription,
       };
+      const newProgramFormData = new FormData();
+      Object.entries(newProgram).forEach(([fieldName, fieldValue]) => {
+        if (fieldValue instanceof File) {
+          newProgramFormData.append(fieldName, fieldValue);
+        } else if (Array.isArray(fieldValue)) {
+          newProgramFormData.append(fieldName, JSON.stringify(fieldValue));
+        } else {
+          newProgramFormData.append(fieldName, fieldValue.toString());
+        }
+      });
 
       const updatedProgram: ProgramUpdates = {
-        id: editProgram!.id,
         title: formValues.programTitle,
-        image: formValues.image,
+        image: formValues.image ? formValues.image[0] : "",
         price: formValues.programPrice,
         description: formValues.programDescription,
       };
+      const updatedFormData = new FormData();
+      Object.entries(updatedProgram).forEach(([fieldName, fieldValue]) => {
+        if (fieldValue instanceof File) {
+          updatedFormData.append(fieldName, fieldValue);
+        } else {
+          updatedFormData.append(fieldName, fieldValue.toString());
+        }
+      });
 
       const method = editProgram
-        ? updateQueryProgram(updatedProgram)
-        : addQueryProgram(newProgram);
+        ? updateQueryProgram({
+            updatedProgram: updatedFormData,
+            programId: editProgram.id,
+          })
+        : addQueryProgram(newProgramFormData);
 
-      method
-        .then(() => {
-          if (editProgram) {
-            navigate(PATHS.NEW_PROGRAM);
-          } else {
-            resetForm();
-          }
-        })
-        .finally(() => {
-          setPending(false);
-        });
+      method.then(() => {
+        resetForm();
+        navigate(PATHS.default);
+      });
+      setPending(false);
     },
     [
       user,

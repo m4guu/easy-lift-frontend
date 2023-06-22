@@ -12,6 +12,7 @@ interface ImagePickerProps {
   type: ImagePickerType;
   size: ImagePickerSize;
   fullWidth?: boolean;
+  initImagePreview?: string;
 }
 
 const ImagePicker: React.FC<ImagePickerProps> = ({
@@ -19,6 +20,7 @@ const ImagePicker: React.FC<ImagePickerProps> = ({
   type,
   size,
   fullWidth,
+  initImagePreview,
 }) => {
   const { control } = useFormContext();
   const theme = useTheme();
@@ -37,6 +39,7 @@ const ImagePicker: React.FC<ImagePickerProps> = ({
             type={type}
             size={size}
             fullwidth={fullWidth}
+            initImagePreview={initImagePreview}
           />
         )}
       />

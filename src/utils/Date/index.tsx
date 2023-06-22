@@ -63,3 +63,5 @@ export const getHowMuchDaysUntill = (stringDate: string) => {
 
   return diffDays;
 };
+
+export const getCurrentMonth = () => new Date().getMonth() + 1;

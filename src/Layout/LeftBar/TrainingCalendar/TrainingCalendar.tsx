@@ -1,23 +1,56 @@
-import React, { useState } from "react";
-import { Dayjs } from "dayjs";
+import React, { useState, useEffect } from "react";
 
 import { Box } from "@mui/material";
 import { DateCalendar } from "@mui/x-date-pickers";
 import { styled } from "@mui/system";
 
-import { initialHighlightedDays } from "./views/constans";
 import { DaySlot } from "./views/DaySlot";
+import { useWorkouts } from "../../../hooks/queryHooks/workoutsHooks/useWorkouts";
+import { getCurrentMonth } from "../../../utils/Date";
+import { generateWorkoutQueriesPath } from "../../../utils/Queries";
+import { QueryKey } from "../../../shared/enums";
+import { usePaginatedResultItems } from "../../../hooks";
 
-interface TrainingCalendarProps {}
+interface TrainingCalendarProps {
+  userId: string;
+}
 
-export const TrainingCalendar: React.FC<TrainingCalendarProps> = () => {
-  const [highlightedDays, setHighlightedDays] = useState(
-    initialHighlightedDays
+export const TrainingCalendar: React.FC<TrainingCalendarProps> = ({
+  userId,
+}) => {
+  const [monthNumber, setMonthNumber] = useState<number>(getCurrentMonth);
+  const [highlightedDays, setHighlightedDays] = useState<number[]>([]);
+  const queryPath = generateWorkoutQueriesPath({
+    creator: userId,
+    monthNumber,
+  });
+  const { data: infinityUserWorkouts, refetch } = useWorkouts(
+    queryPath,
+    QueryKey.USER_WORKOUTS_BY_MONTH
   );
 
-  const onMonthChange = (date: Dayjs) => {
-    // todo: add functionality when backend will be written! --> GET_USER_WORKOUTS_BY_MONTH....
+  const monthWorkouts = usePaginatedResultItems(
+    infinityUserWorkouts,
+    (response) => response
+  );
+
+  const onMonthChange = (month: any) => {
+    setMonthNumber(month.$d.getMonth() + 1);
   };
+
+  // todo: refactory when fix finding workouts by month number
+  useEffect(() => {
+    if (monthWorkouts) {
+      const monthHighlightedDays = monthWorkouts.map((monthWorkout) =>
+        new Date(monthWorkout.date).getDate()
+      );
+      setHighlightedDays(monthHighlightedDays);
+    }
+  }, []);
+
+  useEffect(() => {
+    refetch();
+  }, [refetch, monthNumber]);
 
   return (
     <Container>
@@ -27,6 +60,7 @@ export const TrainingCalendar: React.FC<TrainingCalendarProps> = () => {
           day: DaySlot as any,
         }}
         slotProps={{ day: { highlightedDays } as any }}
+        onMonthChange={onMonthChange}
       />
     </Container>
   );

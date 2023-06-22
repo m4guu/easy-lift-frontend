@@ -11,8 +11,6 @@ import { useIsDragging } from "../../../hooks";
 import { DragInfo } from "./views/DragInfo";
 import { ImagePickerSize, ImagePickerType } from "../../../shared/enums";
 import { avatarPickerOptions, sizes } from "./constans";
-import { useUserContext } from "../../../contexts/userContext";
-import { API_URL } from "../../../config/env.config";
 
 interface DropzoneContentProps extends React.ComponentProps<typeof Box> {
   type: ImagePickerType;
@@ -25,6 +23,7 @@ interface DropzoneProps {
   type: ImagePickerType;
   size: ImagePickerSize;
   fullwidth?: boolean;
+  initImagePreview?: string;
 }
 
 export const Dropzone: React.FC<DropzoneProps> = ({
@@ -32,11 +31,11 @@ export const Dropzone: React.FC<DropzoneProps> = ({
   type,
   size,
   fullwidth,
+  initImagePreview,
 }) => {
-  const { user } = useUserContext();
-  const initImagePreview = user?.isConfigured ? `${API_URL}${user.image}` : "";
-
-  const [imagePreview, setImage] = useState<string>(initImagePreview);
+  const [imagePreview, setImage] = useState<string | undefined>(
+    initImagePreview
+  );
   const isDragging = useIsDragging();
   const theme = useTheme();
 

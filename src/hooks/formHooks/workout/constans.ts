@@ -44,7 +44,7 @@ export const workoutTrainerSchema = yup.object().shape({
 });
 
 export const workoutUserSchema = yup.object().shape({
-  title: yup.string().required().min(5),
+  title: yup.string().required().min(5).max(20),
   startTime: yup.date(),
   exercises: yup
     .array()

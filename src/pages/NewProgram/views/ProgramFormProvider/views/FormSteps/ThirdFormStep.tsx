@@ -8,11 +8,13 @@ import {
   ProgramDescription,
 } from "../ProgramForm/Program.form";
 
-export const ThirdFormStep: React.FC = () => {
+export const ThirdFormStep: React.FC<{
+  initImagePreview: string | undefined;
+}> = ({ initImagePreview }) => {
   return (
     <ThirdFormStepWrapper>
       <ProgramTitle />
-      <Image />
+      <Image initImagePreview={initImagePreview} />
       <ProgramPrice />
       <ProgramDescription />
     </ThirdFormStepWrapper>

@@ -3,11 +3,11 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { ProgramsMethods, ProgramsService } from "../../../services";
 import { QueryKey } from "../../../shared/enums";
 
-export const usePrograms = () => {
+export const usePrograms = (queries?: string, identifier?: string) => {
   return useInfiniteQuery(
-    [QueryKey.PROGRAMS],
+    [QueryKey.PROGRAMS, identifier],
     ({ pageParam = 1 }) =>
-      ProgramsService[ProgramsMethods.GET_ALL_PROGRAMS](pageParam),
+      ProgramsService[ProgramsMethods.GET_ALL_PROGRAMS](pageParam, queries),
     {
       getNextPageParam: (lastPage, pages) =>
         // is there next page validation

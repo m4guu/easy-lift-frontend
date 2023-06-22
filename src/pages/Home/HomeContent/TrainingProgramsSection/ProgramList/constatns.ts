@@ -1,3 +1,5 @@
+import { ProgramQueries } from "../../../../../shared/interfaces";
+
 export const swiperBreakPoints = {
   600: {
     slidesPerView: 3,
@@ -11,4 +13,8 @@ export const swiperBreakPoints = {
     slidesPerView: 5,
     spaceBetween: 30,
   },
+};
+
+export const queries: ProgramQueries = {
+  limit: 10,
 };

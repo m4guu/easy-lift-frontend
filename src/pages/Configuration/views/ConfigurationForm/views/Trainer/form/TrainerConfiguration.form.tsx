@@ -13,6 +13,8 @@ import {
   ImagePickerSize,
   ImagePickerType,
 } from "../../../../../../../shared/enums";
+import { useUserContext } from "../../../../../../../contexts/userContext";
+import { API_URL } from "../../../../../../../config/env.config";
 
 // Name //
 export const Name = styled(() => (
@@ -100,11 +102,18 @@ export const Gyms: React.FC<GymsProps> = ({
 //
 
 // Image //
-export const Image = styled(() => (
-  <ImagePicker
-    fieldName={TrainerConfigFields.IMAGE}
-    type={ImagePickerType.CIRCLE}
-    size={ImagePickerSize.LARGE}
-  />
-))``;
+export const Image = () => {
+  const { user } = useUserContext();
+  const initImagePreview =
+    user && user.image ? `${API_URL}${user.image}` : undefined;
+  return (
+    <ImagePicker
+      fieldName={TrainerConfigFields.IMAGE}
+      type={ImagePickerType.CIRCLE}
+      size={ImagePickerSize.LARGE}
+      initImagePreview={initImagePreview}
+    />
+  );
+};
+
 //

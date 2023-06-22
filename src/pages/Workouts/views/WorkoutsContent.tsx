@@ -3,17 +3,20 @@ import React from "react";
 import { Box, Divider, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
-import { useUserWorkouts } from "../../../hooks/queryHooks/workoutsHooks/useUserWorkouts";
+import { useWorkouts } from "../../../hooks/queryHooks/workoutsHooks/useWorkouts";
 import { useWorkoutFilter } from "../../../hooks/filters/useWorkoutFilter";
 import { usePaginatedResultItems } from "../../../hooks";
 
 import { InfiniteList } from "../../../features";
 
-import { Status } from "../../../shared/enums";
+import { QueryKey, Status } from "../../../shared/enums";
 import { FilterPanel } from "./views/FilterPanel";
 import { WorkoutItem } from "../../../components";
+import { generateWorkoutQueriesPath } from "../../../utils/Queries";
 
 export const WorkoutsContent: React.FC<{ userId: string }> = ({ userId }) => {
+  const queryPath = generateWorkoutQueriesPath({ creator: userId });
+
   const {
     status,
     error,
@@ -21,7 +24,7 @@ export const WorkoutsContent: React.FC<{ userId: string }> = ({ userId }) => {
     isFetchingNextPage,
     fetchNextPage,
     data: infinityUserWorkouts,
-  } = useUserWorkouts(userId);
+  } = useWorkouts(queryPath, QueryKey.USER_WORKOUTS);
 
   // ! REFACTORY FILTERING WHEN BACKEND WILL BE WRITTEN
   // const { updatedWorkouts, filterPanelProps } = useWorkoutFilter(userWorkouts);

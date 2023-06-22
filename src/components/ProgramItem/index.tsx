@@ -10,12 +10,13 @@ import {
 } from "@mui/material";
 import { styled, useTheme } from "@mui/system";
 
+import { useUser } from "../../hooks/queryHooks/userHooks/useUser";
+
 import { Program } from "../../shared/interfaces";
 import { PATHS } from "../../pages/paths";
 
-// todo: change dummy img into real Program Image -> change program FORM !
-import DUMMY_PROGRAM_IMG from "../../assets/images/programs/dummy-program-image.jpg";
 import { useUserContext } from "../../contexts/userContext";
+import { API_URL } from "../../config/env.config";
 
 type ProgramItemProps = {
   program: Program;
@@ -23,6 +24,7 @@ type ProgramItemProps = {
 
 const ProgramItem: React.FC<ProgramItemProps> = ({ program }) => {
   const { user } = useUserContext();
+  const { data: trainer } = useUser(program.creator);
   const navigate = useNavigate();
   const theme = useTheme();
   const isUpSm = useMediaQuery(theme.breakpoints.up("sm"));
@@ -31,7 +33,7 @@ const ProgramItem: React.FC<ProgramItemProps> = ({ program }) => {
     <Item disablePadding>
       <Container onClick={() => navigate(`${PATHS.PROGRAMS}/${program.id}`)}>
         <ImageBox>
-          <ProgramImage src={DUMMY_PROGRAM_IMG} alt="Program" />
+          <ProgramImage src={`${API_URL}${program.image}`} alt="Program" />
           <ImageOverlay />
         </ImageBox>
 
@@ -41,8 +43,10 @@ const ProgramItem: React.FC<ProgramItemProps> = ({ program }) => {
               variant="caption"
               color={theme.palette.custom_grey.tint_2}
             >
-              {program.creator.name}
-              {program.creator.id === user?.id && (
+              {trainer && (
+                <Typography variant="caption">{trainer.name}</Typography>
+              )}
+              {program.creator === user?.id && (
                 <Typography variant="caption" color="info.main">
                   you
                 </Typography>
@@ -63,7 +67,7 @@ const ProgramItem: React.FC<ProgramItemProps> = ({ program }) => {
 
       {isUpSm && (
         <ProgramActions>
-          {program.creator.id !== user?.id ? (
+          {program.creator !== user?.id ? (
             <Button variant="contained" size="small" fullWidth>
               buy
             </Button>
@@ -119,6 +123,7 @@ const ContentText = styled(Typography)(({ theme }) => ({
   alignItems: "center",
   gap: theme.spacing(1),
   letterSpacing: "1px",
+  textTransform: "none",
 }));
 
 const ContentContainer = styled(Box)({

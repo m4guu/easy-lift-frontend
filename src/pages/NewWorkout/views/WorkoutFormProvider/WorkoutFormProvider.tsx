@@ -37,7 +37,7 @@ type WorkoutFormProviderProps = {
     FieldValues,
     `program.${number}.weekWorkouts`
   >;
-  editWorkout?: Workout[];
+  editWorkout?: Workout;
 };
 
 export const WorkoutFormProvider: React.FC<WorkoutFormProviderProps> = ({

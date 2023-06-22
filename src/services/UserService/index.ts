@@ -11,11 +11,11 @@ export enum UserMethods {
 const UserServices = {
   [UserMethods.GET_TRAINERS]: (pageParam: number): Promise<User[]> =>
     HttpService.get(
-      `${ENDPOINTS.USERS}?role=${Role.trainer}&_page=${pageParam}`
+      `${ENDPOINTS.USERS}?role=${Role.trainer}&page=${pageParam}`
     ),
 
-  [UserMethods.GET_USER_BY_ID]: (userId: string): Promise<User[]> =>
-    HttpService.get(`${ENDPOINTS.USERS}?id=${userId}`),
+  [UserMethods.GET_USER_BY_ID]: (userId: string): Promise<User> =>
+    HttpService.get(`${ENDPOINTS.USERS}/${userId}`),
 };
 
 export default UserServices;
