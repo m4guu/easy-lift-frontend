@@ -4,8 +4,6 @@ import { HttpService, ENDPOINTS } from "../api";
 export enum UserProgressMethods {
   GET_USER_PROGRESS = "getUserProgress",
   GET_USER_EXERCISE_PROGRESS = "getUserExerciseProgress",
-  CREATE = "create",
-  DELETE = "delete",
 }
 
 const UserProgressService = {
@@ -20,14 +18,6 @@ const UserProgressService = {
   ) =>
     HttpService.get<UserProgres[]>(
       `${ENDPOINTS.USERS_PROGRESS}?userId=${userId}&exerciseId=${exerciseId}`
-    ),
-
-  [UserProgressMethods.CREATE]: (newUserProgres: UserProgres) =>
-    HttpService.post<void>(ENDPOINTS.USERS_PROGRESS, newUserProgres),
-
-  [UserProgressMethods.DELETE]: (WorkoutId: string) =>
-    HttpService.delete<void>(
-      `${ENDPOINTS.USERS_PROGRESS}?workoutId=${WorkoutId}`
     ),
 };
 export default UserProgressService;

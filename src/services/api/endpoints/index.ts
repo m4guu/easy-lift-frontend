@@ -5,7 +5,7 @@ enum ENDPOINTS {
   USER_WORKOUTS = "workouts/userWorkouts",
   USER_WORKOUTS_BY_MONTH = "workouts/userWorkoutsByMonth",
   TRAINERS = "trainers",
-  USERS_PROGRESS = "usersProgress",
+  USERS_PROGRESS = "user-progress",
   USERS = "users",
 
   // auth

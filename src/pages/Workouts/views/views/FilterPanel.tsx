@@ -9,7 +9,9 @@ interface FilterPanelProps {
   refetchWorkouts: any;
   filterHandlers: {
     selectedTitle: string;
-    handleSelectTitle: React.ChangeEventHandler<HTMLInputElement>;
+    handleSelectTitle: (
+      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => void;
   };
 }
 
