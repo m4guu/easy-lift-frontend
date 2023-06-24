@@ -1,27 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Divider, Box, Typography, useMediaQuery } from "@mui/material";
 import { styled, useTheme } from "@mui/system";
 
 import { useTrainers } from "../../hooks/queryHooks/userHooks/useTrainers";
 import { usePaginatedResultItems } from "../../hooks";
-import { useTrainerFilter } from "../../hooks/filters/useTrainerFilter";
+import {
+  TraninerQueries,
+  useTrainerFilter,
+} from "../../hooks/filters/useTrainerFilter";
 
+import { generateQueriesPath } from "../../utils/Queries";
 import { InfiniteList } from "../../features";
 
 import { Status } from "../../shared/enums";
 import { FilterPanel } from "./views/FilterPanel/FilterPanel";
 import { TrainerItem, SectionHeader } from "../../components";
-import { generateTrainerQueriesPath } from "../../utils/Queries";
 
 const TrainersPage: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   const { filterPanelProps } = useTrainerFilter();
-  const queryPath = generateTrainerQueriesPath({
+  const trainerQueries: TraninerQueries = {
     name: filterPanelProps.selectedName,
     personalTraining: filterPanelProps.selectedPersonalTraining,
-  });
+  };
+  const queryPath = generateQueriesPath(trainerQueries);
 
   const {
     status,
@@ -65,15 +70,18 @@ const TrainersPage: React.FC = () => {
     );
   };
 
+  useEffect(() => {
+    refetchTrainers();
+  }, [
+    filterPanelProps.selectedName,
+    filterPanelProps.selectedPersonalTraining,
+    refetchTrainers,
+  ]);
+
   return (
     <Container>
       <SectionHeader>Our Trainers</SectionHeader>
-
-      <FilterPanel
-        refetchTrainers={refetchTrainers}
-        filterHandlers={filterPanelProps}
-      />
-
+      <FilterPanel filterHandlers={filterPanelProps} />
       <Box sx={{ flex: 1 }}>
         <InfiniteList
           items={trainers}
@@ -84,6 +92,7 @@ const TrainersPage: React.FC = () => {
           itemSize={itemSize}
         />
       </Box>
+
       {status === Status.LOADING && <Typography>Loading...</Typography>}
       {status === Status.ERROR && <Typography>error</Typography>}
       {noTrainers && <Typography>There are no trainers yet.</Typography>}

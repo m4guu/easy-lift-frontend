@@ -49,7 +49,7 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
     (response) => response
   );
   const noExercises = status === Status.SUCCESS && exercises.length === 0;
-  const { updatedExercises, filterPanelProps } = useExerciseFilter(exercises);
+  // const { updatedExercises, filterPanelProps } = useExerciseFilter(exercises);
 
   // Every row is loaded except for our loading indicator row.
   const isItemLoaded = (index: number) =>
@@ -87,7 +87,7 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
     >
       <Container>
         <Header>Exercise list</Header>
-        <FilterPanel filterHandlers={filterPanelProps} />
+        {/* <FilterPanel filterHandlers={filterPanelProps} /> */}
         <Box sx={{ flex: 1 }}>
           <InfiniteList
             items={exercises}

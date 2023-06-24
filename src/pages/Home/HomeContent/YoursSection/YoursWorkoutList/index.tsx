@@ -10,12 +10,14 @@ import { InfiniteList } from "../../../../../features";
 
 import { QueryKey, Status } from "../../../../../shared/enums";
 import { WorkoutItem } from "../../../../../components";
-import { generateWorkoutQueriesPath } from "../../../../../utils/Queries";
+import { generateQueriesPath } from "../../../../../utils/Queries";
+import { WorkoutQueries } from "../../../../../hooks/filters/useWorkoutFilter";
 
 export const YourWorkoutList: React.FC<{ userId: string }> = ({ userId }) => {
   const theme = useTheme();
   const isBelowXl = useMediaQuery(theme.breakpoints.down("xl"));
-  const queryPath = generateWorkoutQueriesPath({ creator: userId });
+  const workoutQueries: WorkoutQueries = { creator: userId };
+  const queryPath = generateQueriesPath(workoutQueries);
   const {
     status,
     error,

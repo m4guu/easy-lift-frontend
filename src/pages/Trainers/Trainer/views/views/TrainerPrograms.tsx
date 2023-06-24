@@ -1,9 +1,11 @@
 import React from "react";
 
-import { Box, Alert, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import { usePaginatedResultItems } from "../../../../../hooks";
 import { usePrograms } from "../../../../../hooks/queryHooks/programsHooks/usePrograms";
+
+import { generateQueriesPath } from "../../../../../utils/Queries";
 
 import { InfiniteList } from "../../../../../features";
 import { ProgramItem } from "../../../../../components";
@@ -14,11 +16,12 @@ import {
   ProgramsContainer,
 } from "./styles/TrainerViews.styles";
 import { Status } from "../../../../../shared/enums";
-import { generateProgramQueriesPath } from "../../../../../utils/Queries";
+import { ProgramQueries } from "../../../../../hooks/filters/useProgramFilter";
 
 export const TrainerPrograms: React.FC<{ trainerId: string }> = ({
   trainerId,
 }) => {
+  const programQueries: ProgramQueries = { creator: trainerId };
   const {
     status,
     error,
@@ -26,7 +29,7 @@ export const TrainerPrograms: React.FC<{ trainerId: string }> = ({
     isFetchingNextPage,
     fetchNextPage,
     data: infinityTrainerPrograms,
-  } = usePrograms(generateProgramQueriesPath({ creator: trainerId }));
+  } = usePrograms(generateQueriesPath(programQueries));
 
   const programs = usePaginatedResultItems(
     infinityTrainerPrograms,

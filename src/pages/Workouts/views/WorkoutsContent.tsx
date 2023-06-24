@@ -1,10 +1,13 @@
-import React from "react";
+import { useEffect } from "react";
 
 import { Box, Divider, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { useWorkouts } from "../../../hooks/queryHooks/workoutsHooks/useWorkouts";
-import { useWorkoutFilter } from "../../../hooks/filters/useWorkoutFilter";
+import {
+  WorkoutQueries,
+  useWorkoutFilter,
+} from "../../../hooks/filters/useWorkoutFilter";
 import { usePaginatedResultItems } from "../../../hooks";
 
 import { InfiniteList } from "../../../features";
@@ -12,14 +15,15 @@ import { InfiniteList } from "../../../features";
 import { QueryKey, Status } from "../../../shared/enums";
 import { FilterPanel } from "./views/FilterPanel";
 import { WorkoutItem } from "../../../components";
-import { generateWorkoutQueriesPath } from "../../../utils/Queries";
+import { generateQueriesPath } from "../../../utils/Queries";
 
 export const WorkoutsContent: React.FC<{ userId: string }> = ({ userId }) => {
   const { filterPanelProps } = useWorkoutFilter();
-  const queryPath = generateWorkoutQueriesPath({
+  const workoutQueries: WorkoutQueries = {
     creator: userId,
     name: filterPanelProps.selectedTitle,
-  });
+  };
+  const queryPath = generateQueriesPath(workoutQueries);
 
   const {
     status,
@@ -58,12 +62,14 @@ export const WorkoutsContent: React.FC<{ userId: string }> = ({ userId }) => {
       </Box>
     );
   };
+
+  useEffect(() => {
+    refetchWorkouts();
+  }, [refetchWorkouts, filterPanelProps.selectedTitle]);
+
   return (
     <Box sx={{ flex: 1 }}>
-      <FilterPanel
-        refetchWorkouts={refetchWorkouts}
-        filterHandlers={filterPanelProps}
-      />
+      <FilterPanel filterHandlers={filterPanelProps} />
 
       <NoPaddingDivider />
       <InfiniteList

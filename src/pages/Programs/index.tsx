@@ -1,31 +1,25 @@
-import React from "react";
+import { useEffect } from "react";
 
 import { Box, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { usePrograms } from "../../hooks/queryHooks/programsHooks/usePrograms";
 import { usePaginatedResultItems } from "../../hooks";
-import { useProgramFilter } from "../../hooks/filters/useProgramFilter";
+import {
+  ProgramQueries,
+  useProgramFilter,
+} from "../../hooks/filters/useProgramFilter";
 
 import { FilterPanel } from "./views/FilterPanel/FilterPanel";
 import { InfiniteList } from "../../features";
 
 import { Status } from "../../shared/enums";
 import { SectionHeader, ProgramItem } from "../../components";
-import { generateProgramQueriesPath } from "../../utils/Queries";
+import { generateQueriesPath } from "../../utils/Queries";
 
 const ProgramsPage: React.FC = () => {
-  const { filterProgramProps } = useProgramFilter();
-  const queryPath = generateProgramQueriesPath({
-    name: filterProgramProps.selectedTitle,
-    programLevel: filterProgramProps.selectedLevel,
-    minPrice: filterProgramProps.selectedPrice[0],
-    maxPrice: filterProgramProps.selectedPrice[1],
-    minFreqTraining: filterProgramProps.selectedFrequency[0],
-    maxFreqTraining: filterProgramProps.selectedFrequency[1],
-    minProgramLength: filterProgramProps.selectedLength[0],
-    maxProgramLength: filterProgramProps.selectedLength[1],
-  });
+  const { filterProgramProps, programQueries } = useProgramFilter();
+  const queryPath = generateQueriesPath(programQueries);
   const {
     status,
     error,
@@ -65,18 +59,14 @@ const ProgramsPage: React.FC = () => {
     );
   };
 
+  useEffect(() => {
+    refetchPrograms();
+  }, [refetchPrograms, filterProgramProps]);
+
   return (
     <Container>
       <SectionHeader>Programs</SectionHeader>
-      {status === Status.LOADING && <Typography>loading...</Typography>}
-      {status === Status.ERROR && <Typography>error!</Typography>}
-      {noPrograms && <Typography>There are no programs yet.</Typography>}
-
-      <FilterPanel
-        refetchPrograms={refetchPrograms}
-        filterHandlers={filterProgramProps}
-      />
-
+      <FilterPanel filterHandlers={filterProgramProps} />
       <Box sx={{ flex: 1 }}>
         <InfiniteList
           items={programs}
@@ -87,6 +77,10 @@ const ProgramsPage: React.FC = () => {
           itemSize={85}
         />
       </Box>
+
+      {status === Status.LOADING && <Typography>loading...</Typography>}
+      {status === Status.ERROR && <Typography>error!</Typography>}
+      {noPrograms && <Typography>There are no programs yet.</Typography>}
     </Container>
   );
 };

@@ -8,10 +8,35 @@ import {
   maxProgramLength,
 } from "../formHooks/program/constans";
 
+export enum ProgramQueriesKeys {
+  LIMIT = "limit",
+  CREATOR = "creator",
+  NAME = "name",
+  MAX_PRICE = "maxPrice",
+  MIN_PRICE = "minPrice",
+  MIN_FREQ_TRAINING = "minFreqTraining",
+  MAX_FREQ_TRAINING = "maxFreqTraining",
+  MIN_PROGRAM_LENGTH = "minProgramLength",
+  MAX_PROGRAM_LENGTH = "maxProgramLength",
+  PROGRAM_LEVEL = "programLevel",
+}
+
+export interface ProgramQueries {
+  [ProgramQueriesKeys.LIMIT]?: number;
+  [ProgramQueriesKeys.CREATOR]?: string;
+  [ProgramQueriesKeys.NAME]?: string;
+  [ProgramQueriesKeys.MIN_PRICE]?: number;
+  [ProgramQueriesKeys.MAX_PRICE]?: number;
+  [ProgramQueriesKeys.MIN_FREQ_TRAINING]?: number;
+  [ProgramQueriesKeys.MAX_FREQ_TRAINING]?: number;
+  [ProgramQueriesKeys.MIN_PROGRAM_LENGTH]?: number;
+  [ProgramQueriesKeys.MAX_PROGRAM_LENGTH]?: number;
+  [ProgramQueriesKeys.PROGRAM_LEVEL]?: ProgramLevels;
+}
+
 export const useProgramFilter = () => {
   const maxPrice = 999;
   const minPrice = 0;
-
   const [selectedTitle, setSelectedTitle] = useState("");
   const [selectedLevel, setSelectedLevel] = useState<ProgramLevels>(
     ProgramLevels.NOVICE
@@ -26,27 +51,31 @@ export const useProgramFilter = () => {
   ]);
   const [selectedPrice, setSelectedPrice] = useState<number[]>([]);
 
+  const programQueries: ProgramQueries = {
+    name: selectedTitle,
+    programLevel: selectedLevel,
+    minPrice: selectedPrice[0],
+    maxPrice: selectedPrice[1],
+    minFreqTraining: selectedFrequency[0],
+    maxFreqTraining: selectedFrequency[1],
+    minProgramLength: selectedLength[0],
+    maxProgramLength: selectedLength[1],
+  };
+
   const handleSelectTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedTitle(event.target.value);
   };
-
   const handleSelectLevel = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value as ProgramLevels;
-    setSelectedLevel(value);
+    setSelectedLevel(event.target.value as ProgramLevels);
   };
-
   const handleSelectFrequency = (_event: Event, value: number[] | number) => {
-    const rangeValue = value as number[];
-    setSelectedFrequency(rangeValue);
+    setSelectedFrequency(value as number[]);
   };
-
   const handleSelectLength = (_event: Event, value: number[] | number) => {
-    const rangeValue = value as number[];
-    setSelectedLength(rangeValue);
+    setSelectedLength(value as number[]);
   };
   const handleSelectPrice = (_event: Event, value: number[] | number) => {
-    const rangeValue = value as number[];
-    setSelectedPrice(rangeValue);
+    setSelectedPrice(value as number[]);
   };
 
   useEffect(() => {
@@ -54,6 +83,7 @@ export const useProgramFilter = () => {
   }, [maxPrice, minPrice]);
 
   return {
+    programQueries,
     filterProgramProps: {
       selectedTitle,
       selectedLevel,

@@ -37,6 +37,8 @@ export const MenuDrawerBox = styled(Box)(({ theme }) => ({
 }));
 
 export const NavigationContainer = styled(Box)(({ theme }) => ({
+  marginTop: theme.spacing(2),
+
   [theme.breakpoints.down("lg")]: {
     display: "none",
   },

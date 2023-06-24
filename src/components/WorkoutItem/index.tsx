@@ -84,7 +84,7 @@ const Item = styled(ListItem)({
 const ItemButton = styled(Button)(({ theme }) => ({
   width: "100%",
   textDecoration: "none",
-  borderRadius: theme.spacing(1),
+  borderStartStartRadius: theme.shape.borderRadius,
   justifyContent: "flex-start",
 }));
 

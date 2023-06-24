@@ -1,4 +1,4 @@
-import { ProgramQueries } from "../../../../../shared/interfaces";
+import { ProgramQueries } from "../../../../../hooks/filters/useProgramFilter";
 
 export const swiperBreakPoints = {
   600: {
