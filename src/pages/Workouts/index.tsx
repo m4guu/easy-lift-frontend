@@ -12,7 +12,7 @@ const Workouts: React.FC = () => {
 
   return (
     <Container>
-      <SectionHeader>Your userWorkouts</SectionHeader>
+      <SectionHeader>Your Workouts</SectionHeader>
       {user && <WorkoutsContent userId={user.id} />}
     </Container>
   );

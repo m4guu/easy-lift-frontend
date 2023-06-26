@@ -1,28 +1,34 @@
-import React from "react";
+import { useEffect } from "react";
 
 import { Box, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { usePrograms } from "../../hooks/queryHooks/programsHooks/usePrograms";
 import { usePaginatedResultItems } from "../../hooks";
+import {
+  ProgramQueries,
+  useProgramFilter,
+} from "../../hooks/filters/useProgramFilter";
 
+import { FilterPanel } from "./views/FilterPanel/FilterPanel";
 import { InfiniteList } from "../../features";
 
 import { Status } from "../../shared/enums";
 import { SectionHeader, ProgramItem } from "../../components";
+import { generateQueriesPath } from "../../utils/Queries";
 
 const ProgramsPage: React.FC = () => {
+  const { filterProgramProps, programQueries } = useProgramFilter();
+  const queryPath = generateQueriesPath(programQueries);
   const {
     status,
     error,
     hasNextPage,
     isFetchingNextPage,
     fetchNextPage,
+    refetch: refetchPrograms,
     data: infinityPrograms,
-  } = usePrograms();
-
-  //! REFACTORY FILTERING WHEN BACKEND WILL BE WRITTEN
-  // const { updatedPrograms, filterProgramProps } = useProgramFilter(programs);
+  } = usePrograms(queryPath);
 
   const programs = usePaginatedResultItems(
     infinityPrograms,
@@ -53,15 +59,14 @@ const ProgramsPage: React.FC = () => {
     );
   };
 
+  useEffect(() => {
+    refetchPrograms();
+  }, [refetchPrograms, filterProgramProps]);
+
   return (
     <Container>
       <SectionHeader>Programs</SectionHeader>
-      {status === Status.LOADING && <Typography>loading...</Typography>}
-      {status === Status.ERROR && <Typography>error!</Typography>}
-      {noPrograms && <Typography>There are no programs yet.</Typography>}
-
-      {/* <FilterPanel filterHandlers={filterProgramProps} /> */}
-
+      <FilterPanel filterHandlers={filterProgramProps} />
       <Box sx={{ flex: 1 }}>
         <InfiniteList
           items={programs}
@@ -72,6 +77,10 @@ const ProgramsPage: React.FC = () => {
           itemSize={85}
         />
       </Box>
+
+      {status === Status.LOADING && <Typography>loading...</Typography>}
+      {status === Status.ERROR && <Typography>error!</Typography>}
+      {noPrograms && <Typography>There are no programs yet.</Typography>}
     </Container>
   );
 };

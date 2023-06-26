@@ -44,14 +44,12 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
     data: infinityExercises,
   } = useExercises();
 
-  //! REFACTORY FILTERING WHEN BACKEND WILL BE WRITTEN
-  // const { updatedExercises, filterPanelProps } = useExerciseFilter(exercises);
-
   const exercises = usePaginatedResultItems(
     infinityExercises,
     (response) => response
   );
   const noExercises = status === Status.SUCCESS && exercises.length === 0;
+  // const { updatedExercises, filterPanelProps } = useExerciseFilter(exercises);
 
   // Every row is loaded except for our loading indicator row.
   const isItemLoaded = (index: number) =>
@@ -89,14 +87,7 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
     >
       <Container>
         <Header>Exercise list</Header>
-
-        {status === Status.LOADING && <Typography>loading...</Typography>}
-        {noExercises && (
-          <Typography>Somethings goes wrong. Please try later.</Typography>
-        )}
-
         {/* <FilterPanel filterHandlers={filterPanelProps} /> */}
-
         <Box sx={{ flex: 1 }}>
           <InfiniteList
             items={exercises}
@@ -116,6 +107,11 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
         >
           close modal
         </CloseModalButton>
+
+        {status === Status.LOADING && <Typography>loading...</Typography>}
+        {noExercises && (
+          <Typography>Somethings goes wrong. Please try later.</Typography>
+        )}
       </Container>
     </ExercisesMuiModal>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { Alert, Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -19,11 +19,10 @@ import { queries, swiperBreakPoints } from "./constatns";
 import { QueryKey, Status } from "../../../../../shared/enums";
 import { Program } from "../../../../../shared/interfaces";
 import { usePaginatedResultItems } from "../../../../../hooks";
-import { generateProgramQueriesPath } from "../../../../../utils/Queries";
+import { generateQueriesPath } from "../../../../../utils/Queries";
 
 export const ProgramList: React.FC = () => {
-  const queryPath = generateProgramQueriesPath(queries);
-
+  const queryPath = generateQueriesPath(queries);
   const {
     status,
     error,

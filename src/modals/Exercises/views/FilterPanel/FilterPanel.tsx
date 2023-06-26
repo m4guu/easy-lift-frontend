@@ -1,6 +1,5 @@
 import React from "react";
 
-import { FormControl } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { SearchBar } from "../../../../components";
@@ -20,7 +19,6 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
   return (
     <Form>
       <SearchBar
-        placeholder="Search exercise..."
         value={selectedExerciseName}
         onChange={handleSelectExerciseName}
       />
@@ -28,6 +26,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
   );
 };
 
-const Form = styled(FormControl)(({ theme }) => ({
-  margin: `${theme.spacing(2)} 0`,
+const Form = styled("form")(({ theme }) => ({
+  maxWidth: "30rem",
+  margin: `${theme.spacing(2)} auto`,
 }));

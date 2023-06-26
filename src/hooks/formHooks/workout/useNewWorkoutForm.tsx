@@ -13,7 +13,6 @@ import { ValidationError } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useAddWorkoutMutation } from "../../queryHooks/workoutsHooks/useAddWorkoutMutation";
-import { useAddUserProgresMutation } from "../../queryHooks/userProgressHooks/useAddUserProgresMutation";
 import { useUserContext } from "../../../contexts/userContext";
 
 import {
@@ -64,7 +63,6 @@ export const useNewWorkoutForm = ({
   editWorkout,
 }: UseNewWorkoutFormProps) => {
   const navigate = useNavigate();
-  const [pending, setPending] = useState(false);
   const [isDraftSubmited, setIsDraftSubmited] = useState(false);
 
   const editWorkoutValues = editWorkout
@@ -72,9 +70,12 @@ export const useNewWorkoutForm = ({
     : undefined;
 
   const { user } = useUserContext();
-  const { mutateAsync: addQueryWorkout } = useAddWorkoutMutation();
-  const { mutateAsync: addQueryUserProgres } = useAddUserProgresMutation();
-  const { mutateAsync: updateQueryWorkout } = useUpdateWorkoutMutation();
+  const { isLoading: isAddingWorkout, mutateAsync: addQueryWorkout } =
+    useAddWorkoutMutation();
+  const { isLoading: isUpdatingWorkout, mutateAsync: updateQueryWorkout } =
+    useUpdateWorkoutMutation();
+
+  const pending = isAddingWorkout || isUpdatingWorkout;
 
   const schema =
     user?.role === Role.trainer ? workoutTrainerSchema : workoutUserSchema;
@@ -102,11 +103,8 @@ export const useNewWorkoutForm = ({
 
   const onSubmit = useCallback(
     (formValues: AddWorkoutForm) => {
-      setPending(true);
-
       const newWorkout = generateNewWorkout(formValues, user!, false);
 
-      // todo: refactory when backend will be written. Delete addQueryUserProgress because it will be done in backend in addNewWorkout route
       if (user?.role === Role.user) {
         if (editWorkout) {
           updateQueryWorkout({
@@ -116,16 +114,8 @@ export const useNewWorkoutForm = ({
         } else {
           addQueryWorkout(newWorkout).then(resetForm);
         }
-
-        // const newUserProgress = generateUserProgress(newWorkout);
-        // return newUserProgress.map((userProgres) =>
-        //   addQueryUserProgres(userProgres)
-        // );
-
-        setPending(false);
       } else {
         updateWorkoutField!(workoutIndex!, { id: uuidv4(), ...newWorkout });
-        setPending(false);
       }
     },
     [
@@ -133,7 +123,6 @@ export const useNewWorkoutForm = ({
       addQueryWorkout,
       resetForm,
       navigate,
-      // addQueryUserProgres,
       updateQueryWorkout,
       editWorkout,
       updateWorkoutField,
@@ -142,7 +131,6 @@ export const useNewWorkoutForm = ({
   );
 
   const onDraftSave = useCallback(async () => {
-    setPending(true);
     clearErrors();
 
     const formData: AddWorkoutForm = getValues();
@@ -152,11 +140,9 @@ export const useNewWorkoutForm = ({
       // add draft workout
       const newDraftWorkout = generateNewWorkout(formData, user!, true);
 
-      // todo: refactory when backend will be written. Delete addQueryUserProgress because it will be done in backend in addNewWorkout route
       addQueryWorkout(newDraftWorkout)
         .then(resetForm)
         .finally(() => {
-          setPending(false);
           setIsDraftSubmited(true);
         });
     } catch (error: unknown) {
@@ -167,13 +153,12 @@ export const useNewWorkoutForm = ({
           return setError(path, { type, message: errors[index] });
         });
       }
-      setPending(false);
     }
   }, [getValues, setError, addQueryWorkout, resetForm, clearErrors, user]);
 
   return {
-    pending,
     methods,
+    pending,
     onSubmit,
     onDraftSave,
     isDraftSubmited,

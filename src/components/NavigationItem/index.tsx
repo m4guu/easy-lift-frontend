@@ -49,7 +49,7 @@ const NavigationItem: React.FC<NavigationItemProps> = ({
 const MenuListItem = styled(MenuItem)(({ theme }) => ({
   padding: 0,
   marginBottom: "0.2rem",
-  borderRadius: " 0.7rem",
+  borderRadius: theme.shape.borderRadius,
   borderEndEndRadius: 0,
   borderStartEndRadius: 0,
   marginRight: `-${theme.spacing(2)}`,
@@ -65,7 +65,7 @@ const NavigationLink = styled(NavLink)(({ theme }) => ({
   display: "flex",
   padding: theme.spacing(1),
   alignItems: "center",
-  borderRadius: " 0.7rem",
+  borderRadius: theme.shape.borderRadius,
   borderEndEndRadius: 0,
   borderStartEndRadius: 0,
   textDecoration: "none",

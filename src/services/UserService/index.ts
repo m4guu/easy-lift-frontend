@@ -9,9 +9,12 @@ export enum UserMethods {
 }
 
 const UserServices = {
-  [UserMethods.GET_TRAINERS]: (pageParam: number): Promise<User[]> =>
+  [UserMethods.GET_TRAINERS]: (
+    pageParam: number,
+    queries?: string
+  ): Promise<User[]> =>
     HttpService.get(
-      `${ENDPOINTS.USERS}?role=${Role.trainer}&page=${pageParam}`
+      `${ENDPOINTS.USERS}?role=${Role.trainer}&page=${pageParam}${queries}`
     ),
 
   [UserMethods.GET_USER_BY_ID]: (userId: string): Promise<User> =>

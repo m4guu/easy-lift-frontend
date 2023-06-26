@@ -5,14 +5,14 @@ import { format } from "date-fns";
 import { ListItem, Typography, Box, Button } from "@mui/material";
 import { styled, useTheme } from "@mui/system";
 
-import { useDeleteUserProgresMutation } from "../../hooks/queryHooks/userProgressHooks/useDeleteUserProgressMutation";
 import { useDeleteWorkoutMutation } from "../../hooks/queryHooks/workoutsHooks/useDeleteWorkoutMutation";
 import { useSnackbar } from "../../hooks";
+
+import ButtonWithConfirmation from "../ButtonWithConfirmation";
 
 import { SnackbarStatus, Status } from "../../shared/enums";
 import { Workout } from "../../shared/interfaces";
 import { PATHS } from "../../pages/paths";
-import ButtonWithConfirmation from "../ButtonWithConfirmation";
 
 type WorkoutItemProps = {
   workout: Workout;
@@ -26,13 +26,6 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
   const { status, mutate: deleteQueryWorkout } = useDeleteWorkoutMutation(
     workout.id
   );
-  const { mutate: deleteQueryUserProgress } = useDeleteUserProgresMutation();
-
-  // todo: change when backend will be written => delete user progress will be in delete workout route
-  const deleteWorkout = () => {
-    deleteQueryWorkout(workout.id);
-    deleteQueryUserProgress(workout.id);
-  };
 
   const onWorkoutChoose = () => {
     if (workout.isDraft) {
@@ -73,7 +66,7 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
       </ItemButton>
 
       <DeleteButton
-        onConfirm={deleteWorkout}
+        onConfirm={() => deleteQueryWorkout(workout.id)}
         variant="outlined"
         size="small"
         color="error"
@@ -91,7 +84,7 @@ const Item = styled(ListItem)({
 const ItemButton = styled(Button)(({ theme }) => ({
   width: "100%",
   textDecoration: "none",
-  borderRadius: theme.spacing(1),
+  borderStartStartRadius: theme.shape.borderRadius,
   justifyContent: "flex-start",
 }));
 

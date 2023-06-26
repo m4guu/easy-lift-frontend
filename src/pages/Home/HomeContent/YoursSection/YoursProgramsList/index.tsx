@@ -10,10 +10,12 @@ import { ProgramItem } from "../../../../../components";
 import { InfiniteList } from "../../../../../features";
 
 import { QueryKey, Status } from "../../../../../shared/enums";
-import { generateProgramQueriesPath } from "../../../../../utils/Queries";
+import { generateQueriesPath } from "../../../../../utils/Queries";
+import { ProgramQueries } from "../../../../../hooks/filters/useProgramFilter";
 
 export const YoursProgramsList: React.FC<{ userId: string }> = ({ userId }) => {
-  const queryPath = generateProgramQueriesPath({ creator: userId });
+  const programQueries: ProgramQueries = { creator: userId };
+  const queryPath = generateQueriesPath(programQueries);
 
   const {
     status,
@@ -55,9 +57,6 @@ export const YoursProgramsList: React.FC<{ userId: string }> = ({ userId }) => {
 
   return (
     <Box sx={{ height: 500 }}>
-      {status === Status.LOADING && <Typography>loading...</Typography>}
-      {status === Status.ERROR && <Typography>error</Typography>}
-      {noPrograms && <Typography>There are no programs yet.</Typography>}
       <InfiniteList
         items={programs}
         Item={Item}
@@ -66,6 +65,10 @@ export const YoursProgramsList: React.FC<{ userId: string }> = ({ userId }) => {
         fetchNextPage={fetchNextPage}
         itemSize={85}
       />
+
+      {status === Status.LOADING && <Typography>loading...</Typography>}
+      {status === Status.ERROR && <Typography>error</Typography>}
+      {noPrograms && <Typography>There are no programs yet.</Typography>}
     </Box>
   );
 };

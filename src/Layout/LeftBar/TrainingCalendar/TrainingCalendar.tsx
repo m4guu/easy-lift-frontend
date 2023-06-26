@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
 
-import { Box } from "@mui/material";
+import { Box, List, ListItem } from "@mui/material";
 import { DateCalendar } from "@mui/x-date-pickers";
 import { styled } from "@mui/system";
 
-import { DaySlot } from "./views/DaySlot";
-import { useWorkouts } from "../../../hooks/queryHooks/workoutsHooks/useWorkouts";
-import { getCurrentMonth } from "../../../utils/Date";
-import { generateWorkoutQueriesPath } from "../../../utils/Queries";
-import { QueryKey } from "../../../shared/enums";
 import { usePaginatedResultItems } from "../../../hooks";
+import { useWorkouts } from "../../../hooks/queryHooks/workoutsHooks/useWorkouts";
+
+import { getCurrentMonth } from "../../../utils/Date";
+import { generateQueriesPath } from "../../../utils/Queries";
+
+import { DaySlot } from "./views/DaySlot";
+import { QueryKey } from "../../../shared/enums";
+import { Workout } from "../../../shared/interfaces";
+import { WorkoutItem } from "../../../components";
+import { WorkoutQueries } from "../../../hooks/filters/useWorkoutFilter";
 
 interface TrainingCalendarProps {
   userId: string;
@@ -20,10 +25,15 @@ export const TrainingCalendar: React.FC<TrainingCalendarProps> = ({
 }) => {
   const [monthNumber, setMonthNumber] = useState<number>(getCurrentMonth);
   const [highlightedDays, setHighlightedDays] = useState<number[]>([]);
-  const queryPath = generateWorkoutQueriesPath({
+  const [todaysWorkouts, setTodaysWorkouts] = useState<Workout[]>([]);
+  const [selectedDay, setSelectedDay] = useState<number>();
+
+  const workoutQueries: WorkoutQueries = {
     creator: userId,
     monthNumber,
-  });
+  };
+  const queryPath = generateQueriesPath(workoutQueries);
+
   const { data: infinityUserWorkouts, refetch } = useWorkouts(
     queryPath,
     QueryKey.USER_WORKOUTS_BY_MONTH
@@ -38,15 +48,22 @@ export const TrainingCalendar: React.FC<TrainingCalendarProps> = ({
     setMonthNumber(month.$d.getMonth() + 1);
   };
 
-  // todo: refactory when fix finding workouts by month number
+  const onDayChange = (selectProps: unknown) => {
+    setSelectedDay(selectProps.$D);
+    const dayWorkouts = monthWorkouts.filter((workout) => {
+      return selectProps.$D === new Date(workout.date).getDate();
+    });
+    setTodaysWorkouts(dayWorkouts);
+  };
+
   useEffect(() => {
-    if (monthWorkouts) {
-      const monthHighlightedDays = monthWorkouts.map((monthWorkout) =>
-        new Date(monthWorkout.date).getDate()
-      );
-      setHighlightedDays(monthHighlightedDays);
-    }
-  }, []);
+    const monthHighlightedDays = monthWorkouts.map((monthWorkout) =>
+      new Date(monthWorkout.date).getDate()
+    );
+    setHighlightedDays(monthHighlightedDays);
+    onDayChange({ $D: selectedDay });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [infinityUserWorkouts]);
 
   useEffect(() => {
     refetch();
@@ -61,7 +78,16 @@ export const TrainingCalendar: React.FC<TrainingCalendarProps> = ({
         }}
         slotProps={{ day: { highlightedDays } as any }}
         onMonthChange={onMonthChange}
+        onChange={onDayChange}
       />
+
+      {todaysWorkouts.length !== 0 && (
+        <TodaysWorkoutsList>
+          {todaysWorkouts.map((workout) => {
+            return <WorkoutItem key={workout.id} workout={workout} />;
+          })}
+        </TodaysWorkoutsList>
+      )}
     </Container>
   );
 };
@@ -75,10 +101,13 @@ const Container = styled(Box)(({ theme }) => ({
 
 const Calendar = styled(DateCalendar)(({ theme }) => ({
   width: "100%",
-  marginLeft: 0,
-  marginBottom: `${theme.spacing(2)}`,
   background: theme.palette.background.default,
-  borderRadius: " 0.7rem",
-  borderEndEndRadius: 0,
-  borderStartEndRadius: 0,
+  borderStartStartRadius: theme.shape.borderRadius,
+}));
+
+const TodaysWorkoutsList = styled(List)(({ theme }) => ({
+  padding: theme.spacing(2),
+  background: theme.palette.background.default,
+  marginTop: theme.spacing(-6),
+  borderEndStartRadius: theme.shape.borderRadius,
 }));

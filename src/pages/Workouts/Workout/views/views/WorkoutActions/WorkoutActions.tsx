@@ -5,7 +5,6 @@ import { Box, Button } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { useDeleteWorkoutMutation } from "../../../../../../hooks/queryHooks/workoutsHooks/useDeleteWorkoutMutation";
-import { useDeleteUserProgresMutation } from "../../../../../../hooks/queryHooks/userProgressHooks/useDeleteUserProgressMutation";
 import { useSnackbar } from "../../../../../../hooks";
 
 import { SnackbarStatus, Status } from "../../../../../../shared/enums";
@@ -25,13 +24,7 @@ export const WorkoutActions: React.FC<WorkoutActionsProps> = ({
 
   const { status, mutate: deleteQueryWorkout } =
     useDeleteWorkoutMutation(workoutId);
-  const { mutate: deleteQueryUserProgress } = useDeleteUserProgresMutation();
 
-  // todo: change when backend will be written => delete user progress will be in delete workout route
-  const deleteWorkout = () => {
-    deleteQueryWorkout(workoutId);
-    deleteQueryUserProgress(workoutId);
-  };
   const editWorkout = () => {
     navigate(`${PATHS.NEW_WORKOUT}/${workoutId}`);
   };
@@ -57,7 +50,7 @@ export const WorkoutActions: React.FC<WorkoutActionsProps> = ({
         edit
       </Button>
       <ButtonWithConfirmation
-        onConfirm={deleteWorkout}
+        onConfirm={() => deleteQueryWorkout(workoutId)}
         variant="outlined"
         size="small"
         color="error"
