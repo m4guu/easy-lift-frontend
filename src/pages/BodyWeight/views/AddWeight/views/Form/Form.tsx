@@ -25,7 +25,7 @@ export const Form: React.FC = () => {
 
   useEffect(() => {
     if (updateWeightError) {
-      snackbar("Something goes wrong. Please try later.", SnackbarStatus.ERROR);
+      snackbar(updateWeightError.message, SnackbarStatus.ERROR);
     }
     if (!isUpdatingWeight && updateWeightStatus === Status.SUCCESS) {
       snackbar("Weight saved successfully!.", SnackbarStatus.SUCCESS);

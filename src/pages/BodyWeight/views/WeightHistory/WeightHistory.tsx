@@ -4,16 +4,21 @@ import { v4 as uuidv4 } from "uuid";
 import { Box, Divider, List, ListItem } from "@mui/material";
 import { styled } from "@mui/system";
 
-import { SectionHeader, BodyWeightItem } from "../../../../components";
+import {
+  SectionHeader,
+  BodyWeightItem,
+  StatusBar,
+} from "../../../../components";
 import { useWeightHistory } from "../../../../hooks/queryHooks/weightHistory/useWeightHistory";
 
 export const WeightHistory: React.FC<{ userId: string }> = ({ userId }) => {
-  const { error, data: weightHistory } = useWeightHistory(userId);
+  const { error, status, data: weightHistory } = useWeightHistory(userId);
 
   return (
     <SectionContainer>
       <SectionHeader>history</SectionHeader>
       <NoPaddingDivider />
+      <StatusBar status={status} error={error} />
 
       <HistoryList disablePadding>
         {weightHistory &&

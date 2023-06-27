@@ -1,4 +1,5 @@
 import { WeightHistory } from "../../shared/interfaces";
+import UpdateWeight from "../../shared/interfaces/UpdateWeight/idnex";
 import { HttpService, ENDPOINTS } from "../api";
 
 export enum WeightHistoryMethods {
@@ -15,10 +16,7 @@ const WeightHistoryService = {
   [WeightHistoryMethods.UPDATE_WEIGHT_HISTORY]: ({
     userId,
     weight,
-  }: {
-    userId: string;
-    weight: number;
-  }): Promise<boolean> =>
+  }: UpdateWeight): Promise<boolean> =>
     HttpService.patch(ENDPOINTS.UPDATE_WEIGHT_HISTORY, { userId, weight }),
 };
 

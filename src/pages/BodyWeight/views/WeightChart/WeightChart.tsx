@@ -13,9 +13,10 @@ import { Chart } from "../../../../utils/LineChart";
 import { ChartType } from "../../../../shared/enums";
 
 export const WeightChart: React.FC<{ userId: string }> = ({ userId }) => {
-  const { error, data: weightHistory } = useWeightHistory(userId);
   const theme = useTheme();
   const isDownSm = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const { data: weightHistory } = useWeightHistory(userId);
 
   const chartOptions = {
     aspectRatio: isDownSm ? 1 / 1 : 3 / 1,

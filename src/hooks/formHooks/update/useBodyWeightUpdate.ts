@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useUserContext } from "../../../contexts/userContext";
 import { useUpdateWeightMutation } from "../../queryHooks/weightHistory/useUpdateWeightMutation";
+import UpdateWeight from "../../../shared/interfaces/UpdateWeight/idnex";
 
 export enum BodyWeightUpdateFields {
   BODY_WEIGHT = "bodyWeight",
@@ -47,10 +48,11 @@ export const useBodyWeightUpdate = () => {
 
   const onSubmit = useCallback(
     (formValues: BodyWeightUpdate) => {
-      updateWeightQuery({
+      const updatedWeight: UpdateWeight = {
         userId: user?.id!,
         weight: formValues.bodyWeight,
-      });
+      };
+      updateWeightQuery(updatedWeight);
     },
     [updateWeightQuery, user]
   );
