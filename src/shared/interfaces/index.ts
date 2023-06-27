@@ -18,6 +18,7 @@ export type { default as User } from "./User";
 export type { default as WeightHistory } from "./WeightHistory";
 export type { default as UpdateEmailData } from "./UpdateEmailData";
 export type { default as UpdatePasswordData } from "./UpdatePasswordData";
+export type { default as Error } from "./Error";
 
 export type { default as FormExercise } from "./WorkoutForm/FormExercise";
 export type { default as FormSet } from "./WorkoutForm/FormSet";

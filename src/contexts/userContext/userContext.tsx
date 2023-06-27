@@ -3,17 +3,24 @@ import { UseMutateAsyncFunction } from "@tanstack/react-query";
 
 import { useAuth } from "../../hooks";
 
-import { User, LoginCredentials, CreateUser } from "../../shared/interfaces";
+import {
+  // Error,
+  User,
+  LoginCredentials,
+  CreateUser,
+} from "../../shared/interfaces";
 
 interface UserContextType {
   isLogging: boolean;
   isRegistering: boolean;
   registerStatus: "error" | "loading" | "idle" | "success";
-  user?: User;
+  // browser doesnt see my Error interface exported from shared/interfaces
+  registerError: any;
   login: (credentials: LoginCredentials) => void;
-  autoLogin: () => void;
   registerUser: UseMutateAsyncFunction<void, unknown, CreateUser, unknown>;
+  autoLogin: () => void;
   logout: () => void;
+  user?: User;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -24,6 +31,7 @@ const UserProvider: React.FCWithChildren = ({ children }) => {
     isRegistering,
     registerStatus,
     user,
+    registerError,
     login,
     registerUser,
     logout,
@@ -41,6 +49,7 @@ const UserProvider: React.FCWithChildren = ({ children }) => {
       isRegistering,
       registerStatus,
       user,
+      registerError,
       login,
       autoLogin,
       registerUser,
@@ -48,6 +57,7 @@ const UserProvider: React.FCWithChildren = ({ children }) => {
     }),
     [
       user,
+      registerError,
       login,
       autoLogin,
       registerUser,

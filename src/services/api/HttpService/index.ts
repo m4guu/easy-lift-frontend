@@ -1,11 +1,14 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { EXERCISE_API_URL, API_URL } from "../../../config/env.config";
-import { config } from "./constans";
+import { config, undefinedError } from "./constans";
+import { Error } from "../../../shared/interfaces";
 
 const pluckData = <T>(wrapper: { data: T }) => wrapper.data;
-const throwError = (e: Error) => {
-  throw e;
+const throwError = (e: AxiosError) => {
+  const error: Error = e.response?.data || undefinedError;
+  throw error;
 };
+
 const axiosInstance = axios.create({
   baseURL: API_URL,
   withCredentials: true,

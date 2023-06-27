@@ -1,0 +1,8 @@
+enum ErrorId {
+  // SERVER
+  INTERNAL_SERVER_ERROR = "INTERNAL_SERVER_ERROR",
+  // AUTH
+  EMAIL_ALREADY_ASSIGNED = "EMAIL_ALREADY_ASSIGNED",
+}
+
+export default ErrorId;
