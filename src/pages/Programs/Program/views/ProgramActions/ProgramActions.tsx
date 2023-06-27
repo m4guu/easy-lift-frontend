@@ -22,9 +22,11 @@ export const ProgramActions: React.FC<ProgramActionsProps> = ({ program }) => {
   const navigate = useNavigate();
   const snackbar = useSnackbar();
 
-  const { status, mutate: deleteQueryProgram } = useDeleteProgramMutation(
-    program.id
-  );
+  const {
+    error,
+    status,
+    mutate: deleteQueryProgram,
+  } = useDeleteProgramMutation(program.id);
 
   const deleteProgram = () => deleteQueryProgram(program.id);
 
@@ -33,10 +35,10 @@ export const ProgramActions: React.FC<ProgramActionsProps> = ({ program }) => {
       navigate(PATHS.default);
       snackbar("Program deleted successfully!", SnackbarStatus.SUCCESS);
     }
-    if (status === Status.ERROR) {
-      snackbar("Something goes wrong. Please try later.", SnackbarStatus.ERROR);
+    if (status === Status.ERROR && error) {
+      snackbar(error.message, SnackbarStatus.ERROR);
     }
-  }, [snackbar, navigate, status]);
+  }, [snackbar, navigate, status, error]);
 
   return (
     <PorgramActions>

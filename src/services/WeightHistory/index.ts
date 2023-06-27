@@ -1,5 +1,5 @@
 import { WeightHistory } from "../../shared/interfaces";
-import UpdateWeight from "../../shared/interfaces/UpdateWeight/idnex";
+import UpdateWeight from "../../shared/interfaces/UpdateWeight";
 import { HttpService, ENDPOINTS } from "../api";
 
 export enum WeightHistoryMethods {

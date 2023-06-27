@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useUserContext } from "../../../contexts/userContext";
 import { useUpdateWeightMutation } from "../../queryHooks/weightHistory/useUpdateWeightMutation";
-import UpdateWeight from "../../../shared/interfaces/UpdateWeight/idnex";
+import UpdateWeight from "../../../shared/interfaces/UpdateWeight";
 
 export enum BodyWeightUpdateFields {
   BODY_WEIGHT = "bodyWeight",

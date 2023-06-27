@@ -4,7 +4,7 @@ import { WeightHistoryMethods, WeightHistoryService } from "../../../services";
 import { useInvalidateQueries } from "../useInvalidateQuries";
 import { QueryKey } from "../../../shared/enums";
 import { Error } from "../../../shared/interfaces";
-import UpdateWeight from "../../../shared/interfaces/UpdateWeight/idnex";
+import UpdateWeight from "../../../shared/interfaces/UpdateWeight";
 
 export const useUpdateWeightMutation = () => {
   const { invalidateQueries } = useInvalidateQueries([

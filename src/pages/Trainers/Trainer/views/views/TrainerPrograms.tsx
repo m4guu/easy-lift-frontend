@@ -8,7 +8,7 @@ import { usePrograms } from "../../../../../hooks/queryHooks/programsHooks/usePr
 import { generateQueriesPath } from "../../../../../utils/Queries";
 
 import { InfiniteList } from "../../../../../features";
-import { ProgramItem } from "../../../../../components";
+import { ProgramItem, StatusBar } from "../../../../../components";
 
 import {
   SegmentTitle,
@@ -65,10 +65,6 @@ export const TrainerPrograms: React.FC<{ trainerId: string }> = ({
         trainer programs
       </SegmentTitle>
       <NoPaddingDivider />
-      {status === Status.LOADING && <Typography>loading...</Typography>}
-      {status === Status.ERROR && <Typography>error</Typography>}
-      {noPrograms && <Typography>There are no programs yet.</Typography>}
-
       <Box sx={{ height: 600 }}>
         <InfiniteList
           items={programs}
@@ -79,7 +75,12 @@ export const TrainerPrograms: React.FC<{ trainerId: string }> = ({
           itemSize={85}
         />
       </Box>
-
+      <StatusBar
+        status={status}
+        error={error}
+        noItems={noPrograms}
+        itemName="programs"
+      />
       <NoPaddingDivider />
     </ProgramsContainer>
   );

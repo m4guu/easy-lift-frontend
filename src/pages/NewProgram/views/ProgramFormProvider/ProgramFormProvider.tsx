@@ -17,7 +17,7 @@ import {
   FormActions,
   FormStepper,
 } from "./styles/ProgramForm.styles";
-import { ErrorMessage } from "../../../../components";
+import { ErrorMessage, Submit } from "../../../../components";
 import { FirstFormStep } from "./views/FormSteps/FirstFormStep";
 import { SecondFormStep } from "./views/FormSteps/SecondFormStep";
 import { ThirdFormStep } from "./views/FormSteps/ThirdFormStep";
@@ -30,6 +30,10 @@ export const ProgramFormProvider: React.FC<{
     methods,
     appendProgramField,
     removeProgramField,
+    isAddingNewProgram,
+    addProgramError,
+    updateProgramError,
+    isUpdatingProgram,
     programFields,
     canSubmit,
     onSubmit,
@@ -40,7 +44,7 @@ export const ProgramFormProvider: React.FC<{
   const {
     trigger,
     handleSubmit,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = methods;
 
   const initImagePreview =
@@ -49,10 +53,19 @@ export const ProgramFormProvider: React.FC<{
       : undefined;
 
   useEffect(() => {
-    if (isSubmitSuccessful) {
+    if (addProgramError || updateProgramError) {
+      snackbar(
+        addProgramError?.message || updateProgramError?.message,
+        SnackbarStatus.ERROR
+      );
+    }
+  }, [snackbar, updateProgramError, addProgramError]);
+
+  useEffect(() => {
+    if (!isAddingNewProgram && !addProgramError) {
       snackbar("Program added successfuly.", SnackbarStatus.SUCCESS);
     }
-  }, [snackbar, isSubmitSuccessful]);
+  }, [snackbar, isAddingNewProgram, addProgramError]);
 
   return (
     <FormProvider {...methods}>
@@ -98,14 +111,14 @@ export const ProgramFormProvider: React.FC<{
             </Button>
           )}
           {currentStep === 3 && (
-            <Button
+            <Submit
               onClick={handleSubmit((data) => onSubmit(data))}
               disabled={!canSubmit}
               variant="outlined"
+              loading={isAddingNewProgram || isUpdatingProgram}
+              label={editProgram ? "update program" : "create program"}
               color={editProgram ? "info" : "primary"}
-            >
-              {editProgram ? "update" : "create"} program
-            </Button>
+            />
           )}
         </FormActions>
       </FormWrapper>

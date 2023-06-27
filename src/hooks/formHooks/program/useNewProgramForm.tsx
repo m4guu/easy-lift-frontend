@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFieldArray, useForm } from "react-hook-form";
 
@@ -102,11 +102,16 @@ export const useNewProgramForm = ({ editProgram }: UseProgramFormProps) => {
   const { user } = useUserContext();
   const navigate = useNavigate();
 
-  const [pending, setPending] = useState(false);
-  const { mutateAsync: addQueryProgram } = useAddProgramMutation();
-  const { mutateAsync: updateQueryProgram } = useUpdateProgramMutation(
-    editProgram ? editProgram.id : ""
-  );
+  const {
+    isLoading: isAddingNewProgram,
+    error: addProgramError,
+    mutateAsync: addQueryProgram,
+  } = useAddProgramMutation();
+  const {
+    isLoading: isUpdatingProgram,
+    error: updateProgramError,
+    mutateAsync: updateQueryProgram,
+  } = useUpdateProgramMutation(editProgram ? editProgram.id : "");
 
   const defaultValues = editProgram
     ? {
@@ -164,8 +169,6 @@ export const useNewProgramForm = ({ editProgram }: UseProgramFormProps) => {
 
   const onSubmit = useCallback(
     (formValues: AddProgramForm) => {
-      setPending(true);
-
       const newProgram: Omit<Program, "id"> = {
         creator: user!.id,
         title: formValues.programTitle,
@@ -214,7 +217,6 @@ export const useNewProgramForm = ({ editProgram }: UseProgramFormProps) => {
         resetForm();
         navigate(PATHS.default);
       });
-      setPending(false);
     },
     [
       user,
@@ -227,12 +229,15 @@ export const useNewProgramForm = ({ editProgram }: UseProgramFormProps) => {
   );
 
   return {
-    pending,
     methods,
     onSubmit,
     canSubmit,
     programFields,
     appendProgramField,
+    isAddingNewProgram,
+    addProgramError,
+    updateProgramError,
+    isUpdatingProgram,
     removeProgramField,
     resetForm,
   };

@@ -21,8 +21,8 @@ export const Form: React.FC = () => {
   } = useBodyWeightUpdate();
   const { handleSubmit } = methods;
 
+  // snackbar
   const snackbar = useSnackbar();
-
   useEffect(() => {
     if (updateWeightError) {
       snackbar(updateWeightError.message, SnackbarStatus.ERROR);
