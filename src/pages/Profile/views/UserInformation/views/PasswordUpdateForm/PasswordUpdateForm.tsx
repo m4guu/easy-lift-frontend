@@ -30,7 +30,7 @@ export const PasswordUpdateForm: React.FC = () => {
 
   useEffect(() => {
     if (updatePasswordError) {
-      snackbar("Something goes wrong. Please try later.", SnackbarStatus.ERROR);
+      snackbar(updatePasswordError.message, SnackbarStatus.ERROR);
     }
     if (!isUpdatingPassword && updatePasswordStatus === Status.SUCCESS) {
       snackbar("Password saved successfully!.", SnackbarStatus.SUCCESS);

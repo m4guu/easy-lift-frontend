@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -8,6 +8,7 @@ import { useUserContext } from "../../../contexts/userContext";
 import { useUpdatePasswordMutation } from "../../queryHooks/auth/useUpdatePasswordMutation";
 import { UpdatePasswordData } from "../../../shared/interfaces";
 import { PATHS } from "../../../pages/paths";
+import { ErrorId } from "../../../shared/enums";
 
 export enum PasswordUpdateFields {
   NEW_PASSWORD = "newPassword",
@@ -82,6 +83,18 @@ export const usePasswordUpdateForm = () => {
     },
     [methods, updatePasswordQuery, user, login, navigate, resetForm]
   );
+
+  useEffect(() => {
+    if (
+      updatePasswordError &&
+      updatePasswordError.id === ErrorId.INVALID_PASSWORD
+    ) {
+      methods.setError(PasswordUpdateFields.PASSWORD, {
+        type: "manual",
+        message: updatePasswordError.message,
+      });
+    }
+  }, [updatePasswordError, methods]);
 
   return {
     methods,

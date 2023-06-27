@@ -17,7 +17,6 @@ export enum AuthMethods {
   UPDATE_EMAIL = "updateEmail",
   UPDATE_PASSWORD = "updatePassword",
   CREATE = "create",
-  UPDATE = "update",
 }
 
 const AuthService = {
@@ -53,14 +52,6 @@ const AuthService = {
       `${ENDPOINTS.USERS}/${ENDPOINTS.CONFIG_TRAINER}/${userId}`,
       updatedTrainer
     ),
-
-  [AuthMethods.UPDATE]: ({
-    updatedUser,
-    userId,
-  }: {
-    updatedUser: FormData;
-    userId: string;
-  }) => HttpService.patch<void>(`${ENDPOINTS.USERS}/${userId}`, updatedUser),
 
   [AuthMethods.LOGOUT]: () => HttpService.post<void>(ENDPOINTS.LOGOUT),
 

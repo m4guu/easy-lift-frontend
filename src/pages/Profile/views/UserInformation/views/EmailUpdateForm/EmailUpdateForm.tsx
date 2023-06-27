@@ -29,7 +29,7 @@ export const EmailUpdateForm: React.FC<{ currentEmail: string }> = ({
 
   useEffect(() => {
     if (updateEmailError) {
-      snackbar("Something goes wrong. Please try later.", SnackbarStatus.ERROR);
+      snackbar(updateEmailError.message, SnackbarStatus.ERROR);
     }
     if (!isUpdatingEmail && updateEmailStatus === Status.SUCCESS) {
       snackbar(

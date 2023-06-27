@@ -45,7 +45,7 @@ export const TrainerConfigurationForm: React.FC<{
 
   useEffect(() => {
     if (updateTrainerError) {
-      snackbar("Something goes wrong. Please try later.", SnackbarStatus.ERROR);
+      snackbar(updateTrainerError.message, SnackbarStatus.ERROR);
     }
     if (!isUpdatingTrainer && updateTrainerStatus === Status.SUCCESS) {
       snackbar(

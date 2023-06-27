@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -8,6 +8,7 @@ import { useUserContext } from "../../../contexts/userContext";
 import { useUpdateEmailMutation } from "../../queryHooks/auth/useUpdateEmailMutation";
 import { UpdateEmailData } from "../../../shared/interfaces";
 import { PATHS } from "../../../pages/paths";
+import { ErrorId } from "../../../shared/enums";
 
 export enum EmailUpdateFields {
   EMAIL = "email",
@@ -77,6 +78,15 @@ export const useEmailUpdateForm = () => {
     },
     [methods, updateEmailQuery, user, resetForm, navigate, login]
   );
+
+  useEffect(() => {
+    if (updateEmailError && updateEmailError.id === ErrorId.INVALID_PASSWORD) {
+      methods.setError(EmailUpdateFields.PASSWORD, {
+        type: "manual",
+        message: updateEmailError.message,
+      });
+    }
+  }, [updateEmailError, methods]);
 
   return {
     methods,

@@ -5,7 +5,7 @@ import { styled } from "@mui/system";
 
 import { useUser } from "../../../../../../hooks/queryHooks/userHooks/useUser";
 
-import { Status } from "../../../../../../shared/enums";
+import { StatusBar } from "../../../../../../components";
 
 import { API_URL } from "../../../../../../config/env.config";
 
@@ -18,15 +18,14 @@ export const AuthorDetails: React.FC<AuthorDetailsProps> = ({ authorId }) => {
 
   return (
     <Box>
-      {status === Status.LOADING && <Typography>loading...</Typography>}
-      {status === Status.ERROR && <Typography>error</Typography>}
-
-      {status === Status.SUCCESS && (
+      {author && (
         <DetailsWrapper>
           <AuthorAvatar src={`${API_URL}${author.image}`} alt="avatar" />
           <AuthorName variant="caption">{author.name}</AuthorName>
         </DetailsWrapper>
       )}
+
+      <StatusBar status={status} error={error} />
     </Box>
   );
 };

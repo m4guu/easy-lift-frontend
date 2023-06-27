@@ -82,6 +82,7 @@ const useAuth = (): UseAuthReturnType => {
       );
     }
   }, [snackbar, loginError, registerError]);
+
   useEffect(() => {
     if (registerStatus === Status.SUCCESS && !isRegistering) {
       snackbar(

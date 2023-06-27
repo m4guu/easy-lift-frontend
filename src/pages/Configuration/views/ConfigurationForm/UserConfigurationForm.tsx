@@ -40,7 +40,7 @@ export const UserConfigurationForm: React.FC<{
 
   useEffect(() => {
     if (updateUserError) {
-      snackbar("Something goes wrong. Please try later.", SnackbarStatus.ERROR);
+      snackbar(updateUserError.message, SnackbarStatus.ERROR);
     }
     if (!isUpdatingUser && updateUserStatus === Status.SUCCESS) {
       snackbar(
