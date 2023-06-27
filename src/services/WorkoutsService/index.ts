@@ -1,6 +1,6 @@
 import { ENDPOINTS, HttpService } from "../api";
 
-import { Workout } from "../../shared/interfaces";
+import { UpdateWorkout, Workout } from "../../shared/interfaces";
 
 export enum WorkoutsMethods {
   GET_WORKOUTS = "getWorkouts",
@@ -25,13 +25,7 @@ const WorkoutsService = {
   [WorkoutsMethods.DELETE]: (workoutId: string) =>
     HttpService.delete<void>(`${ENDPOINTS.WORKOUTS}/${workoutId}`),
 
-  [WorkoutsMethods.UPDATE]: ({
-    workoutId,
-    updatedWorkout,
-  }: {
-    workoutId: string;
-    updatedWorkout: Omit<Workout, "id">;
-  }) =>
+  [WorkoutsMethods.UPDATE]: ({ workoutId, updatedWorkout }: UpdateWorkout) =>
     HttpService.put<void>(`${ENDPOINTS.WORKOUTS}/${workoutId}`, updatedWorkout),
 };
 

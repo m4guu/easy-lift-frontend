@@ -5,6 +5,7 @@ import { WorkoutsService, WorkoutsMethods } from "../../../services";
 import { useInvalidateQueries } from "../useInvalidateQuries";
 
 import { QueryKey } from "../../../shared/enums";
+import { Error } from "../../../shared/interfaces";
 
 export const useDeleteWorkoutMutation = (workoutId: string) => {
   const { invalidateQueries } = useInvalidateQueries([
@@ -14,9 +15,12 @@ export const useDeleteWorkoutMutation = (workoutId: string) => {
     [QueryKey.USER_WORKOUTS_BY_MONTH],
   ]);
 
-  return useMutation(WorkoutsService[WorkoutsMethods.DELETE], {
-    onSuccess: () => {
-      invalidateQueries();
-    },
-  });
+  return useMutation<void, Error, string, unknown>(
+    WorkoutsService[WorkoutsMethods.DELETE],
+    {
+      onSuccess: () => {
+        invalidateQueries();
+      },
+    }
+  );
 };

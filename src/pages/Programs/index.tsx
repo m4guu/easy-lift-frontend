@@ -1,14 +1,11 @@
 import { useEffect } from "react";
 
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { usePrograms } from "../../hooks/queryHooks/programsHooks/usePrograms";
 import { usePaginatedResultItems } from "../../hooks";
-import {
-  ProgramQueries,
-  useProgramFilter,
-} from "../../hooks/filters/useProgramFilter";
+import { useProgramFilter } from "../../hooks/filters/useProgramFilter";
 
 import { FilterPanel } from "./views/FilterPanel/FilterPanel";
 import { InfiniteList } from "../../features";

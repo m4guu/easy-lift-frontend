@@ -1,11 +1,11 @@
 import React from "react";
 
-import { Box, Alert, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
 import { useWorkout } from "../../../hooks/queryHooks/workoutsHooks/useWorkout";
 
-import { Status } from "../../../shared/enums";
 import { WorkoutFormProvider } from "./WorkoutFormProvider/WorkoutFormProvider";
+import { StatusBar } from "../../../components";
 
 export const EditWorkoutFormProvider: React.FC<{
   editWorkoutId: string;
@@ -14,20 +14,8 @@ export const EditWorkoutFormProvider: React.FC<{
 
   return (
     <Box>
-      {status === Status.LOADING && <Typography>loading...</Typography>}
-      {status === Status.ERROR && <Typography>error</Typography>}
-
-      {editWorkout && editWorkout ? (
-        <WorkoutFormProvider editWorkout={editWorkout} />
-      ) : (
-        <Box>
-          {status !== Status.LOADING && (
-            <Alert variant="outlined" severity="info">
-              There are no workout with provided id. Try again later.
-            </Alert>
-          )}
-        </Box>
-      )}
+      {editWorkout && <WorkoutFormProvider editWorkout={editWorkout} />}
+      <StatusBar status={status} error={error} />
     </Box>
   );
 };

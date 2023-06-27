@@ -1,23 +1,21 @@
 import React from "react";
 
-import { Box, Alert, Typography, Divider } from "@mui/material";
+import { Box, Typography, Divider } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { useWorkout } from "../../../../hooks/queryHooks/workoutsHooks/useWorkout";
-import { Status } from "../../../../shared/enums";
 
 import { AuthorDetails } from "./views/AuthorDetails/AuthorDetails";
 import { WorkoutDetails } from "./views/WorkoutDetails/WorkoutDetails";
 import { WorkoutActions } from "./views/WorkoutActions/WorkoutActions";
+import { StatusBar } from "../../../../components";
 
 const WorkoutContent: React.FC<{ workoutId: string }> = ({ workoutId }) => {
   const { status, error, data: workout } = useWorkout(workoutId);
 
   return (
     <Box>
-      {status === Status.LOADING && <Typography>loading...</Typography>}
-      {status === Status.ERROR && <Typography>error</Typography>}
-      {status === Status.SUCCESS && workout && (
+      {workout && (
         <WorkoutWrapper>
           <WorkoutDetail>
             <SegmentCaption variant="caption" color="primary">
@@ -46,11 +44,8 @@ const WorkoutContent: React.FC<{ workoutId: string }> = ({ workoutId }) => {
           <WorkoutActions workoutId={workout.id} />
         </WorkoutWrapper>
       )}
-      {status === Status.SUCCESS && !workout && (
-        <Alert variant="outlined" severity="info">
-          There is no workout with provided ID.
-        </Alert>
-      )}
+
+      <StatusBar status={status} error={error} />
     </Box>
   );
 };

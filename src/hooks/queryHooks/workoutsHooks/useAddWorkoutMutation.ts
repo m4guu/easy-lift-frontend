@@ -5,6 +5,7 @@ import { WorkoutsService, WorkoutsMethods } from "../../../services";
 import { useInvalidateQueries } from "../useInvalidateQuries";
 
 import { QueryKey } from "../../../shared/enums";
+import { Error, Workout } from "../../../shared/interfaces";
 
 export const useAddWorkoutMutation = () => {
   const { invalidateQueries } = useInvalidateQueries([
@@ -12,9 +13,12 @@ export const useAddWorkoutMutation = () => {
     [QueryKey.USER_WORKOUTS_BY_MONTH],
   ]);
 
-  return useMutation(WorkoutsService[WorkoutsMethods.CREATE], {
-    onSuccess: () => {
-      invalidateQueries();
-    },
-  });
+  return useMutation<void, Error, Omit<Workout, "id">, unknown>(
+    WorkoutsService[WorkoutsMethods.CREATE],
+    {
+      onSuccess: () => {
+        invalidateQueries();
+      },
+    }
+  );
 };

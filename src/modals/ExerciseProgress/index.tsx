@@ -1,17 +1,16 @@
 import React from "react";
 
-import { Alert, Divider, Button, Modal, Box, Typography } from "@mui/material";
+import { Divider, Button, Modal, Box } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { useUserExerciseProgress } from "../../hooks/queryHooks/userProgressHooks/useUserExerciseProgress";
 
 import { Chart } from "../../utils/LineChart";
 
-import { Status } from "../../shared/enums";
 import { chartOptions } from "./constans";
 
 import { ExerciseProgresList } from "./ExerciseProgressContent/ExerciseProgresList";
-import { SectionContainer, SectionHeader } from "../../components";
+import { SectionContainer, SectionHeader, StatusBar } from "../../components";
 
 const ExerciseProgressModal: React.FC<{
   exerciseId: string;
@@ -43,19 +42,15 @@ const ExerciseProgressModal: React.FC<{
         <SectionContainer>
           <SectionHeader>your {name} progress</SectionHeader>
 
-          {status === Status.LOADING && <Typography>loading...</Typography>}
-
-          {!!userExerciseProgress && userExerciseProgress?.length !== 0 ? (
+          {userExerciseProgress && (
             <>
               <Chart labels={labels} data={data} options={chartOptions} />
               <NoPaddingDivider />
               <ExerciseProgresList exerciseProgress={userExerciseProgress!} />
             </>
-          ) : (
-            <Alert variant="outlined" severity="info">
-              There are no progress in this exercise yet.
-            </Alert>
           )}
+
+          <StatusBar status={status} error={error} />
 
           <Button onClick={closeModal}>close modal</Button>
         </SectionContainer>

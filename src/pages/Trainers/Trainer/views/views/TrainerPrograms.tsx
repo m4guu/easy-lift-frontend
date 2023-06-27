@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
 import { usePaginatedResultItems } from "../../../../../hooks";
 import { usePrograms } from "../../../../../hooks/queryHooks/programsHooks/usePrograms";

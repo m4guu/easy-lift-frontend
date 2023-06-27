@@ -53,6 +53,8 @@ export const WorkoutFormProvider: React.FC<WorkoutFormProviderProps> = ({
     resetForm,
     onSubmit,
     onDraftSave,
+    addWorkoutError,
+    updateWorkoutError,
     isDraftSubmited,
     canSubmit,
     exerciseFields,
@@ -75,6 +77,15 @@ export const WorkoutFormProvider: React.FC<WorkoutFormProviderProps> = ({
 
   const isUserLogin = user?.role === Role.user;
   const component = isUserLogin ? "form" : Box;
+
+  useEffect(() => {
+    if (addWorkoutError || updateWorkoutError) {
+      snackbar(
+        addWorkoutError?.message || updateWorkoutError?.message,
+        SnackbarStatus.ERROR
+      );
+    }
+  }, [snackbar, updateWorkoutError, addWorkoutError]);
 
   useEffect(() => {
     if ((isSubmitSuccessful && isUserLogin) || isDraftSubmited) {

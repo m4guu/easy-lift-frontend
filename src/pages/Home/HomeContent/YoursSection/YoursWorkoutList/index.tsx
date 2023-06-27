@@ -1,17 +1,17 @@
 import React from "react";
 
-import { List, Box, Typography, useMediaQuery } from "@mui/material";
+import { List, Box, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/system";
 
 import { useWorkouts } from "../../../../../hooks/queryHooks/workoutsHooks/useWorkouts";
 import { usePaginatedResultItems } from "../../../../../hooks";
+import { WorkoutQueries } from "../../../../../hooks/filters/useWorkoutFilter";
+import { generateQueriesPath } from "../../../../../utils/Queries";
 
 import { InfiniteList } from "../../../../../features";
 
 import { QueryKey, Status } from "../../../../../shared/enums";
-import { WorkoutItem } from "../../../../../components";
-import { generateQueriesPath } from "../../../../../utils/Queries";
-import { WorkoutQueries } from "../../../../../hooks/filters/useWorkoutFilter";
+import { StatusBar, WorkoutItem } from "../../../../../components";
 
 export const YourWorkoutList: React.FC<{ userId: string }> = ({ userId }) => {
   const theme = useTheme();
@@ -57,10 +57,6 @@ export const YourWorkoutList: React.FC<{ userId: string }> = ({ userId }) => {
 
   return (
     <Box sx={isBelowXl ? { height: 500 } : { flex: 1 }}>
-      {status === Status.LOADING && <Typography>loading...</Typography>}
-      {status === Status.ERROR && <Typography>error</Typography>}
-      {noWorkouts && <Typography>You dont have any workouts yet.</Typography>}
-
       <InfiniteList
         items={workouts}
         Item={Item}
@@ -68,6 +64,13 @@ export const YourWorkoutList: React.FC<{ userId: string }> = ({ userId }) => {
         hasNextPage={hasNextPage}
         fetchNextPage={fetchNextPage}
         itemSize={52}
+      />
+
+      <StatusBar
+        status={status}
+        error={error}
+        noItems={noWorkouts}
+        itemName="workouts"
       />
     </Box>
   );

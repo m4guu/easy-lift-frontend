@@ -70,10 +70,16 @@ export const useNewWorkoutForm = ({
     : undefined;
 
   const { user } = useUserContext();
-  const { isLoading: isAddingWorkout, mutateAsync: addQueryWorkout } =
-    useAddWorkoutMutation();
-  const { isLoading: isUpdatingWorkout, mutateAsync: updateQueryWorkout } =
-    useUpdateWorkoutMutation();
+  const {
+    error: addWorkoutError,
+    isLoading: isAddingWorkout,
+    mutateAsync: addQueryWorkout,
+  } = useAddWorkoutMutation();
+  const {
+    error: updateWorkoutError,
+    isLoading: isUpdatingWorkout,
+    mutateAsync: updateQueryWorkout,
+  } = useUpdateWorkoutMutation();
 
   const pending = isAddingWorkout || isUpdatingWorkout;
 
@@ -166,6 +172,8 @@ export const useNewWorkoutForm = ({
     exerciseFields,
     appendExercise,
     removeExercise,
+    addWorkoutError,
+    updateWorkoutError,
     resetForm,
   };
 };

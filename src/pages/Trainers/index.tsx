@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import { Divider, Box, Typography, useMediaQuery } from "@mui/material";
+import { Divider, Box,  useMediaQuery } from "@mui/material";
 import { styled, useTheme } from "@mui/system";
 
 import { useTrainers } from "../../hooks/queryHooks/userHooks/useTrainers";

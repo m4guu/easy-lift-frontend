@@ -21,6 +21,7 @@ export type { default as UpdatePasswordData } from "./UpdatePasswordData";
 export type { default as Error } from "./Error";
 export type { default as UpdateWeight } from "./UpdateWeight";
 export type { default as UpdateProgram } from "./UpdateProgram";
+export type { default as UpdateWorkout } from "./UpdateWorkout";
 
 export type { default as FormExercise } from "./WorkoutForm/FormExercise";
 export type { default as FormSet } from "./WorkoutForm/FormSet";
