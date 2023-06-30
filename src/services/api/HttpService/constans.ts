@@ -1,5 +1,7 @@
+import { HttpStatusCode } from "axios";
 import { RAPID_API_KEY } from "../../../config/env.config";
 import { ErrorId } from "../../../shared/enums";
+import { Error } from "../../../shared/interfaces";
 
 export const config = {
   headers: {
@@ -8,8 +10,8 @@ export const config = {
   },
 };
 
-export const undefinedError = {
+export const undefinedError: Error = {
   message: "Something goes wrong. Please try later.",
-  code: 500,
+  code: HttpStatusCode.InternalServerError,
   id: ErrorId.INTERNAL_SERVER_ERROR,
 };

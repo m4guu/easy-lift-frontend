@@ -1,8 +1,9 @@
+import { HttpStatusCode } from "axios";
 import { ErrorId } from "../../enums";
 
 interface Error {
   message: string;
-  code: number;
+  code: HttpStatusCode;
   id: ErrorId;
 }
 

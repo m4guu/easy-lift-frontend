@@ -4,8 +4,9 @@ import { config, undefinedError } from "./constans";
 import { Error } from "../../../shared/interfaces";
 
 const pluckData = <T>(wrapper: { data: T }) => wrapper.data;
-const throwError = (e: AxiosError) => {
-  const error: Error = e.response?.data || undefinedError;
+const throwError = (e: AxiosError<Error, any>) => {
+  const error: Error = e.response ? e.response.data : undefinedError;
+  // eslint-disable-next-line @typescript-eslint/no-throw-literal
   throw error;
 };
 
