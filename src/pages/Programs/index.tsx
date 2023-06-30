@@ -1,20 +1,17 @@
 import { useEffect } from "react";
 
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { usePrograms } from "../../hooks/queryHooks/programsHooks/usePrograms";
 import { usePaginatedResultItems } from "../../hooks";
-import {
-  ProgramQueries,
-  useProgramFilter,
-} from "../../hooks/filters/useProgramFilter";
+import { useProgramFilter } from "../../hooks/filters/useProgramFilter";
 
 import { FilterPanel } from "./views/FilterPanel/FilterPanel";
 import { InfiniteList } from "../../features";
 
 import { Status } from "../../shared/enums";
-import { SectionHeader, ProgramItem } from "../../components";
+import { SectionHeader, ProgramItem, StatusBar } from "../../components";
 import { generateQueriesPath } from "../../utils/Queries";
 
 const ProgramsPage: React.FC = () => {
@@ -78,9 +75,12 @@ const ProgramsPage: React.FC = () => {
         />
       </Box>
 
-      {status === Status.LOADING && <Typography>loading...</Typography>}
-      {status === Status.ERROR && <Typography>error!</Typography>}
-      {noPrograms && <Typography>There are no programs yet.</Typography>}
+      <StatusBar
+        status={status}
+        error={error}
+        noItems={noPrograms}
+        itemName="programs"
+      />
     </Container>
   );
 };

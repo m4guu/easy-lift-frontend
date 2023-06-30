@@ -17,17 +17,18 @@ import { PATHS } from "../../pages/paths";
 
 import { useUserContext } from "../../contexts/userContext";
 import { API_URL } from "../../config/env.config";
+import StatusBar from "../StatusBar";
 
 type ProgramItemProps = {
   program: Program;
 };
 
 const ProgramItem: React.FC<ProgramItemProps> = ({ program }) => {
-  const { user } = useUserContext();
-  const { data: trainer } = useUser(program.creator);
   const navigate = useNavigate();
   const theme = useTheme();
   const isUpSm = useMediaQuery(theme.breakpoints.up("sm"));
+  const { user } = useUserContext();
+  const { error, status, data: trainer } = useUser(program.creator);
 
   return (
     <Item disablePadding>
@@ -51,6 +52,8 @@ const ProgramItem: React.FC<ProgramItemProps> = ({ program }) => {
                   you
                 </Typography>
               )}
+
+              <StatusBar status={status} error={error} />
             </ContentText>
             <ContentText variant="h3" color="primary">
               {program.title}

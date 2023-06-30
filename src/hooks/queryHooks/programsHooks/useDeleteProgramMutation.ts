@@ -5,6 +5,7 @@ import { ProgramsMethods, ProgramsService } from "../../../services";
 import { useInvalidateQueries } from "../useInvalidateQuries";
 
 import { QueryKey } from "../../../shared/enums";
+import { Error } from "../../../shared/interfaces";
 
 export const useDeleteProgramMutation = (programId: string) => {
   const { invalidateQueries } = useInvalidateQueries([
@@ -13,9 +14,12 @@ export const useDeleteProgramMutation = (programId: string) => {
     [QueryKey.PROGRAM, programId],
   ]);
 
-  return useMutation(ProgramsService[ProgramsMethods.DELETE], {
-    onSuccess: () => {
-      invalidateQueries();
-    },
-  });
+  return useMutation<void, Error, string, unknown>(
+    ProgramsService[ProgramsMethods.DELETE],
+    {
+      onSuccess: () => {
+        invalidateQueries();
+      },
+    }
+  );
 };

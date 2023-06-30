@@ -1,25 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-
-import { ProgramItemHome, SectionHeader } from "../../../../../components";
-import { ProgramsNav } from "./ProgramsNav";
-
 import "swiper/css";
 import "swiper/css/pagination";
 
+import {
+  ProgramItemHome,
+  SectionHeader,
+  StatusBar,
+} from "../../../../../components";
+
 import { usePrograms } from "../../../../../hooks/queryHooks/programsHooks/usePrograms";
+import { generateQueriesPath } from "../../../../../utils/Queries";
+import { usePaginatedResultItems } from "../../../../../hooks";
 
 import { PATHS } from "../../../../paths";
 import { queries, swiperBreakPoints } from "./constatns";
 import { QueryKey, Status } from "../../../../../shared/enums";
 import { Program } from "../../../../../shared/interfaces";
-import { usePaginatedResultItems } from "../../../../../hooks";
-import { generateQueriesPath } from "../../../../../utils/Queries";
 
 export const ProgramList: React.FC = () => {
   const queryPath = generateQueriesPath(queries);
@@ -45,14 +47,6 @@ export const ProgramList: React.FC = () => {
       </ProgramSwiperHeader>
 
       <ProgramsSwiper breakpoints={swiperBreakPoints} className="mySwiper">
-        {status === Status.LOADING && <Typography>loading...</Typography>}
-        {status === Status.ERROR && <Typography>error</Typography>}
-        {noPrograms ? (
-          <Typography>There are no programs yet.</Typography>
-        ) : (
-          <ProgramsNav />
-        )}
-
         <SlideContainer>
           {programs &&
             programs.map((program: Program) => (
@@ -61,6 +55,12 @@ export const ProgramList: React.FC = () => {
               </Slide>
             ))}
         </SlideContainer>
+        <StatusBar
+          status={status}
+          error={error}
+          noItems={noPrograms}
+          itemName="programs"
+        />
       </ProgramsSwiper>
     </Box>
   );

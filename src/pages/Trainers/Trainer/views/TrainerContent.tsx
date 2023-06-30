@@ -1,14 +1,14 @@
 import React from "react";
-import { Box, Alert, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { styled, useTheme } from "@mui/system";
 
 import { useUser } from "../../../../hooks/queryHooks/userHooks/useUser";
-import { Status } from "../../../../shared/enums";
 import { UserAvatar } from "../../../../components/ExerciseProgresItem/ExerciseProgresItem.styles";
 
 import { TrainerPrograms } from "./views/TrainerPrograms";
 import { PersonalTrainingInfo } from "./views/PersonalTrainingInfo";
 import { API_URL } from "../../../../config/env.config";
+import { StatusBar } from "../../../../components";
 
 export const TrainerContent: React.FC<{ trainerId: string }> = ({
   trainerId,
@@ -18,9 +18,7 @@ export const TrainerContent: React.FC<{ trainerId: string }> = ({
 
   return (
     <Box>
-      {status === Status.LOADING && <Typography>loading...</Typography>}
-      {status === Status.ERROR && <Typography>error</Typography>}
-      {status === Status.SUCCESS && trainer ? (
+      {trainer && (
         <Box>
           <BasicInformation>
             <UserAvatar src={`${API_URL}${trainer.image}`} alt="User Avatar" />
@@ -32,11 +30,9 @@ export const TrainerContent: React.FC<{ trainerId: string }> = ({
           <PersonalTrainingInfo trainerGymsIds={trainer.gyms} />
           <TrainerPrograms trainerId={trainerId} />
         </Box>
-      ) : (
-        <Alert variant="outlined" severity="info">
-          There is no trainer with provided ID.
-        </Alert>
       )}
+
+      <StatusBar status={status} error={error} />
     </Box>
   );
 };

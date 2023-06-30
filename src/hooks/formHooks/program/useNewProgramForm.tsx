@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFieldArray, useForm } from "react-hook-form";
 
@@ -7,20 +7,21 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useAddProgramMutation } from "../../queryHooks/programsHooks/useAddProgramMutation";
 import { useUserContext } from "../../../contexts/userContext";
+import { useUpdateProgramMutation } from "../../queryHooks/programsHooks/useUpdateProgramMutation";
+import useSnackbar from "../../useSnackbar";
 
 import {
   Program,
   ProgramItem,
   ProgramUpdates,
 } from "../../../shared/interfaces";
-import { ProgramLevels } from "../../../shared/enums";
+import { ProgramLevels, SnackbarStatus } from "../../../shared/enums";
 import {
   minFreqTraining,
   maxFreqTraining,
   minProgramLength,
   maxProgramLength,
 } from "./constans";
-import { useUpdateProgramMutation } from "../../queryHooks/programsHooks/useUpdateProgramMutation";
 import { workoutTrainerSchema } from "../workout/constans";
 import { PATHS } from "../../../pages/paths";
 
@@ -101,12 +102,18 @@ type UseProgramFormProps = {
 export const useNewProgramForm = ({ editProgram }: UseProgramFormProps) => {
   const { user } = useUserContext();
   const navigate = useNavigate();
+  const snackbar = useSnackbar();
 
-  const [pending, setPending] = useState(false);
-  const { mutateAsync: addQueryProgram } = useAddProgramMutation();
-  const { mutateAsync: updateQueryProgram } = useUpdateProgramMutation(
-    editProgram ? editProgram.id : ""
-  );
+  const {
+    isLoading: isAddingNewProgram,
+    error: addProgramError,
+    mutateAsync: addQueryProgram,
+  } = useAddProgramMutation();
+  const {
+    isLoading: isUpdatingProgram,
+    error: updateProgramError,
+    mutateAsync: updateQueryProgram,
+  } = useUpdateProgramMutation(editProgram ? editProgram.id : "");
 
   const defaultValues = editProgram
     ? {
@@ -164,8 +171,6 @@ export const useNewProgramForm = ({ editProgram }: UseProgramFormProps) => {
 
   const onSubmit = useCallback(
     (formValues: AddProgramForm) => {
-      setPending(true);
-
       const newProgram: Omit<Program, "id"> = {
         creator: user!.id,
         title: formValues.programTitle,
@@ -214,7 +219,6 @@ export const useNewProgramForm = ({ editProgram }: UseProgramFormProps) => {
         resetForm();
         navigate(PATHS.default);
       });
-      setPending(false);
     },
     [
       user,
@@ -226,13 +230,30 @@ export const useNewProgramForm = ({ editProgram }: UseProgramFormProps) => {
     ]
   );
 
+  // snackbars
+  useEffect(() => {
+    if (addProgramError || updateProgramError) {
+      snackbar(
+        addProgramError?.message || updateProgramError?.message,
+        SnackbarStatus.ERROR
+      );
+    }
+  }, [snackbar, updateProgramError, addProgramError]);
+
+  useEffect(() => {
+    if (!isAddingNewProgram && !addProgramError) {
+      snackbar("Program added successfuly.", SnackbarStatus.SUCCESS);
+    }
+  }, [snackbar, isAddingNewProgram, addProgramError]);
+
   return {
-    pending,
     methods,
     onSubmit,
     canSubmit,
     programFields,
     appendProgramField,
+    isAddingNewProgram,
+    isUpdatingProgram,
     removeProgramField,
     resetForm,
   };

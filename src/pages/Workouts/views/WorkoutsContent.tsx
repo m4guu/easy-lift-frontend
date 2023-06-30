@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Divider } from "@mui/material";
 import { styled } from "@mui/system";
 
 import { useWorkouts } from "../../../hooks/queryHooks/workoutsHooks/useWorkouts";
@@ -14,7 +14,7 @@ import { InfiniteList } from "../../../features";
 
 import { QueryKey, Status } from "../../../shared/enums";
 import { FilterPanel } from "./views/FilterPanel";
-import { WorkoutItem } from "../../../components";
+import { StatusBar, WorkoutItem } from "../../../components";
 import { generateQueriesPath } from "../../../utils/Queries";
 
 export const WorkoutsContent: React.FC<{ userId: string }> = ({ userId }) => {
@@ -81,9 +81,12 @@ export const WorkoutsContent: React.FC<{ userId: string }> = ({ userId }) => {
         itemSize={52}
       />
 
-      {status === Status.LOADING && <Typography>loading...</Typography>}
-      {status === Status.ERROR && <Typography>error</Typography>}
-      {noWorkouts && <Typography>You dont have any workouts yet.</Typography>}
+      <StatusBar
+        status={status}
+        error={error}
+        noItems={noWorkouts}
+        itemName="workouts"
+      />
     </Box>
   );
 };

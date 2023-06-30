@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { AuthTypes, Role } from "../../../shared/enums";
+import { AuthTypes, ErrorId, Role } from "../../../shared/enums";
 import { LoginCredentials, CreateUser } from "../../../shared/interfaces";
 import { useUserContext } from "../../../contexts/userContext";
 
@@ -45,7 +45,7 @@ const authSignUpSchema = yup.object().shape({
 });
 
 export const useAuthForm = (authType: AuthTypes) => {
-  const { login, registerUser } = useUserContext();
+  const { login, registerUser, registerError } = useUserContext();
   const schema =
     authType === AuthTypes.LOGIN ? authLoginSchema : authSignUpSchema;
 
@@ -89,6 +89,13 @@ export const useAuthForm = (authType: AuthTypes) => {
     },
     [authType, login, registerUser, resetForm, methods]
   );
+
+  if (registerError && registerError.id === ErrorId.EMAIL_ALREADY_ASSIGNED) {
+    methods.setError(AuthFormFields.E_MAIL, {
+      type: "manual",
+      message: registerError.message,
+    });
+  }
 
   return {
     methods,

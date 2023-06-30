@@ -1,12 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { Box, Typography, Divider } from "@mui/material";
 import { styled } from "@mui/system";
-import { UserAvatar } from "../../../../../components/ExerciseProgresItem/ExerciseProgresItem.styles";
+
 import { useUser } from "../../../../../hooks/queryHooks/userHooks/useUser";
+
+import { UserAvatar } from "../../../../../components/ExerciseProgresItem/ExerciseProgresItem.styles";
+
 import { API_URL } from "../../../../../config/env.config";
-import { Link } from "react-router-dom";
 import { PATHS } from "../../../../paths";
+import { StatusBar } from "../../../../../components";
 
 interface ProgramDetailsProps {
   description: string;
@@ -23,7 +27,7 @@ export const ProgramDetails: React.FC<ProgramDetailsProps> = ({
   creatorId,
   programLength,
 }) => {
-  const { data: creator } = useUser(creatorId);
+  const { error, status, data: creator } = useUser(creatorId);
 
   return (
     <Details>
@@ -36,7 +40,9 @@ export const ProgramDetails: React.FC<ProgramDetailsProps> = ({
             <Typography>{creator.name}</Typography>
           </UserLink>
         )}
+        <StatusBar status={status} error={error} />
       </ProgramDetail>
+
       <ProgramDetail>
         <SegmentCaption variant="caption">description</SegmentCaption>
         <NoPaddingDivider />

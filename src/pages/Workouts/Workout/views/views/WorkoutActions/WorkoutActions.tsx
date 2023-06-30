@@ -22,8 +22,11 @@ export const WorkoutActions: React.FC<WorkoutActionsProps> = ({
   const navigate = useNavigate();
   const snackbar = useSnackbar();
 
-  const { status, mutate: deleteQueryWorkout } =
-    useDeleteWorkoutMutation(workoutId);
+  const {
+    error,
+    status,
+    mutate: deleteQueryWorkout,
+  } = useDeleteWorkoutMutation(workoutId);
 
   const editWorkout = () => {
     navigate(`${PATHS.NEW_WORKOUT}/${workoutId}`);
@@ -34,10 +37,10 @@ export const WorkoutActions: React.FC<WorkoutActionsProps> = ({
       navigate(PATHS.WORKOUTS);
       snackbar("Workout deleted successfully!", SnackbarStatus.SUCCESS);
     }
-    if (status === Status.ERROR) {
-      snackbar("Something goes wrong. Please try later.", SnackbarStatus.ERROR);
+    if (status === Status.ERROR && error) {
+      snackbar(error.message, SnackbarStatus.ERROR);
     }
-  }, [snackbar, status, navigate]);
+  }, [snackbar, status, navigate, error]);
 
   return (
     <Container>

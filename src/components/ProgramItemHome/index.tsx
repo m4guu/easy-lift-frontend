@@ -3,12 +3,12 @@ import React from "react";
 import { Typography, Divider } from "@mui/material";
 import { useTheme } from "@mui/system";
 
+import { useUser } from "../../hooks/queryHooks/userHooks/useUser";
 import { useUserContext } from "../../contexts/userContext";
 
 import { Program } from "../../shared/interfaces";
 import { PATHS } from "../../pages/paths";
 import { API_URL } from "../../config/env.config";
-import { useUser } from "../../hooks/queryHooks/userHooks/useUser";
 
 import {
   ProgramItemCard,
@@ -26,6 +26,7 @@ import {
   ContentText,
   Price,
 } from "./ProgramItemHome.styles";
+import StatusBar from "../StatusBar";
 
 type ProgramItemHomeProps = {
   program: Program;
@@ -33,7 +34,7 @@ type ProgramItemHomeProps = {
 
 const ProgramItemHome: React.FC<ProgramItemHomeProps> = ({ program }) => {
   const { user } = useUserContext();
-  const { data: trainer } = useUser(program.creator);
+  const { error, status, data: trainer } = useUser(program.creator);
   const theme = useTheme();
 
   return (
@@ -64,6 +65,8 @@ const ProgramItemHome: React.FC<ProgramItemHomeProps> = ({ program }) => {
                   you
                 </Typography>
               )}
+
+              <StatusBar status={status} error={error} />
             </ContentText>
           </AuthorBox>
 

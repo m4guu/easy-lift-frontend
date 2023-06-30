@@ -1,12 +1,12 @@
 import React from "react";
 
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
 import { usePrograms } from "../../../../../hooks/queryHooks/programsHooks/usePrograms";
 
 import { usePaginatedResultItems } from "../../../../../hooks";
 
-import { ProgramItem } from "../../../../../components";
+import { ProgramItem, StatusBar } from "../../../../../components";
 import { InfiniteList } from "../../../../../features";
 
 import { QueryKey, Status } from "../../../../../shared/enums";
@@ -66,9 +66,12 @@ export const YoursProgramsList: React.FC<{ userId: string }> = ({ userId }) => {
         itemSize={85}
       />
 
-      {status === Status.LOADING && <Typography>loading...</Typography>}
-      {status === Status.ERROR && <Typography>error</Typography>}
-      {noPrograms && <Typography>There are no programs yet.</Typography>}
+      <StatusBar
+        status={status}
+        error={error}
+        noItems={noPrograms}
+        itemName="programs"
+      />
     </Box>
   );
 };

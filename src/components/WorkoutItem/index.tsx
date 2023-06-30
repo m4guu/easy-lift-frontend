@@ -23,9 +23,11 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
   const navigate = useNavigate();
   const snackbar = useSnackbar();
 
-  const { status, mutate: deleteQueryWorkout } = useDeleteWorkoutMutation(
-    workout.id
-  );
+  const {
+    error,
+    status,
+    mutate: deleteQueryWorkout,
+  } = useDeleteWorkoutMutation(workout.id);
 
   const onWorkoutChoose = () => {
     if (workout.isDraft) {
@@ -39,10 +41,10 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout }) => {
     if (status === Status.SUCCESS) {
       snackbar("Workout deleted successfully!", SnackbarStatus.SUCCESS);
     }
-    if (status === Status.ERROR) {
-      snackbar("Something goes wrong. Please try later.", SnackbarStatus.ERROR);
+    if (status === Status.ERROR && error) {
+      snackbar(error.message, SnackbarStatus.ERROR);
     }
-  }, [snackbar, status]);
+  }, [snackbar, status, error]);
 
   return (
     <Item disablePadding>

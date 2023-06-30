@@ -18,7 +18,7 @@ type ChartMenuProps = {
 
 export const ChartMenu: React.FC<ChartMenuProps> = ({ userId, sendData }) => {
   const [formInputs, setFormInputs] = useState(initialFormInputs);
-  const { error, data: userProgress } = useUserProgress(userId);
+  const { data: userProgress } = useUserProgress(userId);
 
   const menuItemProgressData = getUniqueArrayByKey(userProgress, "exerciseId");
 

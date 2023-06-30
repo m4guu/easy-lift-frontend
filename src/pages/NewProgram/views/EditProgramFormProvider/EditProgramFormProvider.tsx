@@ -1,12 +1,11 @@
 import React from "react";
 
-import { Box, Alert, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
 import { useProgram } from "../../../../hooks/queryHooks/programsHooks/useProgram";
 
-import { Status } from "../../../../shared/enums";
-
 import { ProgramFormProvider } from "../ProgramFormProvider/ProgramFormProvider";
+import { StatusBar } from "../../../../components";
 
 export const EditProgramFormProvider: React.FC<{ programId: string }> = ({
   programId,
@@ -15,16 +14,8 @@ export const EditProgramFormProvider: React.FC<{ programId: string }> = ({
 
   return (
     <Box>
-      {status === Status.LOADING && <Typography>loading...</Typography>}
-      {status === Status.ERROR && <Typography>error</Typography>}
-
-      {editProgram && editProgram ? (
-        <ProgramFormProvider editProgram={editProgram} />
-      ) : (
-        <Alert variant="outlined" severity="info">
-          There are no program with provided id. Try again later.
-        </Alert>
-      )}
+      {editProgram && <ProgramFormProvider editProgram={editProgram} />}
+      <StatusBar status={status} error={error} />
     </Box>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FormProvider } from "react-hook-form";
 
 import { Step, StepLabel, Button } from "@mui/material";
@@ -6,9 +6,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 import { useNewProgramForm } from "../../../../hooks/formHooks/program/useNewProgramForm";
 import { useFormSteps } from "../../../../hooks/formHooks/formStepHook/useFormSteps";
-import { useSnackbar } from "../../../../hooks";
 
-import { SnackbarStatus } from "../../../../shared/enums";
 import { Program as ProgramInterface } from "../../../../shared/interfaces";
 
 import { steps } from "./constans";
@@ -17,7 +15,7 @@ import {
   FormActions,
   FormStepper,
 } from "./styles/ProgramForm.styles";
-import { ErrorMessage } from "../../../../components";
+import { ErrorMessage, Submit } from "../../../../components";
 import { FirstFormStep } from "./views/FormSteps/FirstFormStep";
 import { SecondFormStep } from "./views/FormSteps/SecondFormStep";
 import { ThirdFormStep } from "./views/FormSteps/ThirdFormStep";
@@ -30,29 +28,24 @@ export const ProgramFormProvider: React.FC<{
     methods,
     appendProgramField,
     removeProgramField,
+    isAddingNewProgram,
+    isUpdatingProgram,
     programFields,
     canSubmit,
     onSubmit,
   } = useNewProgramForm({ editProgram });
   const { currentStep, nextStep } = useFormSteps(!!editProgram);
-  const snackbar = useSnackbar();
 
   const {
     trigger,
     handleSubmit,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = methods;
 
   const initImagePreview =
     editProgram && editProgram.image
       ? `${API_URL}${editProgram?.image}`
       : undefined;
-
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      snackbar("Program added successfuly.", SnackbarStatus.SUCCESS);
-    }
-  }, [snackbar, isSubmitSuccessful]);
 
   return (
     <FormProvider {...methods}>
@@ -98,14 +91,14 @@ export const ProgramFormProvider: React.FC<{
             </Button>
           )}
           {currentStep === 3 && (
-            <Button
+            <Submit
               onClick={handleSubmit((data) => onSubmit(data))}
               disabled={!canSubmit}
               variant="outlined"
+              loading={isAddingNewProgram || isUpdatingProgram}
+              label={editProgram ? "update program" : "create program"}
               color={editProgram ? "info" : "primary"}
-            >
-              {editProgram ? "update" : "create"} program
-            </Button>
+            />
           )}
         </FormActions>
       </FormWrapper>

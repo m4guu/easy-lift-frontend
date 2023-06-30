@@ -10,17 +10,23 @@ import { useAutoLogin } from "../queryHooks/auth/useAutoLogin";
 import useSnackbar from "../useSnackbar";
 
 import { SnackbarStatus, Status } from "../../shared/enums";
-import { User, LoginCredentials, CreateUser } from "../../shared/interfaces";
+import {
+  User,
+  LoginCredentials,
+  CreateUser,
+  Error,
+} from "../../shared/interfaces";
 
 type UseAuthReturnType = {
   isLogging: boolean;
   isRegistering: boolean;
   registerStatus: "error" | "loading" | "idle" | "success";
-  user?: User;
+  registerError: Error | null;
   login: (credentials: LoginCredentials) => void;
   registerUser: UseMutateAsyncFunction<void, unknown, CreateUser, unknown>;
   logout: () => void;
   autoLogin: () => void;
+  user?: User;
 };
 
 const useAuth = (): UseAuthReturnType => {
@@ -71,11 +77,12 @@ const useAuth = (): UseAuthReturnType => {
   useEffect(() => {
     if (loginError || registerError) {
       snackbar(
-        `We're sorry! The server encountered an internal error. Please try later.`,
+        loginError?.message || registerError?.message,
         SnackbarStatus.ERROR
       );
     }
   }, [snackbar, loginError, registerError]);
+
   useEffect(() => {
     if (registerStatus === Status.SUCCESS && !isRegistering) {
       snackbar(
@@ -90,6 +97,7 @@ const useAuth = (): UseAuthReturnType => {
     isLogging,
     isRegistering,
     registerStatus,
+    registerError,
     login,
     registerUser,
     logout,

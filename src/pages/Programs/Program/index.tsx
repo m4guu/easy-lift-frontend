@@ -2,9 +2,8 @@ import React from "react";
 
 import { useParams } from "react-router-dom";
 
-import { Box, Alert, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
-import { Status } from "../../../shared/enums";
 import { useProgram } from "../../../hooks/queryHooks/programsHooks/useProgram";
 
 import { Header } from "./views/Header/Header";
@@ -12,6 +11,7 @@ import { ProgramDetails } from "./views/ProgramDetails/ProgramDetails";
 
 import { ProgramActions } from "./views/ProgramActions/ProgramActions";
 import { API_URL } from "../../../config/env.config";
+import { StatusBar } from "../../../components";
 
 const Program: React.FC = () => {
   const { programId } = useParams();
@@ -19,10 +19,7 @@ const Program: React.FC = () => {
 
   return (
     <Box>
-      {status === Status.LOADING && <Typography>loading...</Typography>}
-      {status === Status.ERROR && <Typography>error</Typography>}
-
-      {status === Status.SUCCESS && program ? (
+      {program && (
         <Box>
           <Header
             title={program.title}
@@ -38,11 +35,9 @@ const Program: React.FC = () => {
           />
           <ProgramActions program={program} />
         </Box>
-      ) : (
-        <Alert variant="outlined" severity="info">
-          There is no program with provided ID.
-        </Alert>
       )}
+
+      <StatusBar status={status} error={error} />
     </Box>
   );
 };

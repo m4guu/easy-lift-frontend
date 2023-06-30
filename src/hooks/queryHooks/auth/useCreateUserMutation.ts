@@ -1,7 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 
 import { AuthMethods, AuthService } from "../../../services";
+import { CreateUser, Error } from "../../../shared/interfaces";
 
 export const useCreateUserMutation = () => {
-  return useMutation(AuthService[AuthMethods.CREATE]);
+  return useMutation<void, Error, CreateUser>(AuthService[AuthMethods.CREATE]);
 };

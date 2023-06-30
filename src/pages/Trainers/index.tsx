@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import { Divider, Box, Typography, useMediaQuery } from "@mui/material";
+import { Divider, Box,  useMediaQuery } from "@mui/material";
 import { styled, useTheme } from "@mui/system";
 
 import { useTrainers } from "../../hooks/queryHooks/userHooks/useTrainers";
@@ -15,7 +15,7 @@ import { InfiniteList } from "../../features";
 
 import { Status } from "../../shared/enums";
 import { FilterPanel } from "./views/FilterPanel/FilterPanel";
-import { TrainerItem, SectionHeader } from "../../components";
+import { TrainerItem, SectionHeader, StatusBar } from "../../components";
 
 const TrainersPage: React.FC = () => {
   const theme = useTheme();
@@ -93,9 +93,12 @@ const TrainersPage: React.FC = () => {
         />
       </Box>
 
-      {status === Status.LOADING && <Typography>Loading...</Typography>}
-      {status === Status.ERROR && <Typography>error</Typography>}
-      {noTrainers && <Typography>There are no trainers yet.</Typography>}
+      <StatusBar
+        status={status}
+        error={error}
+        noItems={noTrainers}
+        itemName="trainers"
+      />
     </Container>
   );
 };
