@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   FormProvider,
   FieldValues,
@@ -11,7 +11,6 @@ import { Box } from "@mui/material";
 import { useUserContext } from "../../../../contexts/userContext";
 import { useNewWorkoutForm } from "../../../../hooks/formHooks/workout/useNewWorkoutForm";
 import { useExerciseModal } from "../../../../hooks/modalHooks/Exercises/useExerciseModal";
-import { useSnackbar } from "../../../../hooks";
 
 import {
   ChooseExercise,
@@ -27,7 +26,7 @@ import {
 } from "./views/WorkoutForm/Workout.form";
 import { ExercisesModal } from "../../../../modals";
 import { Workout } from "../../../../shared/interfaces";
-import { Role, SnackbarStatus } from "../../../../shared/enums";
+import { Role } from "../../../../shared/enums";
 import { ErrorMessage } from "../../../../components";
 import { NewWorkoutSettings } from "./views/NewWorkoutSettings/NewWorkoutActions";
 
@@ -53,9 +52,6 @@ export const WorkoutFormProvider: React.FC<WorkoutFormProviderProps> = ({
     resetForm,
     onSubmit,
     onDraftSave,
-    addWorkoutError,
-    updateWorkoutError,
-    isDraftSubmited,
     canSubmit,
     exerciseFields,
     removeExercise,
@@ -70,31 +66,11 @@ export const WorkoutFormProvider: React.FC<WorkoutFormProviderProps> = ({
 
   const {
     handleSubmit,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = methods;
-
-  const snackbar = useSnackbar();
 
   const isUserLogin = user?.role === Role.user;
   const component = isUserLogin ? "form" : Box;
-
-  useEffect(() => {
-    if (addWorkoutError || updateWorkoutError) {
-      snackbar(
-        addWorkoutError?.message || updateWorkoutError?.message,
-        SnackbarStatus.ERROR
-      );
-    }
-  }, [snackbar, updateWorkoutError, addWorkoutError]);
-
-  useEffect(() => {
-    if ((isSubmitSuccessful && isUserLogin) || isDraftSubmited) {
-      snackbar(
-        `Workout ${isDraftSubmited ? "saved" : "added"} successfuly.`,
-        SnackbarStatus.SUCCESS
-      );
-    }
-  }, [snackbar, isSubmitSuccessful, user, isDraftSubmited, isUserLogin]);
 
   return (
     <FormProvider {...methods}>

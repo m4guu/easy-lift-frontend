@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FormProvider } from "react-hook-form";
 
 import { Step, StepLabel, Button } from "@mui/material";
@@ -6,9 +6,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 import { useNewProgramForm } from "../../../../hooks/formHooks/program/useNewProgramForm";
 import { useFormSteps } from "../../../../hooks/formHooks/formStepHook/useFormSteps";
-import { useSnackbar } from "../../../../hooks";
 
-import { SnackbarStatus } from "../../../../shared/enums";
 import { Program as ProgramInterface } from "../../../../shared/interfaces";
 
 import { steps } from "./constans";
@@ -31,15 +29,12 @@ export const ProgramFormProvider: React.FC<{
     appendProgramField,
     removeProgramField,
     isAddingNewProgram,
-    addProgramError,
-    updateProgramError,
     isUpdatingProgram,
     programFields,
     canSubmit,
     onSubmit,
   } = useNewProgramForm({ editProgram });
   const { currentStep, nextStep } = useFormSteps(!!editProgram);
-  const snackbar = useSnackbar();
 
   const {
     trigger,
@@ -51,21 +46,6 @@ export const ProgramFormProvider: React.FC<{
     editProgram && editProgram.image
       ? `${API_URL}${editProgram?.image}`
       : undefined;
-
-  useEffect(() => {
-    if (addProgramError || updateProgramError) {
-      snackbar(
-        addProgramError?.message || updateProgramError?.message,
-        SnackbarStatus.ERROR
-      );
-    }
-  }, [snackbar, updateProgramError, addProgramError]);
-
-  useEffect(() => {
-    if (!isAddingNewProgram && !addProgramError) {
-      snackbar("Program added successfuly.", SnackbarStatus.SUCCESS);
-    }
-  }, [snackbar, isAddingNewProgram, addProgramError]);
 
   return (
     <FormProvider {...methods}>

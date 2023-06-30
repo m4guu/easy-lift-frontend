@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import dayjs, { Dayjs } from "dayjs";
 import { v4 as uuidv4 } from "uuid";
@@ -26,9 +26,10 @@ import {
   workoutUserSchema,
 } from "./constans";
 import { FormExercise, Workout } from "../../../shared/interfaces";
-import { Role } from "../../../shared/enums";
+import { Role, SnackbarStatus } from "../../../shared/enums";
 import { useUpdateWorkoutMutation } from "../../queryHooks/workoutsHooks/useUpdateWorkouteMutation";
 import { PATHS } from "../../../pages/paths";
+import useSnackbar from "../../useSnackbar";
 
 export enum AddWorkoutFormFields {
   WORKOUT_TITLE = "title",
@@ -70,6 +71,8 @@ export const useNewWorkoutForm = ({
     : undefined;
 
   const { user } = useUserContext();
+  const snackbar = useSnackbar();
+
   const {
     error: addWorkoutError,
     isLoading: isAddingWorkout,
@@ -90,7 +93,15 @@ export const useNewWorkoutForm = ({
     defaultValues: editWorkoutValues || defaultWorkoutValues,
     resolver: yupResolver(schema),
   });
-  const { watch, control, reset, getValues, setError, clearErrors } = methods;
+  const {
+    watch,
+    control,
+    reset,
+    getValues,
+    setError,
+    clearErrors,
+    formState: { isSubmitSuccessful },
+  } = methods;
 
   const resetForm = useCallback(() => reset(), [reset]);
 
@@ -161,6 +172,25 @@ export const useNewWorkoutForm = ({
       }
     }
   }, [getValues, setError, addQueryWorkout, resetForm, clearErrors, user]);
+
+  // snackbars
+  useEffect(() => {
+    if (addWorkoutError || updateWorkoutError) {
+      snackbar(
+        addWorkoutError?.message || updateWorkoutError?.message,
+        SnackbarStatus.ERROR
+      );
+    }
+  }, [snackbar, updateWorkoutError, addWorkoutError]);
+
+  useEffect(() => {
+    if ((isSubmitSuccessful && user?.role === Role.user) || isDraftSubmited) {
+      snackbar(
+        `Workout ${isDraftSubmited ? "saved" : "added"} successfuly.`,
+        SnackbarStatus.SUCCESS
+      );
+    }
+  }, [snackbar, isSubmitSuccessful, user, isDraftSubmited]);
 
   return {
     methods,

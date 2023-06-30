@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -6,9 +6,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useConfigureUserMutation } from "../../queryHooks/auth/useConfigureUserMutation";
 import { useUserContext } from "../../../contexts/userContext";
+import useSnackbar from "../../useSnackbar";
 
 import { User } from "../../../shared/interfaces";
 import { PATHS } from "../../../pages/paths";
+import { SnackbarStatus, Status } from "../../../shared/enums";
 
 export enum UserConfigFields {
   NAME = "name",
@@ -49,6 +51,7 @@ export const useUserConfigForm = ({
   } = useConfigureUserMutation();
   const { user, autoLogin } = useUserContext();
   const navigate = useNavigate();
+  const snackbar = useSnackbar();
 
   const schema = defaultUpdateValues
     ? defaultSchema
@@ -99,13 +102,24 @@ export const useUserConfigForm = ({
     [configureUserQuery, resetForm, user, navigate, autoLogin]
   );
 
+  // snackbar
+  useEffect(() => {
+    if (updateUserError) {
+      snackbar(updateUserError.message, SnackbarStatus.ERROR);
+    }
+    if (!isUpdatingUser && updateUserStatus === Status.SUCCESS) {
+      snackbar(
+        "Saved! Thank you for keeping us up to date.",
+        SnackbarStatus.SUCCESS
+      );
+    }
+  }, [snackbar, updateUserError, isUpdatingUser, updateUserStatus]);
+
   return {
     methods,
     canSubmit,
     onSubmit,
     resetForm,
-    updateUserStatus,
-    updateUserError,
     isUpdatingUser,
   };
 };

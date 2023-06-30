@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
@@ -7,10 +7,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useConfigureTrainerMutation } from "../../queryHooks/auth/useConfigureTrainerMutation";
 import { useUserContext } from "../../../contexts/userContext";
+import useSnackbar from "../../useSnackbar";
 
 import { Gym, User } from "../../../shared/interfaces";
 import { PATHS } from "../../../pages/paths";
 import { gyms as allGyms } from "../../../pages/Configuration/views/ConfigurationForm/views/Trainer/form/constans";
+import { SnackbarStatus, Status } from "../../../shared/enums";
 
 export enum TrainerConfigFields {
   NAME = "name",
@@ -53,6 +55,8 @@ export const useTrainerConfigForm = ({
 
   const { user, autoLogin } = useUserContext();
   const navigate = useNavigate();
+  const snackbar = useSnackbar();
+
   const initSelectedGyms = defaultUpdateValues?.gyms
     ? allGyms.filter((gym) => defaultUpdateValues?.gyms?.includes(gym.id))
     : [];
@@ -136,13 +140,24 @@ export const useTrainerConfigForm = ({
     }
   };
 
+  // snackbar
+  useEffect(() => {
+    if (updateTrainerError) {
+      snackbar(updateTrainerError.message, SnackbarStatus.ERROR);
+    }
+    if (!isUpdatingTrainer && updateTrainerStatus === Status.SUCCESS) {
+      snackbar(
+        "Saved! Thank you for keeping us up to date.",
+        SnackbarStatus.SUCCESS
+      );
+    }
+  }, [snackbar, updateTrainerError, isUpdatingTrainer, updateTrainerStatus]);
+
   return {
     methods,
     canSubmit,
     onSubmit,
     resetForm,
-    updateTrainerStatus,
-    updateTrainerError,
     isUpdatingTrainer,
     removeGym,
     gymsChangeHandler,

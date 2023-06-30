@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FormProvider } from "react-hook-form";
 
 import {
   TrainerConfig,
   useTrainerConfigForm,
 } from "../../../../hooks/formHooks/configuration/useTrainerConfigForm";
-import { useSnackbar } from "../../../../hooks";
 
 import {
   Name,
@@ -22,9 +21,6 @@ import {
   Title,
 } from "./styles/Trainer/ConfigurationForm.styles";
 
-import { SnackbarStatus, Status } from "../../../../shared/enums";
-
-// ! comment leafletmap to dont up unnessesery database requests
 export const TrainerConfigurationForm: React.FC<{
   defaultValues?: TrainerConfig;
 }> = ({ defaultValues }) => {
@@ -32,8 +28,6 @@ export const TrainerConfigurationForm: React.FC<{
     methods,
     canSubmit,
     onSubmit,
-    updateTrainerStatus,
-    updateTrainerError,
     isUpdatingTrainer,
     selectedGyms,
     gymsChangeHandler,
@@ -41,19 +35,6 @@ export const TrainerConfigurationForm: React.FC<{
     defaultUpdateValues: defaultValues,
   });
   const { handleSubmit } = methods;
-  const snackbar = useSnackbar();
-
-  useEffect(() => {
-    if (updateTrainerError) {
-      snackbar(updateTrainerError.message, SnackbarStatus.ERROR);
-    }
-    if (!isUpdatingTrainer && updateTrainerStatus === Status.SUCCESS) {
-      snackbar(
-        "Saved! Thank you for keeping us up to date.",
-        SnackbarStatus.SUCCESS
-      );
-    }
-  }, [snackbar, updateTrainerError, isUpdatingTrainer, updateTrainerStatus]);
 
   return (
     <FormProvider {...methods}>

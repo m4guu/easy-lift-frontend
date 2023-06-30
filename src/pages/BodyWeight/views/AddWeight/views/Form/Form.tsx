@@ -1,36 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FormProvider } from "react-hook-form";
 
 import { styled } from "@mui/system";
 
 import { useBodyWeightUpdate } from "../../../../../../hooks/formHooks/update/useBodyWeightUpdate";
-import { useSnackbar } from "../../../../../../hooks";
 
 import { BodyWeight } from "./views/BodyWeightUpdate.form";
 import { Submit } from "../../../../../../components";
-import { SnackbarStatus, Status } from "../../../../../../shared/enums";
 
 export const Form: React.FC = () => {
-  const {
-    methods,
-    canSubmit,
-    onSubmit,
-    isUpdatingWeight,
-    updateWeightError,
-    updateWeightStatus,
-  } = useBodyWeightUpdate();
+  const { methods, canSubmit, onSubmit, isUpdatingWeight } =
+    useBodyWeightUpdate();
   const { handleSubmit } = methods;
-
-  // snackbar
-  const snackbar = useSnackbar();
-  useEffect(() => {
-    if (updateWeightError) {
-      snackbar(updateWeightError.message, SnackbarStatus.ERROR);
-    }
-    if (!isUpdatingWeight && updateWeightStatus === Status.SUCCESS) {
-      snackbar("Weight saved successfully!.", SnackbarStatus.SUCCESS);
-    }
-  }, [snackbar, updateWeightError, isUpdatingWeight, updateWeightStatus]);
 
   return (
     <FormProvider {...methods}>

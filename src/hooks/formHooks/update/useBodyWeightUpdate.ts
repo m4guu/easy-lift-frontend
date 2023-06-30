@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import * as yup from "yup";
@@ -6,7 +6,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useUserContext } from "../../../contexts/userContext";
 import { useUpdateWeightMutation } from "../../queryHooks/weightHistory/useUpdateWeightMutation";
+import useSnackbar from "../../useSnackbar";
+
 import UpdateWeight from "../../../shared/interfaces/UpdateWeight";
+import { SnackbarStatus, Status } from "../../../shared/enums";
 
 export enum BodyWeightUpdateFields {
   BODY_WEIGHT = "bodyWeight",
@@ -32,6 +35,7 @@ export const useBodyWeightUpdate = () => {
     status: updateWeightStatus,
     mutateAsync: updateWeightQuery,
   } = useUpdateWeightMutation();
+  const snackbar = useSnackbar();
 
   const methods = useForm<BodyWeightUpdate>({
     defaultValues: {
@@ -57,13 +61,21 @@ export const useBodyWeightUpdate = () => {
     [updateWeightQuery, user]
   );
 
+  // snackbar
+  useEffect(() => {
+    if (updateWeightError) {
+      snackbar(updateWeightError.message, SnackbarStatus.ERROR);
+    }
+    if (!isUpdatingWeight && updateWeightStatus === Status.SUCCESS) {
+      snackbar("Weight saved successfully!.", SnackbarStatus.SUCCESS);
+    }
+  }, [snackbar, updateWeightError, isUpdatingWeight, updateWeightStatus]);
+
   return {
     methods,
     canSubmit,
     onSubmit,
     resetForm,
     isUpdatingWeight,
-    updateWeightError,
-    updateWeightStatus,
   };
 };

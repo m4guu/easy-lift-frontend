@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FormProvider } from "react-hook-form";
 
 import {
@@ -18,37 +18,14 @@ import {
   FormActions,
 } from "./styles/User/ConfigurationForm.styles";
 import { SectionHeader, Submit } from "../../../../components";
-import { useSnackbar } from "../../../../hooks";
-import { SnackbarStatus, Status } from "../../../../shared/enums";
 
 export const UserConfigurationForm: React.FC<{
   defaultValues?: UserConfig;
 }> = ({ defaultValues }) => {
-  const {
-    methods,
-    canSubmit,
-    onSubmit,
-    updateUserStatus,
-    isUpdatingUser,
-    updateUserError,
-  } = useUserConfigForm({
+  const { methods, canSubmit, onSubmit, isUpdatingUser } = useUserConfigForm({
     defaultUpdateValues: defaultValues,
   });
   const { handleSubmit } = methods;
-
-  const snackbar = useSnackbar();
-
-  useEffect(() => {
-    if (updateUserError) {
-      snackbar(updateUserError.message, SnackbarStatus.ERROR);
-    }
-    if (!isUpdatingUser && updateUserStatus === Status.SUCCESS) {
-      snackbar(
-        "Saved! Thank you for keeping us up to date.",
-        SnackbarStatus.SUCCESS
-      );
-    }
-  }, [snackbar, updateUserError, isUpdatingUser, updateUserStatus]);
 
   return (
     <FormProvider {...methods}>

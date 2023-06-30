@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 
 import * as yup from "yup";
@@ -90,14 +90,12 @@ export const useAuthForm = (authType: AuthTypes) => {
     [authType, login, registerUser, resetForm, methods]
   );
 
-  useEffect(() => {
-    if (registerError && registerError.id === ErrorId.EMAIL_ALREADY_ASSIGNED) {
-      methods.setError(AuthFormFields.E_MAIL, {
-        type: "manual",
-        message: registerError.message,
-      });
-    }
-  }, [registerError, methods]);
+  if (registerError && registerError.id === ErrorId.EMAIL_ALREADY_ASSIGNED) {
+    methods.setError(AuthFormFields.E_MAIL, {
+      type: "manual",
+      message: registerError.message,
+    });
+  }
 
   return {
     methods,

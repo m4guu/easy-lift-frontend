@@ -5,10 +5,12 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useUserContext } from "../../../contexts/userContext";
+import useSnackbar from "../../useSnackbar";
 import { useUpdatePasswordMutation } from "../../queryHooks/auth/useUpdatePasswordMutation";
+
 import { UpdatePasswordData } from "../../../shared/interfaces";
+import { ErrorId, SnackbarStatus, Status } from "../../../shared/enums";
 import { PATHS } from "../../../pages/paths";
-import { ErrorId } from "../../../shared/enums";
 
 export enum PasswordUpdateFields {
   NEW_PASSWORD = "newPassword",
@@ -41,6 +43,8 @@ const schema = yup.object().shape({
 export const usePasswordUpdateForm = () => {
   const { user, login } = useUserContext();
   const navigate = useNavigate();
+  const snackbar = useSnackbar();
+
   const {
     isLoading: isUpdatingPassword,
     status: updatePasswordStatus,
@@ -84,17 +88,26 @@ export const usePasswordUpdateForm = () => {
     [methods, updatePasswordQuery, user, login, navigate, resetForm]
   );
 
+  // error handling
+  if (
+    updatePasswordError &&
+    updatePasswordError.id === ErrorId.INVALID_PASSWORD
+  ) {
+    methods.setError(PasswordUpdateFields.PASSWORD, {
+      type: "manual",
+      message: updatePasswordError.message,
+    });
+  }
+
+  // snackbar
   useEffect(() => {
-    if (
-      updatePasswordError &&
-      updatePasswordError.id === ErrorId.INVALID_PASSWORD
-    ) {
-      methods.setError(PasswordUpdateFields.PASSWORD, {
-        type: "manual",
-        message: updatePasswordError.message,
-      });
+    if (updatePasswordError) {
+      snackbar(updatePasswordError.message, SnackbarStatus.ERROR);
     }
-  }, [updatePasswordError, methods]);
+    if (!isUpdatingPassword && updatePasswordStatus === Status.SUCCESS) {
+      snackbar("Password saved successfully!.", SnackbarStatus.SUCCESS);
+    }
+  }, [snackbar, updatePasswordError, isUpdatingPassword, updatePasswordStatus]);
 
   return {
     methods,
@@ -102,7 +115,5 @@ export const usePasswordUpdateForm = () => {
     onSubmit,
     resetForm,
     isUpdatingPassword,
-    updatePasswordError,
-    updatePasswordStatus,
   };
 };

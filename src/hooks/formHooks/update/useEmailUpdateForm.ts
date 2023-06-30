@@ -6,9 +6,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useUserContext } from "../../../contexts/userContext";
 import { useUpdateEmailMutation } from "../../queryHooks/auth/useUpdateEmailMutation";
+import useSnackbar from "../../useSnackbar";
+
 import { UpdateEmailData } from "../../../shared/interfaces";
+import { ErrorId, SnackbarStatus, Status } from "../../../shared/enums";
 import { PATHS } from "../../../pages/paths";
-import { ErrorId } from "../../../shared/enums";
 
 export enum EmailUpdateFields {
   EMAIL = "email",
@@ -37,6 +39,8 @@ const schema = yup.object().shape({
 export const useEmailUpdateForm = () => {
   const { user, login } = useUserContext();
   const navigate = useNavigate();
+  const snackbar = useSnackbar();
+
   const {
     isLoading: isUpdatingEmail,
     error: updateEmailError,
@@ -79,14 +83,26 @@ export const useEmailUpdateForm = () => {
     [methods, updateEmailQuery, user, resetForm, navigate, login]
   );
 
+  // error handling
+  if (updateEmailError && updateEmailError.id === ErrorId.INVALID_PASSWORD) {
+    methods.setError(EmailUpdateFields.PASSWORD, {
+      type: "manual",
+      message: updateEmailError.message,
+    });
+  }
+
+  // snackbar
   useEffect(() => {
-    if (updateEmailError && updateEmailError.id === ErrorId.INVALID_PASSWORD) {
-      methods.setError(EmailUpdateFields.PASSWORD, {
-        type: "manual",
-        message: updateEmailError.message,
-      });
+    if (updateEmailError) {
+      snackbar(updateEmailError.message, SnackbarStatus.ERROR);
     }
-  }, [updateEmailError, methods]);
+    if (!isUpdatingEmail && updateEmailStatus === Status.SUCCESS) {
+      snackbar(
+        "Saved! Thank you for keeping us up to date.",
+        SnackbarStatus.SUCCESS
+      );
+    }
+  }, [snackbar, updateEmailError, isUpdatingEmail, updateEmailStatus]);
 
   return {
     methods,
@@ -94,7 +110,5 @@ export const useEmailUpdateForm = () => {
     onSubmit,
     resetForm,
     isUpdatingEmail,
-    updateEmailError,
-    updateEmailStatus,
   };
 };
