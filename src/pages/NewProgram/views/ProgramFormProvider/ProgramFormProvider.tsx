@@ -19,7 +19,7 @@ import { ErrorMessage, Submit } from "../../../../components";
 import { FirstFormStep } from "./views/FormSteps/FirstFormStep";
 import { SecondFormStep } from "./views/FormSteps/SecondFormStep";
 import { ThirdFormStep } from "./views/FormSteps/ThirdFormStep";
-import { API_URL } from "../../../../config/env.config";
+import { API_URL } from "../../../../config/env/env.config";
 
 export const ProgramFormProvider: React.FC<{
   editProgram?: ProgramInterface;

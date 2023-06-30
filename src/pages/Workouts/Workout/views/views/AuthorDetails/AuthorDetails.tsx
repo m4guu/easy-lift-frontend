@@ -7,7 +7,7 @@ import { useUser } from "../../../../../../hooks/queryHooks/userHooks/useUser";
 
 import { StatusBar } from "../../../../../../components";
 
-import { API_URL } from "../../../../../../config/env.config";
+import { API_URL } from "../../../../../../config/env/env.config";
 
 interface AuthorDetailsProps {
   authorId: string;

@@ -7,7 +7,7 @@ import { UserAvatar } from "../../../../components/ExerciseProgresItem/ExerciseP
 
 import { TrainerPrograms } from "./views/TrainerPrograms";
 import { PersonalTrainingInfo } from "./views/PersonalTrainingInfo";
-import { API_URL } from "../../../../config/env.config";
+import { API_URL } from "../../../../config/env/env.config";
 import { StatusBar } from "../../../../components";
 
 export const TrainerContent: React.FC<{ trainerId: string }> = ({

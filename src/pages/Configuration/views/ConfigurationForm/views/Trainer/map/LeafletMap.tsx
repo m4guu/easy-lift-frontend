@@ -12,7 +12,7 @@ import {
   greenMarkerIcon,
 } from "./constans";
 import { gyms } from "../form/constans";
-import { MAP_BOX_URL } from "../../../../../../../config/env.config";
+import { MAP_BOX_URL } from "../../../../../../../config/env/env.config";
 
 interface LeafletMapProps {
   selectedGyms: Gym[];

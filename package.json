@@ -46,7 +46,12 @@
     "react-window-infinite-loader": "^1.0.8",
     "swiper": "^8.4.5",
     "uuid": "^9.0.0",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "jsdom": "^22.1.0",
+    "vitest": "^0.32.2"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.19.1",

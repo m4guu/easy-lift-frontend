@@ -26,7 +26,7 @@ import { GymItem } from "../../../../../../components";
 import { Role } from "../../../../../../shared/enums";
 import { User } from "../../../../../../shared/interfaces";
 import { gyms } from "../../../../../Configuration/views/ConfigurationForm/views/Trainer/form/constans";
-import { API_URL } from "../../../../../../config/env.config";
+import { API_URL } from "../../../../../../config/env/env.config";
 
 export const UserBasicInfo: React.FC<{ user: User }> = ({ user }) => {
   const isMobile = useMediaQuery((theme: Theme) =>

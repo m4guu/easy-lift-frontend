@@ -16,7 +16,7 @@ import { Program } from "../../shared/interfaces";
 import { PATHS } from "../../pages/paths";
 
 import { useUserContext } from "../../contexts/userContext";
-import { API_URL } from "../../config/env.config";
+import { API_URL } from "../../config/env/env.config";
 import StatusBar from "../StatusBar";
 
 type ProgramItemProps = {

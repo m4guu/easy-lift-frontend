@@ -1,5 +1,5 @@
 import { HttpStatusCode } from "axios";
-import { RAPID_API_KEY } from "../../../config/env.config";
+import { RAPID_API_KEY } from "../../../config/env/env.config";
 import { ErrorId } from "../../../shared/enums";
 import { Error } from "../../../shared/interfaces";
 

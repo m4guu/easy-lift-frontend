@@ -9,7 +9,7 @@ import { useUserContext } from "../../contexts/userContext";
 
 import { PATHS } from "../../pages/paths";
 import { Role } from "../../shared/enums";
-import { API_URL } from "../../config/env.config";
+import { API_URL } from "../../config/env/env.config";
 
 import AccountSettings from "./AccountSettings";
 

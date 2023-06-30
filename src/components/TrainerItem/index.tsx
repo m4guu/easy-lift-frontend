@@ -9,7 +9,7 @@ import { User } from "../../shared/interfaces";
 
 import { PATHS } from "../../pages/paths";
 import { UserAvatar } from "../ExerciseProgresItem/ExerciseProgresItem.styles";
-import { API_URL } from "../../config/env.config";
+import { API_URL } from "../../config/env/env.config";
 
 type TrainerItemProps = {
   trainer: User;

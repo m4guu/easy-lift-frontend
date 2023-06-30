@@ -8,7 +8,7 @@ import { useUserContext } from "../../contexts/userContext";
 
 import { Program } from "../../shared/interfaces";
 import { PATHS } from "../../pages/paths";
-import { API_URL } from "../../config/env.config";
+import { API_URL } from "../../config/env/env.config";
 
 import {
   ProgramItemCard,
