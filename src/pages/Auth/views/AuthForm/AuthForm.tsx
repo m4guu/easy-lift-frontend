@@ -24,13 +24,12 @@ export const AuthForm: React.FC<AuthFormProps> = ({ authType, setTab }) => {
   const { handleSubmit } = methods;
   const { isLogging, isRegistering, registerStatus } = useUserContext();
 
-  const isSuccessfullyRegistered =
-    !isRegistering && registerStatus === Status.SUCCESS;
+  // change to a login tab after successful registration
   useEffect(() => {
-    if (isSuccessfullyRegistered) {
+    if (!isRegistering && registerStatus === Status.SUCCESS) {
       setTab(0);
     }
-  }, [isSuccessfullyRegistered, setTab]);
+  }, [isRegistering, registerStatus, setTab]);
 
   return (
     <FormProvider {...methods}>

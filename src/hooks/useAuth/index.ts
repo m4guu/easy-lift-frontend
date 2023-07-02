@@ -16,6 +16,7 @@ import {
   CreateUser,
   Error,
 } from "../../shared/interfaces";
+import { PATHS } from "../../pages/paths";
 
 type UseAuthReturnType = {
   isLogging: boolean;
@@ -55,6 +56,10 @@ const useAuth = (): UseAuthReturnType => {
       setUser(response.user);
       // Set user to local storage
       localStorage.setItem("userData", JSON.stringify(response.user));
+      // redirect to home page when user is configured and to confi page when is not
+      navigate(
+        response.user.isConfigured ? PATHS.CONFIGURATION : PATHS.default
+      );
     });
   };
 

@@ -90,6 +90,7 @@ export const useAuthForm = (authType: AuthTypes) => {
     [authType, login, registerUser, resetForm, methods]
   );
 
+  // snackbar
   if (registerError && registerError.id === ErrorId.EMAIL_ALREADY_ASSIGNED) {
     methods.setError(AuthFormFields.E_MAIL, {
       type: "manual",
