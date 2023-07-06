@@ -1,8 +1,8 @@
 import { styled } from "@mui/system";
 
-import { ControlledTextField } from "../../../../../../../features";
+import { ControlledTextField } from "../../../../../features";
 
-import { BodyWeightUpdateFields } from "../../../../../../../hooks/formHooks/update/useBodyWeightUpdate";
+import { BodyWeightUpdateFields } from "../../../../../hooks/formHooks/update/useBodyWeightUpdate";
 
 // Body weight //
 export const BodyWeight = styled(() => (
