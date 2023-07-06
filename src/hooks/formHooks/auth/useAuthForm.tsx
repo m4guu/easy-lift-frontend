@@ -79,6 +79,7 @@ export const useAuthForm = (authType: AuthTypes) => {
           password: formValues.password,
           role: formValues.role!,
         };
+
         registerUser(newUser).then(resetForm);
       } else {
         methods.setError(AuthFormFields.CONFIRM_PASSWORD, {
