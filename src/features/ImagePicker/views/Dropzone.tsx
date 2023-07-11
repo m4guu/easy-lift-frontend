@@ -9,7 +9,11 @@ import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import { useIsDragging } from "../../../hooks";
 
 import { DragInfo } from "./views/DragInfo";
-import { ImagePickerSize, ImagePickerType } from "../../../shared/enums";
+import {
+  ImagePickerSize,
+  ImagePickerType,
+  TestId,
+} from "../../../shared/enums";
 import { avatarPickerOptions, sizes } from "./constans";
 
 interface DropzoneContentProps extends React.ComponentProps<typeof Box> {
@@ -85,7 +89,7 @@ export const Dropzone: React.FC<DropzoneProps> = ({
         type={type}
         size={size}
       >
-        <input {...getInputProps()} />
+        <input data-testid={TestId.IMAGE_INPUT} {...getInputProps()} />
         {imagePreview ? (
           <ImagePreview src={imagePreview} alt="preview" type={type} />
         ) : (

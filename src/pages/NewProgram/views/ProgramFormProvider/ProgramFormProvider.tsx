@@ -44,7 +44,7 @@ export const ProgramFormProvider: React.FC<{
 
   const initImagePreview =
     editProgram && editProgram.image
-      ? `${API_URL}${editProgram?.image}`
+      ? `${API_URL}${editProgram.image}`
       : undefined;
 
   return (
@@ -81,16 +81,8 @@ export const ProgramFormProvider: React.FC<{
         )}
 
         <FormActions>
-          {currentStep !== 3 && (
-            <Button
-              onClick={() => nextStep(trigger)}
-              endIcon={<NavigateNextIcon />}
-              variant="outlined"
-            >
-              next step
-            </Button>
-          )}
-          {currentStep === 3 && (
+          {currentStep === 3 ? (
+            // try submit form
             <Submit
               onClick={handleSubmit((data) => onSubmit(data))}
               disabled={!canSubmit}
@@ -99,6 +91,15 @@ export const ProgramFormProvider: React.FC<{
               label={editProgram ? "update program" : "create program"}
               color={editProgram ? "info" : "primary"}
             />
+          ) : (
+            // next step
+            <Button
+              onClick={() => nextStep(trigger)}
+              endIcon={<NavigateNextIcon />}
+              variant="outlined"
+            >
+              next step
+            </Button>
           )}
         </FormActions>
       </FormWrapper>

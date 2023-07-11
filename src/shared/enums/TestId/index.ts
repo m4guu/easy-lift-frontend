@@ -1,0 +1,6 @@
+enum TestId {
+  PASSWORD = "PASSWORD",
+  CONFIRM_PASSWORD = "CONFIRM_PASSWORD",
+  IMAGE_INPUT = "IMAGE_INPUT",
+}
+export default TestId;

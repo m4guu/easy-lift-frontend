@@ -1,22 +1,27 @@
 import { Mock, beforeEach } from "vitest";
-import {
-  fireEvent,
-  render,
-  screen,
-} from "../../../../../config/tests/custom-render";
+import userEvent from "@testing-library/user-event";
 
+import { render } from "../../../../../config/tests/custom-render";
 import { useUserContext } from "../../../../../contexts/userContext";
 
 import Auth from "../../..";
 
 import { Status } from "../../../../../shared/enums";
+import {
+  mockedPassword,
+  mockedEmail,
+  getEmailInput,
+  getPasswordInput,
+  getConfirmPasswordInput,
+  clickRegisterButton,
+  clickSignUpTab,
+  getLoginTab,
+} from "../constans";
 
 vi.mock("../../../../hooks/formHooks/auth/useAuthForm");
 vi.mock("../../../../../contexts/userContext");
 
 const mockedUseUserContext = useUserContext as Mock;
-const mockedEmail = "mocked@email.com";
-const mockedPassword = "mockedPassword";
 
 beforeEach(() => {
   mockedUseUserContext.mockReturnValue({
@@ -32,10 +37,8 @@ describe("Auth Page", () => {
     describe("with valid registration data", () => {
       it("should redirect to the login board", () => {
         const { rerender } = render(<Auth />);
-        const signUpTab = screen.getByText("signup");
-        const loginTab = screen.getByText("login");
-        // change into registration tab
-        fireEvent.click(signUpTab);
+
+        clickSignUpTab();
         // mockup successfully register response
         mockedUseUserContext.mockReturnValue({
           isLogging: false,
@@ -44,31 +47,17 @@ describe("Auth Page", () => {
         });
         rerender(<Auth />);
 
-        expect(loginTab).toHaveAttribute("aria-selected", "true");
+        expect(getLoginTab()).toHaveAttribute("aria-selected", "true");
       });
-      it("should automatically complete the email in the login board", () => {
+      it("should automatically complete the email in the login board", async () => {
         const { rerender } = render(<Auth />);
-        // change into registration tab
-        const signUpTab = screen.getByText("signup");
-        fireEvent.click(signUpTab);
-        // get input elements by label
-        const emailInput = screen.getByLabelText("E-mail");
-        const passwordInput = screen.getByLabelText("Password");
-        const confirmPasswordInput = screen.getByLabelText("Confirm Password");
-        // set values for the input elements
-        fireEvent.change(emailInput, {
-          target: { value: mockedEmail },
-        });
-        fireEvent.change(passwordInput, { target: { value: mockedPassword } });
-        fireEvent.change(confirmPasswordInput, {
-          target: { value: mockedPassword },
-        });
-        // trigger the create acc button
-        fireEvent.click(
-          screen.getByRole("button", {
-            name: "Create Account",
-          })
-        );
+
+        clickSignUpTab();
+        await userEvent.type(getEmailInput(), mockedEmail);
+        await userEvent.type(getPasswordInput(), mockedPassword);
+        await userEvent.type(getConfirmPasswordInput(), mockedPassword);
+        clickRegisterButton();
+
         // Update the mocked value and re-render the component
         mockedUseUserContext.mockReturnValueOnce({
           login: vi.fn(),
@@ -80,19 +69,18 @@ describe("Auth Page", () => {
         });
         rerender(<Auth />);
         // assertion
-        expect(emailInput).toHaveValue(mockedEmail);
+        expect(getEmailInput()).toHaveValue(mockedEmail);
         // todo: fix bug with password reset
         // expect(passwordInput).toHaveValue("");
       });
     });
+
     describe("with invalid registration data", () => {
       it("should not redirect to the login board", () => {
         const { rerender } = render(<Auth />);
-        const signUpTab = screen.getByText("signup");
-        const loginTab = screen.getByText("login");
 
         // change into registration tab
-        fireEvent.click(signUpTab);
+        clickSignUpTab();
         // mockup invalid register response
         mockedUseUserContext.mockReturnValue({
           isLogging: false,
@@ -101,7 +89,7 @@ describe("Auth Page", () => {
         });
         rerender(<Auth />);
 
-        expect(loginTab).toHaveAttribute("aria-selected", "false");
+        expect(getLoginTab()).toHaveAttribute("aria-selected", "false");
       });
     });
   });

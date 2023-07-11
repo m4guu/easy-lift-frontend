@@ -73,6 +73,7 @@ export const useUserConfigForm = ({
 
   const onSubmit = useCallback(
     (formValues: UserConfig) => {
+      console.log(formValues);
       const updatedUser: Partial<User> = {
         name: formValues.name,
         height: formValues.height,

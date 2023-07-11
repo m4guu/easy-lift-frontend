@@ -18,6 +18,7 @@ export const YourWorkoutList: React.FC<{ userId: string }> = ({ userId }) => {
   const isBelowXl = useMediaQuery(theme.breakpoints.down("xl"));
   const workoutQueries: WorkoutQueries = { creator: userId };
   const queryPath = generateQueriesPath(workoutQueries);
+
   const {
     status,
     error,

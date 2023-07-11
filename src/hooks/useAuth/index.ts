@@ -35,15 +35,13 @@ const useAuth = (): UseAuthReturnType => {
   const snackbar = useSnackbar();
   const navigate = useNavigate();
 
+  const { mutateAsync: autoLoginMutation } = useAutoLogin();
+  const { mutateAsync: logoutMutation } = useLogout();
   const {
     isLoading: isLogging,
     error: loginError,
     mutateAsync: loginMutation,
   } = useLogin();
-
-  const { mutateAsync: autoLoginMutation } = useAutoLogin();
-  const { mutateAsync: logoutMutation } = useLogout();
-
   const {
     isLoading: isRegistering,
     status: registerStatus,
