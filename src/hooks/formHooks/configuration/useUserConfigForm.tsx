@@ -43,13 +43,13 @@ export const useUserConfigForm = ({
 }: {
   defaultUpdateValues?: UserConfig;
 }) => {
+  const { user, autoLogin } = useUserContext();
   const {
     status: updateUserStatus,
     error: updateUserError,
     isLoading: isUpdatingUser,
     mutateAsync: configureUserQuery,
   } = useConfigureUserMutation();
-  const { user, autoLogin } = useUserContext();
   const navigate = useNavigate();
   const snackbar = useSnackbar();
 

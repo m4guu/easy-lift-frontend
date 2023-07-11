@@ -12,6 +12,7 @@ import { Role } from "../../shared/enums";
 
 const ConfigurationPage: React.FC = () => {
   const { user } = useUserContext();
+
   return (
     <SectionContainer>
       <LogoWrapper>

@@ -14,12 +14,12 @@ import { ChartType } from "../../../../shared/enums";
 
 export const WeightChart: React.FC<{ userId: string }> = ({ userId }) => {
   const theme = useTheme();
-  const isDownSm = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const { data: weightHistory } = useWeightHistory(userId);
 
   const chartOptions = {
-    aspectRatio: isDownSm ? 1 / 1 : 3 / 1,
+    aspectRatio: isMobile ? 1 / 1 : 3 / 1,
     scales: {
       x: {
         type: "time",

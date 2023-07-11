@@ -13,7 +13,7 @@ import {
   Image,
 } from "./views/Trainer/form/TrainerConfiguration.form";
 import { SectionHeader, Submit } from "../../../../components";
-import { LeafletMap } from "./views/Trainer/map/LeafletMap";
+// import { LeafletMap } from "./views/Trainer/map/LeafletMap";
 import {
   FormWrapper,
   FormBox,
@@ -66,10 +66,10 @@ export const TrainerConfigurationForm: React.FC<{
         </FormBox>
 
         <FormMapBox>
-          <LeafletMap
+          {/* <LeafletMap
             selectedGyms={selectedGyms}
             gymsChangeHandler={gymsChangeHandler}
-          />
+          /> */}
         </FormMapBox>
       </FormWrapper>
     </FormProvider>
