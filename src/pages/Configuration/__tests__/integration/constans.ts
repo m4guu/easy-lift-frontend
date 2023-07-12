@@ -31,12 +31,15 @@ export function clickConfigureButton() {
 export const userMock: Partial<User> = {
   role: Role.user,
 };
-export const validUserConfigData: Omit<UserConfig, "height" | "weight"> = {
+export const validUserConfigData: UserConfig = {
   name: "John",
+  height: 180,
+  weight: 90,
   image: [new File([""], "mock.png", { type: "image/png" })],
 };
-export const invalidUserConfigData: Omit<UserConfig, "image"> = {
+export const invalidUserConfigData: UserConfig = {
   name: "J",
   height: 1800,
   weight: 1,
+  image: [new File([""], "mock.png", { type: "image/png" })],
 };

@@ -14,16 +14,11 @@ import {
   getImageInput,
   getNameInput,
   getWeightInput,
-  invalidUserConfigData,
   userMock,
-  validUserConfigData,
 } from "../constans";
 import { Status } from "../../../../../shared/enums";
-import { PATHS } from "../../../../paths";
-import {
-  defaultHeightValue,
-  defaultWeightValue,
-} from "../../../../../hooks/formHooks/configuration/constans";
+
+import { userConfigTestCases } from "./scenarios.cases";
 
 // ? question: why this mock doesnt work properly ?
 vi.mock("react-leaflet");
@@ -49,46 +44,28 @@ beforeEach(() => {
 
 describe("Configuration Page", () => {
   describe("user", () => {
-    describe("configure with valid data", () => {
-      it("should resest form & redirect to home page", async () => {
-        render(<Configuration />);
-        await userEvent.type(getNameInput(), validUserConfigData.name);
-        await userEvent.upload(getImageInput(), validUserConfigData.image);
-        clickConfigureButton();
-
-        // expect the form reset correctly
-        // ? question: why reset form from react-hook-form doesnt work properly ?
-        // expect(getNameInput()).toHaveValue("");
-        expect(getHeightInput()).toHaveValue(`${defaultHeightValue}`);
-        expect(getWeightInput()).toHaveValue(`${defaultWeightValue}`);
-        // expect redirect to home page
-        expect(global.window.location.href).toContain(PATHS.default);
-      });
-    });
-
-    describe("configure with invalid data", () => {
-      it("should not resest form", async () => {
+    it.each(userConfigTestCases)(
+      "iteration #%#",
+      async ({ configData, expectedFormValues, expectedUrl }) => {
         render(<Configuration />);
         // clear default values
         userEvent.clear(getHeightInput());
         userEvent.clear(getWeightInput());
-        // set invalid data
-        await userEvent.type(getNameInput(), invalidUserConfigData.name);
-        await userEvent.type(
-          getHeightInput(),
-          `${invalidUserConfigData.height}`
-        );
-        await userEvent.type(
-          getWeightInput(),
-          `${invalidUserConfigData.weight}`
-        );
+        // set config data
+        await userEvent.type(getNameInput(), configData.name);
+        await userEvent.type(getHeightInput(), `${configData.height}`);
+        await userEvent.type(getWeightInput(), `${configData.weight}`);
+        await userEvent.upload(getImageInput(), configData.image);
         clickConfigureButton();
 
-        // expect the form not reset
-        expect(getNameInput()).toHaveValue(invalidUserConfigData.name);
-        expect(getHeightInput()).toHaveValue(`${invalidUserConfigData.height}`);
-        expect(getWeightInput()).toHaveValue(`${invalidUserConfigData.weight}`);
-      });
-    });
+        // expect the form reset correctly
+        // ? question: why reset from react-hook-form doesnt work properly ?
+        expect(getNameInput()).toHaveValue(expectedFormValues.name);
+        expect(getHeightInput()).toHaveValue(`${expectedFormValues.height}`);
+        expect(getWeightInput()).toHaveValue(`${expectedFormValues.weight}`);
+        // expect redirect to home page with valid config data
+        expect(global.window.location.href).toContain(expectedUrl);
+      }
+    );
   });
 });
