@@ -1,4 +1,4 @@
-export const programFrequencies = [
+export const programFrequencies: { label: string; value: number }[] = [
   { label: "2 trainings per week", value: 2 },
   { label: "3 trainings per week", value: 3 },
   { label: "4 trainings per week", value: 4 },
@@ -7,7 +7,7 @@ export const programFrequencies = [
   { label: "7 trainings per week", value: 7 },
 ];
 
-export const programLengths = [
+export const programLengths: { label: string; value: number }[] = [
   { label: "4 week", value: 4 },
   { label: "5 week", value: 5 },
   { label: "6 week", value: 6 },

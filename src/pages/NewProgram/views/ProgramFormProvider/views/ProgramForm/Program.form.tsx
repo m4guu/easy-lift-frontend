@@ -42,11 +42,19 @@ export const ProgramLevel = styled(() => (
     size="small"
     label="Level"
     select
+    SelectProps={{
+      native: true,
+    }}
     fieldName={AddProgramFormFields.PROGRAM_LEVEL}
   >
     {Object.values(ProgramLevels).map((programLevel) => {
       return (
-        <MenuItem key={programLevel} value={programLevel}>
+        <MenuItem
+          role="option"
+          component="option"
+          key={programLevel}
+          value={programLevel}
+        >
           {programLevel}
         </MenuItem>
       );
@@ -62,12 +70,20 @@ export const ProgramFrequency = styled(() => (
     size="small"
     label="Frequency"
     select
+    SelectProps={{
+      native: true,
+    }}
     placeholder="2 trainings per week"
     fieldName={AddProgramFormFields.FREQUENCY_PER_WEEK}
   >
     {programFrequencies.map((freq) => {
       return (
-        <MenuItem key={freq.value} value={freq.value}>
+        <MenuItem
+          role="option"
+          component="option"
+          key={freq.value}
+          value={freq.value}
+        >
           {freq.label}
         </MenuItem>
       );
@@ -83,11 +99,19 @@ export const ProgramLength = styled(() => (
     size="small"
     label="Length"
     select
+    SelectProps={{
+      native: true,
+    }}
     fieldName={AddProgramFormFields.PROGRAM_LENGTH}
   >
     {programLengths.map((programLength) => {
       return (
-        <MenuItem key={programLength.value} value={programLength.value}>
+        <MenuItem
+          key={programLength.value}
+          value={programLength.value}
+          component="option"
+          role="option"
+        >
           {programLength.label}
         </MenuItem>
       );

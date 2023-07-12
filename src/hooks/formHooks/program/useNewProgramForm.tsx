@@ -15,7 +15,7 @@ import {
   ProgramItem,
   ProgramUpdates,
 } from "../../../shared/interfaces";
-import { ProgramLevels, SnackbarStatus } from "../../../shared/enums";
+import { ProgramLevels, SnackbarStatus, Status } from "../../../shared/enums";
 import {
   minFreqTraining,
   maxFreqTraining,
@@ -107,6 +107,7 @@ export const useNewProgramForm = ({ editProgram }: UseProgramFormProps) => {
   const {
     isLoading: isAddingNewProgram,
     error: addProgramError,
+    status: addProgramStatus,
     mutateAsync: addQueryProgram,
   } = useAddProgramMutation();
   const {
@@ -182,6 +183,8 @@ export const useNewProgramForm = ({ editProgram }: UseProgramFormProps) => {
         price: formValues.programPrice,
         description: formValues.programDescription,
       };
+      console.log(JSON.stringify(formValues.program));
+
       const newProgramFormData = new FormData();
       Object.entries(newProgram).forEach(([fieldName, fieldValue]) => {
         if (fieldValue instanceof File) {
@@ -241,10 +244,10 @@ export const useNewProgramForm = ({ editProgram }: UseProgramFormProps) => {
   }, [snackbar, updateProgramError, addProgramError]);
 
   useEffect(() => {
-    if (!isAddingNewProgram && !addProgramError) {
+    if (!isAddingNewProgram && addProgramStatus === Status.SUCCESS) {
       snackbar("Program added successfuly.", SnackbarStatus.SUCCESS);
     }
-  }, [snackbar, isAddingNewProgram, addProgramError]);
+  }, [snackbar, isAddingNewProgram, addProgramError, addProgramStatus]);
 
   return {
     methods,
