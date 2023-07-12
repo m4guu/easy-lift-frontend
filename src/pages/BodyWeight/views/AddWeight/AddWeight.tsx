@@ -13,7 +13,6 @@ export const AddWeight: React.FC = () => {
   const { methods, canSubmit, onSubmit, isUpdatingWeight } =
     useBodyWeightUpdate();
   const { handleSubmit } = methods;
-
   return (
     <Container>
       <FormProvider {...methods}>
