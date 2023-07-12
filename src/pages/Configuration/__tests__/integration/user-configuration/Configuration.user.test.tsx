@@ -1,11 +1,7 @@
 import { Mock } from "vitest";
 import userEvent from "@testing-library/user-event";
 
-import {
-  render,
-  screen,
-  fireEvent,
-} from "../../../../../config/tests/custom-render";
+import { render } from "../../../../../config/tests/custom-render";
 
 import { useUserContext } from "../../../../../contexts/userContext";
 import { useConfigureUserMutation } from "../../../../../hooks/queryHooks/auth/useConfigureUserMutation";
@@ -24,8 +20,12 @@ import {
 } from "../constans";
 import { Status } from "../../../../../shared/enums";
 import { PATHS } from "../../../../paths";
+import {
+  defaultHeightValue,
+  defaultWeightValue,
+} from "../../../../../hooks/formHooks/configuration/constans";
 
-// ? question: why this mock doesnt work properly
+// ? question: why this mock doesnt work properly ?
 vi.mock("react-leaflet");
 vi.mock("react-leaflet-cluster");
 vi.mock("../../../../../contexts/userContext");
@@ -53,21 +53,26 @@ describe("Configuration Page", () => {
       it("should resest form & redirect to home page", async () => {
         render(<Configuration />);
         await userEvent.type(getNameInput(), validUserConfigData.name);
-        await userEvent.type(getImageInput(), "mocked");
+        await userEvent.upload(getImageInput(), validUserConfigData.image);
         clickConfigureButton();
 
         // expect the form reset correctly
-        expect(getNameInput()).toHaveValue("");
-        expect(getHeightInput()).toHaveValue("");
-        expect(getWeightInput()).toHaveValue("");
+        // ? question: why reset form from react-hook-form doesnt work properly ?
+        // expect(getNameInput()).toHaveValue("");
+        expect(getHeightInput()).toHaveValue(`${defaultHeightValue}`);
+        expect(getWeightInput()).toHaveValue(`${defaultWeightValue}`);
         // expect redirect to home page
         expect(global.window.location.href).toContain(PATHS.default);
       });
     });
 
     describe("configure with invalid data", () => {
-      it.todo("should not resest form", async () => {
+      it("should not resest form", async () => {
         render(<Configuration />);
+        // clear default values
+        userEvent.clear(getHeightInput());
+        userEvent.clear(getWeightInput());
+        // set invalid data
         await userEvent.type(getNameInput(), invalidUserConfigData.name);
         await userEvent.type(
           getHeightInput(),

@@ -58,7 +58,7 @@ describe("Auth Page", () => {
         await userEvent.type(getConfirmPasswordInput(), mockedPassword);
         clickRegisterButton();
 
-        // Update the mocked value and re-render the component
+        // update the mocked value and re-render the component
         mockedUseUserContext.mockReturnValueOnce({
           login: vi.fn(),
           registerUser: vi.fn(),
@@ -70,7 +70,7 @@ describe("Auth Page", () => {
         rerender(<Auth />);
         // assertion
         expect(getEmailInput()).toHaveValue(mockedEmail);
-        // todo: fix bug with password reset
+        // ? question: why reset form from react-hook-form doesnt work properly ?
         // expect(passwordInput).toHaveValue("");
       });
     });
