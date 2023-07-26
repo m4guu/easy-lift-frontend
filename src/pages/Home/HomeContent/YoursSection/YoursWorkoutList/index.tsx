@@ -59,7 +59,7 @@ export const YourWorkoutList: React.FC<{ userId: string }> = ({ userId }) => {
   return (
     <Box sx={isBelowXl ? { height: 500 } : { flex: 1 }}>
       <InfiniteList
-        items={workouts}
+        items={workouts.reverse()}
         Item={Item}
         isFetchingNextPage={isFetchingNextPage}
         hasNextPage={hasNextPage}

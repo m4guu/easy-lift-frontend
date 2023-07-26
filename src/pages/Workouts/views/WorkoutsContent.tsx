@@ -73,7 +73,7 @@ export const WorkoutsContent: React.FC<{ userId: string }> = ({ userId }) => {
 
       <NoPaddingDivider />
       <InfiniteList
-        items={workouts}
+        items={workouts.reverse()}
         Item={Item}
         isFetchingNextPage={isFetchingNextPage}
         hasNextPage={hasNextPage}

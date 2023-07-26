@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 
 import { Typography, Divider } from "@mui/material";
 import { useTheme } from "@mui/system";
@@ -86,7 +87,7 @@ const ExerciseProgresItem: React.FC<ExerciseProgresItemProps> = ({
           <SetsContent>
             {exerciseProgres.sets.map((set, index) => {
               return (
-                <SetContent>
+                <SetContent key={uuidv4()}>
                   <SetTitle variant="caption" color="primary">
                     {index + 1}
                   </SetTitle>

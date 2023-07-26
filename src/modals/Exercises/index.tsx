@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { UseFieldArrayAppend } from "react-hook-form";
 
 import { Box, Typography, Button, Modal, useMediaQuery } from "@mui/material";
@@ -34,22 +34,24 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
 }) => {
   const theme = useTheme();
   const isBelowSm = useMediaQuery(theme.breakpoints.down("sm"));
-
+  const { filterPanelProps } = useExerciseFilter();
+  const searchName = filterPanelProps.selectedExerciseName;
   const {
     status,
     error,
     hasNextPage,
     isFetchingNextPage,
     fetchNextPage,
+    refetch: refetchExercises,
     data: infinityExercises,
-  } = useExercises();
+  } = useExercises(searchName);
 
   const exercises = usePaginatedResultItems(
     infinityExercises,
     (response) => response
   );
+
   const noExercises = status === Status.SUCCESS && exercises.length === 0;
-  // const { updatedExercises, filterPanelProps } = useExerciseFilter(exercises);
 
   // Every row is loaded except for our loading indicator row.
   const isItemLoaded = (index: number) =>
@@ -63,7 +65,7 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
     style: React.CSSProperties;
   }) => {
     return (
-      <Box style={style}>
+      <Box style={{ ...style, overflow: "" }}>
         {isItemLoaded(index) ? (
           <ExerciseItem
             exercise={exercises[index]}
@@ -79,6 +81,10 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
 
   const itemSize = isBelowSm ? 100 : 150;
 
+  useEffect(() => {
+    refetchExercises();
+  }, [refetchExercises, filterPanelProps.selectedExerciseName]);
+
   return (
     <ExercisesMuiModal
       open={isOpen}
@@ -87,8 +93,8 @@ const ExercisesModal: React.FC<ExercisesProps> = ({
     >
       <Container>
         <Header>Exercise list</Header>
-        {/* <FilterPanel filterHandlers={filterPanelProps} /> */}
-        <Box sx={{ flex: 1 }}>
+        <Box sx={{ flex: 1, p: 2 }}>
+          <FilterPanel filterHandlers={filterPanelProps} />
           <InfiniteList
             items={exercises}
             Item={Item}
@@ -127,7 +133,7 @@ const ExercisesMuiModal = styled(Modal)(({ theme }) => ({
 }));
 
 const Container = styled("section")(({ theme }) => ({
-  paddinf: theme.spacing(2),
+  textAlign: "left",
   height: "100%",
   display: "flex",
   flexDirection: "column",

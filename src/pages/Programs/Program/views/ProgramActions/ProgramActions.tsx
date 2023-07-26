@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Box, Button } from "@mui/material";
+import { Box, Button, useMediaQuery, Theme } from "@mui/material";
 import { styled } from "@mui/system";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import { useUserContext } from "../../../../../contexts/userContext";
 import { useDeleteProgramMutation } from "../../../../../hooks/queryHooks/programsHooks/useDeleteProgramMutation";
@@ -22,6 +23,9 @@ export const ProgramActions: React.FC<ProgramActionsProps> = ({ program }) => {
   const navigate = useNavigate();
   const snackbar = useSnackbar();
 
+  const isMobile = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("sm")
+  );
   const {
     error,
     status,
@@ -43,7 +47,12 @@ export const ProgramActions: React.FC<ProgramActionsProps> = ({ program }) => {
   return (
     <PorgramActions>
       {program.creator !== user?.id ? (
-        <Button variant="contained" size="small">
+        <Button
+          endIcon={<ShoppingCartIcon />}
+          variant="contained"
+          size="medium"
+          fullWidth={isMobile}
+        >
           buy
         </Button>
       ) : (

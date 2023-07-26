@@ -58,7 +58,8 @@ export const AccountSettingsBox = styled(Box)(({ theme }) => ({
 }));
 
 export const LogoWrapper = styled(Box)(({ theme }) => ({
-  width: "14.7rem",
+  width: "11rem",
+  padding: "8px",
   textAlign: "center",
   margin: "auto",
   [theme.breakpoints.down("lg")]: {

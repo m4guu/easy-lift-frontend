@@ -57,7 +57,7 @@ const useAuth = (): UseAuthReturnType => {
 
       // redirect to home page when user is configured and to config page when is not
       navigate(
-        response.user.isConfigured ? PATHS.CONFIGURATION : PATHS.default
+        response.user.isConfigured ? PATHS.default : PATHS.CONFIGURATION
       );
     });
   };
@@ -78,6 +78,7 @@ const useAuth = (): UseAuthReturnType => {
     });
   };
 
+  // snackbars
   useEffect(() => {
     if (loginError || registerError) {
       snackbar(
@@ -86,7 +87,6 @@ const useAuth = (): UseAuthReturnType => {
       );
     }
   }, [snackbar, loginError, registerError]);
-
   useEffect(() => {
     if (registerStatus === Status.SUCCESS && !isRegistering) {
       snackbar(

@@ -79,6 +79,7 @@ const ProgramDetail = styled("li")({
 });
 
 const Detail = styled(Typography)(({ theme }) => ({
+  textAlign: "justify",
   [theme.breakpoints.up("lg")]: {
     fontSize: "1rem",
   },

@@ -6,7 +6,7 @@ import { Error } from "../../../shared/interfaces";
 export const config = {
   headers: {
     "X-RapidAPI-Key": RAPID_API_KEY,
-    "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
+    "X-RapidAPI-Host": "musclewiki.p.rapidapi.com",
   },
 };
 

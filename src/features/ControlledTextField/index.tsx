@@ -54,7 +54,7 @@ const ControlledTextField = <T extends FieldValues>({
             helperText={fieldState.error?.message}
             {...field}
             {...textFieldProps}
-            autoComplete="off"
+            autoComplete="one-time-code"
             color="primary"
           >
             {children}

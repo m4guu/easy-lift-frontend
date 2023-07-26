@@ -20,7 +20,7 @@ const StatusBar: React.FC<StatusBarProps> = ({
 }) => {
   return (
     <Box>
-      {status === Status.LOADING && <CircularProgress />}
+      {status === Status.LOADING && <CircularProgress size="small" />}
       {status === Status.ERROR && error && (
         <Typography color="error">{error.message}</Typography>
       )}

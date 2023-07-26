@@ -52,13 +52,15 @@ export const AccDetails = styled(AccordionDetails)(({ theme }) => ({
   },
 }));
 
-export const ExerciseImage = styled("img")(({ theme }) => ({
-  width: "8rem",
+export const ExerciseImage = styled("video")(({ theme }) => ({
+  width: "15rem",
+
   [theme.breakpoints.down("sm")]: {
-    width: "5rem",
+    width: "10rem",
   },
 }));
-export const ExerciseDetailImage = styled("img")(({ theme }) => ({
+
+export const ExerciseDetailImage = styled("video")(({ theme }) => ({
   width: "22rem",
   [theme.breakpoints.down("sm")]: {
     width: "100%",

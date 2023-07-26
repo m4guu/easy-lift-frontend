@@ -66,6 +66,12 @@ export const TrainerPrograms: React.FC<{ trainerId: string }> = ({
       </SegmentTitle>
       <NoPaddingDivider />
       <Box sx={{ height: 600 }}>
+        <StatusBar
+          status={status}
+          error={error}
+          noItems={noPrograms}
+          itemName="programs"
+        />
         <InfiniteList
           items={programs}
           Item={Item}
@@ -74,14 +80,8 @@ export const TrainerPrograms: React.FC<{ trainerId: string }> = ({
           fetchNextPage={fetchNextPage}
           itemSize={85}
         />
+        <NoPaddingDivider />
       </Box>
-      <StatusBar
-        status={status}
-        error={error}
-        noItems={noPrograms}
-        itemName="programs"
-      />
-      <NoPaddingDivider />
     </ProgramsContainer>
   );
 };

@@ -68,6 +68,7 @@ const InfiniteList = <T,>({
 };
 
 const List = styled(FixedSizeList)(({ theme }) => ({
+  flexDirection: "column-reverse",
   // Add custom scrollbar styles
   "::-webkit-scrollbar": {
     width: "4px",

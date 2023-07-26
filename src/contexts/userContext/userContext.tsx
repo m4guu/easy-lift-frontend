@@ -38,7 +38,7 @@ const UserProvider: React.FCWithChildren = ({ children }) => {
   } = useAuth();
 
   useEffect(() => {
-    // autoLogin();
+    autoLogin();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

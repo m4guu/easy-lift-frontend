@@ -23,7 +23,6 @@ enum ENDPOINTS {
   // exerciseDB API
   EXERCISES = "exercises",
   EXERCISE = "exercise",
-  BODY_PARTS = "bodyPartList",
 }
 
 export default ENDPOINTS;

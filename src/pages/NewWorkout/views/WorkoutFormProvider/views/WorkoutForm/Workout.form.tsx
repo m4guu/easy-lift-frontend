@@ -59,10 +59,11 @@ export const Exercise: React.FC<ExerciseProps> = ({
         {...register(
           `${AddWorkoutFormFields.EXERCISES}.[${exerciseIndex}].name`
         )}
+        style={{ width: "100%" }}
         InputProps={{
           readOnly: true,
           disableUnderline: true,
-          style: { color: theme.palette.primary.main },
+          style: { color: theme.palette.primary.main, width: "100%" },
         }}
         variant="standard"
         defaultValue={exercise.name}

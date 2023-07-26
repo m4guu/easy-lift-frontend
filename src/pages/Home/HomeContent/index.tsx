@@ -29,10 +29,12 @@ export const HomeContent: React.FC = () => {
 const HomeContainer = styled(Box)({
   display: "flex",
   flexDirection: "column",
+  height: "100%",
   flex: 1,
 });
 
 const Wrapper = styled(Box)(({ theme }) => ({
+  flex: 1,
   [theme.breakpoints.up("xl")]: {
     display: "flex",
   },
