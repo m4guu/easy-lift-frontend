@@ -47,6 +47,7 @@ export const ExercisesProgress: React.FC = () => {
 };
 
 const ExercisesProgressContainer = styled(Box)(({ theme }) => ({
+  flex: 1,
   [theme.breakpoints.up("xl")]: {
     display: "flex",
   },

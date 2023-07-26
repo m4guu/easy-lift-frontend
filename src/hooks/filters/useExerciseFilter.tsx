@@ -1,9 +1,6 @@
-import { useState, useCallback, useEffect } from "react";
-import { Exercise } from "../../shared/interfaces";
+import { useState } from "react";
 
-export const useExerciseFilter = (exercises: Exercise[] | undefined) => {
-  const [updatedExercises, setUpdatedExercises] = useState<Exercise[]>([]);
-
+export const useExerciseFilter = () => {
   const [selectedExerciseName, setSelectedExerciseName] = useState("");
 
   const handleSelectExerciseName = (
@@ -12,25 +9,7 @@ export const useExerciseFilter = (exercises: Exercise[] | undefined) => {
     setSelectedExerciseName(event.target.value);
   };
 
-  const applyFilters = useCallback(() => {
-    let filteredExercises = exercises || [];
-
-    // name filter
-    if (selectedExerciseName) {
-      filteredExercises = filteredExercises.filter((exercise) =>
-        exercise.name.toLowerCase().includes(selectedExerciseName.toLowerCase())
-      );
-    }
-
-    setUpdatedExercises(filteredExercises);
-  }, [exercises, selectedExerciseName]);
-
-  useEffect(() => {
-    applyFilters();
-  }, [applyFilters]);
-
   return {
-    updatedExercises,
     filterPanelProps: {
       selectedExerciseName,
       handleSelectExerciseName,

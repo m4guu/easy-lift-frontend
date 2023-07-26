@@ -1,23 +1,24 @@
 import React from "react";
 
-import { Box, Divider } from "@mui/material";
+import { Box, Divider, IconButton } from "@mui/material";
 import { styled } from "@mui/system";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 import { useUserContext } from "../../contexts/userContext";
 
 import { Logo } from "../../components";
-import { Role } from "../../shared/enums";
 import { TrainerConfigurationForm } from "./views/ConfigurationForm/TrainerConfigurationForm";
 import { UserConfigurationForm } from "./views/ConfigurationForm/UserConfigurationForm";
+import { Role } from "../../shared/enums";
 
 const ConfigurationPage: React.FC = () => {
-  const { user } = useUserContext();
+  const { user, logout } = useUserContext();
+
   return (
     <SectionContainer>
       <LogoWrapper>
         <Logo />
       </LogoWrapper>
-
       <NoPaddingDivider />
       <SectionContent>
         {user?.role === Role.user ? (
@@ -28,6 +29,9 @@ const ConfigurationPage: React.FC = () => {
           <TrainerConfigurationForm />
         )}
       </SectionContent>
+      <Logout onClick={logout}>
+        <LogoutIcon color="primary" />
+      </Logout>
     </SectionContainer>
   );
 };
@@ -61,6 +65,13 @@ const LogoWrapper = styled(Box)({
 
 const NoPaddingDivider = styled(Divider)(({ theme }) => ({
   margin: `0 -${theme.spacing(2)} ${theme.spacing(2)} -${theme.spacing(2)}`,
+}));
+
+const Logout = styled(IconButton)(({ theme }) => ({
+  position: "absolute",
+  zIndex: 1000,
+  right: theme.spacing(1),
+  top: theme.spacing(1),
 }));
 
 const Configuration = ConfigurationPage;

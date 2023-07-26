@@ -11,6 +11,7 @@ import useSnackbar from "../../useSnackbar";
 import { User } from "../../../shared/interfaces";
 import { PATHS } from "../../../pages/paths";
 import { SnackbarStatus, Status } from "../../../shared/enums";
+import { defaultHeightValue, defaultWeightValue } from "./constans";
 
 export enum UserConfigFields {
   NAME = "name",
@@ -27,8 +28,8 @@ export interface UserConfig {
 
 export const defaultValues: UserConfig = {
   [UserConfigFields.NAME]: "",
-  [UserConfigFields.HEIGHT]: 60,
-  [UserConfigFields.WEIGHT]: 30,
+  [UserConfigFields.HEIGHT]: defaultHeightValue,
+  [UserConfigFields.WEIGHT]: defaultWeightValue,
   [UserConfigFields.IMAGE]: undefined as unknown as File[],
 };
 
@@ -43,13 +44,13 @@ export const useUserConfigForm = ({
 }: {
   defaultUpdateValues?: UserConfig;
 }) => {
+  const { user, autoLogin } = useUserContext();
   const {
     status: updateUserStatus,
     error: updateUserError,
     isLoading: isUpdatingUser,
     mutateAsync: configureUserQuery,
   } = useConfigureUserMutation();
-  const { user, autoLogin } = useUserContext();
   const navigate = useNavigate();
   const snackbar = useSnackbar();
 
@@ -91,13 +92,14 @@ export const useUserConfigForm = ({
         }
       });
 
-      configureUserQuery({ updatedUser: formData, userId: user!.id }).then(
-        () => {
-          autoLogin();
-          resetForm();
-          navigate(PATHS.default);
-        }
-      );
+      configureUserQuery({
+        updatedUser: formData,
+        userId: user!.id,
+      }).then(() => {
+        resetForm();
+        autoLogin();
+        navigate(PATHS.default);
+      });
     },
     [configureUserQuery, resetForm, user, navigate, autoLogin]
   );

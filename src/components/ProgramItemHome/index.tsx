@@ -8,7 +8,7 @@ import { useUserContext } from "../../contexts/userContext";
 
 import { Program } from "../../shared/interfaces";
 import { PATHS } from "../../pages/paths";
-import { API_URL } from "../../config/env.config";
+import { API_URL } from "../../config/env/env.config";
 
 import {
   ProgramItemCard,
@@ -83,7 +83,7 @@ const ProgramItemHome: React.FC<ProgramItemHomeProps> = ({ program }) => {
               variant="body2"
               color={theme.palette.custom_grey.tint_2}
             >
-              {program.description.substring(0, 50)}...
+              {program.description.substring(0, 100)}...
             </DescriptionContent>
           </Description>
 

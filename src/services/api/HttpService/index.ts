@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios";
-import { EXERCISE_API_URL, API_URL } from "../../../config/env.config";
+import { EXERCISE_API_URL, API_URL } from "../../../config/env/env.config";
 import { config, undefinedError } from "./constans";
 import { Error } from "../../../shared/interfaces";
 

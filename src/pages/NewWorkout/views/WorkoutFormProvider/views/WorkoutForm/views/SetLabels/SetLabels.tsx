@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useMediaQuery, useTheme, Theme } from "@mui/material";
 import { styled } from "@mui/system";
 import { useUserContext } from "../../../../../../../../contexts/userContext";
 import { Role } from "../../../../../../../../shared/enums";
@@ -8,7 +8,7 @@ import { userLabels, trainerLabels } from "./constans";
 export const SetLabels = () => {
   const { user } = useUserContext();
   const theme = useTheme();
-
+  const isMobile = useMediaQuery((t: Theme) => t.breakpoints.down("sm"));
   const labels = user?.role === Role.trainer ? trainerLabels : userLabels;
 
   return (
@@ -19,6 +19,7 @@ export const SetLabels = () => {
             <SetTitle
               key={label.name}
               variant="h3"
+              style={isMobile ? { width: "10%" } : {}}
               color={theme.palette.custom_grey.tint_2}
             >
               {label.name}
@@ -50,7 +51,7 @@ const Container = styled(Box)(({ theme }) => ({
 
 const SetTitle = styled(Typography)(({ theme }) => ({
   width: "25%",
-  [theme.breakpoints.down("sm")]: {
-    width: "10%",
-  },
+  // [theme.breakpoints.down("sm")]: {
+  //   width: "17%",
+  // },
 }));

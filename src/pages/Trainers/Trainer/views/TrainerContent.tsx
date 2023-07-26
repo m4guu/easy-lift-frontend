@@ -7,7 +7,7 @@ import { UserAvatar } from "../../../../components/ExerciseProgresItem/ExerciseP
 
 import { TrainerPrograms } from "./views/TrainerPrograms";
 import { PersonalTrainingInfo } from "./views/PersonalTrainingInfo";
-import { API_URL } from "../../../../config/env.config";
+import { API_URL } from "../../../../config/env/env.config";
 import { StatusBar } from "../../../../components";
 
 export const TrainerContent: React.FC<{ trainerId: string }> = ({
@@ -23,8 +23,12 @@ export const TrainerContent: React.FC<{ trainerId: string }> = ({
           <BasicInformation>
             <UserAvatar src={`${API_URL}${trainer.image}`} alt="User Avatar" />
             <Typography>{trainer.name}</Typography>
-            <Typography variant="caption" color={theme.palette.text.secondary}>
-              {trainer.email}
+            <Typography
+              component="address"
+              variant="caption"
+              color={theme.palette.text.secondary}
+            >
+              <Email href={`mailto:${trainer.email}`}>{trainer.email}</Email>
             </Typography>
           </BasicInformation>
           <PersonalTrainingInfo trainerGymsIds={trainer.gyms} />
@@ -42,3 +46,10 @@ const BasicInformation = styled(Box)({
   flexDirection: "column",
   alignItems: "center",
 });
+
+const Email = styled("a")(({ theme }) => ({
+  color: theme.palette.primary.main,
+  textDecoration: "none",
+  fontStyle: "normal",
+  fontWeight: "normal",
+}));

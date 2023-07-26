@@ -9,6 +9,7 @@ import { AuthTypes } from "../../shared/enums";
 
 const AuthPage: React.FC = () => {
   const [tab, setTab] = useState(0);
+
   const authType = tab === 0 ? AuthTypes.LOGIN : AuthTypes.SIGN_UP;
 
   const handleChange = (e: React.SyntheticEvent, newValue: number) => {
@@ -25,7 +26,6 @@ const AuthPage: React.FC = () => {
           <StyledTab label="login" />
           <StyledTab label="signup" />
         </StyledTabs>
-
         <AuthForm authType={authType} setTab={setTab} />
       </SectionContent>
     </SectionContainer>

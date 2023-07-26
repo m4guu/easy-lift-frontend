@@ -10,7 +10,7 @@ import { Header } from "./views/Header/Header";
 import { ProgramDetails } from "./views/ProgramDetails/ProgramDetails";
 
 import { ProgramActions } from "./views/ProgramActions/ProgramActions";
-import { API_URL } from "../../../config/env.config";
+import { API_URL } from "../../../config/env/env.config";
 import { StatusBar } from "../../../components";
 
 const Program: React.FC = () => {

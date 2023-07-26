@@ -12,23 +12,18 @@ interface ControlledTextFieldProps<T extends FieldValues>
   disabledUnderline?: boolean;
   children?: React.ReactNode;
   multiple?: boolean;
+  testId?: string;
 }
 
 const ControlledTextField = <T extends FieldValues>({
   fieldName,
-  label,
-  placeholder,
-  type,
-  variant,
-  size,
-  disabled = false,
-  multiline = false,
-  rows,
   mask,
-  select,
   textColor,
   disabledUnderline,
   children,
+  multiline = false,
+  testId,
+  ...textFieldProps
 }: ControlledTextFieldProps<T>) => {
   const { control } = useFormContext<T>();
   const isDarkMode = useIsDarkMode();
@@ -37,6 +32,7 @@ const ControlledTextField = <T extends FieldValues>({
     disableUnderline: disabledUnderline,
     inputComponent: mask && (TextFieldMask as any),
     inputProps: { mask },
+    "data-testid": testId,
     style: {
       color: textColor,
       // calendar styles
@@ -51,21 +47,14 @@ const ControlledTextField = <T extends FieldValues>({
       render={({ field, fieldState }) => {
         return (
           <TextField
-            {...field}
-            variant={variant}
-            size={size}
-            type={type}
-            disabled={disabled}
             multiline={multiline}
             InputLabelProps={{ shrink: true }}
             InputProps={inputProps}
-            rows={rows}
-            placeholder={placeholder}
             error={!!fieldState.error}
-            label={label}
-            select={select}
             helperText={fieldState.error?.message}
-            autoComplete="off"
+            {...field}
+            {...textFieldProps}
+            autoComplete="one-time-code"
             color="primary"
           >
             {children}

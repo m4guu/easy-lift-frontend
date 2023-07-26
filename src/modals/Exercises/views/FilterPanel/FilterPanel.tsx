@@ -28,5 +28,5 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
 
 const Form = styled("form")(({ theme }) => ({
   maxWidth: "30rem",
-  margin: `${theme.spacing(2)} auto`,
+  paddingBottom: theme.spacing(2),
 }));

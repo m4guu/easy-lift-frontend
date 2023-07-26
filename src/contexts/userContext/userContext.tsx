@@ -4,7 +4,7 @@ import { UseMutateAsyncFunction } from "@tanstack/react-query";
 import { useAuth } from "../../hooks";
 
 import {
-  // Error,
+  Error as CustomError,
   User,
   LoginCredentials,
   CreateUser,
@@ -14,8 +14,7 @@ interface UserContextType {
   isLogging: boolean;
   isRegistering: boolean;
   registerStatus: "error" | "loading" | "idle" | "success";
-  // browser doesnt see my Error interface exported from shared/interfaces
-  registerError: any;
+  registerError: CustomError | null;
   login: (credentials: LoginCredentials) => void;
   registerUser: UseMutateAsyncFunction<void, unknown, CreateUser, unknown>;
   autoLogin: () => void;

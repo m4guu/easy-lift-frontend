@@ -8,7 +8,7 @@ import { useUser } from "../../../../../hooks/queryHooks/userHooks/useUser";
 
 import { UserAvatar } from "../../../../../components/ExerciseProgresItem/ExerciseProgresItem.styles";
 
-import { API_URL } from "../../../../../config/env.config";
+import { API_URL } from "../../../../../config/env/env.config";
 import { PATHS } from "../../../../paths";
 import { StatusBar } from "../../../../../components";
 
@@ -79,6 +79,7 @@ const ProgramDetail = styled("li")({
 });
 
 const Detail = styled(Typography)(({ theme }) => ({
+  textAlign: "justify",
   [theme.breakpoints.up("lg")]: {
     fontSize: "1rem",
   },

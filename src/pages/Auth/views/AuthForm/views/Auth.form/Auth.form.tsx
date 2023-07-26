@@ -3,7 +3,7 @@ import { styled } from "@mui/system";
 
 import { ControlledTextField } from "../../../../../../features";
 import { AuthFormFields } from "../../../../../../hooks/formHooks/auth/useAuthForm";
-import { Role } from "../../../../../../shared/enums";
+import { Role, TestId } from "../../../../../../shared/enums";
 
 // Email //
 export const AuthEmail = styled(() => (
@@ -27,6 +27,7 @@ export const AuthPassword = styled(() => (
     type="password"
     fieldName={AuthFormFields.PASSWORD}
     placeholder="*****"
+    testId={TestId.PASSWORD}
   />
 ))``;
 //
@@ -40,6 +41,7 @@ export const ConfirmPassword = styled(() => (
     type="password"
     fieldName={AuthFormFields.CONFIRM_PASSWORD}
     placeholder="*****"
+    testId={TestId.CONFIRM_PASSWORD}
   />
 ))``;
 //

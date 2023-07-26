@@ -55,5 +55,11 @@ export const Chart: React.FC<ChartProps> = ({ labels, data, options }) => {
     ],
   };
 
-  return <Line options={{ ...defaultOptions, ...options }} data={chartData} />;
+  return (
+    <Line
+      style={{ marginTop: "auto", marginBottom: "auto" }}
+      options={{ ...defaultOptions, ...options }}
+      data={chartData}
+    />
+  );
 };

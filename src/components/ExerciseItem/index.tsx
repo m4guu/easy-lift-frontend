@@ -63,7 +63,7 @@ const ExerciseItem: React.FC<ExerciseItemProps> = ({
     appendExercise({
       id: uuidv4(),
       _id: choosenExercise.id,
-      name: choosenExercise.name,
+      name: choosenExercise.exercise_name,
       sets: defaultSets,
     });
     clearErrors();
@@ -71,67 +71,66 @@ const ExerciseItem: React.FC<ExerciseItemProps> = ({
   };
 
   return (
-    <>
-      <ExerciseListItem>
-        <ExerciseButtton
-          disabled={expand}
-          onClick={() => addExerciseToWorkout(exercise)}
-        >
-          <CustomAccordion expanded={expand}>
-            {!expand && (
-              <AccSummary>
-                <AccSummaryContent>
-                  <ExerciseImage src={exercise.gifUrl} alt={exercise.name} />
-                  {exercise.name}
-                </AccSummaryContent>
-              </AccSummary>
-            )}
+    <ExerciseListItem>
+      <ExerciseButtton
+        disabled={expand}
+        onClick={() => addExerciseToWorkout(exercise)}
+      >
+        <CustomAccordion expanded={expand}>
+          {!expand && (
+            <AccSummary>
+              <AccSummaryContent>
+                <ExerciseImage src={exercise.videoURL.at(0)} autoPlay />
+                {exercise.exercise_name}
+              </AccSummaryContent>
+            </AccSummary>
+          )}
 
-            <AccDetails>
-              <ExerciseDetailImage src={exercise.gifUrl} alt={exercise.name} />
-              <DetailsList>
-                <DetailItem>
-                  <Typography variant="subtitle1" color="primary">
-                    name
-                  </Typography>
-                  <Typography variant="h3">{exercise.name}</Typography>
-                </DetailItem>
-                <DetailItem>
-                  <Typography variant="subtitle1" color="primary">
-                    body part
-                  </Typography>
-                  <Typography variant="h3">{exercise.bodyPart}</Typography>
-                </DetailItem>
-                <DetailItem>
-                  <Typography variant="subtitle1" color="primary">
-                    nessesery equipment
-                  </Typography>
-                  <Typography variant="h3">{exercise.equipment}</Typography>
-                </DetailItem>
-              </DetailsList>
-            </AccDetails>
-          </CustomAccordion>
-        </ExerciseButtton>
+          <AccDetails>
+            <ExerciseDetailImage src={exercise.videoURL.at(0)} autoPlay />
+            <DetailsList>
+              <DetailItem>
+                <Typography variant="subtitle1" color="primary">
+                  name
+                </Typography>
+                <Typography variant="h3">{exercise.exercise_name}</Typography>
+              </DetailItem>
+              <DetailItem>
+                <Typography variant="subtitle1" color="primary">
+                  body part
+                </Typography>
+                <Typography variant="h3">{exercise.Category}</Typography>
+              </DetailItem>
+              <DetailItem>
+                <Typography variant="subtitle1" color="primary">
+                  difficulty
+                </Typography>
+                <Typography variant="h3">{exercise.Difficulty}</Typography>
+              </DetailItem>
+            </DetailsList>
+          </AccDetails>
+        </CustomAccordion>
+      </ExerciseButtton>
 
-        <ExtandButton color="primary" onClick={toggleAcordion}>
-          <InfoOutlinedIcon />
-        </ExtandButton>
-        {expand && (
-          <ButtonsContainer>
-            <Button
-              onClick={() => addExerciseToWorkout(exercise)}
-              variant="outlined"
-            >
-              add
+      {/* <ExtandButton color="primary" onClick={toggleAcordion}>
+        <InfoOutlinedIcon />
+      </ExtandButton> */}
+
+      {expand && (
+        <ButtonsContainer>
+          <Button
+            onClick={() => addExerciseToWorkout(exercise)}
+            variant="outlined"
+          >
+            add
+          </Button>
+          {user?.role === Role.user && (
+            <Button onClick={openExerciseProgressModal} variant="contained">
+              yours progress
             </Button>
-            {user?.role === Role.user && (
-              <Button onClick={openExerciseProgressModal} variant="contained">
-                yours progress
-              </Button>
-            )}
-          </ButtonsContainer>
-        )}
-      </ExerciseListItem>
+          )}
+        </ButtonsContainer>
+      )}
       <Divider />
       {user && isExerciseProgressModalOpen && (
         <ExerciseProgressModal
@@ -141,7 +140,7 @@ const ExerciseItem: React.FC<ExerciseItemProps> = ({
           closeModal={closeExerciseProgressModal}
         />
       )}
-    </>
+    </ExerciseListItem>
   );
 };
 

@@ -12,7 +12,7 @@ import {
   greenMarkerIcon,
 } from "./constans";
 import { gyms } from "../form/constans";
-import { MAP_BOX_URL } from "../../../../../../../config/env.config";
+import { MAP_BOX_URL } from "../../../../../../../config/env/env.config";
 
 interface LeafletMapProps {
   selectedGyms: Gym[];
@@ -52,14 +52,14 @@ export const LeafletMap: React.FC<LeafletMapProps> = ({
                   label={<Typography>{gym.location.adres}</Typography>}
                 />
                 <GymActions>
-                  <AddGym
+                  <Button
                     onClick={() => gymsChangeHandler(gym)}
                     color={isSelected ? "error" : "primary"}
                     variant="contained"
                     fullWidth
                   >
                     {isSelected ? "remove" : "add"}
-                  </AddGym>
+                  </Button>
                 </GymActions>
               </Popup>
             </Marker>
@@ -86,5 +86,3 @@ const GymImage = styled("img")({
 const GymActions = styled(Box)(({ theme }) => ({
   marginTop: theme.spacing(1),
 }));
-
-const AddGym = styled(Button)({});

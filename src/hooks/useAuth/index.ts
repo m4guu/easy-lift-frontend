@@ -16,6 +16,7 @@ import {
   CreateUser,
   Error,
 } from "../../shared/interfaces";
+import { PATHS } from "../../pages/paths";
 
 type UseAuthReturnType = {
   isLogging: boolean;
@@ -34,15 +35,13 @@ const useAuth = (): UseAuthReturnType => {
   const snackbar = useSnackbar();
   const navigate = useNavigate();
 
+  const { mutateAsync: autoLoginMutation } = useAutoLogin();
+  const { mutateAsync: logoutMutation } = useLogout();
   const {
     isLoading: isLogging,
     error: loginError,
     mutateAsync: loginMutation,
   } = useLogin();
-
-  const { mutateAsync: autoLoginMutation } = useAutoLogin();
-  const { mutateAsync: logoutMutation } = useLogout();
-
   const {
     isLoading: isRegistering,
     status: registerStatus,
@@ -55,6 +54,11 @@ const useAuth = (): UseAuthReturnType => {
       setUser(response.user);
       // Set user to local storage
       localStorage.setItem("userData", JSON.stringify(response.user));
+
+      // redirect to home page when user is configured and to config page when is not
+      navigate(
+        response.user.isConfigured ? PATHS.default : PATHS.CONFIGURATION
+      );
     });
   };
 
@@ -74,6 +78,7 @@ const useAuth = (): UseAuthReturnType => {
     });
   };
 
+  // snackbars
   useEffect(() => {
     if (loginError || registerError) {
       snackbar(
@@ -82,7 +87,6 @@ const useAuth = (): UseAuthReturnType => {
       );
     }
   }, [snackbar, loginError, registerError]);
-
   useEffect(() => {
     if (registerStatus === Status.SUCCESS && !isRegistering) {
       snackbar(

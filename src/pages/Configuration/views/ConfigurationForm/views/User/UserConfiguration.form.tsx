@@ -8,7 +8,7 @@ import {
   ImagePickerType,
 } from "../../../../../../shared/enums";
 import { useUserContext } from "../../../../../../contexts/userContext";
-import { API_URL } from "../../../../../../config/env.config";
+import { API_URL } from "../../../../../../config/env/env.config";
 
 // Name //
 export const Name = styled(() => (

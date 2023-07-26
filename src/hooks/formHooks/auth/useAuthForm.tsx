@@ -37,7 +37,7 @@ const authLoginSchema = yup.object().shape({
 const authSignUpSchema = yup.object().shape({
   [AuthFormFields.E_MAIL]: yup.string().email().required(),
   [AuthFormFields.PASSWORD]: yup.string().required().min(5).max(40),
-  [AuthFormFields.CONFIRM_PASSWORD]: yup.string().required().min(5).max(40),
+  [AuthFormFields.CONFIRM_PASSWORD]: yup.string().required(),
   [AuthFormFields.ROLE]: yup
     .mixed<Role>()
     .oneOf(Object.values(Role))
@@ -53,13 +53,14 @@ export const useAuthForm = (authType: AuthTypes) => {
     defaultValues,
     resolver: yupResolver(schema),
   });
-  const { watch, reset } = methods;
+  const { watch, reset, setValue } = methods;
 
   // reset form expect email
   const resetForm = useCallback(() => {
-    const emailValue = watch(AuthFormFields.E_MAIL);
-    reset({ [AuthFormFields.E_MAIL]: emailValue });
-  }, [reset, watch]);
+    const registeredEmail = watch(AuthFormFields.E_MAIL);
+    reset();
+    setValue(AuthFormFields.E_MAIL, registeredEmail);
+  }, [reset, watch, setValue]);
 
   const { email, password, confirmPassword } = watch();
   const canSubmit = email && password && confirmPassword;
@@ -79,6 +80,7 @@ export const useAuthForm = (authType: AuthTypes) => {
           password: formValues.password,
           role: formValues.role!,
         };
+
         registerUser(newUser).then(resetForm);
       } else {
         methods.setError(AuthFormFields.CONFIRM_PASSWORD, {
@@ -90,6 +92,7 @@ export const useAuthForm = (authType: AuthTypes) => {
     [authType, login, registerUser, resetForm, methods]
   );
 
+  // snackbar
   if (registerError && registerError.id === ErrorId.EMAIL_ALREADY_ASSIGNED) {
     methods.setError(AuthFormFields.E_MAIL, {
       type: "manual",
