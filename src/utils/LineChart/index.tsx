@@ -11,7 +11,6 @@ import {
   Title,
   Tooltip,
   Legend,
-  ChartOptions,
 } from "chart.js";
 import "chartjs-adapter-date-fns";
 import { Line } from "react-chartjs-2";
@@ -26,7 +25,7 @@ ChartJS.register(
   Legend
 );
 
-const defaultOptions: ChartOptions = {
+const defaultOptions: any = {
   responsive: true,
   plugins: {
     legend: {
@@ -38,7 +37,7 @@ const defaultOptions: ChartOptions = {
 type ChartProps = {
   labels: string[];
   data: number[];
-  options: ChartOptions;
+  options: any;
 };
 
 export const Chart: React.FC<ChartProps> = ({ labels, data, options }) => {

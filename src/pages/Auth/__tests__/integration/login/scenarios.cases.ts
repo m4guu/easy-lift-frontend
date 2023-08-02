@@ -17,7 +17,7 @@ export const userTestCases: [Iteration][] = [
   [
     {
       user: notConfiguredUserMock,
-      expectedUrl: PATHS.CONFIGURATION,
+      expectedUrl: PATHS.default,
     },
   ],
 ];

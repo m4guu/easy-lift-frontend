@@ -51,9 +51,10 @@ export const useAuthForm = (authType: AuthTypes) => {
 
   const methods = useForm<AuthForm>({
     defaultValues,
+    reValidateMode: "onBlur",
     resolver: yupResolver(schema),
   });
-  const { watch, reset, setValue } = methods;
+  const { watch, reset, setValue, setError } = methods;
 
   // reset form expect email
   const resetForm = useCallback(() => {
@@ -83,18 +84,18 @@ export const useAuthForm = (authType: AuthTypes) => {
 
         registerUser(newUser).then(resetForm);
       } else {
-        methods.setError(AuthFormFields.CONFIRM_PASSWORD, {
+        setError(AuthFormFields.CONFIRM_PASSWORD, {
           type: "manual",
           message: "Password must match.",
         });
       }
     },
-    [authType, login, registerUser, resetForm, methods]
+    [authType, login, registerUser, resetForm, setError]
   );
 
-  // snackbar
+  // assigned email error
   if (registerError && registerError.id === ErrorId.EMAIL_ALREADY_ASSIGNED) {
-    methods.setError(AuthFormFields.E_MAIL, {
+    setError(AuthFormFields.E_MAIL, {
       type: "manual",
       message: registerError.message,
     });

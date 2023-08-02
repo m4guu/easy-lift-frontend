@@ -66,7 +66,6 @@ export const TrainerConfigurationForm: React.FC<{
         </FormBox>
 
         <FormMapBox>
-          {/* // TODO: fix tests leaflet lib bug and uncomment that lines */}
           <LeafletMap
             selectedGyms={selectedGyms}
             gymsChangeHandler={gymsChangeHandler}

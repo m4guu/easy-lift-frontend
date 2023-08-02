@@ -62,7 +62,7 @@ const defaultProgramValues: AddProgramForm = {
 };
 
 const programUpdateSchema = yup.object().shape({
-  [AddProgramFormFields.PROGRAM_TITLE]: yup.string().required().min(5).max(20),
+  [AddProgramFormFields.PROGRAM_TITLE]: yup.string().required().min(5).max(30),
   [AddProgramFormFields.PROGRAM_LEVEL]: yup
     .mixed<ProgramLevels>()
     .oneOf(Object.values(ProgramLevels)),
@@ -93,7 +93,7 @@ const programUpdateSchema = yup.object().shape({
     .min(minProgramLength)
     .max(maxProgramLength),
   [AddProgramFormFields.PROGRAM_PRICE]: yup.number().required().min(0),
-  [AddProgramFormFields.PROGRAM_DESCRIPTION]: yup.string().min(20).max(150),
+  [AddProgramFormFields.PROGRAM_DESCRIPTION]: yup.string().min(20).max(550),
 });
 type UseProgramFormProps = {
   editProgram?: Program;
@@ -183,7 +183,6 @@ export const useNewProgramForm = ({ editProgram }: UseProgramFormProps) => {
         price: formValues.programPrice,
         description: formValues.programDescription,
       };
-      console.log(JSON.stringify(formValues.program));
 
       const newProgramFormData = new FormData();
       Object.entries(newProgram).forEach(([fieldName, fieldValue]) => {
